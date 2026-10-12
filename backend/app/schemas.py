@@ -61,6 +61,10 @@ class QuestionOut(BaseModel):
         description="Alıntının başladığı transkript segmentinin başlangıcı (saniye); doğrulanamadıysa null"
     )
     verified: bool = Field(description="Alıntı temizlenmiş transkriptte bulundu mu")
+    quote_match: Literal["exact", "trimmed"] | None = Field(
+        description="exact: alıntı birebir bulundu; trimmed: kenarlarından en fazla 2 kelime "
+        "kırpılarak bulundu ve source_quote transkriptteki metinle değiştirildi; null: bulunamadı"
+    )
 
 
 class QuestionsResponse(BaseModel):

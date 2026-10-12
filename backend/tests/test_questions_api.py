@@ -90,14 +90,33 @@ def test_endpoint_ok(use_llm, fake_transcript):
     by_text = {q["question"]: q for q in body["questions"]}
     assert set(by_text) == {"Soru 1?", "Soru 2?", "Soru 4?"}
     assert by_text["Soru 1?"]["verified"] is True and by_text["Soru 1?"]["source_start_seconds"] == 4.0
+    assert by_text["Soru 1?"]["quote_match"] == "exact"
     assert by_text["Soru 2?"]["verified"] is False and by_text["Soru 2?"]["source_start_seconds"] is None
+    assert by_text["Soru 2?"]["quote_match"] is None
     assert by_text["Soru 4?"]["verified"] is True and by_text["Soru 4?"]["source_start_seconds"] == 40.0
     for q in body["questions"]:
         assert len(q["options"]) == 4 and q["options"][q["correct_index"]] == "a"
         assert set(q) == {
             "question", "options", "correct_index", "explanation",
-            "source_quote", "source_start_seconds", "verified",
+            "source_quote", "source_start_seconds", "verified", "quote_match",
         }
+
+
+def test_endpoint_trimmed_quote(use_llm, fake_transcript):
+    q = {
+        "question": "Kabarcık sıralaması neyi karşılaştırır?",
+        "options": ["a", "b", "c", "d"],
+        "correct_index": 0,
+        "explanation": "açıklama",
+        "source_quote": "[4] Yani kabarcık sıralaması komşu elemanları karşılaştırır",
+    }
+    use_llm(FakeLLM(response=json.dumps({"questions": [q]}, ensure_ascii=False)))
+    r = client.post("/api/questions", json={"url": VID})
+    assert r.status_code == 200
+    (out,) = r.json()["questions"]
+    assert out["verified"] is True and out["quote_match"] == "trimmed"
+    assert out["source_quote"] == "kabarcık sıralaması komşu elemanları karşılaştırır"
+    assert out["source_start_seconds"] == 4.0
 
 
 def test_endpoint_default_count(use_llm, fake_transcript):

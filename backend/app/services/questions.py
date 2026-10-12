@@ -11,6 +11,7 @@ import json
 import logging
 import random
 from dataclasses import dataclass
+from typing import Literal
 
 from pydantic import BaseModel, ValidationError, field_validator
 
@@ -37,6 +38,7 @@ class Question:
     source_quote: str
     source_start_seconds: float | None  # alıntı bulunamazsa None
     verified: bool
+    quote_match: Literal["exact", "trimmed"] | None  # alıntı bulunamazsa None
 
 
 # LLM'in döndürdüğü tek bir sorunun beklenen yapısı
@@ -159,7 +161,11 @@ def generate_questions(
     locator = QuoteLocator(reference.segments)
     questions = []
     for q in candidates:
-        start = locator.find(q.source_quote)
+        found = locator.match(q.source_quote)
+        source_quote = q.source_quote
+        if found and found.match == "trimmed":
+            # Kırpılarak bulunduysa öğrenciye videoda gerçekten geçen metin gösterilir
+            source_quote = found.text
         options, correct_index = shuffle_options(q.question, q.options, q.correct_index)
         questions.append(
             Question(
@@ -167,9 +173,10 @@ def generate_questions(
                 options=options,
                 correct_index=correct_index,
                 explanation=q.explanation,
-                source_quote=q.source_quote,
-                source_start_seconds=start,
-                verified=start is not None,
+                source_quote=source_quote,
+                source_start_seconds=found.start_seconds if found else None,
+                verified=found is not None,
+                quote_match=found.match if found else None,
             )
         )
     return questions

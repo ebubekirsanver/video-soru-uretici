@@ -107,6 +107,7 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
                 source_quote=q.source_quote,
                 source_start_seconds=q.source_start_seconds,
                 verified=q.verified,
+                quote_match=q.quote_match,
             )
             for q in questions
         ],

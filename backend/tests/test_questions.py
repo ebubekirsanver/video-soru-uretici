@@ -106,10 +106,25 @@ def test_valid_question_is_verified_with_block_time():
     assert q.options[q.correct_index] == "Komşu elemanları"
 
 
+def test_exact_quote_is_kept_as_given():
+    (q,), _ = run(question())
+    assert q.quote_match == "exact"
+    assert q.source_quote == "Kabarcık sıralaması, komşu elemanları karşılaştırır."
+
+
+def test_trimmed_quote_is_replaced_with_transcript_text():
+    (q,), _ = run(question(source_quote="[34] Yani kabarcık sıralaması komşu elemanları karşılaştırır."))
+    assert q.verified is True and q.quote_match == "trimmed"
+    assert q.source_start_seconds == 34.0
+    assert q.source_quote == "kabarcık sıralaması komşu elemanları karşılaştırır"
+
+
 def test_quote_not_in_transcript_is_unverified():
-    (q,), _ = run(question(source_quote="Kabarcık sıralaması en hızlı sıralama algoritmasıdır"))
-    assert q.verified is False
+    quote = "Kabarcık sıralaması en hızlı sıralama algoritmasıdır"
+    (q,), _ = run(question(source_quote=quote))
+    assert q.verified is False and q.quote_match is None
     assert q.source_start_seconds is None
+    assert q.source_quote == quote  # doğrulanamayan alıntı olduğu gibi bırakılır
 
 
 def test_short_quote_is_unverified():
