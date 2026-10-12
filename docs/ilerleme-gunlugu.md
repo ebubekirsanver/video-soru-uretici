@@ -87,3 +87,16 @@ Transkriptin tamamı ~30 sn'lik zaman damgalı bloklar halinde bağlam olarak LL
   - 5+ kelimelik alıntı birden çok yerde geçerse hâlâ ilk geçiş kullanılıyor.
   - Doğrulama başarılıysa `source_quote` (exact ya da trimmed) transkriptteki özgün metinle değiştirilir; bu yüzden metin altyazının yazımıyla döner (ör. otomatik altyazıda küçük harfle başlayan cümle). Doğrulanamayan alıntı modelin yazdığı gibi kalır, yalnızca baştaki `[saniye]` etiketi silinir. Bu ayar sonradan eklendi; pytest → 156 test geçti.
   - İstemdeki "en az 5 kelime" ifadesi koddaki 3-4 kelime kuralıyla artık tam örtüşmüyor; istem bilerek değiştirilmedi.
+
+## Ara iş · Çalıştırma kayıtları (2026-10-12)
+
+Aşama 14'ün (izleme ve günlükleme) küçük bir parçası öne alındı: Swagger ekranı yenilenince sonuçlar kaybolmasın diye başarılı yanıtlar dosyaya kaydediliyor.
+
+- `services/runs.py`: `POST /api/summary` ve `POST /api/questions` her başarılı yanıtı `backend/runs/YYYYMMDD-HHMMSS-<video_id>-<summary|questions>.json` dosyasına yazar. İçerik: `saved_at` (saat dilimli zaman damgası), `endpoint`, `request` (url, transcript_mode, sorularda count) ve yanıtın tamamı. Aynı saniyedeki ikinci kayıt `-2` alır, üzerine yazılmaz.
+- Dosyaya yalnızca istek gövdesi ve yanıt yazılır; ayarlar ve ortam değişkenleri kullanılmaz, API anahtarı kayda giremez.
+- `backend/runs/` git dışında (`.gitignore`); seçilen kayıtlar elle `docs/bulgular/` altına kopyalanır.
+- Ayar: `SAVE_RUNS=true` (varsayılan), `RUNS_DIR` (varsayılan `backend/runs`); `.env.example` güncellendi.
+- Yazma hatası isteği bozmaz: hata sunucu günlüğüne yazılır, yanıt yine döner. Hatalı yanıtlar (404/422/502/503) kaydedilmez.
+- Testlerde kayıt `tests/conftest.py` ile varsayılan kapalı; kayıt testleri geçici klasör kullanır.
+- Doğrulama: `pytest` → 163 test geçti. Testler: iki uç nokta için kayıt oluşması ve içeriği, kayıtta sahte API anahtarının geçmemesi, `SAVE_RUNS=false` iken dosya oluşmaması, hatalı yanıtta kayıt olmaması, yazma hatasında yanıtın 200 dönüp hatanın günlüğe düşmesi, aynı saniyede üzerine yazmama.
+- Bilinen sınırlar: kayıtlar yalnızca yerelde; eski kayıtlar otomatik silinmez. Kayıtta transkriptin kendisi ve LLM'e giden istem yok, yalnızca yanıt var (tam izleme Aşama 14'te).
