@@ -1,0 +1,67 @@
+{
+  "video_id": "109kCbVtU1U",
+  "transcript_mode": "clean",
+  "model": "gpt-4o-mini",
+  "prompt_version": "questions-v1",
+  "requested_count": 5,
+  "returned_count": 4,
+  "verified_count": 2,
+  "questions": [
+    {
+      "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretirler?",
+      "options": [
+        "Kimyasal enerji",
+        "Işık enerjisi",
+        "Termal enerji",
+        "Mekanik enerji"
+      ],
+      "correct_index": 0,
+      "explanation": "Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretimini gerçekleştirirler.",
+      "source_quote": "[219] Yani kimyasal bir enerjiyi kullanarak besin üretimini gerçekleştiriyorsa o canlıya da kemosentetik canlı adını vermiştik.",
+      "source_start_seconds": null,
+      "verified": false
+    },
+    {
+      "question": "Hidrotermal bacaların bulunduğu yerler hakkında hangi ifade doğrudur?",
+      "options": [
+        "Işık vardır",
+        "Yüzeyde bulunur",
+        "Sıcaklık 0°C'dir",
+        "Okyanus tabanında yer alır"
+      ],
+      "correct_index": 3,
+      "explanation": "Hidrotermal bacalar, okyanus tabanında yer alan sıcak su kaynaklarıdır.",
+      "source_quote": "[124] Hidrotermal bacalar su ve gaz fışkırtan sıcak su kaynaklarının okyanus tabanında yer alan benzerleridir.",
+      "source_start_seconds": 124.96,
+      "verified": true
+    },
+    {
+      "question": "Kemosentez yapan canlıların hücre yapısı nedir?",
+      "options": [
+        "Süper hücre",
+        "Ökaryot",
+        "Prokaryot",
+        "Hibrid"
+      ],
+      "correct_index": 2,
+      "explanation": "Kemosentetik canlıların tamamı prokaryot hücre yapısına sahiptir.",
+      "source_quote": "[591] Kemosentetik canlıların tamamının prokaryot olduğunu unutma.",
+      "source_start_seconds": 435.4,
+      "verified": true
+    },
+    {
+      "question": "Kemosentez sırasında hangi madde açığa çıkmaz?",
+      "options": [
+        "Besin",
+        "Oksijen",
+        "Karbon dioksit",
+        "Enerji"
+      ],
+      "correct_index": 1,
+      "explanation": "Kemosentez tepkimesi sonucunda oksijen açığa çıkmaz.",
+      "source_quote": "[806] Kemosentezde oksijen açığa çıkmıyormuş.",
+      "source_start_seconds": null,
+      "verified": false
+    }
+  ]
+}
