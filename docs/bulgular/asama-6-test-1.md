@@ -3,13 +3,13 @@
 **Tarih:** 12 Ekim 2026
 **Test:** `POST /api/questions` · video `109kCbVtU1U` (Türkçe, kemosentez dersi, yaklaşık 25 dk, YouTube otomatik altyazısı) · `count: 5` · `transcript_mode: clean`
 **Model / istem:** gpt-4o-mini · `questions-v1` (RAG'siz taban çizgisi)
-**Ham sonuç:** [asama-6-ilk-gercek-test.json](asama-6-ilk-gercek-test.json)
+**Ham sonuç:** [asama-6-test-1-kemosentez.json](asama-6-test-1-kemosentez.json)
 
 > Bu bir ön denemedir: tek video, tek çalıştırma, 4 soru. Sonuçlar genellenemez, sistemin neyi yakaladığını ve hangi zayıflıkları gösterdiğini belgelemek içindir. Ölçülü karşılaştırmalar Aşama 15'te yapılacaktır.
 
 ## A · İlk çalıştırma sonucu (API yanıtı, test anındaki kod)
 
-Bu bölüm, `POST /api/questions` çağrısının ham yanıtıdır ([JSON](asama-6-ilk-gercek-test.json)). Test anındaki kod zamanı 30 sn'lik blok başlangıcından hesaplıyor ve 5 kelimeden kısa alıntıyı reddediyordu; kırpmalı eşleştirme yoktu.
+Bu bölüm, `POST /api/questions` çağrısının ham yanıtıdır ([JSON](asama-6-test-1-kemosentez.json)). Test anındaki kod zamanı 30 sn'lik blok başlangıcından hesaplıyor ve 5 kelimeden kısa alıntıyı reddediyordu; kırpmalı eşleştirme yoktu.
 
 | Ölçü | Değer |
 |---|---|
@@ -56,7 +56,7 @@ Güncel kodda doğrulanan her alıntının `source_quote` değeri transkriptteki
 
 ### C.1 · Kemosentez videosu (`109kCbVtU1U`)
 
-Ham yanıt: [asama-6-ikinci-test-kemosentez.json](asama-6-ikinci-test-kemosentez.json). İstenen 5, dönen 4, doğrulanan 4/4.
+Ham yanıt: [asama-6-test-2-kemosentez.json](asama-6-test-2-kemosentez.json). İstenen 5, dönen 4, doğrulanan 4/4.
 
 | # | Soru | `verified` | `quote_match` | `source_start_seconds` | Kelime | Elle zaman kontrolü |
 |---|---|---|---|---|---|---|
@@ -67,7 +67,7 @@ Ham yanıt: [asama-6-ikinci-test-kemosentez.json](asama-6-ikinci-test-kemosentez
 
 ### C.2 · Tarih videosu (`aaCHLYO3Fzg`)
 
-Ham yanıt: [asama-6-ikinci-test-tarih.json](asama-6-ikinci-test-tarih.json). İstenen 5, dönen 5, doğrulanan 5/5.
+Ham yanıt: [asama-6-test-2-tarih.json](asama-6-test-2-tarih.json). İstenen 5, dönen 5, doğrulanan 5/5.
 
 | # | Soru | `verified` | `quote_match` | `source_start_seconds` | Kelime | Elle zaman kontrolü |
 |---|---|---|---|---|---|---|

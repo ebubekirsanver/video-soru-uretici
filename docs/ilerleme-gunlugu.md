@@ -65,7 +65,7 @@ Transkriptin tamamı ~30 sn'lik zaman damgalı bloklar halinde bağlam olarak LL
 
 ## Aşama 6 sonrası · İlk gerçek test ve alıntı doğrulama ayarları (2026-10-12)
 
-İlk gerçek test: video `109kCbVtU1U` (Türkçe kemosentez dersi, ~25 dk, otomatik altyazı), `count: 5`, `questions-v1`. 4 soru döndü, 2'si doğrulandı. Ham yanıt: [docs/bulgular/asama-6-ilk-gercek-test.json](bulgular/asama-6-ilk-gercek-test.json). Ayrıntılı tanı: [docs/bulgular/asama-6-ilk-gercek-test.md](bulgular/asama-6-ilk-gercek-test.md).
+İlk gerçek test: video `109kCbVtU1U` (Türkçe kemosentez dersi, ~25 dk, otomatik altyazı), `count: 5`, `questions-v1`. 4 soru döndü, 2'si doğrulandı. Ham yanıt: [docs/bulgular/asama-6-test-1-kemosentez.json](bulgular/asama-6-test-1-kemosentez.json). Ayrıntılı tanı: [docs/bulgular/asama-6-test-1.md](bulgular/asama-6-test-1.md).
 
 - Bulgular:
   - **Model zamanına güvenmeme kararı doğrulandı:** Soru 3'te model alıntıya `[591]` yazdı. Cümle transkriptte tek kez ve 442,72 sn'de geçiyor; modelin değeri 148,3 sn sapıyor ve başka konuyu anlatan bir bloğu gösteriyor. Kodun hesapladığı zaman doğruydu.
@@ -90,7 +90,7 @@ Transkriptin tamamı ~30 sn'lik zaman damgalı bloklar halinde bağlam olarak LL
 
 ## Aşama 6 sonrası · İkinci test (2026-10-12)
 
-Kural değişikliklerinden sonraki ilk gerçek çalıştırmalar: kemosentez (`109kCbVtU1U`, 4 soru) ve tarih (`aaCHLYO3Fzg`, 5 soru), `questions-v1`. Ham yanıtlar `docs/bulgular/asama-6-ikinci-test-*.json`; ayrıntı [asama-6-ilk-gercek-test.md](bulgular/asama-6-ilk-gercek-test.md), C bölümü.
+Kural değişikliklerinden sonraki ilk gerçek çalıştırmalar: kemosentez (`109kCbVtU1U`, 4 soru) ve tarih (`aaCHLYO3Fzg`, 5 soru), `questions-v1`. Ham yanıtlar `docs/bulgular/asama-6-test-2-*.json`; ayrıntı [asama-6-test-1.md](bulgular/asama-6-test-1.md), C bölümü.
 
 - 9 sorunun 9'u doğrulandı (3'ü `trimmed`).
 - Elle zaman kontrolü 6 soruda yapıldı, 6'sı doğru yere düşüyor. Saniyesi ölçülen 4 soruda kod cümleden 1,5-5,4 sn önce başlatıyor (ortalama ~2,6 sn); segment çözünürlüğünün sonucu. Eski blok tabanlı hesapta bu fark ~7,3 sn idi.

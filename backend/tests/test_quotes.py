@@ -192,7 +192,7 @@ def test_empty_segments():
 
 # Gerçek test videosundan (109kCbVtU1U) kesit: 435,4 sn'de başlayan 30 sn'lik blok.
 # Aşama 6 ilk gerçek testinde Soru 3'ün alıntısı bu bloktaydı; ayrıntı:
-# docs/bulgular/asama-6-ilk-gercek-test.md
+# docs/bulgular/asama-6-test-1.md
 REAL_EXCERPT = [
     Segment("yapıyoruz? Enerji üretimini", 435.4, 1.4),
     Segment("gerçekleştirmek için. Niye yapıyoruz", 436.8, 1.959),

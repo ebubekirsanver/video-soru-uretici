@@ -134,7 +134,7 @@ def strip_time_label(quote: str) -> str:
     """Alıntının başındaki `[219]` gibi saniye etiketini siler.
 
     İstem bunu yasaklasa da model blok etiketini alıntıya kopyalayabiliyor
-    (bkz. docs/bulgular/asama-6-ilk-gercek-test.md, Bulgu 5).
+    (bkz. docs/bulgular/asama-6-test-1.md, Bulgu 5).
     """
     return _TIME_LABEL.sub("", quote, count=1).strip()
 

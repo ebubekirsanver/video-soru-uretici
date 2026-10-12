@@ -177,7 +177,7 @@ def test_summary_record_has_no_quote_audit(runs_enabled, use_llm, fake_transcrip
 
 def test_load_run_reads_old_format_record():
     # Sürüm 1 biçiminde gerçek bir kayıt (record_version ve quote_audit yok)
-    old = Path(__file__).resolve().parents[2] / "docs" / "bulgular" / "asama-6-ikinci-test-tarih.json"
+    old = Path(__file__).resolve().parents[2] / "docs" / "bulgular" / "asama-6-test-2-tarih.json"
     record = runs.load_run(old)
     assert record["record_version"] == 1
     assert record["quote_audit"] == []
