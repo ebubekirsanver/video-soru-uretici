@@ -40,6 +40,8 @@ Bu bölüm, `POST /api/questions` çağrısının ham yanıtıdır ([JSON](asama
 | 3 | true | 442,72 | exact | Zaman blok başı (435,4) yerine cümlenin başladığı segment |
 | 4 | **true** | 813,28 | exact | 4 kelimelik tek geçişli alıntı artık kabul ediliyor |
 
+Güncel kodda doğrulanan her alıntının `source_quote` değeri transkriptteki özgün metinle değiştirilir. Bu yüzden modelin eklediği `[124]`, `[591]` gibi etiketler yanıtta görünmez. Doğrulanamayan alıntılarda yalnızca baştaki etiket silinir.
+
 **Doğrulanan: 4 / 4** (ilk çalıştırmada 2 / 4). Bu artış doğrulama kurallarının değişmesinden kaynaklanır, modelin daha iyi soru üretmesinden değil. Kurallar bu dört soruya bakılarak ayarlandığı için bu sonuç kuralların başarısının kanıtı sayılmamalıdır (bkz. Sınırlar).
 
 **Tanı ve yeniden ölçüm yöntemi:** Transkript aynı videodan `fetch_transcript` ile yeniden çekildi (Türkçe otomatik altyazı, 680 segment, 1513,8 sn; OpenAI çağrısı yapılmadı). Temizlenip 30 sn'lik bloklara ayrıldı (49 blok). Alıntılar kodla aynı normalleştirmeyle (`quotes.normalize`) aranarak tüm tam kelime geçişleri sayıldı. Yeniden ölçümde alıntılar JSON dosyasından okunup güncel `QuoteLocator.match` ile tam transkriptte arandı. İlk çalıştırmanın kod değerleri (124,96 ve 435,4) yeniden çekilen transkript üzerinde o zamanki kodla da yeniden üretildi ve API yanıtıyla aynı çıktı. Geçici tanı betikleri commit'lenmedi.

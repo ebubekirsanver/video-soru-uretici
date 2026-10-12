@@ -9,6 +9,7 @@ from app.services.questions import (
     generate_questions,
     parse_questions,
     shuffle_options,
+    strip_time_label,
 )
 from app.services.prompts import load_prompt
 from app.services.text_clean import clean_transcript
@@ -106,10 +107,19 @@ def test_valid_question_is_verified_with_block_time():
     assert q.options[q.correct_index] == "Komşu elemanları"
 
 
-def test_exact_quote_is_kept_as_given():
+def test_exact_quote_is_replaced_with_transcript_text():
+    # Model noktalama ve büyük harf eklemiş; yanıtta transkriptteki hâli görünür
     (q,), _ = run(question())
     assert q.quote_match == "exact"
-    assert q.source_quote == "Kabarcık sıralaması, komşu elemanları karşılaştırır."
+    assert q.source_quote == "kabarcık sıralaması komşu elemanları karşılaştırır"
+
+
+def test_exact_quote_time_label_is_removed():
+    # Model kural 10'u ihlal edip blok etiketini alıntıya kopyalamış
+    (q,), _ = run(question(source_quote="[34] Kabarcık sıralaması komşu elemanları karşılaştırır."))
+    assert q.quote_match == "exact"  # etiket kırpma sayılmaz
+    assert q.source_quote == "kabarcık sıralaması komşu elemanları karşılaştırır"
+    assert q.source_start_seconds == 34.0
 
 
 def test_trimmed_quote_is_replaced_with_transcript_text():
@@ -124,7 +134,27 @@ def test_quote_not_in_transcript_is_unverified():
     (q,), _ = run(question(source_quote=quote))
     assert q.verified is False and q.quote_match is None
     assert q.source_start_seconds is None
-    assert q.source_quote == quote  # doğrulanamayan alıntı olduğu gibi bırakılır
+    assert q.source_quote == quote  # doğrulanamayan alıntı modelin yazdığı gibi bırakılır
+
+
+def test_unverified_quote_keeps_text_but_loses_time_label():
+    (q,), _ = run(question(source_quote="[591] Kabarcık sıralaması en hızlı sıralama algoritmasıdır."))
+    assert q.verified is False
+    assert q.source_quote == "Kabarcık sıralaması en hızlı sıralama algoritmasıdır."
+
+
+@pytest.mark.parametrize(
+    "raw, expected",
+    [
+        ("[219] Yani kimyasal enerji", "Yani kimyasal enerji"),
+        ("  [124.5]  metin", "metin"),
+        ("[Müzik] metin", "[Müzik] metin"),  # yalnızca sayı etiketi silinir
+        ("metin [219] ortada", "metin [219] ortada"),  # yalnızca baştaki etiket
+        ("etiketsiz metin", "etiketsiz metin"),
+    ],
+)
+def test_strip_time_label(raw, expected):
+    assert strip_time_label(raw) == expected
 
 
 def test_short_quote_is_unverified():

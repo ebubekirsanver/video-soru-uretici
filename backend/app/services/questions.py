@@ -10,6 +10,7 @@ import hashlib
 import json
 import logging
 import random
+import re
 from dataclasses import dataclass
 from typing import Literal
 
@@ -27,6 +28,8 @@ PROMPT_VERSION = "questions-v1"
 SYSTEM_PROMPT_FILE = "questions_v1_system.txt"
 USER_PROMPT_FILE = "questions_v1_user.txt"
 OPTION_COUNT = 4
+# Alıntının başındaki [219] ya da [124.5] biçiminde saniye etiketi
+_TIME_LABEL = re.compile(r"^\s*\[\d+(?:[.,]\d+)?\]")
 
 
 @dataclass
@@ -122,6 +125,15 @@ def drop_duplicates(questions: list[_QuestionModel]) -> list[_QuestionModel]:
     return unique
 
 
+def strip_time_label(quote: str) -> str:
+    """Alıntının başındaki `[219]` gibi saniye etiketini siler.
+
+    İstem bunu yasaklasa da model blok etiketini alıntıya kopyalayabiliyor
+    (bkz. docs/bulgular/asama-6-ilk-gercek-test.md, Bulgu 5).
+    """
+    return _TIME_LABEL.sub("", quote, count=1).strip()
+
+
 def shuffle_options(question: str, options: list[str], correct_index: int) -> tuple[list[str], int]:
     """Seçenekleri karıştırır ve doğru cevabın yeni konumunu döndürür.
 
@@ -162,10 +174,12 @@ def generate_questions(
     questions = []
     for q in candidates:
         found = locator.match(q.source_quote)
-        source_quote = q.source_quote
-        if found and found.match == "trimmed":
-            # Kırpılarak bulunduysa öğrenciye videoda gerçekten geçen metin gösterilir
+        if found:
+            # Doğrulanan alıntıda öğrenciye videoda gerçekten geçen metin gösterilir
+            # (modelin eklediği [saniye] etiketi ve kırpılan sözcükler gitmiş olur)
             source_quote = found.text
+        else:
+            source_quote = strip_time_label(q.source_quote)
         options, correct_index = shuffle_options(q.question, q.options, q.correct_index)
         questions.append(
             Question(

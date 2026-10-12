@@ -56,14 +56,17 @@ class QuestionOut(BaseModel):
     options: list[str] = Field(description="4 seçenek")
     correct_index: int = Field(description="Doğru seçeneğin sırası (0-3)")
     explanation: str
-    source_quote: str = Field(description="Sorunun dayandığı transkript alıntısı")
+    source_quote: str = Field(
+        description="Sorunun dayandığı alıntı. Doğrulandıysa transkriptteki metin; "
+        "doğrulanamadıysa modelin yazdığı alıntı (baştaki [saniye] etiketi silinmiş)"
+    )
     source_start_seconds: float | None = Field(
         description="Alıntının başladığı transkript segmentinin başlangıcı (saniye); doğrulanamadıysa null"
     )
     verified: bool = Field(description="Alıntı temizlenmiş transkriptte bulundu mu")
     quote_match: Literal["exact", "trimmed"] | None = Field(
         description="exact: alıntı birebir bulundu; trimmed: kenarlarından en fazla 2 kelime "
-        "kırpılarak bulundu ve source_quote transkriptteki metinle değiştirildi; null: bulunamadı"
+        "kırpılarak bulundu; null: bulunamadı"
     )
 
 

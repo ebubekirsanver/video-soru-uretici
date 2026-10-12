@@ -85,5 +85,5 @@ Transkriptin tamamı ~30 sn'lik zaman damgalı bloklar halinde bağlam olarak LL
   - Bulgular tek video, tek çalıştırma ve 4 soruya dayanıyor.
   - **Kurallar (5 kelime, tek geçiş, kenar kırpma) aynı 4 soruya bakılarak ayarlandı.** 4/4 sonucu kuralların başarısını göstermez; kurallar başka videolarda ve yeni üretilmiş sorularda ayrıca test edilmeli.
   - 5+ kelimelik alıntı birden çok yerde geçerse hâlâ ilk geçiş kullanılıyor.
-  - Birebir eşleşen alıntıda `source_quote` modelin yazdığı gibi kalıyor; model kural 10'u ihlal ettiyse baştaki `[saniye]` etiketi de yanıtta görünüyor.
+  - Doğrulama başarılıysa `source_quote` (exact ya da trimmed) transkriptteki özgün metinle değiştirilir; bu yüzden metin altyazının yazımıyla döner (ör. otomatik altyazıda küçük harfle başlayan cümle). Doğrulanamayan alıntı modelin yazdığı gibi kalır, yalnızca baştaki `[saniye]` etiketi silinir. Bu ayar sonradan eklendi; pytest → 156 test geçti.
   - İstemdeki "en az 5 kelime" ifadesi koddaki 3-4 kelime kuralıyla artık tam örtüşmüyor; istem bilerek değiştirilmedi.
