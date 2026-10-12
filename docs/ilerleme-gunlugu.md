@@ -65,20 +65,25 @@ Transkriptin tamamı ~30 sn'lik zaman damgalı bloklar halinde bağlam olarak LL
 
 ## Aşama 6 sonrası · İlk gerçek test ve alıntı doğrulama ayarları (2026-10-12)
 
-İlk gerçek test: video `109kCbVtU1U` (Türkçe kemosentez dersi, ~25 dk, otomatik altyazı), `count: 5`, `questions-v1`. 4 soru döndü, 2'si doğrulandı. Ayrıntılı tanı: [docs/bulgular/asama-6-ilk-gercek-test.md](bulgular/asama-6-ilk-gercek-test.md).
+İlk gerçek test: video `109kCbVtU1U` (Türkçe kemosentez dersi, ~25 dk, otomatik altyazı), `count: 5`, `questions-v1`. 4 soru döndü, 2'si doğrulandı. Ham yanıt: [docs/bulgular/asama-6-ilk-gercek-test.json](bulgular/asama-6-ilk-gercek-test.json). Ayrıntılı tanı: [docs/bulgular/asama-6-ilk-gercek-test.md](bulgular/asama-6-ilk-gercek-test.md).
 
 - Bulgular:
   - **Model zamanına güvenmeme kararı doğrulandı:** Soru 3'te model alıntıya `[591]` yazdı. Cümle transkriptte tek kez ve 442,72 sn'de geçiyor; modelin değeri 148,3 sn sapıyor ve başka konuyu anlatan bir bloğu gösteriyor. Kodun hesapladığı zaman doğruydu.
   - **Kural 10 ihlali:** 4 alıntının 4'ü de istemdeki `[saniye]` blok etiketiyle başlıyor. Temizleme etiketi sildiği için doğrulama bozulmadı.
-  - **Soru 1 doğrulanmadı, çünkü model alıntıya transkriptte olmayan "Yani" kelimesini ekledi.** Kelimeler birebir aynı olmadığı için kuralın reddetmesi doğru. Düzeltme yapılmadı, ayrı karar bekliyor.
+  - **Soru 1 doğrulanmadı, çünkü model alıntının başına transkriptte olmayan "Yani" kelimesini ekledi.** Alıntının geri kalan 14 kelimesi birebir aynı.
   - **Soru 4 haksız yere reddedildi:** alıntı 4 kelime ve transkriptte tek kez geçiyor.
 - Yapılan ayarlar (`services/quotes.py`):
   - `source_start_seconds` artık blok başlangıcı yerine **alıntının başladığı segmentin başlangıcı** (Aşama 6 kaydındaki blok düzeyi çözünürlük sınırının yerini alır). Soru 3: 435,4 → 442,72.
   - **Kısa alıntı kuralı:** 5+ kelime eskisi gibi; 3-4 kelime yalnızca transkriptte tam 1 kez geçerse doğrulanır; 3'ten kısası doğrulanmaz (Aşama 6 kaydındaki "5 kelimeden kısa alıntı kanıt sayılmaz" kuralının yerini alır). Soru 4 artık doğrulanıyor.
-  - Aynı dört alıntı güncel kodla yeniden ölçüldüğünde doğrulanan soru 2/4 → 3/4. Model yeniden çalıştırılmadı.
-- Doğrulama: `pytest` → 135 test geçti. Soru 3 ve Soru 4 örnekleri gerçek transkript kesitleriyle test edildi (442,72 ve 813,28 sn). Ayrıca 3-4 kelimelik tek geçişli alıntı kabulü, iki kez geçen kısa alıntının reddi, 2 kelimelik alıntının reddi ve 5+ kelimede ilk geçişin korunması test edildi.
+  - **Kenar kırpma:** birebir bulunamayan alıntının kenarlarından toplam en fazla 2 kelime kırpılarak yeniden aranır. Kalan parça yukarıdaki kurallardan geçmeli, ortadaki farklar reddedilir. Kırpılarak bulunan alıntıda `source_quote` transkriptteki özgün metinle değiştirilir. Yanıta `quote_match: "exact" | "trimmed" | null` alanı eklendi. Soru 1 artık `trimmed` olarak doğrulanıyor (216,84 sn).
+  - İstem `questions-v1` karşılaştırma için sabit taban çizgisi olarak bırakıldı, değiştirilmedi.
+  - Yeniden ölçüm (**model yeniden çalıştırılmadı**, aynı 4 alıntı güncel kodla denetlendi): doğrulanan 2/4 → 4/4. Bulgular dosyasında ilk çalıştırma (A) ve yeniden ölçüm (B) ayrı bölümlerde.
+- Doğrulama: `pytest` → 149 test geçti. Soru 1, 3 ve 4 örnekleri gerçek transkript kesitleriyle test edildi (216,84, 442,72 ve 813,28 sn). Ayrıca şunlar test edildi:
+  - 3-4 kelimelik tek geçişli alıntının kabulü, iki kez geçen kısa alıntının reddi, 2 kelimelik alıntının reddi, 5+ kelimede ilk geçişin korunması.
+  - Kenarda dolgu sözcüğünün kırpılarak kabulü (baş, son, baş+son), ortadaki farkın reddi, 2 kelimeden fazla kırpmanın reddi, birebir eşleşmede kırpma yapılmaması, kırpılan parçanın kısa alıntı kurallarına tabi olması.
 - Bilinen sınırlar:
   - Bulgular tek video, tek çalıştırma ve 4 soruya dayanıyor.
+  - **Kurallar (5 kelime, tek geçiş, kenar kırpma) aynı 4 soruya bakılarak ayarlandı.** 4/4 sonucu kuralların başarısını göstermez; kurallar başka videolarda ve yeni üretilmiş sorularda ayrıca test edilmeli.
   - 5+ kelimelik alıntı birden çok yerde geçerse hâlâ ilk geçiş kullanılıyor.
-  - Modelin alıntıya kelime eklemesi (Soru 1) için bir önlem yok.
-  - İstem (`questions-v1`) değiştirilmedi; "en az 5 kelime" ifadesi istemde duruyor.
+  - Birebir eşleşen alıntıda `source_quote` modelin yazdığı gibi kalıyor; model kural 10'u ihlal ettiyse baştaki `[saniye]` etiketi de yanıtta görünüyor.
+  - İstemdeki "en az 5 kelime" ifadesi koddaki 3-4 kelime kuralıyla artık tam örtüşmüyor; istem bilerek değiştirilmedi.
