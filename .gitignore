@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Ortam ve gizli anahtarlar
+.env
+.env.*
+!.env.example
+
+# Veri
+chroma_data/
+*.sqlite3
+*.db
+
+# Node
+node_modules/
+.next/
+
+# Editör / OS
+.vscode/
+.idea/
+.DS_Store
