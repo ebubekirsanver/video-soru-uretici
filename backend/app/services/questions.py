@@ -14,7 +14,6 @@ from dataclasses import dataclass
 
 from pydantic import BaseModel, ValidationError, field_validator
 
-from app.services.chunking import group_into_blocks
 from app.services.llm import LLMClient, LLMError
 from app.services.prompts import BLOCK_SECONDS, fill_prompt, load_prompt, transcript_context
 from app.services.quotes import QuoteLocator, normalize
@@ -157,7 +156,7 @@ def generate_questions(
     )
     candidates = drop_duplicates(parse_questions(raw))[:count]
 
-    locator = QuoteLocator(group_into_blocks(reference.segments, block_seconds))
+    locator = QuoteLocator(reference.segments)
     questions = []
     for q in candidates:
         start = locator.find(q.source_quote)

@@ -1,14 +1,14 @@
 """Kaynak alıntısını transkriptte arama ve alıntının video zamanını bulma.
 
 LLM'in verdiği alıntıya ve zamana güvenilmez: alıntı kodda transkript içinde
-aranır, zaman da alıntının bulunduğu bloktan hesaplanır.
+aranır, zaman da alıntının başladığı segmentten hesaplanır.
 """
 
 import bisect
 import unicodedata
 
-from app.services.chunking import TimeBlock
 from app.services.text_clean import clean_text
+from app.services.transcript import Segment
 
 # Bundan kısa alıntılar (ör. "ve bu") her transkriptte geçer, kanıt sayılmaz
 MIN_QUOTE_WORDS = 5
@@ -33,26 +33,30 @@ def normalize(text: str) -> str:
 
 
 class QuoteLocator:
-    """Bloklar üzerinde alıntı arar; bulunursa alıntının başladığı bloğun zamanını verir."""
+    """Transkript segmentleri üzerinde alıntı arar; bulunursa alıntının başladığı segmentin zamanını verir.
 
-    def __init__(self, blocks: list[TimeBlock]):
+    Segmentler tek bir metinde birleştirilir, bu yüzden birden çok segmente
+    (ya da bloğa) yayılan alıntılar da bulunur.
+    """
+
+    def __init__(self, segments: list[Segment]):
         parts: list[str] = []
-        self._offsets: list[int] = []  # her bloğun birleşik metindeki başlangıç konumu
+        self._offsets: list[int] = []  # her segmentin birleşik metindeki başlangıç konumu
         self._starts: list[float] = []
         position = 0
-        for block in blocks:
-            text = normalize(block.text)
+        for segment in segments:
+            text = normalize(segment.text)
             if not text:
                 continue
             self._offsets.append(position)
-            self._starts.append(block.start)
+            self._starts.append(segment.start)
             parts.append(text)
-            position += len(text) + 1  # bloklar arasına bir boşluk konur
+            position += len(text) + 1  # segmentler arasına bir boşluk konur
         # Baştaki ve sondaki boşluk, yalnızca tam kelime eşleşmesi için
         self._text = " " + " ".join(parts) + " "
 
     def find(self, quote: str) -> float | None:
-        """Alıntı transkriptte tam kelimelerle geçiyorsa başladığı bloğun saniyesini döndürür.
+        """Alıntı transkriptte tam kelimelerle geçiyorsa başladığı segmentin saniyesini döndürür.
 
         Alıntı bulunamazsa ya da `MIN_QUOTE_WORDS` kelimeden kısaysa None döner.
         """
@@ -64,5 +68,5 @@ class QuoteLocator:
             return None
         # index, eşleşmeden önceki boşluğu gösterir; bu da birleşik metindeki
         # (baştaki boşluk hariç) kelime başlangıcına denk gelir
-        block = bisect.bisect_right(self._offsets, index) - 1
-        return self._starts[block]
+        segment = bisect.bisect_right(self._offsets, index) - 1
+        return self._starts[segment]

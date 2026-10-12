@@ -58,7 +58,7 @@ class QuestionOut(BaseModel):
     explanation: str
     source_quote: str = Field(description="Sorunun dayandığı transkript alıntısı")
     source_start_seconds: float | None = Field(
-        description="Alıntının geçtiği bloğun başlangıcı (saniye); doğrulanamadıysa null"
+        description="Alıntının başladığı transkript segmentinin başlangıcı (saniye); doğrulanamadıysa null"
     )
     verified: bool = Field(description="Alıntı temizlenmiş transkriptte bulundu mu")
 

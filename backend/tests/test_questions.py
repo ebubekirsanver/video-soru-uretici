@@ -101,7 +101,7 @@ def test_valid_question_is_verified_with_block_time():
     (q,), llm = run(question())
     assert llm.calls[0]["json_mode"] is True
     assert q.verified is True
-    # Zaman modelden değil, alıntının geçtiği bloktan (34. saniyede başlayan blok)
+    # Zaman modelden değil, alıntının başladığı segmentten (34. saniyedeki segment)
     assert q.source_start_seconds == 34.0
     assert q.options[q.correct_index] == "Komşu elemanları"
 
