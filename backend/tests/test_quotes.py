@@ -145,6 +145,28 @@ def test_filler_word_at_edge_is_trimmed(quote, expected_text):
     assert m.text == expected_text
 
 
+@pytest.mark.parametrize(
+    "quote, head, tail",
+    [
+        ("Yani, kabarcık sıralaması komşu elemanları karşılaştırır", ["yani"], []),
+        ("kabarcık sıralaması komşu elemanları karşılaştırır. Tamam mı", [], ["tamam", "mı"]),
+        ("Evet ilk olarak kabarcık sıralaması TAMAM", ["evet"], ["tamam"]),
+        ("YANİ şöyle kabarcık sıralaması komşu elemanları", ["yani", "şöyle"], []),
+    ],
+)
+def test_trimmed_words_are_reported_normalized(quote, head, tail):
+    m = make_locator().match(quote)
+    assert m.match == "trimmed"
+    assert m.trimmed_head == head and m.trimmed_tail == tail
+
+
+def test_exact_match_has_no_trimmed_words():
+    # Baştaki [saniye] etiketi kırpma sayılmaz
+    m = make_locator().match("[30] İlk olarak kabarcık sıralaması komşu elemanları")
+    assert m.match == "exact"
+    assert m.trimmed_head == [] and m.trimmed_tail == []
+
+
 def test_trim_more_than_two_words_is_rejected():
     # Başta üç fazladan sözcük: en fazla 2 kırpılabilir
     assert make_locator().match("Yani şöyle ki kabarcık sıralaması komşu elemanları karşılaştırır") is None
@@ -217,6 +239,7 @@ def test_real_example_soru1_leading_filler_is_trimmed():
     )
     m = QuoteLocator(REAL_EXCERPT_SORU1).match(quote)
     assert m.match == "trimmed"
+    assert m.trimmed_head == ["yani"] and m.trimmed_tail == []
     assert m.start_seconds == pytest.approx(216.84)
     assert m.text == (
         "Kimyasal bir enerjiyi kullanarak besin üretimini "

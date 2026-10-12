@@ -5,7 +5,7 @@ aranır, zaman da alıntının başladığı segmentten hesaplanır.
 """
 
 import unicodedata
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Literal
 
 from app.services.text_clean import clean_text
@@ -52,6 +52,10 @@ class QuoteMatch:
     start_seconds: float  # alıntının başladığı segmentin başlangıcı
     text: str  # transkriptte bulunan metin, özgün yazımıyla
     match: Literal["exact", "trimmed"]
+    # Kırpılan kelimeler, normalleştirilmiş hâlde (küçük harf, noktalamasız);
+    # exact eşleşmede boş. Baştaki [saniye] etiketi kırpma sayılmaz.
+    trimmed_head: list[str] = field(default_factory=list)
+    trimmed_tail: list[str] = field(default_factory=list)
 
 
 class QuoteLocator:
@@ -119,6 +123,8 @@ class QuoteLocator:
                 start_seconds=self._token_starts[first_token],
                 text=" ".join(self._tokens[first_token : last_token + 1]),
                 match="trimmed" if front + back else "exact",
+                trimmed_head=words[:front],
+                trimmed_tail=words[len(words) - back :],
             )
         return None
 
