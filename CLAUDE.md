@@ -22,7 +22,16 @@ YouTube ders videosu bağlantısından zaman damgalı transkript çıkaran, tran
 ## Çalışma kuralları
 1. **Aşama aşama ilerle.** Aynı anda yalnızca tek bir aşamaya çalış. Aşamayı yol haritasından al, kapsamın dışına çıkma.
 2. **Her aşama bitince:** testleri çalıştır (`cd backend && pytest`), `docs/ilerleme-gunlugu.md` dosyasına aşamanın kaydını ekle (ne yapıldı, nasıl doğrulandı, bilinen sınırlar), sonra commit at.
-3. **Küçük, anlamlı commit'ler** at. Mesajlar Türkçe ve şu biçimde olsun: `feat(backend): ...`, `fix: ...`, `docs: ...`, `test: ...`, `chore: ...`. Push'u kullanıcı yapar, sen yalnızca commit at.
+3. **Küçük, anlamlı commit'ler** at. Push'u kullanıcı yapar, sen yalnızca commit at.
+   - Mesajın ilk satırı sade Türkçe, tek cümle olsun ve ne yapıldığını doğrudan anlatsın. `feat:`, `fix:`, `docs:` gibi teknik önekler **kullanılmaz**.
+   - İlk satır emir kipiyle bitsin: "ekle", "geliştir", "düzelt", "doğrula", "iyileştir" gibi.
+   - Gerekirse bir boş satır bırakıp kısa bir açıklama yaz: neden yapıldı, nasıl doğrulandı.
+   - Örnekler:
+     - `Transkript temizlemeyi ekle ve ham/temiz seçimini mümkün kıl`
+     - `Videodan çoktan seçmeli soru üretimini ve kaynak alıntısı doğrulamasını ekle`
+     - `Soru tekrarlarını benzerlik eşiğiyle ele`
+     - `API anahtarı eksikken anlaşılır hata mesajı ver`
+   - Eski commit'ler yeniden yazılmaz: rebase, amend ya da force push yapılmaz. Eski önekli mesajlar olduğu gibi kalır.
 4. **Test yaz.** Dış servis çağrılarını (YouTube, OpenAI) testlerde sahte nesnelerle taklit et.
 5. **Gizli bilgi:** `.env`, API anahtarı ve kişisel veri commit'lenmez.
 6. **Literatürle uyumlu kal:** her teknolojiyi bir sorunu çözdüğü ve etkisi ölçülebildiği için ekle. Karşılaştırma gerektiren yerlerde (sabit boyutlu ve anlamsal bölütleme, RAG'li ve RAG'siz, ham ve temiz transkript) ikisini de kodda seçilebilir bırak ki ölçülebilsin.
