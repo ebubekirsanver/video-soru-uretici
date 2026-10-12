@@ -88,6 +88,22 @@ Transkriptin tamamı ~30 sn'lik zaman damgalı bloklar halinde bağlam olarak LL
   - Doğrulama başarılıysa `source_quote` (exact ya da trimmed) transkriptteki özgün metinle değiştirilir; bu yüzden metin altyazının yazımıyla döner (ör. otomatik altyazıda küçük harfle başlayan cümle). Doğrulanamayan alıntı modelin yazdığı gibi kalır, yalnızca baştaki `[saniye]` etiketi silinir. Bu ayar sonradan eklendi; pytest → 156 test geçti.
   - İstemdeki "en az 5 kelime" ifadesi koddaki 3-4 kelime kuralıyla artık tam örtüşmüyor; istem bilerek değiştirilmedi.
 
+## Aşama 6 sonrası · İkinci test (2026-10-12)
+
+Kural değişikliklerinden sonraki ilk gerçek çalıştırmalar: kemosentez (`109kCbVtU1U`, 4 soru) ve tarih (`aaCHLYO3Fzg`, 5 soru), `questions-v1`. Ham yanıtlar `docs/bulgular/asama-6-ikinci-test-*.json`; ayrıntı [asama-6-ilk-gercek-test.md](bulgular/asama-6-ilk-gercek-test.md), C bölümü.
+
+- 9 sorunun 9'u doğrulandı (3'ü `trimmed`).
+- Elle zaman kontrolü 6 soruda yapıldı, 6'sı doğru yere düşüyor. Saniyesi ölçülen 4 soruda kod cümleden 1,5-5,4 sn önce başlatıyor (ortalama ~2,6 sn); segment çözünürlüğünün sonucu. Eski blok tabanlı hesapta bu fark ~7,3 sn idi.
+- Gözlemler (Aşama 9 için):
+  - Aynı videoda çalıştırmalar arası çıktı belirsizliği var: bir soru birebir tekrar etti, ikisi aynı konuyu tekrarladı.
+  - Olumsuz soru kökü iki videoda çıktı.
+  - Tarih S2'de doğru cevap alıntıda geçmiyor, kemosentez S2'de alıntı ile cevap tam örtüşmüyor: alıntı doğrulaması cevabı kanıtlamıyor.
+- Sınırlar:
+  - 2 video, 9 soru, her video için tek çalıştırma.
+  - 3 sorunun zamanı kontrol edilmedi.
+  - Hiç ret olmadığı için kuralların ret yönü sınanmadı.
+  - Çalıştırma kayıtları modelin özgün alıntısını saklamıyor, bu yüzden `trimmed` sorularda neyin kırpıldığı görülemiyor.
+
 ## Ara iş · Çalıştırma kayıtları (2026-10-12)
 
 Aşama 14'ün (izleme ve günlükleme) küçük bir parçası öne alındı: Swagger ekranı yenilenince sonuçlar kaybolmasın diye başarılı yanıtlar dosyaya kaydediliyor.
