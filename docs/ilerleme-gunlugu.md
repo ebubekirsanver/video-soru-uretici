@@ -116,3 +116,10 @@ Aşama 14'ün (izleme ve günlükleme) küçük bir parçası öne alındı: Swa
 - Testlerde kayıt `tests/conftest.py` ile varsayılan kapalı; kayıt testleri geçici klasör kullanır.
 - Doğrulama: `pytest` → 163 test geçti. Testler: iki uç nokta için kayıt oluşması ve içeriği, kayıtta sahte API anahtarının geçmemesi, `SAVE_RUNS=false` iken dosya oluşmaması, hatalı yanıtta kayıt olmaması, yazma hatasında yanıtın 200 dönüp hatanın günlüğe düşmesi, aynı saniyede üzerine yazmama.
 - Bilinen sınırlar: kayıtlar yalnızca yerelde; eski kayıtlar otomatik silinmez. Kayıtta transkriptin kendisi ve LLM'e giden istem yok, yalnızca yanıt var (tam izleme Aşama 14'te).
+- Ek (kayıt sürümü 2): soru kayıtlarına `quote_audit` listesi eklendi. Her soru için:
+  - `model_quote`: modelin yazdığı ham alıntı, `[saniye]` etiketi dahil
+  - `source_quote`: transkriptteki hâli
+  - `quote_match`
+  - `trimmed_head` / `trimmed_tail`: kırpılan kelimeler, normalleştirilmiş hâlde
+
+  Bu bilgi yalnızca yerel kayda yazılır, API yanıtında yer almaz; `response` alanı yanıtla birebir aynı kalır. Kayda `record_version: 2` eklendi. `load_run()` eski (sürüm 1) kayıtlarda eksik alanları `record_version: 1` ve `quote_audit: []` olarak doldurur. İkinci testte görülen "trimmed sorularda neyin kırpıldığı görülemiyor" sınırı bundan sonraki çalıştırmalar için giderildi; mevcut iki kayıtta bu bilgi yok. pytest → 173 test geçti.

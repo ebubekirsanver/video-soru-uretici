@@ -11,7 +11,7 @@ import json
 import logging
 import random
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Literal
 
 from pydantic import BaseModel, ValidationError, field_validator
@@ -42,6 +42,11 @@ class Question:
     source_start_seconds: float | None  # alıntı bulunamazsa None
     verified: bool
     quote_match: Literal["exact", "trimmed"] | None  # alıntı bulunamazsa None
+    # Yalnızca çalıştırma kaydı için (API yanıtına girmez): modelin yazdığı ham
+    # alıntı ve kırpılan kelimeler (normalleştirilmiş)
+    model_quote: str = ""
+    trimmed_head: list[str] = field(default_factory=list)
+    trimmed_tail: list[str] = field(default_factory=list)
 
 
 # LLM'in döndürdüğü tek bir sorunun beklenen yapısı
@@ -191,6 +196,9 @@ def generate_questions(
                 source_start_seconds=found.start_seconds if found else None,
                 verified=found is not None,
                 quote_match=found.match if found else None,
+                model_quote=q.source_quote,
+                trimmed_head=found.trimmed_head if found else [],
+                trimmed_tail=found.trimmed_tail if found else [],
             )
         )
     return questions

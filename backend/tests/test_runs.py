@@ -2,6 +2,7 @@ import json
 import logging
 import re
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -110,8 +111,89 @@ def test_questions_run_is_saved(runs_enabled, use_llm, fake_transcript):
     assert "Kabarcık sıralaması" in path.read_text(encoding="utf-8")
 
 
+def mixed_questions_json():
+    """Biri exact (etiketli), biri trimmed, biri doğrulanamayan üç soru."""
+    base = {"options": ["a", "b", "c", "d"], "correct_index": 0, "explanation": "açıklama"}
+    return json.dumps(
+        {
+            "questions": [
+                {**base, "question": "Exact soru?",
+                 "source_quote": "[4] Kabarcık sıralaması, komşu elemanları karşılaştırır."},
+                {**base, "question": "Trimmed soru?",
+                 "source_quote": "[4] Yani kabarcık sıralaması komşu elemanları karşılaştırır tamam"},
+                {**base, "question": "Doğrulanamayan soru?",
+                 "source_quote": "[90] Bu cümle videoda hiç geçmiyor aslında"},
+            ]
+        },
+        ensure_ascii=False,
+    )
+
+
+def test_quote_audit_in_record(runs_enabled, use_llm, fake_transcript):
+    use_llm(mixed_questions_json())
+    r = client.post("/api/questions", json={"url": VID})
+    assert r.status_code == 200
+
+    (path,) = saved_files(runs_enabled)
+    record = json.loads(path.read_text(encoding="utf-8"))
+    assert record["record_version"] == 2
+    assert record["response"] == r.json()  # yanıt kayıtta değiştirilmeden durur
+
+    exact, trimmed, unverified = record["quote_audit"]
+    assert exact == {
+        "index": 1,
+        "question": "Exact soru?",
+        "model_quote": "[4] Kabarcık sıralaması, komşu elemanları karşılaştırır.",
+        "source_quote": "kabarcık sıralaması komşu elemanları karşılaştırır",
+        "quote_match": "exact",
+        "trimmed_head": [],
+        "trimmed_tail": [],
+    }
+    assert trimmed["model_quote"] == "[4] Yani kabarcık sıralaması komşu elemanları karşılaştırır tamam"
+    assert trimmed["source_quote"] == "kabarcık sıralaması komşu elemanları karşılaştırır"
+    assert trimmed["quote_match"] == "trimmed"
+    assert trimmed["trimmed_head"] == ["yani"] and trimmed["trimmed_tail"] == ["tamam"]
+    assert unverified["model_quote"] == "[90] Bu cümle videoda hiç geçmiyor aslında"
+    assert unverified["source_quote"] == "Bu cümle videoda hiç geçmiyor aslında"
+    assert unverified["quote_match"] is None
+
+
+def test_response_has_no_model_quote(runs_enabled, use_llm, fake_transcript):
+    use_llm(mixed_questions_json())
+    r = client.post("/api/questions", json={"url": VID})
+    assert r.status_code == 200
+    for q in r.json()["questions"]:
+        assert not {"model_quote", "trimmed_head", "trimmed_tail"} & set(q)
+    assert "model_quote" not in r.text and "quote_audit" not in r.text
+
+
+def test_summary_record_has_no_quote_audit(runs_enabled, use_llm, fake_transcript):
+    use_llm(SUMMARY_JSON)
+    client.post("/api/summary", json={"url": VID})
+    (path,) = saved_files(runs_enabled)
+    record = json.loads(path.read_text(encoding="utf-8"))
+    assert record["record_version"] == 2 and "quote_audit" not in record
+
+
+def test_load_run_reads_old_format_record():
+    # Sürüm 1 biçiminde gerçek bir kayıt (record_version ve quote_audit yok)
+    old = Path(__file__).resolve().parents[2] / "docs" / "bulgular" / "asama-6-ikinci-test-tarih.json"
+    record = runs.load_run(old)
+    assert record["record_version"] == 1
+    assert record["quote_audit"] == []
+    assert record["response"]["video_id"] == "aaCHLYO3Fzg"
+
+
+def test_load_run_reads_new_format_record(runs_enabled, use_llm, fake_transcript):
+    use_llm(mixed_questions_json())
+    client.post("/api/questions", json={"url": VID})
+    (path,) = saved_files(runs_enabled)
+    record = runs.load_run(path)
+    assert record["record_version"] == 2 and len(record["quote_audit"]) == 3
+
+
 def test_saved_run_contains_no_api_key(runs_enabled, use_llm, fake_transcript):
-    use_llm(QUESTIONS_JSON)
+    use_llm(mixed_questions_json())  # quote_audit içeren kayıt da denetlensin
     client.post("/api/questions", json={"url": VID})
     use_llm(SUMMARY_JSON)
     client.post("/api/summary", json={"url": VID})

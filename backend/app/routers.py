@@ -115,5 +115,18 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
             for q in questions
         ],
     )
-    save_run("questions", response.video_id, body, response)
+    # Modelin ham alıntısı yalnızca yerel kayda yazılır, yanıtta yer almaz
+    quote_audit = [
+        {
+            "index": i,
+            "question": q.question,
+            "model_quote": q.model_quote,
+            "source_quote": q.source_quote,
+            "quote_match": q.quote_match,
+            "trimmed_head": q.trimmed_head,
+            "trimmed_tail": q.trimmed_tail,
+        }
+        for i, q in enumerate(questions, 1)
+    ]
+    save_run("questions", response.video_id, body, response, quote_audit=quote_audit)
     return response
