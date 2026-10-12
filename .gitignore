@@ -16,6 +16,8 @@ venv/
 chroma_data/
 *.sqlite3
 *.db
+# Yerel çalıştırma kayıtları (seçilenler elle docs/bulgular'a kopyalanır)
+backend/runs/
 
 # Node
 node_modules/

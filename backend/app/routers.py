@@ -14,6 +14,7 @@ from app.schemas import (
 )
 from app.services.llm import LLMClient, LLMError, LLMNotConfigured, get_llm
 from app.services.questions import PROMPT_VERSION, generate_questions
+from app.services.runs import save_run
 from app.services.summary import summarize
 from app.services.text_clean import clean_transcript, prepare_transcript
 from app.services.transcript import Transcript, TranscriptUnavailable, fetch_transcript
@@ -64,7 +65,7 @@ def get_summary(body: SummaryRequest, llm: LLMClient = Depends(get_llm)) -> Summ
     except LLMError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
 
-    return SummaryResponse(
+    response = SummaryResponse(
         video_id=transcript.video_id,
         language=transcript.language,
         transcript_mode=body.transcript_mode,
@@ -72,6 +73,8 @@ def get_summary(body: SummaryRequest, llm: LLMClient = Depends(get_llm)) -> Summ
         summary=result.summary,
         topics=[SummaryTopic(title=t.title, start_seconds=t.start_seconds) for t in result.topics],
     )
+    save_run("summary", response.video_id, body, response)
+    return response
 
 
 @router.post("/questions", response_model=QuestionsResponse, tags=["soru"])
@@ -90,7 +93,7 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
     except LLMError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
 
-    return QuestionsResponse(
+    response = QuestionsResponse(
         video_id=raw.video_id,
         transcript_mode=body.transcript_mode,
         model=llm.model,
@@ -112,3 +115,5 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
             for q in questions
         ],
     )
+    save_run("questions", response.video_id, body, response)
+    return response
