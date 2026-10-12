@@ -2,6 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from app.config import get_settings
 from app.schemas import (
+    QuestionOut,
+    QuestionsRequest,
+    QuestionsResponse,
     SummaryRequest,
     SummaryResponse,
     SummaryTopic,
@@ -10,8 +13,9 @@ from app.schemas import (
     TranscriptSegment,
 )
 from app.services.llm import LLMClient, LLMError, LLMNotConfigured, get_llm
+from app.services.questions import PROMPT_VERSION, generate_questions
 from app.services.summary import summarize
-from app.services.text_clean import prepare_transcript
+from app.services.text_clean import clean_transcript, prepare_transcript
 from app.services.transcript import Transcript, TranscriptUnavailable, fetch_transcript
 from app.services.youtube import InvalidYouTubeUrl, extract_video_id
 
@@ -67,4 +71,43 @@ def get_summary(body: SummaryRequest, llm: LLMClient = Depends(get_llm)) -> Summ
         model=llm.model,
         summary=result.summary,
         topics=[SummaryTopic(title=t.title, start_seconds=t.start_seconds) for t in result.topics],
+    )
+
+
+@router.post("/questions", response_model=QuestionsResponse, tags=["soru"])
+def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> QuestionsResponse:
+    """Transkriptin tamamından (RAG'siz) doğrulanmış çoktan seçmeli sorular üretir."""
+    raw = _load_transcript(body.url)
+    context = prepare_transcript(raw, body.transcript_mode)
+    if not context.segments:
+        raise HTTPException(status_code=404, detail="Temizlikten sonra soru üretilecek transkript kalmadı.")
+
+    try:
+        # Alıntılar, mod ne olursa olsun temizlenmiş transkriptte aranır
+        questions = generate_questions(context, clean_transcript(raw), llm, body.count)
+    except LLMNotConfigured as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except LLMError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+    return QuestionsResponse(
+        video_id=raw.video_id,
+        transcript_mode=body.transcript_mode,
+        model=llm.model,
+        prompt_version=PROMPT_VERSION,
+        requested_count=body.count,
+        returned_count=len(questions),
+        verified_count=sum(q.verified for q in questions),
+        questions=[
+            QuestionOut(
+                question=q.question,
+                options=q.options,
+                correct_index=q.correct_index,
+                explanation=q.explanation,
+                source_quote=q.source_quote,
+                source_start_seconds=q.source_start_seconds,
+                verified=q.verified,
+            )
+            for q in questions
+        ],
     )
