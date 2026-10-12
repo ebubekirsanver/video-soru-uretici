@@ -10,8 +10,12 @@ import unicodedata
 from app.services.text_clean import clean_text
 from app.services.transcript import Segment
 
-# Bundan kısa alıntılar (ör. "ve bu") her transkriptte geçer, kanıt sayılmaz
+# Bu kadar ya da daha uzun alıntı, transkriptte geçiyorsa doğrulanır
 MIN_QUOTE_WORDS = 5
+# Daha kısa alıntılar (3-4 kelime) yalnızca transkriptte tam bir kez geçerse
+# doğrulanır: tek geçiş alıntının tek bir yeri gösterdiğini garanti eder.
+# Bundan kısası (ör. "ve bu") hiçbir zaman kanıt sayılmaz.
+MIN_UNIQUE_QUOTE_WORDS = 3
 
 
 def turkish_lower(text: str) -> str:
@@ -58,13 +62,20 @@ class QuoteLocator:
     def find(self, quote: str) -> float | None:
         """Alıntı transkriptte tam kelimelerle geçiyorsa başladığı segmentin saniyesini döndürür.
 
-        Alıntı bulunamazsa ya da `MIN_QUOTE_WORDS` kelimeden kısaysa None döner.
+        - `MIN_QUOTE_WORDS` ve üzeri kelime: transkriptte geçmesi yeterli (ilk geçiş kullanılır).
+        - `MIN_UNIQUE_QUOTE_WORDS` ile `MIN_QUOTE_WORDS` arası: transkriptte tam bir kez geçmeli.
+        - Daha kısa ya da bulunamayan alıntı: None.
         """
         normalized = normalize(quote)
-        if len(normalized.split()) < MIN_QUOTE_WORDS:
+        word_count = len(normalized.split())
+        if word_count < MIN_UNIQUE_QUOTE_WORDS:
             return None
-        index = self._text.find(" " + normalized + " ")
+        needle = " " + normalized + " "
+        index = self._text.find(needle)
         if index == -1:
+            return None
+        # Kısa alıntı ikinci kez geçiyorsa hangi yeri gösterdiği belirsizdir
+        if word_count < MIN_QUOTE_WORDS and self._text.find(needle, index + 1) != -1:
             return None
         # index, eşleşmeden önceki boşluğu gösterir; bu da birleşik metindeki
         # (baştaki boşluk hariç) kelime başlangıcına denk gelir

@@ -49,9 +49,46 @@ def test_find_missing_quote():
     assert make_locator().find("kabarcık sıralaması en hızlı sıralama algoritmasıdır") is None
 
 
-def test_find_rejects_short_quote():
-    # Transkriptte geçse de 5 kelimeden kısa alıntı kanıt sayılmaz
-    assert make_locator().find("kabarcık sıralaması komşu") is None
+@pytest.mark.parametrize(
+    "quote, expected",
+    [
+        ("kabarcık sıralaması komşu", 30.0),  # 3 kelime, tek geçiş: doğrulanır
+        ("komşu elemanları karşılaştırır ve", 34.0),  # 4 kelime, tek geçiş: doğrulanır
+        ("elemanları karşılaştırır", None),  # 2 kelime: hiçbir zaman doğrulanmaz
+        ("sıralama", None),
+    ],
+)
+def test_short_quote_rules(quote, expected):
+    assert make_locator().find(quote) == expected
+
+
+def repeated_locator():
+    # "sıralama algoritmaları çok önemli" iki kez geçiyor
+    return QuoteLocator(
+        [
+            Segment("sıralama algoritmaları çok önemli", 0.0, 3.0),
+            Segment("bugün bunları göreceğiz", 3.0, 3.0),
+            Segment("tekrar ediyorum sıralama algoritmaları çok önemli", 50.0, 4.0),
+            Segment("sınavda mutlaka çıkar", 54.0, 3.0),
+        ]
+    )
+
+
+def test_short_quote_occurring_twice_is_rejected():
+    assert repeated_locator().find("sıralama algoritmaları çok önemli") is None  # 4 kelime, 2 geçiş
+    assert repeated_locator().find("algoritmaları çok önemli") is None  # 3 kelime, 2 geçiş
+
+
+def test_long_quote_occurring_twice_uses_first():
+    # 5+ kelimede bugünkü davranış korunur: geçmesi yeterli, ilk geçiş kullanılır
+    assert repeated_locator().find("sıralama algoritmaları çok önemli bugün") == 0.0
+    assert repeated_locator().find("ediyorum sıralama algoritmaları çok önemli") == 50.0
+
+
+def test_short_quote_occurring_twice_overlapping():
+    # Örtüşen geçişler de sayılır: "bir bir bir" içinde "bir bir" iki kez geçer
+    locator = QuoteLocator([Segment("bir bir bir bir", 0.0, 2.0)])
+    assert locator.find("bir bir bir") is None
 
 
 def test_find_requires_whole_words():
@@ -87,3 +124,20 @@ def test_real_example_soru3_uses_segment_start_not_block_start():
     # Blok düzeyinde sonuç 435,4 idi; cümle 442,72'de başlayan segmentte söyleniyor.
     quote = "[591] Kemosentetik canlıların tamamının prokaryot olduğunu unutma"
     assert QuoteLocator(REAL_EXCERPT).find(quote) == pytest.approx(442.72)
+
+
+# Aynı videodan 806,96 sn'de başlayan bloğun başı (Soru 4'ün alıntısı)
+REAL_EXCERPT_SORU4 = [
+    Segment("yazmıştık değil mi? Ama fotosentezde", 806.959, 2.281),
+    Segment("hemen besinin yanında oksijen", 809.24, 1.52),
+    Segment("yazdığımızı da görmüştün ama burada", 810.76, 2.519),
+    Segment("görmüyorsun. Demek ki kemosentezde", 813.279, 2.12),
+    Segment("oksijen açığa çıkmıyormuş. Bunu da", 815.399, 1.761),
+    Segment("anlamış oldun. Bu arada şu inorganik", 817.16, 2.44),
+]
+
+
+def test_real_example_soru4_four_word_unique_quote_is_verified():
+    # Gerçek testte 4 kelime olduğu için reddedilmişti; transkriptte tek kez geçiyor
+    quote = "[806] Kemosentezde oksijen açığa çıkmıyormuş."
+    assert QuoteLocator(REAL_EXCERPT_SORU4).find(quote) == pytest.approx(813.279)

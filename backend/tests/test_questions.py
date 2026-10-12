@@ -113,8 +113,28 @@ def test_quote_not_in_transcript_is_unverified():
 
 
 def test_short_quote_is_unverified():
-    (q,), _ = run(question(source_quote="komşu elemanları karşılaştırır"))
+    (q,), _ = run(question(source_quote="elemanları karşılaştırır"))  # 2 kelime
     assert q.verified is False
+
+
+def test_short_unique_quote_is_verified():
+    (q,), _ = run(question(source_quote="komşu elemanları karşılaştırır"))  # 3 kelime, tek geçiş
+    assert q.verified is True and q.source_start_seconds == 34.0
+
+
+def test_short_repeated_quote_is_unverified():
+    # 4 kelimelik alıntı transkriptte iki kez geçiyor: hangi yeri gösterdiği belirsiz
+    transcript = Transcript(
+        VID,
+        "tr",
+        True,
+        [
+            Segment("komşu elemanlar yer değiştirir", 10.0, 3.0),
+            Segment("tekrar söylüyorum komşu elemanlar yer değiştirir", 40.0, 4.0),
+        ],
+    )
+    (q,), _ = run(question(source_quote="Komşu elemanlar yer değiştirir."), transcript=transcript)
+    assert q.verified is False and q.source_start_seconds is None
 
 
 def test_quote_verified_against_clean_transcript_in_raw_mode():
