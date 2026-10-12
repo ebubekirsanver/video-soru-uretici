@@ -1,0 +1,95 @@
+{
+  "saved_at": "2026-10-12T18:36:32+03:00",
+  "endpoint": "/api/questions",
+  "request": {
+    "url": "https://youtu.be/aaCHLYO3Fzg?si=6ZzFNva4PK42LxpB",
+    "count": 5,
+    "transcript_mode": "clean"
+  },
+  "response": {
+    "video_id": "aaCHLYO3Fzg",
+    "transcript_mode": "clean",
+    "model": "gpt-4o-mini",
+    "prompt_version": "questions-v1",
+    "requested_count": 5,
+    "returned_count": 5,
+    "verified_count": 5,
+    "questions": [
+      {
+        "question": "Malazgirt Savaşı hangi yıllarda gerçekleşmiştir?",
+        "options": [
+          "1081",
+          "1066",
+          "1096",
+          "1071"
+        ],
+        "correct_index": 3,
+        "explanation": "Malazgirt Savaşı, 1071 yılında gerçekleşmiştir.",
+        "source_quote": "Bu savaş 1071'de gerçekleşti",
+        "source_start_seconds": 79.52,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Danışmentlilerin kurulduğu bölgeler arasında hangisi yer almaz?",
+        "options": [
+          "Amasya",
+          "İzmir",
+          "Kayseri",
+          "Tokat"
+        ],
+        "correct_index": 1,
+        "explanation": "Danışmentliler Tokat, Amasya, Kayseri, Sivas, Malatya bölgelerine yayılmıştır; İzmir bu bölgeler arasında değildir.",
+        "source_quote": "Tokat, Amasya, Kayseri, Sivas, Malatya bu bölgelere yayılmış bir beylik.",
+        "source_start_seconds": 244.319,
+        "verified": true,
+        "quote_match": "trimmed"
+      },
+      {
+        "question": "Kösedağ Savaşı'nda Türkiye Selçuklu Devleti kime karşı savaşmıştır?",
+        "options": [
+          "Moğollar",
+          "Gürcüler",
+          "Bizans",
+          "Haçlılar"
+        ],
+        "correct_index": 0,
+        "explanation": "Kösedağ Savaşı, Türkiye Selçuklu Devleti ile Moğollar arasında yapılmıştır.",
+        "source_quote": "Türkiye Selçuklu Devleti ile Moğollar arasında yapıldı.",
+        "source_start_seconds": 1786.96,
+        "verified": true,
+        "quote_match": "trimmed"
+      },
+      {
+        "question": "Mir Kefalon Savaşı'nın önemi nedir?",
+        "options": [
+          "Haçlıların Anadolu'ya girmesi",
+          "Bizans'ın Anadolu'daki hakimiyetini artırması",
+          "Anadolu'dan Türklerin atılma ihtimalini ortadan kaldırması",
+          "Türklerin denizcilik yapmaya başlaması"
+        ],
+        "correct_index": 2,
+        "explanation": "Mir Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağı kesinleşmiştir.",
+        "source_quote": "Bu savaşta Türkiye Selçuklu Devleti Bizans'ı yenince Anadolu'dan Türklerin atılamayacağı kesinleşmişti.",
+        "source_start_seconds": 1740.36,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "1. Haçlı Seferi'nin temel amacı nedir?",
+        "options": [
+          "Bizans'ı güçlendirmek",
+          "Kudüs'ü ele geçirmek",
+          "Türkleri Anadolu'dan atmak",
+          "Ticaret yollarını kontrol etmek"
+        ],
+        "correct_index": 1,
+        "explanation": "1. Haçlı Seferi'nin temel amacı Kudüs'ü ele geçirmektir.",
+        "source_quote": "Temel dini amaçları neymiş? Kudüs'ü ele geçirmekmiş.",
+        "source_start_seconds": 607.279,
+        "verified": true,
+        "quote_match": "exact"
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "saved_at": "2026-10-12T18:36:28+03:00",
+  "endpoint": "/api/questions",
+  "request": {
+    "url": "https://youtu.be/109kCbVtU1U?si=cdS7uAfN_UPugvpM",
+    "count": 5,
+    "transcript_mode": "clean"
+  },
+  "response": {
+    "video_id": "109kCbVtU1U",
+    "transcript_mode": "clean",
+    "model": "gpt-4o-mini",
+    "prompt_version": "questions-v1",
+    "requested_count": 5,
+    "returned_count": 4,
+    "verified_count": 4,
+    "questions": [
+      {
+        "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretimi gerçekleştirir?",
+        "options": [
+          "Termal enerji",
+          "Işık enerjisi",
+          "Nükleer enerji",
+          "Kimyasal enerji"
+        ],
+        "correct_index": 3,
+        "explanation": "Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretimi gerçekleştirir.",
+        "source_quote": "kemosentez yapan canlılar için ne diyoruz? Kimyasal bir enerji kullanılıyor ve buna bağlı olarak da besin üretimi gerçekleşiyor.",
+        "source_start_seconds": 568.959,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Hidrotermal bacaların bulunduğu ortamda hangi canlılar yaşayabilir?",
+        "options": [
+          "Sadece balıklar",
+          "Sadece memeliler",
+          "Kemosentetik canlılar",
+          "Fotosentetik canlılar"
+        ],
+        "correct_index": 2,
+        "explanation": "Hidrotermal bacaların etrafında kemosentetik canlılar yaşar çünkü bu canlılar o ortamda besin üretimi yapabilir.",
+        "source_quote": "Bu nedenle okyanus derinliklerinde özellikle bu bacaların etrafında kemosentez yapan bakterilerle beslenen farklı biyolojik canlılara rastlanabilir.",
+        "source_start_seconds": 247.64,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Kemosentez sırasında hangi madde açığa çıkmaz?",
+        "options": [
+          "Su",
+          "Oksijen",
+          "Enerji",
+          "Karbondioksit"
+        ],
+        "correct_index": 1,
+        "explanation": "Kemosentez sırasında oksijen açığa çıkmaz, bu durum fotosentezden farklıdır.",
+        "source_quote": "oksijen üretilmez demiştim.",
+        "source_start_seconds": 1175.919,
+        "verified": true,
+        "quote_match": "trimmed"
+      },
+      {
+        "question": "Kemosentetik canlıların hücre yapısı nedir?",
+        "options": [
+          "Çok hücreli",
+          "Hibrid",
+          "Prokaryot",
+          "Ökaryot"
+        ],
+        "correct_index": 2,
+        "explanation": "Kemosentetik canlıların tamamı prokaryot hücre yapısına sahiptir.",
+        "source_quote": "Kemosentetik canlıların tamamının prokaryot olduğunu unutma.",
+        "source_start_seconds": 442.72,
+        "verified": true,
+        "quote_match": "exact"
+      }
+    ]
+  }
+}
