@@ -1,17 +1,12 @@
 """Transkriptten LLM ile Türkçe özet ve zaman damgalı konu başlıkları çıkarma."""
 
 from dataclasses import dataclass
-from functools import lru_cache
-from pathlib import Path
 
 from pydantic import BaseModel, Field, ValidationError
 
-from app.services.chunking import format_blocks, group_into_blocks
 from app.services.llm import LLMClient, LLMError
+from app.services.prompts import BLOCK_SECONDS, fill_prompt, load_prompt, transcript_context
 from app.services.transcript import Transcript
-
-PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
-BLOCK_SECONDS = 30.0
 
 
 @dataclass
@@ -37,22 +32,12 @@ class _SummaryModel(BaseModel):
     topics: list[_TopicModel]
 
 
-@lru_cache
-def load_prompt(name: str) -> str:
-    """`app/prompts` altındaki istem dosyasını okur."""
-    return (PROMPT_DIR / name).read_text(encoding="utf-8")
-
-
 def build_user_prompt(transcript: Transcript, block_seconds: float = BLOCK_SECONDS) -> str:
     """Transkripti zaman damgalı bloklara ayırıp kullanıcı istemine yerleştirir."""
-    text = format_blocks(group_into_blocks(transcript.segments, block_seconds))
-    # Transkript içinde sınır etiketi geçerse veri bölümünün dışına taşmasın
-    text = text.replace("<transkript>", "").replace("</transkript>", "")
-    # str.format yerine replace: transkriptteki { } karakterleri sorun çıkarmasın
-    return (
-        load_prompt("summary_user.txt")
-        .replace("{duration_seconds}", str(int(transcript.duration_seconds)))
-        .replace("{transcript}", text)
+    return fill_prompt(
+        load_prompt("summary_user.txt"),
+        transcript_context(transcript, block_seconds),
+        duration_seconds=int(transcript.duration_seconds),
     )
 
 
