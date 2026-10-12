@@ -22,3 +22,10 @@ Her aşama çalışan, gösterilebilir bir çıktı verir ve ayrı commit(ler)le
 | 15 | Değerlendirme | RAG'li / RAG'siz karşılaştırma, SUS, öğretmen puanı | Miladi 2025 |
 
 Aşama sırası ve içeriği ilerledikçe güncellenebilir.
+
+## Durum (2026-10-12)
+
+- **Tamamlanan:** 0, 1, 2, 5
+- **Ertelenen:** 3 (Whisper yedeği, WER ölçümü) ve 4 (bölümleme). Uçtan uca dikey dilimi (URL → transkript → özet) önce bitirmek için Aşama 5 öne alındı.
+- Aşama 5'te ham/temiz transkript seçimi (`transcript_mode`) ve ~30 sn'lik zaman damgalı bloklama (`services/chunking.py`) eklendi; bloklama Aşama 4'te yeniden kullanılacak.
+- **Sırada:** Aşama 6 (RAG'siz temel soru üretimi) ya da ertelenen Aşama 3 / 4.

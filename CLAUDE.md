@@ -37,4 +37,6 @@ pytest
 ```
 
 ## Şu anki durum
-Aşama 0, 1 ve 2 tamamlandı: iskelet, FastAPI, `POST /api/transcript`. Sırada Aşama 3 (Whisper yedeği ve transkript kalitesi) ya da kullanıcının seçeceği aşama var.
+Aşama 0, 1, 2 ve 5 tamamlandı: iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi ve `POST /api/summary`. Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Sırada Aşama 6 (RAG'siz temel soru üretimi) ya da ertelenen Aşama 3 / 4 var; kullanıcı seçer.
+
+Windows notu: `python` komutu PATH'te değil; sanal ortam `backend\.venv` (`py -3.12 -m venv .venv` ile kuruldu), komutlar `.\.venv\Scripts\python.exe -m pytest` biçiminde çalıştırılır.
