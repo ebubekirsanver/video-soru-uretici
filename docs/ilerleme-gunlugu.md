@@ -62,3 +62,23 @@ Transkriptin tamamı ~30 sn'lik zaman damgalı bloklar halinde bağlam olarak LL
   - Model istenenden az soru döndürürse ya da sorular atılırsa `returned_count < requested_count` olur; eksik soru yeniden üretilmez (yeniden üretim döngüsü Aşama 10).
   - Atılan soruların sayısı ve nedeni yalnızca sunucu günlüğüne yazılır, yanıtta yer almaz.
   - Zorluk ve Bloom düzeyi henüz yönlendirilmiyor (Aşama 8).
+
+## Aşama 6 sonrası · İlk gerçek test ve alıntı doğrulama ayarları (2026-10-12)
+
+İlk gerçek test: video `109kCbVtU1U` (Türkçe kemosentez dersi, ~25 dk, otomatik altyazı), `count: 5`, `questions-v1`. 4 soru döndü, 2'si doğrulandı. Ayrıntılı tanı: [docs/bulgular/asama-6-ilk-gercek-test.md](bulgular/asama-6-ilk-gercek-test.md).
+
+- Bulgular:
+  - **Model zamanına güvenmeme kararı doğrulandı:** Soru 3'te model alıntıya `[591]` yazdı. Cümle transkriptte tek kez ve 442,72 sn'de geçiyor; modelin değeri 148,3 sn sapıyor ve başka konuyu anlatan bir bloğu gösteriyor. Kodun hesapladığı zaman doğruydu.
+  - **Kural 10 ihlali:** 4 alıntının 4'ü de istemdeki `[saniye]` blok etiketiyle başlıyor. Temizleme etiketi sildiği için doğrulama bozulmadı.
+  - **Soru 1 doğrulanmadı, çünkü model alıntıya transkriptte olmayan "Yani" kelimesini ekledi.** Kelimeler birebir aynı olmadığı için kuralın reddetmesi doğru. Düzeltme yapılmadı, ayrı karar bekliyor.
+  - **Soru 4 haksız yere reddedildi:** alıntı 4 kelime ve transkriptte tek kez geçiyor.
+- Yapılan ayarlar (`services/quotes.py`):
+  - `source_start_seconds` artık blok başlangıcı yerine **alıntının başladığı segmentin başlangıcı** (Aşama 6 kaydındaki blok düzeyi çözünürlük sınırının yerini alır). Soru 3: 435,4 → 442,72.
+  - **Kısa alıntı kuralı:** 5+ kelime eskisi gibi; 3-4 kelime yalnızca transkriptte tam 1 kez geçerse doğrulanır; 3'ten kısası doğrulanmaz (Aşama 6 kaydındaki "5 kelimeden kısa alıntı kanıt sayılmaz" kuralının yerini alır). Soru 4 artık doğrulanıyor.
+  - Aynı dört alıntı güncel kodla yeniden ölçüldüğünde doğrulanan soru 2/4 → 3/4. Model yeniden çalıştırılmadı.
+- Doğrulama: `pytest` → 135 test geçti. Soru 3 ve Soru 4 örnekleri gerçek transkript kesitleriyle test edildi (442,72 ve 813,28 sn). Ayrıca 3-4 kelimelik tek geçişli alıntı kabulü, iki kez geçen kısa alıntının reddi, 2 kelimelik alıntının reddi ve 5+ kelimede ilk geçişin korunması test edildi.
+- Bilinen sınırlar:
+  - Bulgular tek video, tek çalıştırma ve 4 soruya dayanıyor.
+  - 5+ kelimelik alıntı birden çok yerde geçerse hâlâ ilk geçiş kullanılıyor.
+  - Modelin alıntıya kelime eklemesi (Soru 1) için bir önlem yok.
+  - İstem (`questions-v1`) değiştirilmedi; "en az 5 kelime" ifadesi istemde duruyor.
