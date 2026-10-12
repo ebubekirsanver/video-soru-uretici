@@ -92,13 +92,76 @@ def test_short_quote_occurring_twice_overlapping():
 
 
 def test_find_requires_whole_words():
-    # "arkadaşlar" yerine "kadaşlar": kelime parçası eşleşmemeli
-    assert make_locator().find("kadaşlar bugün sıralama algoritmalarını konuşacağız") is None
+    # "sıralama" yerine "sıra": kelime parçası eşleşmemeli (ortada olduğu için kırpılamaz)
+    assert make_locator().find("merhaba arkadaşlar bugün sıra algoritmalarını konuşacağız") is None
+
+
+def test_word_fragment_at_edge_is_trimmed_not_matched():
+    # Kenardaki kelime parçası ("kadaşlar") birebir eşleşmez; kırpılarak atılır
+    m = make_locator().match("kadaşlar bugün sıralama algoritmalarını konuşacağız")
+    assert m.match == "trimmed"
+    assert m.text == "bugün sıralama algoritmalarını konuşacağız"
 
 
 def test_find_with_word_changed():
     # Kelimeler birebir aynı olmalı: tek kelime farkı doğrulamayı bozar
     assert make_locator().find("kabarcık sıralaması yakın elemanları karşılaştırır") is None
+
+
+# --- Kenar kırpma -------------------------------------------------------------
+
+
+def test_exact_match_is_not_trimmed():
+    m = make_locator().match("İlk olarak, kabarcık sıralaması komşu elemanları karşılaştırır.")
+    assert m.match == "exact"
+    # Metin transkriptteki özgün yazımıyla döner
+    assert m.text == "İlk olarak kabarcık sıralaması komşu elemanları karşılaştırır"
+    assert m.start_seconds == 30.0
+
+
+def test_exact_preferred_even_if_trimmed_also_matches():
+    # Birebir eşleşen alıntı, kırpılmış hali de eşleşse "exact" kalır ve tamamı döner
+    m = make_locator().match("bugün sıralama algoritmalarını konuşacağız")
+    assert m.match == "exact" and m.text == "bugün sıralama algoritmalarını konuşacağız"
+
+
+@pytest.mark.parametrize(
+    "quote, expected_text",
+    [
+        # Başta dolgu sözcüğü
+        ("Yani kabarcık sıralaması komşu elemanları karşılaştırır", "kabarcık sıralaması komşu elemanları karşılaştırır"),
+        # Sonda dolgu sözcüğü
+        ("kabarcık sıralaması komşu elemanları karşılaştırır tamam", "kabarcık sıralaması komşu elemanları karşılaştırır"),
+        # Başta iki sözcük
+        ("Yani şöyle kabarcık sıralaması komşu elemanları", "kabarcık sıralaması komşu elemanları"),
+        # Başta ve sonda birer sözcük
+        ("Evet ilk olarak kabarcık sıralaması tamam", "İlk olarak kabarcık sıralaması"),
+    ],
+)
+def test_filler_word_at_edge_is_trimmed(quote, expected_text):
+    m = make_locator().match(quote)
+    assert m is not None and m.match == "trimmed"
+    # Dönen metin transkriptteki özgün yazımdır
+    assert m.text == expected_text
+
+
+def test_trim_more_than_two_words_is_rejected():
+    # Başta üç fazladan sözcük: en fazla 2 kırpılabilir
+    assert make_locator().match("Yani şöyle ki kabarcık sıralaması komşu elemanları karşılaştırır") is None
+    # Başta iki, sonda bir: toplam 3
+    assert make_locator().match("Yani şöyle kabarcık sıralaması komşu elemanları karşılaştırır tamam") is None
+
+
+def test_difference_in_middle_is_rejected():
+    # Ortadaki fark kırpılarak giderilemez
+    assert make_locator().match("İlk olarak kabarcık sıralaması yakın elemanları karşılaştırır ve") is None
+
+
+def test_trimmed_part_must_pass_short_quote_rules():
+    # Kırpılınca kalan 2 kelime: kural gereği doğrulanmaz
+    assert make_locator().match("Yani komşu elemanları") is None
+    # Kırpılınca kalan 4 kelime ama transkriptte iki kez geçiyor: doğrulanmaz
+    assert repeated_locator().match("Yani sıralama algoritmaları çok önemli") is None
 
 
 def test_empty_segments():
@@ -135,6 +198,30 @@ REAL_EXCERPT_SORU4 = [
     Segment("oksijen açığa çıkmıyormuş. Bunu da", 815.399, 1.761),
     Segment("anlamış oldun. Bu arada şu inorganik", 817.16, 2.44),
 ]
+
+
+REAL_EXCERPT_SORU1 = [
+    Segment("besin üretiyorsa biz buna fotosentetik", 214.319, 2.521),
+    Segment("canlı demiştik. Kimyasal bir enerjiyi", 216.84, 2.36),
+    Segment("kullanarak besin üretimini", 219.2, 1.239),
+    Segment("gerçekleştiriyorsa o canlıya da", 220.439, 2.0),
+    Segment("kemosentetik canlı adını vermiştik.", 222.439, 2.16),
+]
+
+
+def test_real_example_soru1_leading_filler_is_trimmed():
+    # Model alıntının başına transkriptte olmayan "Yani" eklemişti
+    quote = (
+        "[219] Yani kimyasal bir enerjiyi kullanarak besin üretimini "
+        "gerçekleştiriyorsa o canlıya da kemosentetik canlı adını vermiştik."
+    )
+    m = QuoteLocator(REAL_EXCERPT_SORU1).match(quote)
+    assert m.match == "trimmed"
+    assert m.start_seconds == pytest.approx(216.84)
+    assert m.text == (
+        "Kimyasal bir enerjiyi kullanarak besin üretimini "
+        "gerçekleştiriyorsa o canlıya da kemosentetik canlı adını vermiştik."
+    )
 
 
 def test_real_example_soru4_four_word_unique_quote_is_verified():
