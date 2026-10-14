@@ -3,13 +3,15 @@
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import { describeError, getSummary, type SummaryResponse } from "@/lib/api";
 import { validateYouTubeUrl } from "@/lib/youtube";
+import QuestionsSection from "./questions-section";
 import SummaryResult from "./summary-result";
 
 type State =
   | { phase: "idle" }
   | { phase: "loading" }
   | { phase: "error"; title: string; detail: string | null }
-  | { phase: "success"; result: SummaryResponse };
+  // url: özeti çıkarılan bağlantı; sorular da bununla istenir (kutu sonradan değişse bile)
+  | { phase: "success"; result: SummaryResponse; url: string };
 
 export default function SummaryForm() {
   const [url, setUrl] = useState("");
@@ -36,8 +38,9 @@ export default function SummaryForm() {
     setState({ phase: "loading" });
 
     try {
-      const result = await getSummary({ url: url.trim() }, { signal: controller.signal });
-      setState({ phase: "success", result });
+      const requestedUrl = url.trim();
+      const result = await getSummary({ url: requestedUrl }, { signal: controller.signal });
+      setState({ phase: "success", result, url: requestedUrl });
     } catch (err) {
       if (controller.signal.aborted) return; // iptal edilen istek ekranı değiştirmesin
       setState({ phase: "error", ...describeError(err) });
@@ -85,7 +88,13 @@ export default function SummaryForm() {
           </div>
         )}
 
-        {state.phase === "success" && <SummaryResult result={state.result} />}
+        {state.phase === "success" && (
+          <>
+            <SummaryResult result={state.result} />
+            {/* Yeni özet istenince bu bölüm kaldırılır, eski sorular da gider */}
+            <QuestionsSection url={state.url} />
+          </>
+        )}
       </div>
     </section>
   );

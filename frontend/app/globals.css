@@ -155,7 +155,9 @@ h1 {
   border-color: var(--down);
 }
 
-.summary button {
+/* Ana eylem düğmeleri: "Özet çıkar" ve "Soruları üret" (seçenek düğmeleri bu stili almaz) */
+.summary form button,
+button.primary {
   padding: 8px 16px;
   border: 1px solid var(--fg);
   border-radius: 6px;
@@ -166,7 +168,8 @@ h1 {
   cursor: pointer;
 }
 
-.summary button:disabled {
+.summary form button:disabled,
+button.primary:disabled {
   opacity: 0.6;
   cursor: progress;
 }
@@ -258,4 +261,178 @@ h1 {
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 0.8rem;
+}
+
+/* Soru bölümü ve soru kartları */
+.questions {
+  margin-top: 32px;
+}
+
+.questions h2 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.question-list .meta,
+.question-list .note {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.question-list .meta {
+  margin: 16px 0 0;
+}
+
+.question-list .note {
+  margin: 16px 0 0;
+}
+
+.question-card {
+  margin-top: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+/* Kaynağı doğrulanamayan soru: kesikli kenar ve uyarı rozeti */
+.question-card.unverified {
+  border-style: dashed;
+  border-color: var(--down);
+}
+
+.question-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.question-no {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge-unverified {
+  padding: 1px 8px;
+  border: 1px solid var(--down);
+  border-radius: 999px;
+  background: var(--down-bg);
+  color: var(--down);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.question-text {
+  margin: 8px 0 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: baseline;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--fg);
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option .letter {
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.option .option-text {
+  flex: 1;
+}
+
+.option .mark {
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.option.is-correct {
+  border-color: var(--ok);
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.option.is-wrong {
+  border-color: var(--down);
+  background: var(--down-bg);
+  color: var(--down);
+}
+
+.reveal {
+  margin-top: 12px;
+}
+
+.verdict {
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.verdict-ok {
+  color: var(--ok);
+}
+
+.verdict-wrong {
+  color: var(--down);
+}
+
+.explanation {
+  margin: 0 0 12px;
+}
+
+.source {
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--checking-bg);
+  font-size: 0.9rem;
+}
+
+.source-status {
+  margin: 0;
+  font-weight: 600;
+}
+
+.source blockquote {
+  margin: 6px 0;
+  padding-left: 10px;
+  border-left: 3px solid var(--border);
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+.source-time {
+  margin: 0;
+}
+
+.source-time a {
+  color: inherit;
+  font-variant-numeric: tabular-nums;
 }
