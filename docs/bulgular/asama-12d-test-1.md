@@ -3,7 +3,7 @@
 **Tarih:** 14 Ekim 2026
 **Test:** Arayüzdeki "Soruları üret" düğmesiyle `POST /api/questions` · video `109kCbVtU1U` (kemosentez) · `count: 5` · `transcript_mode: clean`
 **Model / istem:** gpt-4o-mini · `questions-v1`
-**Ham sonuç:** yerel çalıştırma kaydı `backend/runs/20261014-152923-109kCbVtU1U-questions.json` (git dışında). 5 soru döndü, 5'inin alıntısı transkriptte bulundu (`verified=true`).
+**Ham sonuç:** [asama-12d-test-1.json](asama-12d-test-1.json) (yerel çalıştırma kaydı `backend/runs/20261014-152923-109kCbVtU1U-questions.json` dosyasının birebir kopyası). 5 soru döndü, 5'inin alıntısı transkriptte bulundu (`verified=true`).
 
 ## Elle kontrol durumu
 
