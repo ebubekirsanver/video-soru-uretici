@@ -43,9 +43,16 @@ cd backend
 pip install -r requirements.txt
 uvicorn app.main:app --reload     # http://localhost:8000/docs
 pytest
+
+cd frontend
+npm install
+npm run dev                       # http://localhost:3000 (backend ayrıca çalışmalı)
+npm run typecheck
 ```
 
 ## Şu anki durum
-Aşama 0, 1, 2, 5 ve 6 tamamlandı: iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Sırada Aşama 7 (gömme + ChromaDB + RAG'li üretim) ya da ertelenen Aşama 3 / 4 var; kullanıcı seçer.
+Aşama 0, 1, 2, 5 ve 6 tamamlandı: iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Aşama 14'ün küçük bir parçası öne alındı: başarılı yanıtlar `backend/runs/` altına kaydediliyor (`services/runs.py`, git dışında).
+
+Aşama 12 (web arayüzü) parçalara bölündü; **yalnızca 12a yapıldı**: `frontend/` altında Next.js (App Router, TypeScript) iskeleti ve ana sayfada `/health` sağlık göstergesi; backend'de yalnızca `http://localhost:3000` kaynağına izin veren CORS. Arayüzde henüz URL girme, soru gösterme ya da videoya atlama yok; Aşama 7-11 yapılmadı. Sırada Aşama 12'nin sonraki parçaları, Aşama 7 ya da ertelenen Aşama 3 / 4 var; kullanıcı seçer.
 
 Windows notu: `python` komutu PATH'te değil; sanal ortam `backend\.venv` (`py -3.12 -m venv .venv` ile kuruldu), komutlar `.\.venv\Scripts\python.exe -m pytest` biçiminde çalıştırılır.

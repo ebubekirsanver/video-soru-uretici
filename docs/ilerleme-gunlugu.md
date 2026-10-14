@@ -123,3 +123,21 @@ Aşama 14'ün (izleme ve günlükleme) küçük bir parçası öne alındı: Swa
   - `trimmed_head` / `trimmed_tail`: kırpılan kelimeler, normalleştirilmiş hâlde
 
   Bu bilgi yalnızca yerel kayda yazılır, API yanıtında yer almaz; `response` alanı yanıtla birebir aynı kalır. Kayda `record_version: 2` eklendi. `load_run()` eski (sürüm 1) kayıtlarda eksik alanları `record_version: 1` ve `quote_audit: []` olarak doldurur. İkinci testte görülen "trimmed sorularda neyin kırpıldığı görülemiyor" sınırı bundan sonraki çalıştırmalar için giderildi; mevcut iki kayıtta bu bilgi yok. pytest → 173 test geçti.
+
+## Aşama 12a · Web arayüzü iskeleti ve sağlık göstergesi (2026-10-14)
+
+Aşama 12 (web arayüzü) parçalara bölündü; bu kayıt yalnızca ilk parçayı (12a) kapsar. Aşama 7-11 yapılmadan arayüz iskeletine geçildi.
+
+- **Backend CORS** (`backend/app/main.py`): tarayıcıdan yalnızca `http://localhost:3000` kaynağına izin var; yöntemler GET/POST, başlık `Content-Type`, kimlik bilgisi (credentials) kapalı. İzinli kaynak bilerek ortam değişkeninden okunmuyor: başka bir kaynağa izin vermek kod değişikliği gerektirir.
+- **Frontend iskeleti** (`frontend/`): Next.js App Router + TypeScript. Sürümler sabitlendi: next 16.3.8, react/react-dom 19.2.8, typescript 5.9.3. Tailwind ve ESLint eklenmedi, stil düz CSS. En yeni next 16.4.0 sekiz günlük olduğu için bir önceki ara sürümün son yaması seçildi; TypeScript 7 yerine Next ile uyumu bilinen 5.9 seçildi. Next'in ürettiği `next-env.d.ts` ve `*.tsbuildinfo` git dışında.
+- **Sağlık göstergesi** (`frontend/app/health-status.tsx`): sayfa açılınca `/health` çağrılır. Başarılıysa yeşil "Sunucu çalışıyor", ulaşılamazsa kırmızı "Sunucuya ulaşılamıyor" ve "Yeniden dene" düğmesi; 5 sn zaman aşımı var. Adres `NEXT_PUBLIC_API_URL` ortam değişkeninden, varsayılanı `http://localhost:8000` (`frontend/.env.example`).
+- Doğrulama:
+  - `pytest` → 181 test geçti (önceki 173 + 8 CORS testi). Testler: izinli kaynağa izin başlığı, POST için ön kontrol (preflight), başka port / `127.0.0.1` / `https` / başka alan adının reddi, kimlik bilgisinin kapalı olması.
+  - `npm run typecheck` ve `npm run build` hatasız.
+  - İki sunucu birlikte çalıştırıldı: sayfa 200 döndü, derlenmiş istemci kodunda backend adresi var, `Origin: http://localhost:3000` ile `/health` isteği izin başlığıyla yanıtlandı.
+- Bilinen sınırlar:
+  - Yeşil/kırmızı geçişi bir tarayıcıda görsel olarak doğrulanmadı; yalnızca tarayıcının yapacağı istekler komut satırından denendi.
+  - Frontend için otomatik test yok (test paketi eklenmedi).
+  - Sayfa `http://127.0.0.1:3000` adresinden açılırsa CORS izni yok, gösterge kırmızı olur; `localhost:3000` kullanılmalı.
+  - `NEXT_PUBLIC_API_URL` derleme anında koda gömülür; değiştirince geliştirme sunucusu yeniden başlatılmalı.
+  - Arayüzde henüz URL girme, soru gösterme ya da videoya atlama yok (Aşama 12'nin sonraki parçaları).
