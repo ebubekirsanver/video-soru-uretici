@@ -1,0 +1,62 @@
+{
+  "experiment": "asama-9-destek-kontrolu-1",
+  "note": "Model değerlendirmesidir, kesin doğru değildir. İlk çalıştırmanın sonucu, değiştirilmeden.",
+  "started_at": "2026-10-14T16:07:09+03:00",
+  "finished_at": "2026-10-14T16:07:16+03:00",
+  "model": "gpt-4o-mini",
+  "support_prompt_version": "support-v1",
+  "code_commit": "05196c361fc968ccb880b7105b2f5b7ce1aac2cd",
+  "prompt_files_sha256": {
+    "support_v1_system.txt": "412fe5b777b9a88269a743223b8b98f3d054191648eed5586260617f42aa8204",
+    "support_v1_user.txt": "a1180eb438e4341aa763e82c18160236d03b8fa8ff64fe2e958ae57794feef4f"
+  },
+  "source_file": "asama-12d-test-1.json",
+  "source_sha256": "99e705a310b29a317cf78df5bbb46757c325f15991b776ae23731d7ae357d57a",
+  "results": [
+    {
+      "index": 1,
+      "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretirler?",
+      "correct_answer": "Kimyasal enerji",
+      "source_quote": "Kimyasal bir enerjiyi kullanarak besin üretimini gerçekleştiriyorsa o canlıya da kemosentetik canlı adını vermiştik.",
+      "label": "destekliyor",
+      "reason": "Alıntıda kemosentetik canlıların kimyasal enerji kullanarak besin ürettiği belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda kemosentetik canlıların kimyasal enerji kullanarak besin ürettiği belirtiliyor.\"}"
+    },
+    {
+      "index": 2,
+      "question": "Hidrotermal bacaların etrafında hangi canlılar yaşayabilir?",
+      "correct_answer": "Kemosentetik canlılar",
+      "source_quote": "Yani bu canlılarda nelermiş? Karides, yengeç, midye, deniz yıldızı gibi canlılarmış.",
+      "label": "desteklemiyor",
+      "reason": "Alıntıda kemosentetik canlılar hakkında bilgi verilmemiş.",
+      "model_raw": "{\"label\": \"desteklemiyor\", \"reason\": \"Alıntıda kemosentetik canlılar hakkında bilgi verilmemiş.\"}"
+    },
+    {
+      "index": 3,
+      "question": "Kemosentez sırasında hangi madde açığa çıkmaz?",
+      "correct_answer": "Oksijen",
+      "source_quote": "Demek ki kemosentezde oksijen açığa çıkmıyormuş.",
+      "label": "destekliyor",
+      "reason": "Alıntıda kemosentezde oksijenin açığa çıkmadığı belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda kemosentezde oksijenin açığa çıkmadığı belirtiliyor.\"}"
+    },
+    {
+      "index": 4,
+      "question": "Kemosentetik canlıların hücre yapısı nedir?",
+      "correct_answer": "Prokaryot",
+      "source_quote": "Kemosentez yapan canlılara da kemosentetik canlılar adını veriyoruz. Bu canlıların tamamı prokaryot hücre yapısına sahip olan canlılardır.",
+      "label": "destekliyor",
+      "reason": "Alıntıda kemosentetik canlıların prokaryot hücre yapısına sahip olduğu belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda kemosentetik canlıların prokaryot hücre yapısına sahip olduğu belirtiliyor.\"}"
+    },
+    {
+      "index": 5,
+      "question": "Kemosentez hangi koşullarda gerçekleşebilir?",
+      "correct_answer": "Gündüz ve gece",
+      "source_quote": "Yani besin üretimi için ışık şart değildir ifadesini kullanabiliriz.",
+      "label": "desteklemiyor",
+      "reason": "Alıntıda kemosentezin hangi koşullarda gerçekleştiğine dair bir bilgi yok.",
+      "model_raw": "{\"label\": \"desteklemiyor\", \"reason\": \"Alıntıda kemosentezin hangi koşullarda gerçekleştiğine dair bir bilgi yok.\"}"
+    }
+  ]
+}
