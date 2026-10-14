@@ -206,3 +206,41 @@ Aşama 12'nin üçüncü parçası; yalnızca 12c yapıldı. Ayrıca CLAUDE.md'y
   - Hata durumunda önceki kart ekrandan temizlendi.
   - Zaman bağlantısının videoyu doğru saniyede açıp açmadığı **henüz denenmedi**.
 - Gözlem: aynı videoda iki ayrı çalıştırmada model farklı konu zamanları üretti; örneğin üçüncü konu bir çalıştırmada 9:51, ötekinde 9:19. Yani konu zamanları çalıştırmadan çalıştırmaya değişiyor. Bu, kartta yazan "henüz transkriptle doğrulanmamıştır" notunu destekliyor ve özet zamanlarının da soru alıntılarındaki gibi kodda doğrulanması gerektiğini gösteriyor.
+
+## Aşama 12d · Soru kartları (2026-10-14)
+
+Aşama 12'nin dördüncü parçası; yalnızca 12d yapıldı.
+
+- **İstek** (`frontend/lib/api.ts`):
+  - `QuestionsRequest`, `QuestionOut` ve `QuestionsResponse` türleri `backend/app/schemas.py` ile aynı.
+  - `getQuestions()`, `POST /api/questions` çağırır. Soru sayısı gönderilmez, backend varsayılanı 5 kullanılır.
+  - Hata eşleme özetle ortak; zaman aşımı mesajı ikisine uyacak şekilde genelleştirildi.
+- **Soru bölümü** (`frontend/app/questions-section.tsx`):
+  - Özet kartının altında ayrı bir "Soruları üret" düğmesi var, çünkü özet ve sorular ayrı ve ücretli OpenAI istekleridir.
+  - Soru isteği, özeti çıkarılan bağlantıyla yapılır; kutu sonradan değişse bile aynı bağlantı kullanılır.
+  - Beklerken düğme kapalı ve "Sorular hazırlanıyor..." yazar. Hatalar özetle aynı sade Türkçe mesajlarla gösterilir.
+  - Yeni soru isteğinde eski sorular ekrandan kalkar. Yeni özet istenince soru bölümü tümüyle kaldırılır.
+  - Listenin üstünde sönük bir satır var: dönen ve istenen soru sayısı, kaynağı doğrulanan soru sayısı, istem sürümü, model.
+- **Soru kartı** (`frontend/app/question-card.tsx`):
+  - Soru metni ve A/B/C/D seçenekleri gösterilir. Seçenek seçilmeden doğru cevap görünmez.
+  - Seçilince doğru şık yeşil, yanlış seçilen şık kırmızı olur; "Doğru!" ya da "Yanlış. Doğru cevap: X" yazar. Seçim değiştirilemez.
+  - Cevap açılınca açıklama, kaynak alıntısı (`source_quote`) ve doğrulama durumu ("Alıntı transkriptte bulundu" ya da "bulunamadı") gösterilir. `quote_match: trimmed` ise "kenarındaki birkaç sözcük atılarak" notu eklenir.
+  - Kaynak süresi dakika:saniye olarak gösterilir; tıklanınca video o saniyeden yeni sekmede açılır (`lib/format.ts`).
+  - Kaynağı doğrulanamayan sorular gizlenmez: kesikli kırmızı kenar ve "Kaynak doğrulanamadı" rozetiyle ayrılır, kaynak süresi "yok" yazar.
+- **Dürüstlük notu** (listenin altında, sönük): "Alıntı transkriptte bulundu" yalnızca alıntının transkriptte geçtiğini gösterir, sorunun ya da cevabın doğru olduğunu garanti etmez. Kaynak süresi altyazı satırının başıdır, cümle birkaç saniye sonra başlayabilir. Bu not ikinci testteki 1,5-5,4 sn'lik ölçüme dayanır.
+- Stil: özet formundaki düğme stili seçenek düğmelerine bulaşmasın diye yalnızca form düğmesine ve `.primary` sınıfına daraltıldı. Yeni paket eklenmedi.
+- Doğrulama (gerçek OpenAI çağrısı yapılmadı, sunucu başlatılmadı ya da kapatılmadı):
+  - `npm run typecheck` ve `npm run build` hatasız; `pytest` → 181 test geçti (backend değişmedi).
+  - Örnek bir soru yanıtı `QuestionsResponse` tipiyle tip kontrolünden geçti. Bilerek hatalı yazılan iki alan yakalandı: `source_start_seconds` için metin ve geçersiz `quote_match`. Geçici dosya commit'lenmedi.
+  - Kartlar, önceki gerçek çalıştırmanın kaydıyla (`docs/bulgular/asama-6-test-2-tarih.json`, 5 soru) HTML'e çevrildi. Doğrulanamayan soru için elle bir örnek kullanıldı. 24 kontrol geçti:
+    - Cevap seçilmeden doğru cevap, alıntı ve açıklama görünmüyor.
+    - Yanlış seçimde doğru şık yeşil, seçilen şık kırmızı, 4 düğme kilitli; alıntı, "bulundu" durumu ve `1:19 → ?t=79` bağlantısı doğru.
+    - `trimmed` notu çıkıyor.
+    - Doğrulanamayan soruda rozet, "bulunamadı" ve "yok" yazıyor, bağlantı çıkmıyor.
+    - Liste 5 kart, dürüstlük notu ve üst satırla oluşuyor; boş listede mesaj gösteriliyor.
+- Bilinen sınırlar:
+  - Kartların ekrandaki görünümü ve tıklama davranışı ("ilk seçim kilitlenir") tarayıcıda denenmedi. Statik render, durum tutmayan görünüm parçasını seçili ve seçilmemiş hâllerde denedi; seçimi tutan küçük sarmalayıcı çalıştırılmadı.
+  - Gerçek bir yeni soru yanıtıyla denenmedi; önceki çalıştırmanın kaydı kullanıldı.
+  - Kaynak süresinin videoyu doğru saniyede açtığı tarayıcıda denenmedi.
+  - Soru sayısı arayüzden seçilemiyor (backend varsayılanı 5).
+  - Frontend için otomatik test yok.
