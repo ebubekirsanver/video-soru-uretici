@@ -40,3 +40,11 @@ Aşama sırası ve içeriği ilerledikçe güncellenebilir.
   - **12d · Soru kartları: tamamlandı** (2026-10-14). Özet kartının altında ayrı "Soruları üret" isteği; etkileşimli soru kartlarında cevap seçilince doğru/yanlış, kaynak alıntısı, doğrulama durumu ve videoya atlayan kaynak süresi gösterilir. Elle kontrol (kullanıcı): 5 sorudan 2'sinin (Soru 1 ve Soru 2) kaynak süresi videoda açılıp kontrol edildi, kalan 3'ü kontrol edilmedi, saniye ölçülmedi. Soru 2'de alıntı transkriptte bulunuyor ve süresi konuşmayla uyuşuyor, ama doğru cevap ("Kemosentetik canlılar") bu kaynakla desteklenmiyor; "kaynağı doğrulanmış" etiketi kaynağın cevabı kanıtladığı anlamına gelmiyor ([bulgu](bulgular/asama-12d-test-1.md)).
   - **12e: yapılmadı.**
 - Aşama 7-11 yapılmadı; arayüz iskeletine bunlardan önce geçildi. Aşama 3 ve 4 hâlâ ertelenmiş durumda.
+
+## Durum güncellemesi (2026-10-14, Aşama 9)
+
+- **Aşama 9 (otomatik doğrulama): kısmen — alıntı-cevap destek kontrolü (ilk adım).**
+  - **Yapıldı:** `POST /api/questions` isteğinde `check_support: true` ile açılan, varsayılanı kapalı model kontrolü (istem `support-v1`). Her doğrulanmış soru için modele soru, doğru cevabın metni ve alıntı verilir; model alıntının cevabı "destekliyor", "kısmen" ya da "desteklemiyor" olduğunu söyler. Gerekçe: Aşama 12d tarayıcı testinde alıntısı transkriptte bulunan ama doğru cevabı desteklemeyen bir soru görüldü ([bulgu](bulgular/asama-12d-test-1.md)).
+  - Bu bir **model değerlendirmesidir**; kontrolün isabeti ölçülmedi ve gerçek OpenAI ile henüz denenmedi.
+  - **Yapılmadı:** sadakat (faithfulness) kontrolü, Bloom düzeyi kontrolü, yazım hatası kontrolü, tekrar kontrolü (Aşama 6'daki birebir metin tekrarı ayıklama dışında).
+- Aşama 7, 8, 10 ve 11 yapılmadı.
