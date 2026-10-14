@@ -4,6 +4,12 @@
   --fg: #1f2328;
   --muted: #59636e;
   --border: #d1d9e0;
+  --ok: #1a7f37;
+  --ok-bg: #dafbe1;
+  --down: #cf222e;
+  --down-bg: #ffebe9;
+  --checking: #59636e;
+  --checking-bg: #f6f8fa;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,6 +18,12 @@
     --fg: #e6edf3;
     --muted: #9198a1;
     --border: #3d444d;
+    --ok: #3fb950;
+    --ok-bg: #12261e;
+    --down: #f85149;
+    --down-bg: #2d1214;
+    --checking: #9198a1;
+    --checking-bg: #151b23;
   }
 }
 
@@ -40,4 +52,73 @@ h1 {
 
 .muted {
   color: var(--muted);
+}
+
+/* Sunucu sağlık göstergesi */
+.health {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.health .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.health .label {
+  font-weight: 600;
+}
+
+.health .url {
+  color: var(--muted);
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+
+.health button {
+  margin-left: auto;
+  padding: 4px 12px;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.health-ok {
+  color: var(--ok);
+  background: var(--ok-bg);
+  border-color: var(--ok);
+}
+
+.health-ok .dot {
+  background: var(--ok);
+}
+
+.health-down {
+  color: var(--down);
+  background: var(--down-bg);
+  border-color: var(--down);
+}
+
+.health-down .dot {
+  background: var(--down);
+}
+
+.health-checking {
+  color: var(--checking);
+  background: var(--checking-bg);
+}
+
+.health-checking .dot {
+  background: var(--checking);
 }
