@@ -23,7 +23,7 @@
 **Sonuç:**
 - Alıntı transkriptte bulunuyor ve süresi o konuşmayla uyuşuyor.
 - Alıntı konuyla ilgili ama doğru cevabı ("Kemosentetik canlılar") doğrudan söylemiyor (elle etiket: kısmen; bkz. [asama-9-destek-kontrolu-1.md](asama-9-destek-kontrolu-1.md)).
-- Cevap videoda bir yerde geçiyor olabilir, ama soruya bağlı kaynak onu göstermiyor.
+- Cevap videoda bir yerde geçiyor olabilir, ama soruya bağlı kaynak onu doğrudan göstermiyor.
 - **"Kaynağı doğrulanmış" etiketi, kaynağın cevabı kanıtladığı anlamına gelmiyor.**
 
 ## Sınırlar

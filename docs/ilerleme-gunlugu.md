@@ -247,7 +247,7 @@ Aşama 12'nin dördüncü parçası; yalnızca 12d yapıldı.
 - Sonradan, elle kontrol (kullanıcı, kemosentez videosu `109kCbVtU1U`, 5 soru, 5'inin alıntısı transkriptte bulundu). Ayrıntı: [docs/bulgular/asama-12d-test-1.md](bulgular/asama-12d-test-1.md).
   - 5 sorudan 2'sinin (Soru 1 ve Soru 2) kaynak süresi videoda açılıp kontrol edildi. Kalan 3 sorununki kontrol edilmedi. Hiçbir sorunun saniyesi ölçülmedi.
   - **Soru 2 bulgusu:** Kullanıcı bağlantıdaki 4:17'yi videoda açıp dinledi. O noktada canlılar sayılıyor (karides, yengeç, midye, deniz yıldızı gibi), ama bunların kemosentetik canlılar olduğu söylenmiyor. Kullanıcıya göre videonun devamında "kemosentetik canlılar" ifadesi geçiyor, fakat bağlantının açtığı noktada geçmiyor.
-  - Sonuç: alıntı transkriptte bulunuyor ve süresi o konuşmayla uyuşuyor; alıntı konuyla ilgili ama doğru cevabı ("Kemosentetik canlılar") doğrudan söylemiyor (elle etiket: kısmen). Cevap videoda bir yerde geçiyor olabilir, ama soruya bağlı kaynak onu göstermiyor. "Kaynağı doğrulanmış" etiketi, kaynağın cevabı kanıtladığı anlamına gelmiyor.
+  - Sonuç: alıntı transkriptte bulunuyor ve süresi o konuşmayla uyuşuyor; alıntı konuyla ilgili ama doğru cevabı ("Kemosentetik canlılar") doğrudan söylemiyor (elle etiket: kısmen). Cevap videoda bir yerde geçiyor olabilir, ama soruya bağlı kaynak onu doğrudan göstermiyor. "Kaynağı doğrulanmış" etiketi, kaynağın cevabı kanıtladığı anlamına gelmiyor.
   - Sınırlar: tek soru, tek video, tek elle kontrol.
 
 ## Aşama 9 (kısmen) · Alıntı-cevap destek kontrolü, ilk adım (2026-10-14)
