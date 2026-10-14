@@ -3,6 +3,7 @@
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import { describeError, getSummary, type SummaryResponse } from "@/lib/api";
 import { validateYouTubeUrl } from "@/lib/youtube";
+import SummaryResult from "./summary-result";
 
 type State =
   | { phase: "idle" }
@@ -84,10 +85,7 @@ export default function SummaryForm() {
           </div>
         )}
 
-        {state.phase === "success" && (
-          // Geçici gösterim: biçimli özet ekranı 12c'de yapılacak
-          <pre className="raw-result">{JSON.stringify(state.result, null, 2)}</pre>
-        )}
+        {state.phase === "success" && <SummaryResult result={state.result} />}
       </div>
     </section>
   );
