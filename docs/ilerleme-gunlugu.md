@@ -201,3 +201,8 @@ Aşama 12'nin üçüncü parçası; yalnızca 12c yapıldı. Ayrıca CLAUDE.md'y
   - Gerçek bir özet yanıtıyla denenmedi; örnek nesne kullanıldı.
   - Konu zamanları doğrulanmıyor (kartta yazıyor).
   - Frontend için otomatik test yok.
+- Sonradan: tarayıcıda gözle doğrulandı (kullanıcı).
+  - Gerçek bir özet yanıtıyla kart gösterildi: özet, konu başlıkları ve zamanları, doğrulanmadı notu.
+  - Hata durumunda önceki kart ekrandan temizlendi.
+  - Zaman bağlantısının videoyu doğru saniyede açıp açmadığı **henüz denenmedi**.
+- Gözlem: aynı videoda iki ayrı çalıştırmada model farklı konu zamanları üretti; örneğin üçüncü konu bir çalıştırmada 9:51, ötekinde 9:19. Yani konu zamanları çalıştırmadan çalıştırmaya değişiyor. Bu, kartta yazan "henüz transkriptle doğrulanmamıştır" notunu destekliyor ve özet zamanlarının da soru alıntılarındaki gibi kodda doğrulanması gerektiğini gösteriyor.
