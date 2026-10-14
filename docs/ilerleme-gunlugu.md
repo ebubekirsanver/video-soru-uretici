@@ -141,3 +141,40 @@ Aşama 12 (web arayüzü) parçalara bölündü; bu kayıt yalnızca ilk parçay
   - Sayfa `http://127.0.0.1:3000` adresinden açılırsa CORS izni yok, gösterge kırmızı olur; `localhost:3000` kullanılmalı.
   - `NEXT_PUBLIC_API_URL` derleme anında koda gömülür; değiştirince geliştirme sunucusu yeniden başlatılmalı.
   - Arayüzde henüz URL girme, soru gösterme ya da videoya atlama yok (Aşama 12'nin sonraki parçaları).
+- Sonradan: tarayıcıda gözle doğrulandı (kullanıcı). Backend açıkken yeşil "Sunucu çalışıyor", backend kapatılınca kırmızı durum göründü.
+
+## Aşama 12b · YouTube bağlantısı formu ve özet isteği (2026-10-14)
+
+Aşama 12'nin ikinci parçası; yalnızca 12b yapıldı.
+
+- **Ortak istek kodu** (`frontend/lib/api.ts`):
+  - Türler `backend/app/schemas.py` ile aynı: istek `{url, transcript_mode?}`, yanıt `{video_id, language, transcript_mode, model, summary, topics[{title, start_seconds}]}`.
+  - `getSummary()`, `POST /api/summary` çağrısını yapar; zaman aşımı 180 sn, iptal desteği var.
+  - Hatalar `ApiError` türlerine ayrılır, `describeError()` her birini sade Türkçe başlık ve ayrıntıya çevirir. Türler: 422 geçersiz bağlantı, 422 şema hatası, 404 altyazı alınamadı, 503 API anahtarı yok, 502 yapay zekâ servisi hatası, diğer HTTP hataları, ağ hatası, zaman aşımı.
+  - 12c ve 12d bu dosyayı kullanacak.
+- **Tarayıcıda bağlantı denetimi** (`frontend/lib/youtube.ts`): backend'deki `extract_video_id` ile aynı kurallar. Geçersiz bağlantıda istek gönderilmez; son kararı yine backend verir.
+- **Form** (`frontend/app/summary-form.tsx`):
+  - Sağlık göstergesinin altında metin kutusu ve "Özet çıkar" düğmesi.
+  - Boş ya da geçersiz bağlantıda kutunun altında uyarı.
+  - Beklerken düğme kapalı ve "Özet hazırlanıyor...".
+  - Hatada sade Türkçe mesaj ve backend'in ayrıntısı.
+  - Başarıda yanıt şimdilik ham JSON metin bloğu olarak gösterilir; biçimli özet 12c'de.
+- Yeni paket eklenmedi.
+- Doğrulama:
+  - `npm run typecheck` ve `npm run build` hatasız; `pytest` → 181 test geçti (backend değişmedi).
+  - Bağlantı denetiminin backend'le aynı sonucu verdiği 32 durumda karşılaştırıldı (Python `extract_video_id` ile TypeScript `extractVideoId`); fark yok.
+  - Gerçek `lib/api.ts` kodu Node 24 ile, **API anahtarı olmayan** gerçek bir backend'e karşı çalıştırıldı. Bu backend `.env` dosyası okunmayacak biçimde başlatıldı, `OPENAI_BASE_URL` kapalı bir yerel porta yönlendirildi; OpenAI'ye istek gitmedi. Sonuçlar:
+    - 422 geçersiz bağlantı → "Bağlantı geçerli bir YouTube videosu değil."
+    - 422 şema hatası → "İstek sunucu tarafından kabul edilmedi."
+    - 404 var olmayan video → "Bu videonun altyazısı alınamadı." + "Video bulunamadı ya da erişilemiyor."
+    - 503 gerçek video (transkript YouTube'dan çekildi) → "Sunucuda OpenAI API anahtarı tanımlı değil."
+    - Zaman aşımı → "Sunucu zamanında yanıt vermedi."
+    - Kapalı sunucu → "Sunucuya ulaşılamadı."
+    - Kullanıcı iptali `ApiError` sayılmıyor, form iptal edilen isteği ekrana yansıtmıyor.
+  - `POST /api/summary` için `Origin: http://localhost:3000` ön kontrolü (preflight) izinle yanıtlandı.
+- Bilinen sınırlar:
+  - Başarılı özet yolu ve 502 (OpenAI hatası) gerçek OpenAI çağrısı gerektirdiği için denenmedi.
+  - 404'ün "altyazılar kapalı" ve "istenen dillerde altyazı yok" alt durumları denenmedi (bilinen bir örnek video yok); arayüz bunları aynı 404 başlığıyla, backend'in mesajını ayrıntı olarak gösterir.
+  - Formun ekrandaki görünümü tarayıcıda gözle doğrulanmadı; bileşen yerine onun kullandığı istek ve denetim kodu çalıştırıldı.
+  - 502 ayrıntısı OpenAI'den geldiği için İngilizce olabilir; başlık Türkçe.
+  - Frontend için otomatik test yok.

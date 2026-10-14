@@ -53,6 +53,9 @@ npm run typecheck
 ## Şu anki durum
 Aşama 0, 1, 2, 5 ve 6 tamamlandı: iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Aşama 14'ün küçük bir parçası öne alındı: başarılı yanıtlar `backend/runs/` altına kaydediliyor (`services/runs.py`, git dışında).
 
-Aşama 12 (web arayüzü) parçalara bölündü; **yalnızca 12a yapıldı**: `frontend/` altında Next.js (App Router, TypeScript) iskeleti ve ana sayfada `/health` sağlık göstergesi; backend'de yalnızca `http://localhost:3000` kaynağına izin veren CORS. Arayüzde henüz URL girme, soru gösterme ya da videoya atlama yok; Aşama 7-11 yapılmadı. Sırada Aşama 12'nin sonraki parçaları, Aşama 7 ya da ertelenen Aşama 3 / 4 var; kullanıcı seçer.
+Aşama 12 (web arayüzü) parçalara bölündü (12a-12e); **yalnızca 12a ve 12b yapıldı**, Aşama 12'nin geneli bitmedi.
+- 12a: `frontend/` altında Next.js (App Router, TypeScript) iskeleti, ana sayfada `/health` sağlık göstergesi; backend'de yalnızca `http://localhost:3000` kaynağına izin veren CORS. Tarayıcıda gözle doğrulandı.
+- 12b: ana sayfada YouTube bağlantısı formu ve `POST /api/summary` çağrısı. İstek kodu `frontend/lib/api.ts` (12c ve 12d de bunu kullanacak), tarayıcıdaki bağlantı denetimi `frontend/lib/youtube.ts` (backend'deki `extract_video_id` ile aynı kurallar). Başarılı yanıt şimdilik ham JSON metni olarak gösteriliyor; biçimli özet ekranı 12c'de.
+- Arayüzde henüz biçimli özet, soru gösterme ya da videoya atlama yok; Aşama 7-11 yapılmadı. Sırada 12c, Aşama 7 ya da ertelenen Aşama 3 / 4 var; kullanıcı seçer.
 
 Windows notu: `python` komutu PATH'te değil; sanal ortam `backend\.venv` (`py -3.12 -m venv .venv` ile kuruldu), komutlar `.\.venv\Scripts\python.exe -m pytest` biçiminde çalıştırılır.
