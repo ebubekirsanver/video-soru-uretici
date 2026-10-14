@@ -247,12 +247,12 @@ Aşama 12'nin dördüncü parçası; yalnızca 12d yapıldı.
 - Sonradan, elle kontrol (kullanıcı, kemosentez videosu `109kCbVtU1U`, 5 soru, 5'inin alıntısı transkriptte bulundu). Ayrıntı: [docs/bulgular/asama-12d-test-1.md](bulgular/asama-12d-test-1.md).
   - 5 sorudan 2'sinin (Soru 1 ve Soru 2) kaynak süresi videoda açılıp kontrol edildi. Kalan 3 sorununki kontrol edilmedi. Hiçbir sorunun saniyesi ölçülmedi.
   - **Soru 2 bulgusu:** Kullanıcı bağlantıdaki 4:17'yi videoda açıp dinledi. O noktada canlılar sayılıyor (karides, yengeç, midye, deniz yıldızı gibi), ama bunların kemosentetik canlılar olduğu söylenmiyor. Kullanıcıya göre videonun devamında "kemosentetik canlılar" ifadesi geçiyor, fakat bağlantının açtığı noktada geçmiyor.
-  - Sonuç: alıntı transkriptte bulunuyor ve süresi o konuşmayla uyuşuyor, ama doğru cevap olan "Kemosentetik canlılar" bu alıntıyla ve bu noktayla desteklenmiyor. Cevap videoda bir yerde geçiyor olabilir, ama soruya bağlı kaynak onu göstermiyor. "Kaynağı doğrulanmış" etiketi, kaynağın cevabı kanıtladığı anlamına gelmiyor.
+  - Sonuç: alıntı transkriptte bulunuyor ve süresi o konuşmayla uyuşuyor; alıntı konuyla ilgili ama doğru cevabı ("Kemosentetik canlılar") doğrudan söylemiyor (elle etiket: kısmen). Cevap videoda bir yerde geçiyor olabilir, ama soruya bağlı kaynak onu göstermiyor. "Kaynağı doğrulanmış" etiketi, kaynağın cevabı kanıtladığı anlamına gelmiyor.
   - Sınırlar: tek soru, tek video, tek elle kontrol.
 
 ## Aşama 9 (kısmen) · Alıntı-cevap destek kontrolü, ilk adım (2026-10-14)
 
-Kod tarafındaki doğrulama yalnızca alıntının transkriptte geçtiğini söylüyor. Aşama 12d tarayıcı testinde alıntısı transkriptte bulunan ama doğru cevabı desteklemeyen bir soru görüldü ([bulgu](bulgular/asama-12d-test-1.md)). Bu adım, bunu ayrı bir model kontrolüyle sormayı ekler. Yalnızca backend değişti; frontend'e dokunulmadı.
+Kod tarafındaki doğrulama yalnızca alıntının transkriptte geçtiğini söylüyor. Aşama 12d tarayıcı testinde alıntısı transkriptte bulunan, konuyla ilgili ama doğru cevabı doğrudan söylemeyen bir soru görüldü (elle etiket: kısmen; [bulgu](bulgular/asama-12d-test-1.md)). Bu adım, bunu ayrı bir model kontrolüyle sormayı ekler. Yalnızca backend değişti; frontend'e dokunulmadı.
 
 - **Servis** (`services/support_check.py`):
   - Alıntısı transkriptte bulunan (`verified=true`) her soru için ayrı bir LLM çağrısı yapılır.
@@ -292,3 +292,9 @@ Kod tarafındaki doğrulama yalnızca alıntının transkriptte geçtiğini söy
   - Çağrılar sırayla yapılıyor; çok soruda yanıt süresi uzar.
   - Frontend `check_support` göndermiyor ve `support` alanını göstermiyor (arayüz değişmedi).
   - Aşama 9'un sadakat, Bloom, yazım hatası ve tekrar kontrolleri yapılmadı.
+- Sonradan, **ilk deneme** ([docs/bulgular/asama-9-destek-kontrolu-1.md](bulgular/asama-9-destek-kontrolu-1.md)). Bu kayıt yukarıdaki "gerçek OpenAI ile denenmedi" sınırının yerini alır.
+  - Aşama 12d testinin 5 sorusu yeniden üretilmeden `check_support` fonksiyonuna verildi (`support-v1`, 5 çağrı, tek çalıştırma). Sonuç değiştirilmeden kaydedildi; betik de çalıştırıldığı hâliyle eklendi.
+  - Elle etiketler kullanıcı tarafından, yalnızca alıntıya bakılarak ve model çağrısından önce verilip commit'lendi.
+  - Elle etiket ile model etiketi 5 sorunun 3'ünde eşleşti (Soru 1, 3, 4), 2'sinde farklı (Soru 2: elle kısmen, model desteklemiyor; Soru 5: elle destekliyor, model desteklemiyor).
+  - İsabet iddiası yok: 5 soru, tek video, tek etiketleyen, modelin tek çalıştırması.
+  - Aynı gün, 12d bulgusundaki Soru 2 ifadesi elle etiketle çelişmesin diye düzeltildi: "alıntı konuyla ilgili ama doğru cevabı doğrudan söylemiyor (elle etiket: kısmen)".

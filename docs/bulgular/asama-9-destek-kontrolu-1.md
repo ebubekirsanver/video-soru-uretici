@@ -29,6 +29,8 @@
 
 **Eşleşme:** 5 sorunun 3'ünde elle etiket ile model etiketi aynı (Soru 1, 3, 4), 2'sinde farklı (Soru 2, 5).
 
+Not: Soru 5 için etiket model sonucu görülmeden verildi ve değiştirilmedi; alıntıdan cevaba bir çıkarım gerekiyor.
+
 | # | Elle etiket | Model etiketi | Model gerekçesi |
 |---|---|---|---|
 | 1 | destekliyor | destekliyor | Alıntıda kemosentetik canlıların kimyasal enerji kullanarak besin ürettiği belirtiliyor. |

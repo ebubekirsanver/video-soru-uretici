@@ -11,7 +11,7 @@
 - Kalan 3 sorunun kaynak süresi kontrol edilmedi.
 - Hiçbir sorunun saniyesi ölçülmedi.
 
-## Bulgu · Soru 2'de kaynak, doğru cevabı desteklemiyor
+## Bulgu · Soru 2'de alıntı konuyla ilgili ama doğru cevabı doğrudan söylemiyor
 
 **Soru 2:** *"Hidrotermal bacaların etrafında hangi canlılar yaşayabilir?"*
 - Doğru cevap (yanıta göre): **Kemosentetik canlılar**
@@ -22,7 +22,7 @@
 
 **Sonuç:**
 - Alıntı transkriptte bulunuyor ve süresi o konuşmayla uyuşuyor.
-- Ama doğru cevap olan "Kemosentetik canlılar" bu alıntıyla ve bu noktayla desteklenmiyor.
+- Alıntı konuyla ilgili ama doğru cevabı ("Kemosentetik canlılar") doğrudan söylemiyor (elle etiket: kısmen; bkz. [asama-9-destek-kontrolu-1.md](asama-9-destek-kontrolu-1.md)).
 - Cevap videoda bir yerde geçiyor olabilir, ama soruya bağlı kaynak onu göstermiyor.
 - **"Kaynağı doğrulanmış" etiketi, kaynağın cevabı kanıtladığı anlamına gelmiyor.**
 
