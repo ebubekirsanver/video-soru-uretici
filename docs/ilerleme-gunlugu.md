@@ -178,3 +178,26 @@ Aşama 12'nin ikinci parçası; yalnızca 12b yapıldı.
   - Formun ekrandaki görünümü tarayıcıda gözle doğrulanmadı; bileşen yerine onun kullandığı istek ve denetim kodu çalıştırıldı.
   - 502 ayrıntısı OpenAI'den geldiği için İngilizce olabilir; başlık Türkçe.
   - Frontend için otomatik test yok.
+
+## Aşama 12c · Biçimli özet ekranı (2026-10-14)
+
+Aşama 12'nin üçüncü parçası; yalnızca 12c yapıldı. Ayrıca CLAUDE.md'ye kural eklendi: kendi başlatılmayan süreçler kapatılmaz. 12b denemesinde kullanıcının backend süreci yanlışlıkla kapatılmıştı.
+
+- **Sonuç kartı** (`frontend/app/summary-result.tsx`): ham JSON yerine:
+  - Video kimliği, dil, model ve transkript modu küçük, sönük bir satırda.
+  - Özet paragraf olarak; boş satırdan bölünür.
+  - Konu başlıkları sıralı bir liste olarak, her birinin yanında dakika:saniye zamanı.
+  - Başlığa tıklanınca `https://youtu.be/<video_id>?t=<saniye>` yeni sekmede açılır.
+  - Listenin altında not: "Konu zamanları modelin ürettiği blok başlangıçlarına dayanır; henüz transkriptle doğrulanmamıştır." Not bilerek yazıldı: özet konularının zamanları soru alıntılarındaki gibi kodda doğrulanmıyor, yalnızca video süresine sınırlanıyor.
+- **Yardımcılar** (`frontend/lib/format.ts`): `formatTimestamp` saniyeyi aşağı yuvarlayıp dakika:saniye yapar (bir saati aşınca saat:dakika:saniye); `youtubeTimeUrl` bağlantıyı üretir. 12d de kullanacak.
+- Yüklenme ve hata davranışı değişmedi. Yeni istekte durum "yükleniyor"a geçtiği için eski sonuç ya da hata ekrandan kalkar. Yeni paket eklenmedi.
+- Doğrulama (gerçek OpenAI çağrısı yapılmadı):
+  - `npm run typecheck` ve `npm run build` hatasız; `pytest` → 181 test geçti (backend değişmedi).
+  - Örnek bir yanıt nesnesi `SummaryResponse` tipiyle tip kontrolünden geçti. Bilerek hatalı yazılan alan (`start_seconds` için metin) tip kontrolünde yakalandı. Geçici kontrol dosyası commit'lenmedi.
+  - Bileşen, projede kurulu TypeScript ve React ile derlenip örnek yanıttan HTML'e çevrildi. 2 paragraf, 3 konu satırı, 3 yeni sekme bağlantısı, doğru `?t=591` bağlantısı, doğrulanmadı notu ve teknik satır doğru çıktı; ham JSON yok; boş konu listesinde "Konu başlığı bulunamadı." görünüyor.
+  - `formatTimestamp` ve `youtubeTimeUrl` 12 durumda denendi (ör. 591,2 → 9:51, 3725,5 → 1:02:05, negatif ve NaN → 0:00); fark yok.
+- Bilinen sınırlar:
+  - Kartın ekrandaki görünümü tarayıcıda gözle doğrulanmadı (kullanıcı kontrol edecek).
+  - Gerçek bir özet yanıtıyla denenmedi; örnek nesne kullanıldı.
+  - Konu zamanları doğrulanmıyor (kartta yazıyor).
+  - Frontend için otomatik test yok.
