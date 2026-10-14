@@ -244,3 +244,8 @@ Aşama 12'nin dördüncü parçası; yalnızca 12d yapıldı.
   - Kaynak süresinin videoyu doğru saniyede açtığı tarayıcıda denenmedi.
   - Soru sayısı arayüzden seçilemiyor (backend varsayılanı 5).
   - Frontend için otomatik test yok.
+- Sonradan, elle kontrol (kullanıcı, kemosentez videosu `109kCbVtU1U`, 5 soru, 5'inin alıntısı transkriptte bulundu). Ayrıntı: [docs/bulgular/asama-12d-test-1.md](bulgular/asama-12d-test-1.md).
+  - 5 sorudan 2'sinin (Soru 1 ve Soru 2) kaynak süresi videoda açılıp kontrol edildi. Kalan 3 sorununki kontrol edilmedi. Hiçbir sorunun saniyesi ölçülmedi.
+  - **Soru 2 bulgusu:** Kullanıcı bağlantıdaki 4:17'yi videoda açıp dinledi. O noktada canlılar sayılıyor (karides, yengeç, midye, deniz yıldızı gibi), ama bunların kemosentetik canlılar olduğu söylenmiyor. Kullanıcıya göre videonun devamında "kemosentetik canlılar" ifadesi geçiyor, fakat bağlantının açtığı noktada geçmiyor.
+  - Sonuç: alıntı transkriptte bulunuyor ve süresi o konuşmayla uyuşuyor, ama doğru cevap olan "Kemosentetik canlılar" bu alıntıyla ve bu noktayla desteklenmiyor. Cevap videoda bir yerde geçiyor olabilir, ama soruya bağlı kaynak onu göstermiyor. "Kaynağı doğrulanmış" etiketi, kaynağın cevabı kanıtladığı anlamına gelmiyor.
+  - Sınırlar: tek soru, tek video, tek elle kontrol.
