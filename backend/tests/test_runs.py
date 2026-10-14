@@ -105,7 +105,7 @@ def test_questions_run_is_saved(runs_enabled, use_llm, fake_transcript):
     (path,) = saved_files(runs_enabled)
     assert FILE_NAME.match(path.name) and path.name.endswith("-questions.json")
     record = json.loads(path.read_text(encoding="utf-8"))
-    assert record["request"] == {"url": VID, "count": 3, "transcript_mode": "clean"}
+    assert record["request"] == {"url": VID, "count": 3, "transcript_mode": "clean", "check_support": False}
     assert record["response"] == r.json()
     # Türkçe karakterler kaçış dizisine çevrilmeden yazılır
     assert "Kabarcık sıralaması" in path.read_text(encoding="utf-8")
@@ -136,7 +136,7 @@ def test_quote_audit_in_record(runs_enabled, use_llm, fake_transcript):
 
     (path,) = saved_files(runs_enabled)
     record = json.loads(path.read_text(encoding="utf-8"))
-    assert record["record_version"] == 2
+    assert record["record_version"] == 3
     assert record["response"] == r.json()  # yanıt kayıtta değiştirilmeden durur
 
     exact, trimmed, unverified = record["quote_audit"]
@@ -172,7 +172,7 @@ def test_summary_record_has_no_quote_audit(runs_enabled, use_llm, fake_transcrip
     client.post("/api/summary", json={"url": VID})
     (path,) = saved_files(runs_enabled)
     record = json.loads(path.read_text(encoding="utf-8"))
-    assert record["record_version"] == 2 and "quote_audit" not in record
+    assert record["record_version"] == 3 and "quote_audit" not in record and "support_check" not in record
 
 
 def test_load_run_reads_old_format_record():
@@ -181,6 +181,7 @@ def test_load_run_reads_old_format_record():
     record = runs.load_run(old)
     assert record["record_version"] == 1
     assert record["quote_audit"] == []
+    assert record["support_check"] is None
     assert record["response"]["video_id"] == "aaCHLYO3Fzg"
 
 
@@ -189,7 +190,7 @@ def test_load_run_reads_new_format_record(runs_enabled, use_llm, fake_transcript
     client.post("/api/questions", json={"url": VID})
     (path,) = saved_files(runs_enabled)
     record = runs.load_run(path)
-    assert record["record_version"] == 2 and len(record["quote_audit"]) == 3
+    assert record["record_version"] == 3 and len(record["quote_audit"]) == 3 and record["support_check"] is None
 
 
 def test_saved_run_contains_no_api_key(runs_enabled, use_llm, fake_transcript):

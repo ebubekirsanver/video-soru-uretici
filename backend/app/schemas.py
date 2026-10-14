@@ -49,6 +49,22 @@ class QuestionsRequest(BaseModel):
     transcript_mode: Literal["clean", "raw"] = Field(
         default="clean", description="LLM'e verilecek transkript: clean (temiz) ya da raw (ham)"
     )
+    check_support: bool = Field(
+        default=False,
+        description="true ise alıntısı transkriptte bulunan her soru için ayrı bir model çağrısıyla "
+        "alıntının doğru cevabı destekleyip desteklemediği sorulur (soru sayısı kadar ek ücretli çağrı)",
+    )
+
+
+class SupportOut(BaseModel):
+    """Alıntı-cevap destek kontrolü. Bir model değerlendirmesidir; kesin doğru kabul edilmemelidir."""
+
+    label: Literal["destekliyor", "kısmen", "desteklemiyor", "kontrol edilmedi", "kontrol edilemedi"] = Field(
+        description="destekliyor / kısmen / desteklemiyor: modelin değerlendirmesi; "
+        "kontrol edilmedi: alıntı transkriptte bulunamadığı için çağrı yapılmadı; "
+        "kontrol edilemedi: çağrı başarısız oldu ya da model geçersiz yanıt verdi"
+    )
+    reason: str = Field(description="En fazla bir cümlelik gerekçe (model ya da kod tarafından)")
 
 
 class QuestionOut(BaseModel):
@@ -68,6 +84,10 @@ class QuestionOut(BaseModel):
         description="exact: alıntı birebir bulundu; trimmed: kenarlarından en fazla 2 kelime "
         "kırpılarak bulundu; null: bulunamadı"
     )
+    # Yalnızca check_support=true iken yanıtta yer alır; kapalıyken anahtar hiç görünmez
+    support: SupportOut | None = Field(
+        default=None, description="Alıntı-cevap destek kontrolü (model değerlendirmesi; yalnızca check_support=true iken)"
+    )
 
 
 class QuestionsResponse(BaseModel):
@@ -79,3 +99,7 @@ class QuestionsResponse(BaseModel):
     returned_count: int
     verified_count: int
     questions: list[QuestionOut]
+    # Yalnızca check_support=true iken yanıtta yer alır
+    support_prompt_version: str | None = Field(
+        default=None, description="Destek kontrolünde kullanılan istem sürümü (yalnızca check_support=true iken)"
+    )

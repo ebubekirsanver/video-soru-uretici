@@ -8,6 +8,7 @@ from app.schemas import (
     SummaryRequest,
     SummaryResponse,
     SummaryTopic,
+    SupportOut,
     TranscriptRequest,
     TranscriptResponse,
     TranscriptSegment,
@@ -16,6 +17,7 @@ from app.services.llm import LLMClient, LLMError, LLMNotConfigured, get_llm
 from app.services.questions import PROMPT_VERSION, generate_questions
 from app.services.runs import save_run
 from app.services.summary import summarize
+from app.services.support_check import SUPPORT_PROMPT_VERSION, check_support
 from app.services.text_clean import clean_transcript, prepare_transcript
 from app.services.transcript import Transcript, TranscriptUnavailable, fetch_transcript
 from app.services.youtube import InvalidYouTubeUrl, extract_video_id
@@ -77,9 +79,15 @@ def get_summary(body: SummaryRequest, llm: LLMClient = Depends(get_llm)) -> Summ
     return response
 
 
-@router.post("/questions", response_model=QuestionsResponse, tags=["soru"])
+# response_model_exclude_unset: destek kontrolü kapalıyken "support" alanları yanıtta hiç görünmez,
+# yanıt şeması eskisiyle aynı kalır. Diğer alanlar her zaman açıkça verildiği için (null olsalar da) görünür.
+@router.post("/questions", response_model=QuestionsResponse, response_model_exclude_unset=True, tags=["soru"])
 def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> QuestionsResponse:
-    """Transkriptin tamamından (RAG'siz) doğrulanmış çoktan seçmeli sorular üretir."""
+    """Transkriptin tamamından (RAG'siz) doğrulanmış çoktan seçmeli sorular üretir.
+
+    `check_support=true` ise her doğrulanmış soru için alıntının doğru cevabı destekleyip
+    desteklemediği ayrıca modele sorulur (model değerlendirmesi, kesin değildir).
+    """
     raw = _load_transcript(body.url)
     context = prepare_transcript(raw, body.transcript_mode)
     if not context.segments:
@@ -93,6 +101,24 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
     except LLMError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
 
+    # Destek kontrolü varsayılan olarak kapalı: her doğrulanmış soru için ek bir ücretli çağrı yapar
+    supports = check_support(questions, llm) if body.check_support else None
+
+    question_outs = []
+    for i, q in enumerate(questions):
+        out = QuestionOut(
+            question=q.question,
+            options=q.options,
+            correct_index=q.correct_index,
+            explanation=q.explanation,
+            source_quote=q.source_quote,
+            source_start_seconds=q.source_start_seconds,
+            verified=q.verified,
+            quote_match=q.quote_match,
+            **({"support": SupportOut(label=supports[i].label, reason=supports[i].reason)} if supports else {}),
+        )
+        question_outs.append(out)
+
     response = QuestionsResponse(
         video_id=raw.video_id,
         transcript_mode=body.transcript_mode,
@@ -101,19 +127,8 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
         requested_count=body.count,
         returned_count=len(questions),
         verified_count=sum(q.verified for q in questions),
-        questions=[
-            QuestionOut(
-                question=q.question,
-                options=q.options,
-                correct_index=q.correct_index,
-                explanation=q.explanation,
-                source_quote=q.source_quote,
-                source_start_seconds=q.source_start_seconds,
-                verified=q.verified,
-                quote_match=q.quote_match,
-            )
-            for q in questions
-        ],
+        questions=question_outs,
+        **({"support_prompt_version": SUPPORT_PROMPT_VERSION} if supports is not None else {}),
     )
     # Modelin ham alıntısı yalnızca yerel kayda yazılır, yanıtta yer almaz
     quote_audit = [
@@ -128,5 +143,15 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
         }
         for i, q in enumerate(questions, 1)
     ]
-    save_run("questions", response.video_id, body, response, quote_audit=quote_audit)
+    # Destek kontrolünün modelden gelen ham yanıtı da yalnızca yerel kayda yazılır
+    support_check = None
+    if supports is not None:
+        support_check = {
+            "prompt_version": SUPPORT_PROMPT_VERSION,
+            "results": [
+                {"index": i, "question": q.question, "label": s.label, "reason": s.reason, "model_raw": s.model_raw}
+                for i, (q, s) in enumerate(zip(questions, supports), 1)
+            ],
+        }
+    save_run("questions", response.video_id, body, response, quote_audit=quote_audit, support_check=support_check)
     return response
