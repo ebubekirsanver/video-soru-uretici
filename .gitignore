@@ -22,6 +22,9 @@ backend/runs/
 # Node
 node_modules/
 .next/
+# Next.js'in kendi ürettiği dosyalar
+next-env.d.ts
+*.tsbuildinfo
 
 # Editör / OS
 .vscode/
