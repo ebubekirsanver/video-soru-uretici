@@ -25,6 +25,36 @@ export interface SummaryResponse {
   topics: SummaryTopic[];
 }
 
+export interface QuestionsRequest {
+  url: string;
+  count?: number; // 1-20, backend varsayılanı 5
+  transcript_mode?: TranscriptMode; // backend varsayılanı "clean"
+}
+
+export interface QuestionOut {
+  question: string;
+  options: string[]; // 4 seçenek
+  correct_index: number; // 0-3
+  explanation: string;
+  // Doğrulandıysa transkriptteki metin; doğrulanamadıysa modelin yazdığı alıntı
+  source_quote: string;
+  // Alıntının başladığı transkript satırının (segment) başlangıcı; doğrulanamadıysa null
+  source_start_seconds: number | null;
+  verified: boolean; // alıntı transkriptte bulundu mu (sorunun doğruluğunu göstermez)
+  quote_match: "exact" | "trimmed" | null;
+}
+
+export interface QuestionsResponse {
+  video_id: string;
+  transcript_mode: TranscriptMode;
+  model: string;
+  prompt_version: string;
+  requested_count: number;
+  returned_count: number;
+  verified_count: number;
+  questions: QuestionOut[];
+}
+
 /** Hatanın türü: arayüz her birine ayrı, sade bir Türkçe mesaj gösterir. */
 export type ApiErrorKind =
   | "invalid_url" // 422: backend bağlantıyı geçersiz buldu
@@ -50,7 +80,7 @@ export class ApiError extends Error {
   }
 }
 
-// Özet, uzun videolarda LLM yüzünden onlarca saniye sürebilir
+// Özet ve soru üretimi, uzun videolarda LLM yüzünden onlarca saniye sürebilir
 const DEFAULT_TIMEOUT_MS = 180_000;
 
 interface RequestOptions {
@@ -119,6 +149,11 @@ export function getSummary(request: SummaryRequest, options?: RequestOptions): P
   return postJson<SummaryResponse>("/api/summary", request, options);
 }
 
+/** POST /api/questions: videodan doğrulanmış çoktan seçmeli sorular ister. */
+export function getQuestions(request: QuestionsRequest, options?: RequestOptions): Promise<QuestionsResponse> {
+  return postJson<QuestionsResponse>("/api/questions", request, options);
+}
+
 /** Hatayı kullanıcıya gösterilecek sade Türkçe başlık ve açıklamaya çevirir. */
 export function describeError(err: unknown): { title: string; detail: string | null } {
   if (!(err instanceof ApiError)) {
@@ -146,7 +181,7 @@ export function describeError(err: unknown): { title: string; detail: string | n
         detail: `Backend çalışıyor mu? Adres: ${API_URL}. Sayfayı localhost:3000 adresinden açtığınızdan emin olun.`,
       };
     case "timeout":
-      return { title: "Sunucu zamanında yanıt vermedi.", detail: "Video uzunsa özet uzun sürebilir; biraz sonra yeniden deneyin." };
+      return { title: "Sunucu zamanında yanıt vermedi.", detail: "Video uzunsa işlem uzun sürebilir; biraz sonra yeniden deneyin." };
     default:
       return {
         title: "Sunucuda beklenmeyen bir hata oluştu.",
