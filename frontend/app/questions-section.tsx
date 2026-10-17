@@ -12,11 +12,14 @@ type State =
 
 /** Başarılı soru yanıtının listesi: özet satırı, soru kartları ve dürüstlük notu. */
 export function QuestionList({ result }: { result: QuestionsResponse }) {
+  // Destek kontrolü yalnızca o istekte açıldıysa yanıtta istem sürümü gelir
+  const supportChecked = result.support_prompt_version !== undefined;
   return (
     <div className="question-list">
       <p className="meta">
         {result.returned_count} soru (istenen {result.requested_count}) · Kaynağı doğrulanan {result.verified_count} ·
         İstem: {result.prompt_version} · Model: {result.model}
+        {supportChecked && <> · Destek kontrolü: {result.support_prompt_version}</>}
       </p>
       {result.questions.length === 0 ? (
         <p className="muted">Model kullanılabilir soru üretemedi.</p>
@@ -29,6 +32,9 @@ export function QuestionList({ result }: { result: QuestionsResponse }) {
         “Alıntı transkriptte bulundu” yalnızca sorunun dayandığı alıntının videonun transkriptinde geçtiğini gösterir;
         sorunun ya da cevabın doğru olduğunu garanti etmez. Kaynak süresi alıntının başladığı altyazı satırının
         başıdır, cümle birkaç saniye sonra başlayabilir.
+        {supportChecked && (
+          <> Destek kontrolü bir model değerlendirmesidir ve yanılabilir; sorunun doğruluğunu garanti etmez.</>
+        )}
       </p>
     </div>
   );
@@ -38,6 +44,8 @@ export function QuestionList({ result }: { result: QuestionsResponse }) {
  *  Özetten ayrı bir istektir: ikisi de OpenAI'ya gider ve ücretlidir. */
 export default function QuestionsSection({ url }: { url: string }) {
   const [state, setState] = useState<State>({ phase: "idle" });
+  // Varsayılan kapalı: açıkken soru sayısı kadar ek, ücretli model çağrısı yapılır
+  const [checkSupport, setCheckSupport] = useState(false);
   const controllerRef = useRef<AbortController | null>(null);
 
   // Bölüm kapanırsa (ör. yeni özet istenirse) süren isteği iptal et
@@ -53,7 +61,9 @@ export default function QuestionsSection({ url }: { url: string }) {
     setState({ phase: "loading" }); // eski sorular ve hata ekrandan kalkar
 
     try {
-      const result = await getQuestions({ url }, { signal: controller.signal });
+      // Kapalıyken alan hiç gönderilmez; istek eskisiyle birebir aynı kalır
+      const request = checkSupport ? { url, check_support: true } : { url };
+      const result = await getQuestions(request, { signal: controller.signal });
       setState({ phase: "success", result });
     } catch (err) {
       if (controller.signal.aborted) return;
@@ -64,9 +74,20 @@ export default function QuestionsSection({ url }: { url: string }) {
   return (
     <section className="questions" aria-labelledby="questions-title">
       <h2 id="questions-title">Alıştırma soruları</h2>
-      <button type="button" className="primary" onClick={generate} disabled={loading}>
-        {loading ? "Sorular hazırlanıyor..." : state.phase === "success" ? "Yeniden soru üret" : "Soruları üret"}
-      </button>
+      <div className="question-controls">
+        <button type="button" className="primary" onClick={generate} disabled={loading}>
+          {loading ? "Sorular hazırlanıyor..." : state.phase === "success" ? "Yeniden soru üret" : "Soruları üret"}
+        </button>
+        <label className="support-toggle">
+          <input
+            type="checkbox"
+            checked={checkSupport}
+            onChange={(e) => setCheckSupport(e.target.checked)}
+            disabled={loading} // istek sürerken değiştirilemez
+          />{" "}
+          Alıntı-cevap destek kontrolünü de çalıştır (soru sayısı kadar ek model çağrısı yapar)
+        </label>
+      </div>
 
       <div aria-live="polite">
         {loading && <p className="muted">Sorular hazırlanıyor... Video uzunsa bu birkaç dakika sürebilir.</p>}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { QuestionOut } from "@/lib/api";
+import type { QuestionOut, SupportLabel, SupportOut } from "@/lib/api";
 import { formatTimestamp, youtubeTimeUrl } from "@/lib/format";
 
 const LETTERS = ["A", "B", "C", "D"];
@@ -68,6 +68,8 @@ export function QuestionView({ question: q, index, videoId, selected, onSelect }
                 : "Alıntı transkriptte bulunamadı."}
             </p>
             <blockquote>{q.source_quote}</blockquote>
+            {/* Yalnızca destek kontrolü açıkken gelir; cevap açılmadan görünmez çünkü gerekçe cevabı içerebilir */}
+            {q.support && <SupportVerdict support={q.support} />}
             <p className="source-time">
               Kaynak süresi:{" "}
               {q.source_start_seconds !== null ? (
@@ -87,6 +89,46 @@ export function QuestionView({ question: q, index, videoId, selected, onSelect }
         </div>
       )}
     </article>
+  );
+}
+
+// Etiketler renk ve metinle (ve simgeyle) ayrılır; yalnızca renge dayanılmaz
+const SUPPORT_TEXT: Record<SupportLabel, { cls: string; mark: string; text: string; showReason: boolean }> = {
+  destekliyor: { cls: "support-yes", mark: "✓", text: "Model değerlendirmesi: alıntı cevabı destekliyor", showReason: true },
+  kısmen: { cls: "support-partial", mark: "◐", text: "Model değerlendirmesi: alıntı cevabı kısmen destekliyor", showReason: true },
+  desteklemiyor: { cls: "support-no", mark: "✗", text: "Model değerlendirmesi: alıntı cevabı desteklemiyor", showReason: true },
+  "kontrol edilmedi": {
+    cls: "support-none",
+    mark: "–",
+    text: "Model değerlendirmesi yapılmadı (kontrol edilmedi): alıntı transkriptte bulunamadığı için model çağrılmadı.",
+    showReason: false,
+  },
+  "kontrol edilemedi": {
+    cls: "support-none",
+    mark: "!",
+    text: "Model değerlendirmesi alınamadı (kontrol edilemedi): model çağrısı başarısız oldu ya da geçersiz yanıt verdi.",
+    showReason: false,
+  },
+};
+
+function SupportVerdict({ support }: { support: SupportOut }) {
+  // Backend yeni bir etiket eklerse bilinmeyen etiket olduğu gibi gösterilir
+  const info = SUPPORT_TEXT[support.label] ?? {
+    cls: "support-none",
+    mark: "?",
+    text: `Model değerlendirmesi: ${support.label}`,
+    showReason: true,
+  };
+  return (
+    <div className={`support ${info.cls}`}>
+      <p className="support-label">
+        <span className="support-mark" aria-hidden="true">
+          {info.mark}
+        </span>{" "}
+        {info.text}
+      </p>
+      {info.showReason && support.reason && <p className="support-reason">{support.reason}</p>}
+    </div>
   );
 }
 

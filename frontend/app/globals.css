@@ -10,6 +10,8 @@
   --down-bg: #ffebe9;
   --checking: #59636e;
   --checking-bg: #f6f8fa;
+  --warn: #9a6700;
+  --warn-bg: #fff8c5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +26,8 @@
     --down-bg: #2d1214;
     --checking: #9198a1;
     --checking-bg: #151b23;
+    --warn: #d29922;
+    --warn-bg: #2b2111;
   }
 }
 
@@ -435,4 +439,77 @@ button.primary:disabled {
 .source-time a {
   color: inherit;
   font-variant-numeric: tabular-nums;
+}
+
+/* "Soruları üret" düğmesi ve destek kontrolü onay kutusu */
+.question-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.support-toggle {
+  display: inline-flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.support-toggle:has(input:disabled) {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* Model değerlendirmesi: renk + simge + metin */
+.support {
+  margin: 6px 0;
+  padding: 6px 10px;
+  border-left: 3px solid var(--border);
+  border-radius: 4px;
+}
+
+.support p {
+  margin: 0;
+}
+
+.support-label {
+  font-weight: 600;
+}
+
+.support-reason {
+  font-size: 0.85rem;
+}
+
+.support-yes {
+  border-color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.support-yes .support-label {
+  color: var(--ok);
+}
+
+.support-partial {
+  border-color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.support-partial .support-label {
+  color: var(--warn);
+}
+
+.support-no {
+  border-color: var(--down);
+  background: var(--down-bg);
+}
+
+.support-no .support-label {
+  color: var(--down);
+}
+
+.support-none {
+  border-style: dashed;
+  color: var(--muted);
 }
