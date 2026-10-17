@@ -29,6 +29,20 @@ export interface QuestionsRequest {
   url: string;
   count?: number; // 1-20, backend varsayılanı 5
   transcript_mode?: TranscriptMode; // backend varsayılanı "clean"
+  // true ise her doğrulanmış soru için ayrı bir (ücretli) model çağrısıyla alıntının
+  // doğru cevabı destekleyip desteklemediği sorulur; backend varsayılanı false
+  check_support?: boolean;
+}
+
+/** destekliyor / kısmen / desteklemiyor: modelin değerlendirmesi.
+ *  kontrol edilmedi: alıntı transkriptte bulunamadığı için çağrı yapılmadı.
+ *  kontrol edilemedi: çağrı başarısız oldu ya da model geçersiz yanıt verdi. */
+export type SupportLabel = "destekliyor" | "kısmen" | "desteklemiyor" | "kontrol edilmedi" | "kontrol edilemedi";
+
+/** Alıntı-cevap destek kontrolü. Bir model değerlendirmesidir; kesin doğru değildir. */
+export interface SupportOut {
+  label: SupportLabel;
+  reason: string; // en fazla bir cümlelik gerekçe
 }
 
 export interface QuestionOut {
@@ -42,6 +56,8 @@ export interface QuestionOut {
   source_start_seconds: number | null;
   verified: boolean; // alıntı transkriptte bulundu mu (sorunun doğruluğunu göstermez)
   quote_match: "exact" | "trimmed" | null;
+  // Yalnızca check_support=true iken gelir; kapalıyken anahtar yanıtta hiç yoktur
+  support?: SupportOut;
 }
 
 export interface QuestionsResponse {
@@ -53,6 +69,8 @@ export interface QuestionsResponse {
   returned_count: number;
   verified_count: number;
   questions: QuestionOut[];
+  // Yalnızca check_support=true iken gelir: destek kontrolünde kullanılan istem sürümü
+  support_prompt_version?: string;
 }
 
 /** Hatanın türü: arayüz her birine ayrı, sade bir Türkçe mesaj gösterir. */
