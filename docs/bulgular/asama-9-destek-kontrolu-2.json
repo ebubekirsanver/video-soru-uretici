@@ -1,0 +1,142 @@
+{
+  "experiment": "asama-9-destek-kontrolu-2",
+  "note": "Model değerlendirmesidir, kesin doğru değildir. İlk çalıştırmanın sonucu, değiştirilmeden.",
+  "started_at": "2026-10-17T18:45:54+03:00",
+  "finished_at": "2026-10-17T18:46:05+03:00",
+  "model": "gpt-4o-mini",
+  "support_prompt_version": "support-v1",
+  "code_commit": "996f65359f1163f17bf9ae78e059cb75106b3d71",
+  "prompt_files_sha256": {
+    "support_v1_system.txt": "412fe5b777b9a88269a743223b8b98f3d054191648eed5586260617f42aa8204",
+    "support_v1_user.txt": "a1180eb438e4341aa763e82c18160236d03b8fa8ff64fe2e958ae57794feef4f"
+  },
+  "source_files": [
+    {
+      "name": "asama-6-test-2-kemosentez.json",
+      "sha256": "0ef6daf96267e5193dcd6187b5832f2a91eec2f6ebdd75011e333546d2ffe72f"
+    },
+    {
+      "name": "asama-6-test-2-tarih.json",
+      "sha256": "6f79b586f03005c7237e4422061b3ec27af0c595e4b0c7623a9470c01ae1598a"
+    }
+  ],
+  "results": [
+    {
+      "key": "kemosentez S1",
+      "video_id": "109kCbVtU1U",
+      "source_file": "asama-6-test-2-kemosentez.json",
+      "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretimi gerçekleştirir?",
+      "correct_answer": "Kimyasal enerji",
+      "source_quote": "kemosentez yapan canlılar için ne diyoruz? Kimyasal bir enerji kullanılıyor ve buna bağlı olarak da besin üretimi gerçekleşiyor.",
+      "quote_match": "exact",
+      "model_quote_available": false,
+      "label": "destekliyor",
+      "reason": "Alıntıda kimyasal enerji kullanıldığı ve besin üretimi gerçekleştiği belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda kimyasal enerji kullanıldığı ve besin üretimi gerçekleştiği belirtiliyor.\"}"
+    },
+    {
+      "key": "kemosentez S2",
+      "video_id": "109kCbVtU1U",
+      "source_file": "asama-6-test-2-kemosentez.json",
+      "question": "Hidrotermal bacaların bulunduğu ortamda hangi canlılar yaşayabilir?",
+      "correct_answer": "Kemosentetik canlılar",
+      "source_quote": "Bu nedenle okyanus derinliklerinde özellikle bu bacaların etrafında kemosentez yapan bakterilerle beslenen farklı biyolojik canlılara rastlanabilir.",
+      "quote_match": "exact",
+      "model_quote_available": false,
+      "label": "destekliyor",
+      "reason": "Alıntıda kemosentez yapan bakterilerle beslenen canlıların varlığı belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda kemosentez yapan bakterilerle beslenen canlıların varlığı belirtiliyor.\"}"
+    },
+    {
+      "key": "kemosentez S3",
+      "video_id": "109kCbVtU1U",
+      "source_file": "asama-6-test-2-kemosentez.json",
+      "question": "Kemosentez sırasında hangi madde açığa çıkmaz?",
+      "correct_answer": "Oksijen",
+      "source_quote": "oksijen üretilmez demiştim.",
+      "quote_match": "trimmed",
+      "model_quote_available": false,
+      "label": "destekliyor",
+      "reason": "Alıntıda oksijenin üretilmediği belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda oksijenin üretilmediği belirtiliyor.\"}"
+    },
+    {
+      "key": "kemosentez S4",
+      "video_id": "109kCbVtU1U",
+      "source_file": "asama-6-test-2-kemosentez.json",
+      "question": "Kemosentetik canlıların hücre yapısı nedir?",
+      "correct_answer": "Prokaryot",
+      "source_quote": "Kemosentetik canlıların tamamının prokaryot olduğunu unutma.",
+      "quote_match": "exact",
+      "model_quote_available": false,
+      "label": "destekliyor",
+      "reason": "Alıntı, kemosentetik canlıların prokaryot olduğunu açıkça belirtiyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntı, kemosentetik canlıların prokaryot olduğunu açıkça belirtiyor.\"}"
+    },
+    {
+      "key": "tarih S1",
+      "video_id": "aaCHLYO3Fzg",
+      "source_file": "asama-6-test-2-tarih.json",
+      "question": "Malazgirt Savaşı hangi yıllarda gerçekleşmiştir?",
+      "correct_answer": "1071",
+      "source_quote": "Bu savaş 1071'de gerçekleşti",
+      "quote_match": "exact",
+      "model_quote_available": false,
+      "label": "destekliyor",
+      "reason": "Alıntıda savaşın 1071'de gerçekleştiği belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda savaşın 1071'de gerçekleştiği belirtiliyor.\"}"
+    },
+    {
+      "key": "tarih S2",
+      "video_id": "aaCHLYO3Fzg",
+      "source_file": "asama-6-test-2-tarih.json",
+      "question": "Danışmentlilerin kurulduğu bölgeler arasında hangisi yer almaz?",
+      "correct_answer": "İzmir",
+      "source_quote": "Tokat, Amasya, Kayseri, Sivas, Malatya bu bölgelere yayılmış bir beylik.",
+      "quote_match": "trimmed",
+      "model_quote_available": false,
+      "label": "desteklemiyor",
+      "reason": "Alıntıda İzmir ile ilgili bir bilgi bulunmamaktadır.",
+      "model_raw": "{\"label\": \"desteklemiyor\", \"reason\": \"Alıntıda İzmir ile ilgili bir bilgi bulunmamaktadır.\"}"
+    },
+    {
+      "key": "tarih S3",
+      "video_id": "aaCHLYO3Fzg",
+      "source_file": "asama-6-test-2-tarih.json",
+      "question": "Kösedağ Savaşı'nda Türkiye Selçuklu Devleti kime karşı savaşmıştır?",
+      "correct_answer": "Moğollar",
+      "source_quote": "Türkiye Selçuklu Devleti ile Moğollar arasında yapıldı.",
+      "quote_match": "trimmed",
+      "model_quote_available": false,
+      "label": "destekliyor",
+      "reason": "Alıntıda Türkiye Selçuklu Devleti ile Moğollar arasında savaş yapıldığı belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda Türkiye Selçuklu Devleti ile Moğollar arasında savaş yapıldığı belirtiliyor.\"}"
+    },
+    {
+      "key": "tarih S4",
+      "video_id": "aaCHLYO3Fzg",
+      "source_file": "asama-6-test-2-tarih.json",
+      "question": "Mir Kefalon Savaşı'nın önemi nedir?",
+      "correct_answer": "Anadolu'dan Türklerin atılma ihtimalini ortadan kaldırması",
+      "source_quote": "Bu savaşta Türkiye Selçuklu Devleti Bizans'ı yenince Anadolu'dan Türklerin atılamayacağı kesinleşmişti.",
+      "quote_match": "exact",
+      "model_quote_available": false,
+      "label": "destekliyor",
+      "reason": "Alıntıda Anadolu'dan Türklerin atılamayacağı kesinleştiği belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda Anadolu'dan Türklerin atılamayacağı kesinleştiği belirtiliyor.\"}"
+    },
+    {
+      "key": "tarih S5",
+      "video_id": "aaCHLYO3Fzg",
+      "source_file": "asama-6-test-2-tarih.json",
+      "question": "1. Haçlı Seferi'nin temel amacı nedir?",
+      "correct_answer": "Kudüs'ü ele geçirmek",
+      "source_quote": "Temel dini amaçları neymiş? Kudüs'ü ele geçirmekmiş.",
+      "quote_match": "exact",
+      "model_quote_available": false,
+      "label": "destekliyor",
+      "reason": "Alıntıda Kudüs'ü ele geçirmenin temel dini amacı olduğu belirtiliyor.",
+      "model_raw": "{\"label\": \"destekliyor\", \"reason\": \"Alıntıda Kudüs'ü ele geçirmenin temel dini amacı olduğu belirtiliyor.\"}"
+    }
+  ]
+}
