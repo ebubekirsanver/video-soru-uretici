@@ -323,3 +323,33 @@ Kod tarafındaki doğrulama yalnızca alıntının transkriptte geçtiğini söy
   - Sorular bağımsız değil: aynı videodan birden çok soru; Deneme 1 ve 2'nin 9 sorusu aynı kemosentez videosundan.
   - Her deneme ve her video tek çalıştırma.
 - **Sonraki adımlar:** Bir sonraki destek kontrolü denemesinden önce elle etiketleme ölçütü ikili olarak (doğrudan destekliyor / değil) önceden belirlenecek.
+
+## Aşama 12e · Destek kontrolü arayüzde (2026-10-17)
+
+Aşama 12'nin son parçası; yalnızca frontend değişti, backend'e dokunulmadı (`check_support` Aşama 9'dan beri `/api/questions`'ta var).
+
+- **İstek** (`frontend/lib/api.ts`):
+  - `QuestionsRequest`'e isteğe bağlı `check_support`, `QuestionOut`'a isteğe bağlı `support: {label, reason}`, yanıta isteğe bağlı `support_prompt_version` eklendi. Türler `backend/app/schemas.py` ile aynı.
+  - Kontrol kapalıyken alan istekte hiç gönderilmez; yanıtta da bu alanlar yoktur.
+- **Onay kutusu** (`frontend/app/questions-section.tsx`):
+  - "Soruları üret" yanında, varsayılan kapalı: "Alıntı-cevap destek kontrolünü de çalıştır (soru sayısı kadar ek model çağrısı yapar)".
+  - İşaretliyse istek `check_support: true` ile gider. Soru isteği sürerken kutu kilitlenir.
+- **Kart** (`frontend/app/question-card.tsx`):
+  - Model değerlendirmesi yalnızca şık seçildikten sonra, kaynak alıntısının altında gösterilir: "Model değerlendirmesi: alıntı cevabı destekliyor / kısmen destekliyor / desteklemiyor" ve modelin gerekçesi. Seçimden önce görünmez, çünkü gerekçe doğru cevabı içerebilir.
+  - Üç etiket renk, simge (✓ ◐ ✗) ve metinle ayrılır; yalnızca renge dayanılmaz.
+  - "kontrol edilmedi" (alıntı bulunamadı, model çağrılmadı) ve "kontrol edilemedi" (çağrı ya da yanıt geçersiz) ayrı mesajlardır; bu ikisinde gerekçe gösterilmez.
+- **Liste:** Kontrol açıkken üst satırda "Destek kontrolü: support-v1" yazar; dürüstlük notuna şu cümle eklenir: "Destek kontrolü bir model değerlendirmesidir ve yanılabilir; sorunun doğruluğunu garanti etmez."
+- Yeni paket eklenmedi.
+- Doğrulama (gerçek OpenAI çağrısı yapılmadı, sunucu başlatılmadı ya da kapatılmadı):
+  - `npm run typecheck` ve `npm run build` hatasız; `pytest` → 207 test geçti (backend değişmedi).
+  - Örnek nesneler `QuestionsRequest` / `QuestionsResponse` / `SupportOut` tipleriyle tip kontrolünden geçti; bilerek hatalı yazılan geçersiz etiket ve metin `check_support` yakalandı. Geçici dosya commit'lenmedi.
+  - Render kontrolü, 57 kontrol geçti:
+    - Kontrol kapalı: değişiklikten önceki (git'teki) ve yeni bileşen, gerçek bir soru yanıtıyla (`genelleme-1-matematik.json`) 5 sorunun her biri için seçim yapılmadan, doğru ve yanlış seçimde birebir aynı HTML'i üretti; liste HTML'i de aynı.
+    - Kontrol açık: gerçek sorular ve Deneme 3'ün gerçek model etiketleri/gerekçeleriyle; üç etiket ile "kontrol edilmedi" seçimden önce görünmüyor, seçimden sonra doğru sınıf ve metinle, alıntının altında görünüyor. Gerçek verilerde "kontrol edilemedi" olmadığı için o durum gerçek bir soruya elle yazılmış örnek etiketle denendi.
+    - Liste: ek not ve istem sürümü yalnızca kontrol açıkken var.
+    - Onay kutusu varsayılan olarak işaretsiz ve kilitsiz.
+- Bilinen sınırlar:
+  - Gerçek tıklama, onay kutusunun istek sırasında kilitlenmesi ve ekran görünümü (renkler, karanlık tema, dar ekran) tarayıcıda denenmedi.
+  - Kontrol açık gerçek bir yanıtla (yeni `/api/questions` çağrısıyla) denenmedi.
+  - Model değerlendirmesinin isabeti ölçülmedi (bkz. Aşama 9 denemeleri).
+  - Frontend için otomatik test yok.

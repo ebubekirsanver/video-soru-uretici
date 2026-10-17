@@ -61,4 +61,5 @@ Aşama sırası ve içeriği ilerledikçe güncellenebilir.
   - Sınırlar: tek etiketleyen; sorular bağımsız değil (aynı videodan birden çok soru, Deneme 1 ve 2'de aynı kemosentez videosu); her deneme tek çalıştırma.
   - **Yapılmadı:** sadakat (faithfulness), Bloom düzeyi, yazım hatası ve tekrar kontrolü.
 - **Sonraki adımlar:** Bir sonraki destek kontrolü denemesinden önce elle etiketleme ölçütü ikili olarak (doğrudan destekliyor / değil) önceden belirlenecek.
-- Aşama 7, 8, 10 ve 11 yapılmadı; Aşama 3 ve 4 ertelenmiş durumda; Aşama 12'de 12e yapılmadı.
+- **12e · Destek kontrolü arayüzde: yapıldı** (2026-10-17). "Soruları üret" yanında varsayılan kapalı onay kutusu (`check_support`); model değerlendirmesi şık seçildikten sonra kartta gösterilir. Yalnızca frontend değişti. Tarayıcıda gözle doğrulanması kullanıcının onayını bekliyor.
+- Aşama 7, 8, 10 ve 11 yapılmadı; Aşama 3 ve 4 ertelenmiş durumda.
