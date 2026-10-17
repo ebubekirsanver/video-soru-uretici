@@ -298,3 +298,28 @@ Kod tarafındaki doğrulama yalnızca alıntının transkriptte geçtiğini söy
   - Elle etiket ile model etiketi 5 sorunun 3'ünde eşleşti (Soru 1, 3, 4), 2'sinde farklı (Soru 2: elle kısmen, model desteklemiyor; Soru 5: elle destekliyor, model desteklemiyor).
   - İsabet iddiası yok: 5 soru, tek video, tek etiketleyen, modelin tek çalıştırması.
   - Aynı gün, 12d bulgusundaki Soru 2 ifadesi elle etiketle çelişmesin diye düzeltildi: "alıntı konuyla ilgili ama doğru cevabı doğrudan söylemiyor (elle etiket: kısmen)".
+
+## Genelleme denemesi 1 ve Aşama 9 destek kontrolü denemeleri 2-3 (2026-10-17)
+
+- **Genelleme denemesi 1** ([docs/bulgular/genelleme-denemesi-1.md](bulgular/genelleme-denemesi-1.md)):
+  - 4 yeni video: matematik `edSvMQ77TmU`, edebiyat `fgOxbhEMnQQ`, python `CEr_UiR4Gvk`, ingilizce `FetnCoTS9qY`. Ayarlar: `questions-v1`, `check_support: false`; video başına tek çalıştırma.
+  - 20 soru üretildi, 18'inin alıntısı transkriptte bulundu (matematik 4/5, edebiyat 5/5, python 5/5, ingilizce 4/5). Doğrulanamayanlar: matematik S3, ingilizce S5.
+  - Ham kayıtlar `docs/bulgular/genelleme-1-*.json` olarak kopyalandı. Kopyalamadan önce gizli bilgi taraması yapıldı, eşleşme yok.
+  - Yazım gözlemleri: ingilizce transkriptte "used to" 0 kez, "yüz" 25 kez geçiyor. Özet ve konu başlığı "used to", soru metinlerinin beşi "Yüz kalıbı" yazıyor; "yüz" içeren alıntılar bu yazımla transkriptte bulunduğu için doğrulandı. Python transkriptinde "guido One rossum", "mat plot lip", "non python" yazımları var.
+  - Soru kalitesi ve özet doğruluğu ölçülmedi.
+- **Aşama 9 destek kontrolü denemesi 2** ([docs/bulgular/asama-9-destek-kontrolu-2.md](bulgular/asama-9-destek-kontrolu-2.md)):
+  - Test 2'nin 9 sorusu yeniden üretilmeden `support-v1` ile kontrol edildi (9 çağrı, tek çalıştırma).
+  - Elle etiketler model çağrısından önce commit'lendi. Dosyada dürüstlük notu var: iki etiket önceki bulgu notlarına dikkat çekilince "destekliyor"dan "kısmen"e değiştirildi.
+  - 9 soruda 7 eşleşme, 2 farklı.
+- **Aşama 9 destek kontrolü denemesi 3** ([docs/bulgular/asama-9-destek-kontrolu-3.md](bulgular/asama-9-destek-kontrolu-3.md)):
+  - Genelleme denemesinin 18 doğrulanmış sorusu yeniden üretilmeden kontrol edildi (18 çağrı, tek çalıştırma). Çalıştırmadan önce betikteki çağrı sayacı sahte istemcilerle denetlendi.
+  - Elle etiketler (14 destekliyor, 3 desteklemiyor, 1 belirsiz) model çağrısından önce commit'lendi.
+  - Sayıma giren 17 soruda 11 eşleşme, 6 farklı. ingilizce S3 (elle "belirsiz") sayım dışı.
+- **Deneme 1+2+3 birleşik:** sayıma giren 31 soruda 21 eşleşme, 10 farklı.
+- Her denemenin betiği çalıştırıldığı hâliyle, sonucu değiştirilmeden kaydedildi. `support-v1` istemi üç denemede de aynı (istem dosyalarının SHA256 özetleri aynı).
+- **Aşama 9'da yapılanlar:** yalnızca alıntı-cevap destek kontrolü (3 deneme). Sadakat (faithfulness), Bloom, yazım hatası ve tekrar kontrolü yapılmadı.
+- Sınırlar:
+  - Tek etiketleyen.
+  - Sorular bağımsız değil: aynı videodan birden çok soru; Deneme 1 ve 2'nin 9 sorusu aynı kemosentez videosundan.
+  - Her deneme ve her video tek çalıştırma.
+- **Sonraki adımlar:** Bir sonraki destek kontrolü denemesinden önce elle etiketleme ölçütü ikili olarak (doğrudan destekliyor / değil) önceden belirlenecek.

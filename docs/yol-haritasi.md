@@ -49,3 +49,16 @@ Aşama sırası ve içeriği ilerledikçe güncellenebilir.
   - **İlk deneme yapıldı** ([destek kontrolü denemesi 1](bulgular/asama-9-destek-kontrolu-1.md)): Aşama 12d testinin 5 sorusu yeniden üretilmeden, `support-v1` ile tek çalıştırmayla kontrol edildi. Elle etiketler model çağrısından önce verildi. Elle etiket ile model etiketi 5 sorunun 3'ünde eşleşti, 2'sinde farklı. İsabet iddiası yok: 5 soru, tek etiketleyen, tek çalıştırma.
   - **Yapılmadı:** sadakat (faithfulness) kontrolü, Bloom düzeyi kontrolü, yazım hatası kontrolü, tekrar kontrolü (Aşama 6'daki birebir metin tekrarı ayıklama dışında).
 - Aşama 7, 8, 10 ve 11 yapılmadı.
+
+## Durum güncellemesi (2026-10-17)
+
+- **Genelleme denemesi 1** ([bulgu](bulgular/genelleme-denemesi-1.md)): 4 yeni video (matematik, edebiyat, python, ingilizce), video başına tek çalıştırma, 20 soru, 18'inin alıntısı transkriptte bulundu (matematik 4/5, edebiyat 5/5, python 5/5, ingilizce 4/5). Yazım gözlemleri kaydedildi: ingilizce transkriptte "used to" 0, "yüz" 25 kez geçiyor; özet "used to", soru metinleri "Yüz kalıbı" yazıyor. Python transkriptinde "guido One rossum", "mat plot lip", "non python" yazımları var.
+- **Aşama 9: kısmen — yalnızca alıntı-cevap destek kontrolü (3 deneme).** Her denemede elle etiketler model çağrısından önce verilip commit'lendi; model tek çalıştırmayla, `support-v1` ile etiketledi.
+  - Deneme 1 ([bulgu](bulgular/asama-9-destek-kontrolu-1.md)): 5 soruda 3 eşleşme, 2 farklı.
+  - Deneme 2 ([bulgu](bulgular/asama-9-destek-kontrolu-2.md)): 9 soruda 7 eşleşme, 2 farklı.
+  - Deneme 3 ([bulgu](bulgular/asama-9-destek-kontrolu-3.md)): genelleme denemesinin 18 doğrulanmış sorusu; sayıma giren 17 soruda 11 eşleşme, 6 farklı; ingilizce S3 (elle "belirsiz") sayım dışı.
+  - Birleşik: sayıma giren 31 soruda 21 eşleşme, 10 farklı.
+  - Sınırlar: tek etiketleyen; sorular bağımsız değil (aynı videodan birden çok soru, Deneme 1 ve 2'de aynı kemosentez videosu); her deneme tek çalıştırma.
+  - **Yapılmadı:** sadakat (faithfulness), Bloom düzeyi, yazım hatası ve tekrar kontrolü.
+- **Sonraki adımlar:** Bir sonraki destek kontrolü denemesinden önce elle etiketleme ölçütü ikili olarak (doğrudan destekliyor / değil) önceden belirlenecek.
+- Aşama 7, 8, 10 ve 11 yapılmadı; Aşama 3 ve 4 ertelenmiş durumda; Aşama 12'de 12e yapılmadı.
