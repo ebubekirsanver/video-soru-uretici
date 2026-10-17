@@ -353,3 +353,20 @@ Aşama 12'nin son parçası; yalnızca frontend değişti, backend'e dokunulmad�
   - Kontrol açık gerçek bir yanıtla (yeni `/api/questions` çağrısıyla) denenmedi.
   - Model değerlendirmesinin isabeti ölçülmedi (bkz. Aşama 9 denemeleri).
   - Frontend için otomatik test yok.
+- Sonradan: tarayıcıda gözle doğrulandı (kullanıcı), kısmen.
+  - Görülenler:
+    - Onay kutusu varsayılan olarak işaretsiz.
+    - Kutu kapalıyken kartlarda model değerlendirmesi ve üst satırda "Destek kontrolü" yok.
+    - Kutu işaretliyken üst satırda "Destek kontrolü: support-v1" görünüyor.
+    - Kutu işaretliyken şık seçilmeden önce kartlarda model değerlendirmesi görünmüyor.
+    - Kemosentez videosunda şık seçildikten sonra alıntının altında "Model değerlendirmesi: alıntı cevabı destekliyor" ve gerekçe göründü (birkaç soruda).
+    - Doğrulanamayan bir soruda şık seçilince "Alıntı transkriptte bulunamadı", modelin alıntısı, "kontrol edilmedi: alıntı transkriptte bulunamadığı için model çağrılmadı" ve "Kaynak süresi: yok" göründü.
+  - Doğrulanmadı:
+    - "kısmen" ve "desteklemiyor" hâllerinin gerçek yanıtta görünüşü.
+    - "kontrol edilemedi" hâli.
+    - Kutunun istek sırasında kilitlenmesi.
+    - Sayfa altındaki dürüstlük notu.
+    - Karanlık tema dışındaki görünümler ve dar ekran.
+  - Gözlem:
+    - Aynı videoda üç ayrı çalıştırmada sorular farklı çıktı; birinde 5 yerine 4 soru döndü (3'ü doğrulanmış).
+    - Doğrulanamayan bir soruda alıntı "350-400 S D" yazıyor, soru ve cevapta "350-400 °C" yazıyor. Kayıttaki asıl neden henüz incelenmedi.
