@@ -1,0 +1,144 @@
+{
+  "record_version": 3,
+  "saved_at": "2026-10-17T19:03:13+03:00",
+  "endpoint": "/api/questions",
+  "request": {
+    "url": "https://youtu.be/fgOxbhEMnQQ",
+    "count": 5,
+    "transcript_mode": "clean",
+    "check_support": false
+  },
+  "response": {
+    "video_id": "fgOxbhEMnQQ",
+    "transcript_mode": "clean",
+    "model": "gpt-4o-mini",
+    "prompt_version": "questions-v1",
+    "requested_count": 5,
+    "returned_count": 5,
+    "verified_count": 5,
+    "questions": [
+      {
+        "question": "Milli Edebiyat Dönemi'nin temel özelliklerinden biri nedir?",
+        "options": [
+          "Arapça ve Farsça sözcüklerin kullanımı",
+          "Sanat için sanat anlayışı",
+          "Halka yönelme",
+          "Sadece İstanbul Türkçesi kullanılması"
+        ],
+        "correct_index": 2,
+        "explanation": "Milli Edebiyat Dönemi, halka yönelen bir edebiyat anlayışına sahiptir.",
+        "source_quote": "Milli Edebiyat yani milliyetçi bir edebiyat. Kendi toprağımızdan doğan, halka yönelen bir edebiyat.",
+        "source_start_seconds": 13.44,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Milli Edebiyat Dönemi'nde hangi dil anlayışı benimsenmiştir?",
+        "options": [
+          "Fransızca",
+          "Arapça",
+          "Sade Türkçe",
+          "Ağır ve süslü dil"
+        ],
+        "correct_index": 2,
+        "explanation": "Milli Edebiyat Dönemi'nde sade Türkçe kullanılması amaçlanmıştır.",
+        "source_quote": "Sade Türkçe, ağır ve süslü dilden kaçınılmış, halka yakın, anlaşılır bir dil kullanılacak.",
+        "source_start_seconds": 83.28,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Milli Edebiyat Dönemi'nde hangi akım ön plana çıkmıştır?",
+        "options": [
+          "Türkçülük",
+          "İslamcılık",
+          "Osmanlıcılık",
+          "Batıcılık"
+        ],
+        "correct_index": 0,
+        "explanation": "Milli Edebiyat Dönemi'nde Türkçülük akımı ön plana çıkmıştır.",
+        "source_quote": "Türkçülük ise bütün Türkleri bir araya toplamaktır, kültür, dil ve fikir birliği sağlamaktır.",
+        "source_start_seconds": 492.36,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Milli Edebiyat Dönemi'nde eserlerinde Anadolu insanını konu alan yazar kimdir?",
+        "options": [
+          "Ömer Seyfettin",
+          "Halide Edip Adıvar",
+          "Refik Halit Karay",
+          "Yakup Kadri Karaosmanoğlu"
+        ],
+        "correct_index": 2,
+        "explanation": "Refik Halit Karay, eserlerinde Anadolu'ya yönelmiştir.",
+        "source_quote": "Refik Halit Karay Anadolu'ya yönelecek ve Memleket Hikayelerini yazacak.",
+        "source_start_seconds": 697.64,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Milli Edebiyat Dönemi'nde hangi tür hikaye yazılmaktadır?",
+        "options": [
+          "Durum hikayesi",
+          "Roman",
+          "Kısa hikaye",
+          "Olay hikayesi"
+        ],
+        "correct_index": 3,
+        "explanation": "Ömer Seyfettin, Milli Edebiyat Dönemi'nde olay hikayeleri yazmıştır.",
+        "source_quote": "Olay hikayesi deyince aklımıza Ömer Seyfettin, durum hikayesi deyince de Memduh Şevket Esendal gelmesi lazım.",
+        "source_start_seconds": 622.92,
+        "verified": true,
+        "quote_match": "exact"
+      }
+    ]
+  },
+  "quote_audit": [
+    {
+      "index": 1,
+      "question": "Milli Edebiyat Dönemi'nin temel özelliklerinden biri nedir?",
+      "model_quote": "[0] Milli Edebiyat yani milliyetçi bir edebiyat. Kendi toprağımızdan doğan, halka yönelen bir edebiyat.",
+      "source_quote": "Milli Edebiyat yani milliyetçi bir edebiyat. Kendi toprağımızdan doğan, halka yönelen bir edebiyat.",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 2,
+      "question": "Milli Edebiyat Dönemi'nde hangi dil anlayışı benimsenmiştir?",
+      "model_quote": "[94] Sade Türkçe, ağır ve süslü dilden kaçınılmış, halka yakın, anlaşılır bir dil kullanılacak.",
+      "source_quote": "Sade Türkçe, ağır ve süslü dilden kaçınılmış, halka yakın, anlaşılır bir dil kullanılacak.",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 3,
+      "question": "Milli Edebiyat Dönemi'nde hangi akım ön plana çıkmıştır?",
+      "model_quote": "[468] Türkçülük ise bütün Türkleri bir araya toplamaktır, kültür, dil ve fikir birliği sağlamaktır.",
+      "source_quote": "Türkçülük ise bütün Türkleri bir araya toplamaktır, kültür, dil ve fikir birliği sağlamaktır.",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 4,
+      "question": "Milli Edebiyat Dönemi'nde eserlerinde Anadolu insanını konu alan yazar kimdir?",
+      "model_quote": "[686] Refik Halit Karay Anadolu'ya yönelecek ve Memleket Hikayelerini yazacak.",
+      "source_quote": "Refik Halit Karay Anadolu'ya yönelecek ve Memleket Hikayelerini yazacak.",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 5,
+      "question": "Milli Edebiyat Dönemi'nde hangi tür hikaye yazılmaktadır?",
+      "model_quote": "[622] Olay hikayesi deyince aklımıza Ömer Seyfettin, durum hikayesi deyince de Memduh Şevket Esendal gelmesi lazım.",
+      "source_quote": "Olay hikayesi deyince aklımıza Ömer Seyfettin, durum hikayesi deyince de Memduh Şevket Esendal gelmesi lazım.",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    }
+  ]
+}

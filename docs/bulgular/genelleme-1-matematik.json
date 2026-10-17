@@ -1,0 +1,146 @@
+{
+  "record_version": 3,
+  "saved_at": "2026-10-17T19:01:12+03:00",
+  "endpoint": "/api/questions",
+  "request": {
+    "url": "https://youtu.be/edSvMQ77TmU",
+    "count": 5,
+    "transcript_mode": "clean",
+    "check_support": false
+  },
+  "response": {
+    "video_id": "edSvMQ77TmU",
+    "transcript_mode": "clean",
+    "model": "gpt-4o-mini",
+    "prompt_version": "questions-v1",
+    "requested_count": 5,
+    "returned_count": 5,
+    "verified_count": 4,
+    "questions": [
+      {
+        "question": "Açıortay teoremi neyi ifade eder?",
+        "options": [
+          "Bir açının kollarının oranı",
+          "Bir üçgenin alanını",
+          "Bir üçgenin çevresini",
+          "Bir açının ölçüsünü"
+        ],
+        "correct_index": 0,
+        "explanation": "Açıortay teoremi, bir açının kollarının ayırdığı parçaların oranlarının eşit olduğunu belirtir.",
+        "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit,",
+        "source_start_seconds": 107.68,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "İç açıortay teoremi hangi durumlarda kullanılır?",
+        "options": [
+          "Açıortay çizildiğinde",
+          "İkizkenar üçgenlerde",
+          "Dış açıortay çizildiğinde",
+          "Dik üçgenlerde"
+        ],
+        "correct_index": 0,
+        "explanation": "İç açıortay teoremi, bir açıortay çizildiğinde ve kenar uzunlukları ile ilgili oranlar verildiğinde kullanılır.",
+        "source_quote": "açıortay teoremi aklına gelecek.",
+        "source_start_seconds": 350.28,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Açıortay teoremi ile ilgili oranlar nasıl yazılır?",
+        "options": [
+          "Kenarortay ile",
+          "Kenar uzunlukları ile",
+          "Açı ölçüleri ile",
+          "Dış açı ile"
+        ],
+        "correct_index": 1,
+        "explanation": "Açıortay teoremi, kenar uzunlukları ile oranlar yazılarak uygulanır.",
+        "source_quote": "Birinci kolun birinci parçaya oranı, ikinci kolun ikinci parçaya oranı.",
+        "source_start_seconds": null,
+        "verified": false,
+        "quote_match": null
+      },
+      {
+        "question": "Açıortay teoremi ispatında hangi yöntem önerilmektedir?",
+        "options": [
+          "Dış açı yöntemi",
+          "Kenarortay yöntemi",
+          "Eşlik benzerlik yöntemi",
+          "Dik üçgen yöntemi"
+        ],
+        "correct_index": 2,
+        "explanation": "Açıortay teoreminin ispatında eşlik benzerlik yöntemi kullanılması önerilmektedir.",
+        "source_quote": "bence en anlaşılırı pek çok teoremde olduğu gibi eşlik benzerlik yöntemiyle ispatlamak",
+        "source_start_seconds": 164.48,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Açıortay teoremi uygulandığında hangi oranlar eşit olur?",
+        "options": [
+          "Dış açı uzunlukları",
+          "Kenar uzunlukları",
+          "Kenarortay uzunlukları",
+          "Açı ölçüleri"
+        ],
+        "correct_index": 1,
+        "explanation": "Açıortay teoremi uygulandığında, kenar uzunlukları ile ilgili oranlar eşit olur.",
+        "source_quote": "C'nin X'e oranı B'nin Y'ye oranına",
+        "source_start_seconds": 317.44,
+        "verified": true,
+        "quote_match": "trimmed"
+      }
+    ]
+  },
+  "quote_audit": [
+    {
+      "index": 1,
+      "question": "Açıortay teoremi neyi ifade eder?",
+      "model_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit",
+      "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit,",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 2,
+      "question": "İç açıortay teoremi hangi durumlarda kullanılır?",
+      "model_quote": "Açıortay teoremi aklına gelecek.",
+      "source_quote": "açıortay teoremi aklına gelecek.",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 3,
+      "question": "Açıortay teoremi ile ilgili oranlar nasıl yazılır?",
+      "model_quote": "Birinci kolun birinci parçaya oranı, ikinci kolun ikinci parçaya oranı.",
+      "source_quote": "Birinci kolun birinci parçaya oranı, ikinci kolun ikinci parçaya oranı.",
+      "quote_match": null,
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 4,
+      "question": "Açıortay teoremi ispatında hangi yöntem önerilmektedir?",
+      "model_quote": "Bence en anlaşılırı pek çok teoremde olduğu gibi eşlik benzerlik yöntemiyle ispatlamak.",
+      "source_quote": "bence en anlaşılırı pek çok teoremde olduğu gibi eşlik benzerlik yöntemiyle ispatlamak",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 5,
+      "question": "Açıortay teoremi uygulandığında hangi oranlar eşit olur?",
+      "model_quote": "C'nin X'e oranı B'nin Y'ye oranına eşit.",
+      "source_quote": "C'nin X'e oranı B'nin Y'ye oranına",
+      "quote_match": "trimmed",
+      "trimmed_head": [],
+      "trimmed_tail": [
+        "eşit"
+      ]
+    }
+  ]
+}

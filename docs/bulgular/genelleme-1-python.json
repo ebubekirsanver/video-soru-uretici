@@ -1,0 +1,147 @@
+{
+  "record_version": 3,
+  "saved_at": "2026-10-17T19:04:34+03:00",
+  "endpoint": "/api/questions",
+  "request": {
+    "url": "https://youtu.be/CEr_UiR4Gvk",
+    "count": 5,
+    "transcript_mode": "clean",
+    "check_support": false
+  },
+  "response": {
+    "video_id": "CEr_UiR4Gvk",
+    "transcript_mode": "clean",
+    "model": "gpt-4o-mini",
+    "prompt_version": "questions-v1",
+    "requested_count": 5,
+    "returned_count": 5,
+    "verified_count": 5,
+    "questions": [
+      {
+        "question": "Python hangi yıl yayınlanmıştır?",
+        "options": [
+          "1991",
+          "1994",
+          "2000",
+          "1989"
+        ],
+        "correct_index": 0,
+        "explanation": "Python, 1991 yılında Guido van Rossum tarafından yayınlanmıştır.",
+        "source_quote": "python popüler bir programlama dilidir ve guido One rossum tarafından yaratılmış ve 1991'de yayınlanmıştır",
+        "source_start_seconds": 65.519,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Python hangi sürümünü bu eğitimde kullanacağını belirtmiştir?",
+        "options": [
+          "Python 2.7",
+          "Python 3.11",
+          "Python 3.13",
+          "Python 3.12"
+        ],
+        "correct_index": 2,
+        "explanation": "Eğitimde Python 3.13 sürümünün kullanılacağı belirtilmiştir.",
+        "source_quote": "bu eğitimde kullanacağımız python 3'tür python 3.13 sürümünü kullanacağım",
+        "source_start_seconds": 191.319,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Python ile hangi alanda çalışmalar yapılabilir?",
+        "options": [
+          "Sadece masaüstü yazılımı",
+          "Veri analizi",
+          "Sadece oyun geliştirme",
+          "Sadece web geliştirme"
+        ],
+        "correct_index": 1,
+        "explanation": "Python, veri analizi gibi birçok alanda kullanılabilmektedir.",
+        "source_quote": "python' kullanır bakın pandas non python mat plot lip gibi kütüphaneler sayesinde veri setleri üzerinde kolaylıkla analiz yapılabiliyor",
+        "source_start_seconds": 358.759,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Python'un ilk resmi sürümü ne zaman çıkmıştır?",
+        "options": [
+          "2000",
+          "2008",
+          "1994",
+          "1991"
+        ],
+        "correct_index": 2,
+        "explanation": "Python'un ilk resmi sürümü Ocak 1994'te çıkmıştır.",
+        "source_quote": "ilk res sürümü Ocak 1994'te geldi",
+        "source_start_seconds": 238.159,
+        "verified": true,
+        "quote_match": "trimmed"
+      },
+      {
+        "question": "Python 2'nin son sürümü ne zaman çıkmıştır?",
+        "options": [
+          "2020",
+          "2015",
+          "2008",
+          "2010"
+        ],
+        "correct_index": 3,
+        "explanation": "Python 2'nin son sürümü 2010 yılında çıkmıştır.",
+        "source_quote": "2010'a geldiğimizde python' artık python 2'nin sonuna doğru gelmiş olduk",
+        "source_start_seconds": 255.0,
+        "verified": true,
+        "quote_match": "exact"
+      }
+    ]
+  },
+  "quote_audit": [
+    {
+      "index": 1,
+      "question": "Python hangi yıl yayınlanmıştır?",
+      "model_quote": "Python popüler bir programlama dilidir ve guido One rossum tarafından yaratılmış ve 1991'de yayınlanmıştır.",
+      "source_quote": "python popüler bir programlama dilidir ve guido One rossum tarafından yaratılmış ve 1991'de yayınlanmıştır",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 2,
+      "question": "Python hangi sürümünü bu eğitimde kullanacağını belirtmiştir?",
+      "model_quote": "Bu eğitimde kullanacağımız python 3'tür python 3.13 sürümünü kullanacağım.",
+      "source_quote": "bu eğitimde kullanacağımız python 3'tür python 3.13 sürümünü kullanacağım",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 3,
+      "question": "Python ile hangi alanda çalışmalar yapılabilir?",
+      "model_quote": "Python kullanır bakın pandas non python mat plot lip gibi kütüphaneler sayesinde veri setleri üzerinde kolaylıkla analiz yapılabiliyor.",
+      "source_quote": "python' kullanır bakın pandas non python mat plot lip gibi kütüphaneler sayesinde veri setleri üzerinde kolaylıkla analiz yapılabiliyor",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 4,
+      "question": "Python'un ilk resmi sürümü ne zaman çıkmıştır?",
+      "model_quote": "Python'un ilk res sürümü Ocak 1994'te geldi.",
+      "source_quote": "ilk res sürümü Ocak 1994'te geldi",
+      "quote_match": "trimmed",
+      "trimmed_head": [
+        "python",
+        "un"
+      ],
+      "trimmed_tail": []
+    },
+    {
+      "index": 5,
+      "question": "Python 2'nin son sürümü ne zaman çıkmıştır?",
+      "model_quote": "2010'a geldiğimizde python' artık python 2'nin sonuna doğru gelmiş olduk.",
+      "source_quote": "2010'a geldiğimizde python' artık python 2'nin sonuna doğru gelmiş olduk",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    }
+  ]
+}

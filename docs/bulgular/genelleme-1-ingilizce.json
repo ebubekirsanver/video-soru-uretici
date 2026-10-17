@@ -1,0 +1,144 @@
+{
+  "record_version": 3,
+  "saved_at": "2026-10-17T19:08:48+03:00",
+  "endpoint": "/api/questions",
+  "request": {
+    "url": "https://youtu.be/FetnCoTS9qY",
+    "count": 5,
+    "transcript_mode": "clean",
+    "check_support": false
+  },
+  "response": {
+    "video_id": "FetnCoTS9qY",
+    "transcript_mode": "clean",
+    "model": "gpt-4o-mini",
+    "prompt_version": "questions-v1",
+    "requested_count": 5,
+    "returned_count": 5,
+    "verified_count": 4,
+    "questions": [
+      {
+        "question": "Yüz kalıbı hangi durumlarda kullanılır?",
+        "options": [
+          "Sadece olumlu cümlelerde",
+          "Gelecek zaman için",
+          "Geçmişte sürekli yapılan ama artık yapılmayan eylemler için",
+          "Sadece olumsuz cümlelerde"
+        ],
+        "correct_index": 2,
+        "explanation": "Yüz kalıbı, geçmişte sürekli olarak yapılan ama artık yapılmayan eylemlerden bahsetmek için kullanılır.",
+        "source_quote": "yüz kalıbı şu amaçlarla kullanılır geçmişte sürekli olarak yapılan Ama artık yapılmayan eylemleriniz den yada alışkanlıklarınızdan bahsedecek siniz",
+        "source_start_seconds": 304.98,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Yüz kalıbının olumsuz hali nasıl oluşturulur?",
+        "options": [
+          "Yüz ifadesi + özne + didn't",
+          "Özne + didn't + yüz ifadesi",
+          "Özne + yüz ifadesi + did",
+          "Özne + yüz ifadesi + didn't"
+        ],
+        "correct_index": 1,
+        "explanation": "Yüz kalıbının olumsuz hali, özne ile başlayıp ardından didn't ve yüz ifadesinin eklenmesiyle oluşturulur.",
+        "source_quote": "Eğer yüz kalıbını kullanarak olumsuz bir cümle bu istiyorsak şu kalıplara dikkat etmeliyiz Biz cümleyi bir özne ile başlarız ay ve Yuh Bey he she it özel lerinden biri Tabletimi yazdıktan sonra negatifi geçiyor lan did kelimesini kullanırız",
+        "source_start_seconds": 467.649,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Yüz kalıbı ile soru cümlesi oluştururken hangi ifade cümlenin başında yer alır?",
+        "options": [
+          "Is",
+          "Did",
+          "Does",
+          "Do"
+        ],
+        "correct_index": 1,
+        "explanation": "Yüz kalıbı ile soru cümlesi oluştururken cümlenin başında did ifadesi kullanılır.",
+        "source_quote": "Eğer yüz ifadesini soru yapacaksak şu kurallara dikkat etmeliyiz Biz sürekli olarak cümlenin başında da ifadesini kullanırız",
+        "source_start_seconds": 612.71,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Yüz kalıbı ile olumlu bir cümle kurmak için hangi özne kullanılmaz?",
+        "options": [
+          "It",
+          "She",
+          "He",
+          "I"
+        ],
+        "correct_index": 0,
+        "explanation": "Cansız varlıklar ve nesneler için it öznesi kullanılır, bu nedenle olumlu cümlelerde it kullanılmaz.",
+        "source_quote": "o anlamına gelir it cansız hayvan ürünlerinde kullanılır o anlamına",
+        "source_start_seconds": 356.139,
+        "verified": true,
+        "quote_match": "exact"
+      },
+      {
+        "question": "Yüz kalıbı ile olumsuz cümle kurarken hangi kelime kullanılmaz?",
+        "options": [
+          "Aren't",
+          "Did",
+          "Didn't",
+          "Wasn't"
+        ],
+        "correct_index": 2,
+        "explanation": "Olumsuz cümlelerde did kelimesi kullanılırken, didn't ifadesi de geçmiş zaman için olumsuzluk ekler.",
+        "source_quote": "Burada dikkat etmemiz gereken en önemli nokta şudur negatifi belirtmek için did kelimesini kullanırız ama Özellikle belirtmek istediğim bir nokta vardır",
+        "source_start_seconds": null,
+        "verified": false,
+        "quote_match": null
+      }
+    ]
+  },
+  "quote_audit": [
+    {
+      "index": 1,
+      "question": "Yüz kalıbı hangi durumlarda kullanılır?",
+      "model_quote": "[298] yüz kalıbı şu amaçlarla kullanılır geçmişte sürekli olarak yapılan Ama artık yapılmayan eylemleriniz den yada alışkanlıklarınızdan bahsedecek siniz",
+      "source_quote": "yüz kalıbı şu amaçlarla kullanılır geçmişte sürekli olarak yapılan Ama artık yapılmayan eylemleriniz den yada alışkanlıklarınızdan bahsedecek siniz",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 2,
+      "question": "Yüz kalıbının olumsuz hali nasıl oluşturulur?",
+      "model_quote": "[488] Eğer yüz kalıbını kullanarak olumsuz bir cümle bu istiyorsak şu kalıplara dikkat etmeliyiz Biz cümleyi bir özne ile başlarız ay ve Yuh Bey he she it özel lerinden biri Tabletimi yazdıktan sonra negatifi geçiyor lan did kelimesini kullanırız",
+      "source_quote": "Eğer yüz kalıbını kullanarak olumsuz bir cümle bu istiyorsak şu kalıplara dikkat etmeliyiz Biz cümleyi bir özne ile başlarız ay ve Yuh Bey he she it özel lerinden biri Tabletimi yazdıktan sonra negatifi geçiyor lan did kelimesini kullanırız",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 3,
+      "question": "Yüz kalıbı ile soru cümlesi oluştururken hangi ifade cümlenin başında yer alır?",
+      "model_quote": "[612] Eğer yüz ifadesini soru yapacaksak şu kurallara dikkat etmeliyiz Biz sürekli olarak cümlenin başında da ifadesini kullanırız",
+      "source_quote": "Eğer yüz ifadesini soru yapacaksak şu kurallara dikkat etmeliyiz Biz sürekli olarak cümlenin başında da ifadesini kullanırız",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 4,
+      "question": "Yüz kalıbı ile olumlu bir cümle kurmak için hangi özne kullanılmaz?",
+      "model_quote": "[329] o anlamına gelir it cansız hayvan ürünlerinde kullanılır o anlamına",
+      "source_quote": "o anlamına gelir it cansız hayvan ürünlerinde kullanılır o anlamına",
+      "quote_match": "exact",
+      "trimmed_head": [],
+      "trimmed_tail": []
+    },
+    {
+      "index": 5,
+      "question": "Yüz kalıbı ile olumsuz cümle kurarken hangi kelime kullanılmaz?",
+      "model_quote": "[520] Burada dikkat etmemiz gereken en önemli nokta şudur negatifi belirtmek için did kelimesini kullanırız ama Özellikle belirtmek istediğim bir nokta vardır",
+      "source_quote": "Burada dikkat etmemiz gereken en önemli nokta şudur negatifi belirtmek için did kelimesini kullanırız ama Özellikle belirtmek istediğim bir nokta vardır",
+      "quote_match": null,
+      "trimmed_head": [],
+      "trimmed_tail": []
+    }
+  ]
+}
