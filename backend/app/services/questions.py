@@ -159,11 +159,14 @@ def generate_questions(
     llm: LLMClient,
     count: int,
     block_seconds: float = BLOCK_SECONDS,
+    dropped: dict | None = None,
 ) -> list[Question]:
     """Soruları üretir ve doğrular.
 
     context: LLM'e verilen transkript (ham ya da temiz, kullanıcının seçimi).
     reference: alıntıların arandığı temizlenmiş transkript.
+    dropped: verilirse yapı denetiminde (`structure_invalid`) ve tekrar olarak
+        (`duplicate`) atılan soru sayıları buraya yazılır (çalıştırma kaydı için).
     """
     if not context.segments:
         raise ValueError("Soru üretilecek transkript boş.")
@@ -173,7 +176,13 @@ def generate_questions(
         user=build_user_prompt(context, count, block_seconds),
         json_mode=True,
     )
-    candidates = drop_duplicates(parse_questions(raw))[:count]
+    parsed = parse_questions(raw)
+    unique = drop_duplicates(parsed)
+    if dropped is not None:
+        # parse_questions başarılıysa yanıt bir "questions" listesi içerir
+        dropped["structure_invalid"] = len(json.loads(raw)["questions"]) - len(parsed)
+        dropped["duplicate"] = len(parsed) - len(unique)
+    candidates = unique[:count]
 
     locator = QuoteLocator(reference.segments)
     questions = []

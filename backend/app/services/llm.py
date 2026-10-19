@@ -5,6 +5,7 @@ değişirse (başka bir model ya da yerel LLM) yeni bir sınıf yazıp `get_llm`
 içinde onu döndürmek yeterlidir.
 """
 
+from contextvars import ContextVar
 from typing import Protocol
 
 from openai import OpenAI, OpenAIError
@@ -18,6 +19,26 @@ class LLMError(Exception):
 
 class LLMNotConfigured(LLMError):
     """LLM için gerekli ayar (örneğin API anahtarı) tanımlı değil."""
+
+
+# Son model çağrısının token bilgisi (Aşama 14). İstemcide değil, isteğin
+# bağlamında tutulur: istemci istekler arasında paylaşılsa bile aynı anda gelen
+# iki istek birbirinin bilgisini görmez. Okuyan: services/metrics.py
+TOKEN_FIELDS = ("prompt_tokens", "completion_tokens", "total_tokens")
+_last_usage: ContextVar[dict | None] = ContextVar("last_llm_usage", default=None)
+
+
+def reset_usage() -> None:
+    _last_usage.set(None)
+
+
+def last_usage() -> dict | None:
+    """Bu bağlamdaki son çağrının token sayıları; yanıtta `usage` yoksa None."""
+    return _last_usage.get()
+
+
+def _record_usage(usage) -> None:
+    _last_usage.set(None if usage is None else {k: getattr(usage, k, None) for k in TOKEN_FIELDS})
 
 
 class LLMClient(Protocol):
@@ -63,6 +84,8 @@ class OpenAIClient:
         except OpenAIError as exc:
             raise LLMError(f"OpenAI çağrısı başarısız: {exc}") from exc
 
+        # Token sayıları yalnızca ölçüm için saklanır; dönüş değeri yine metindir
+        _record_usage(getattr(response, "usage", None))
         content = response.choices[0].message.content
         if not content:
             raise LLMError("LLM boş yanıt döndürdü.")
