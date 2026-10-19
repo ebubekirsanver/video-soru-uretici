@@ -34,6 +34,9 @@ YouTube ders videosu bağlantısından zaman damgalı transkript çıkaran, tran
    - Eski commit'ler yeniden yazılmaz: rebase, amend ya da force push yapılmaz. Eski önekli mesajlar olduğu gibi kalır.
 4. **Test yaz.** Dış servis çağrılarını (YouTube, OpenAI) testlerde sahte nesnelerle taklit et.
 5. **Gizli bilgi:** `.env`, API anahtarı ve kişisel veri commit'lenmez.
+   - Çalıştırma kayıtları (`backend/runs/`) `docs/bulgular`'a kopyalanmadan önce gizli bilgi için taranır (API anahtarı, yetki başlığı, parola/token, `.env`, e-posta, yerel dosya yolu).
+   - Kopyalamadan önce istek bağlantılarındaki YouTube paylaşım kodu (`si=...`) temizlenir.
+   - Daha önce commit'lenmiş eski dosyalara dokunulmaz; geçmiş yeniden yazılmaz.
 6. **Literatürle uyumlu kal:** her teknolojiyi bir sorunu çözdüğü ve etkisi ölçülebildiği için ekle. Karşılaştırma gerektiren yerlerde (sabit boyutlu ve anlamsal bölütleme, RAG'li ve RAG'siz, ham ve temiz transkript) ikisini de kodda seçilebilir bırak ki ölçülebilsin.
 7. **Anlaşılır ol:** kullanıcı öğrencidir. Yaptığın değişikliği kısa ve sade Türkçeyle açıkla, kod yorumlarını Türkçe yaz.
 8. **Kendi başlatmadığın süreçleri asla kapatma** (uvicorn, `npm run dev` vb.). Port doluysa oradaki süreci durdurma: kullanıcıya söyle ya da başka bir port kullan. Yalnızca kendi başlattığın süreci, komut satırını kontrol ederek kapat.
