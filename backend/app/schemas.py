@@ -31,7 +31,11 @@ class SummaryRequest(BaseModel):
 
 class SummaryTopic(BaseModel):
     title: str
-    start_seconds: float = Field(description="Konunun yaklaşık başladığı zaman (saniye)")
+    start_seconds: float = Field(description="Konunun yaklaşık başladığı zaman (saniye); modelin verdiği değer")
+    start_verified: bool = Field(
+        description="true: modelin verdiği değer isteme verilen blok etiketlerinden biri. "
+        "Konunun videoda gerçekten o anda başladığını göstermez."
+    )
 
 
 class SummaryResponse(BaseModel):

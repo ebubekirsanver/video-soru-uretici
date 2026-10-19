@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.services.llm import LLMError, OpenAIClient, get_llm
-from app.services.summary import build_user_prompt, load_prompt, parse_summary, summarize
+from app.services.summary import block_labels, build_user_prompt, load_prompt, parse_summary, summarize
 from app.services.transcript import Segment, Transcript, TranscriptUnavailable
 
 VID = "dQw4w9WgXcQ"
@@ -153,8 +153,9 @@ def test_endpoint_ok(use_llm, fake_transcript):
     assert body["video_id"] == VID and body["language"] == "tr"
     assert body["transcript_mode"] == "clean" and body["model"] == "fake-model"
     assert body["topics"] == [
-        {"title": "Giriş", "start_seconds": 0.0},
-        {"title": "Kabarcık sıralaması", "start_seconds": 30.0},
+        # Temiz modda bloklar 4 ve 34 sn'de başlıyor (etiketler {4, 34}); 0 ve 30 etiket değil
+        {"title": "Giriş", "start_seconds": 0.0, "start_verified": False},
+        {"title": "Kabarcık sıralaması", "start_seconds": 30.0, "start_verified": False},
     ]
     # Varsayılan modda etiketler temizlenmiş olmalı
     assert "[Müzik]" not in llm.calls[0]["user"]
@@ -219,3 +220,67 @@ def test_endpoint_missing_api_key(use_llm, fake_transcript):
     r = client.post("/api/summary", json={"url": VID})
     assert r.status_code == 503
     assert "OPENAI_API_KEY" in r.json()["detail"]
+
+
+# --- Konu zamanının blok etiketi denetimi ------------------------------------
+
+
+def test_block_labels_match_prompt_labels():
+    # Ham transkript: bloklar 0 ve 34 sn'de başlıyor; istemde de [0] ve [34] yazıyor
+    t = make_transcript()
+    assert block_labels(t) == {0, 34}
+    user = build_user_prompt(t)
+    assert "[0] " in user and "[34] " in user
+
+
+def topics_json(*values):
+    return llm_json(topics=[{"title": f"Konu {i}", "start_seconds": v} for i, v in enumerate(values)])
+
+
+def test_value_in_labels_is_verified():
+    (topic,) = parse_summary(topics_json(34), duration_seconds=60.0, labels={0, 34}).topics
+    assert topic.start_seconds == 34 and topic.start_verified is True
+
+
+def test_value_not_in_labels_is_not_verified():
+    # Süre içinde ama etiket değil: değer değiştirilmez, yalnızca işaretlenir
+    (topic,) = parse_summary(topics_json(400), duration_seconds=900.0, labels={0, 354, 435}).topics
+    assert topic.start_seconds == 400 and topic.start_verified is False
+
+
+def test_float_equal_to_integer_label_is_verified():
+    (topic,) = parse_summary(topics_json(354.0), duration_seconds=900.0, labels={354}).topics
+    assert topic.start_seconds == 354.0 and topic.start_verified is True
+
+
+def test_fractional_value_is_not_verified():
+    (topic,) = parse_summary(topics_json(354.5), duration_seconds=900.0, labels={354}).topics
+    assert topic.start_verified is False
+
+
+def test_clamped_value_is_not_verified():
+    # 999 süre sınırına (60) sıkıştırılır; 60 etiket olsa bile modelin verdiği değer değil
+    # -5 ise 0'a sıkıştırılır; 0 etiket olsa bile doğrulanmış sayılmaz
+    topics = parse_summary(topics_json(999, -5), duration_seconds=60.0, labels={0, 60}).topics
+    assert [(t.start_seconds, t.start_verified) for t in topics] == [(0.0, False), (60.0, False)]
+
+
+def test_clamp_and_sort_behaviour_unchanged():
+    topics = parse_summary(topics_json(999, 34, -5), duration_seconds=60.0, labels={0, 34}).topics
+    assert [t.start_seconds for t in topics] == [0.0, 34, 60.0]
+
+
+def test_no_labels_means_not_verified():
+    (topic,) = parse_summary(topics_json(0), duration_seconds=60.0).topics
+    assert topic.start_verified is False
+
+
+def test_endpoint_marks_label_topics_verified(use_llm, fake_transcript):
+    # Temiz modda etiketler {4, 34}
+    use_llm(FakeLLM(response=llm_json(topics=[{"title": "A", "start_seconds": 4}, {"title": "B", "start_seconds": 400}])))
+    r = client.post("/api/summary", json={"url": VID})
+    assert r.status_code == 200
+    assert r.json()["topics"] == [
+        {"title": "A", "start_seconds": 4.0, "start_verified": True},
+        {"title": "B", "start_seconds": 60.0, "start_verified": False},
+    ]

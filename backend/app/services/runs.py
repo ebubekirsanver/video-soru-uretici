@@ -26,6 +26,9 @@ RunKind = Literal["summary", "questions"]
 # 3: + destek kontrolü açıkken support_check (istem sürümü, her soru için etiket,
 #    gerekçe ve modelin ham yanıtı). Kapalıyken alan yazılmaz.
 # Yeni sürümler yalnızca alan ekler; eski kayıtlar load_run ile okunabilir kalır.
+# Sürüm yalnızca kaydın kendi alanları değişince artar. `response` içindeki alan
+# eklemeleri (ör. özet konularındaki start_verified) API yanıtının parçasıdır ve
+# kayıt biçimini değiştirmez; bu yüzden sürüm 3'te kaldı.
 RECORD_VERSION = 3
 
 

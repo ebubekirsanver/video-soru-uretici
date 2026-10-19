@@ -73,7 +73,10 @@ def get_summary(body: SummaryRequest, llm: LLMClient = Depends(get_llm)) -> Summ
         transcript_mode=body.transcript_mode,
         model=llm.model,
         summary=result.summary,
-        topics=[SummaryTopic(title=t.title, start_seconds=t.start_seconds) for t in result.topics],
+        topics=[
+            SummaryTopic(title=t.title, start_seconds=t.start_seconds, start_verified=t.start_verified)
+            for t in result.topics
+        ],
     )
     save_run("summary", response.video_id, body, response)
     return response
