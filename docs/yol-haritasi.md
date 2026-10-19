@@ -33,7 +33,7 @@ Aşama sırası ve içeriği ilerledikçe güncellenebilir.
 
 ## Durum güncellemesi (2026-10-14)
 
-- **Aşama 12 (web arayüzü) parçalara bölündü (12a-12e). Aşama 12'nin geneli: yapılmadı.**
+- **Aşama 12 (web arayüzü) parçalara bölündü (12a-12e). Aşama 12'nin geneli: prototip tamamlandı; arayüz ileride yeniden tasarlanacak.**
   - **12a · Arayüz iskeleti ve sağlık göstergesi: tamamlandı.** `frontend/` altında Next.js iskeleti, ana sayfada `/health` göstergesi, backend'de yalnızca `http://localhost:3000` kaynağına izin veren CORS. Tarayıcıda gözle doğrulandı: backend açıkken yeşil "Sunucu çalışıyor", backend kapatılınca kırmızı durum göründü.
   - **12b · YouTube bağlantısı formu: yapıldı** (2026-10-14). Form `POST /api/summary` çağırıyor; hata durumları anahtarsız gerçek backend'e karşı denendi. Başarılı özet yolu ve tarayıcıda gözle kontrol henüz yapılmadı.
   - **12c · Biçimli özet ekranı: tamamlandı** (2026-10-14). Özet, konu başlıkları ve dakika:saniye zamanları okunaklı bir kartta; başlık videoyu o saniyeden açar. Tarayıcıda gözle doğrulandı (kullanıcı): gerçek bir özet kartı gösterildi (özet, konu başlıkları ve zamanlar, doğrulanmadı notu), hata durumunda kart temizlendi. Zaman bağlantısının videoyu doğru saniyede açıp açmadığı henüz denenmedi. Gözlem: aynı videoda iki ayrı çalıştırmada model farklı konu zamanları üretti (ör. üçüncü konu 9:51 ve 9:19).
@@ -59,7 +59,8 @@ Aşama sırası ve içeriği ilerledikçe güncellenebilir.
   - Deneme 3 ([bulgu](bulgular/asama-9-destek-kontrolu-3.md)): genelleme denemesinin 18 doğrulanmış sorusu; sayıma giren 17 soruda 11 eşleşme, 6 farklı; ingilizce S3 (elle "belirsiz") sayım dışı.
   - Birleşik: sayıma giren 31 soruda 21 eşleşme, 10 farklı.
   - Sınırlar: tek etiketleyen; sorular bağımsız değil (aynı videodan birden çok soru, Deneme 1 ve 2'de aynı kemosentez videosu); her deneme tek çalıştırma.
-  - **Yapılmadı:** sadakat (faithfulness), Bloom düzeyi, yazım hatası ve tekrar kontrolü.
+  - **Yapılan:** alıntı-cevap destek kontrolü. **Yapılmayan:** sadakat (RAGAs), Bloom uyum, yazım hataları, tekrar ayıklama (benzerlik eşiğiyle).
+- **Aşama 14 (izleme ve günlükleme): kısmen.** **Yapılan:** çalıştırma kaydı (`backend/runs/`, `services/runs.py`). **Yapılmayan:** aşama bazlı gecikme ve token ölçümü.
 - **Sonraki adımlar:** Bir sonraki destek kontrolü denemesinden önce elle etiketleme ölçütü ikili olarak (doğrudan destekliyor / değil) önceden belirlenecek.
 - **12e · Destek kontrolü arayüzde: yapıldı** (2026-10-17). "Soruları üret" yanında varsayılan kapalı onay kutusu (`check_support`); model değerlendirmesi şık seçildikten sonra kartta gösterilir. Yalnızca frontend değişti. Tarayıcıda gözle doğrulandı (kullanıcı), kısmen:
   - Görülenler: onay kutusu varsayılan olarak işaretsiz; kutu kapalıyken kartlarda model değerlendirmesi ve üst satırda "Destek kontrolü" yok; kutu işaretliyken üst satırda "Destek kontrolü: support-v1" var ve şık seçilmeden önce kartlarda model değerlendirmesi görünmüyor; kemosentez videosunda şık seçildikten sonra alıntının altında "Model değerlendirmesi: alıntı cevabı destekliyor" ve gerekçe göründü (birkaç soruda); doğrulanamayan bir soruda şık seçilince "Alıntı transkriptte bulunamadı", modelin alıntısı, "kontrol edilmedi: alıntı transkriptte bulunamadığı için model çağrılmadı" ve "Kaynak süresi: yok" göründü.
