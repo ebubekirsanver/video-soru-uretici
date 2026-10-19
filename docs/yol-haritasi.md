@@ -29,6 +29,7 @@ Aşama sırası ve içeriği ilerledikçe güncellenebilir.
 - **Ertelenen:** 3 (Whisper yedeği, WER ölçümü) ve 4 (bölümleme). Uçtan uca dikey dilimi (URL → transkript → özet → soru) önce bitirmek için Aşama 5 ve 6 öne alındı.
 - Aşama 5'te ham/temiz transkript seçimi (`transcript_mode`) ve ~30 sn'lik zaman damgalı bloklama (`services/chunking.py`) eklendi; bloklama Aşama 4'te yeniden kullanılacak.
 - Aşama 6'da RAG'siz taban çizgisi (`POST /api/questions`, istem `questions-v1`) ve kod tarafında doğrulama eklendi: yapı denetimi, kaynak alıntısının transkriptte aranması, tekrar ayıklama, tekrarlanabilir seçenek karıştırma.
+  - Not: soru istemi alıntı için "en az 5 kelime" istiyor (`questions_v1_system.txt`, kural 10); kod ise 3-4 kelimelik alıntıyı transkriptte tek geçiyorsa kabul ediyor (`quotes.py`, `MIN_UNIQUE_QUOTE_WORDS = 3`). Bu bilinçli bir tolerans; `questions-v1` taban çizgisi olarak sabit tutuldu. İstem değişikliği `v2` olarak ve yeni veriyle değerlendirilecek.
 - **Sırada:** Aşama 7 (gömme + ChromaDB + erişim; RAG'li üretim taban çizgisiyle karşılaştırılacak) ya da ertelenen Aşama 3 / 4. Aşama 7'deki anlamsal bölütleme için Aşama 4'ün önce yapılması mantıklı olabilir.
 
 ## Durum güncellemesi (2026-10-14)
