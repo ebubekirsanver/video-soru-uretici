@@ -381,3 +381,10 @@ Kod değiştirilmedi, model çağrısı yapılmadı.
   - Karar: `quotes.py` değiştirilmedi; güncel kurallarla yanlış red örneği 1 tane, daha fazla örnek toplanınca yeniden bakılacak.
 - **Mimari-kod karşılaştırması yapıldı** ([docs/mimari-kod-karsilastirmasi.md](mimari-kod-karsilastirmasi.md)): kodlanmış hâl RAG'siz taban çizgisi, mimari görseli hedef sistem. 25 bileşen: 4 var, 8 kısmen, 13 yok. Gecikme/token ölçümü yok; RAG'li taraf henüz kurulamaz. Kök `README.md`'ye bağlantı eklendi.
 - **Belge durumları düzeltildi** (`docs/yol-haritasi.md`): Aşama 12 "prototip tamamlandı; arayüz ileride yeniden tasarlanacak"; Aşama 9'da yapılan = alıntı-cevap destek kontrolü, yapılmayan = sadakat (RAGAs), Bloom uyum, yazım hataları, tekrar ayıklama (benzerlik eşiğiyle); Aşama 14'te yapılan = çalıştırma kaydı, yapılmayan = aşama bazlı gecikme ve token ölçümü.
+
+## Aşama 12e tarayıcı gözlemi ve belge notları (2026-10-19)
+
+Kod değiştirilmedi, model çağrısı yapılmadı.
+
+- **12e tarayıcı gözlemi** ([asama-12e-tarayici-gozlemi-1.md](bulgular/asama-12e-tarayici-gozlemi-1.md)): kullanıcı kemosentez videosunda destek kontrolü açıkken 5 soru üretti. Kutu ve açıklama metni, "Destek kontrolü: support-v1" satırı, istek sırasında kutunun kilitlenmesi ve alt not görüldü. 5 sorunun 5'i doğrulandı; destek kontrolü 3 desteklemiyor, 2 destekliyor. "kısmen", "kontrol edilemedi" ve dar ekran görülmedi. Kör etiketleme yapılmadığı için ölçüm değil gözlem; tek çalıştırma. Çalıştırma kaydı istekteki paylaşım kodu (`si=`) nedeniyle depoya kopyalanmadı.
+- **Yol haritası:** 12e doğrulama notu güncellendi; Aşama 6'ya istem ("en az 5 kelime") ile kod (3-4 kelimelik alıntıyı tek geçişte kabul) arasındaki bilinçli tolerans not edildi (`questions-v1` sabit, istem değişikliği `v2` olarak değerlendirilecek).
