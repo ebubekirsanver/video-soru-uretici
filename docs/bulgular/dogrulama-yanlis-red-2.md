@@ -79,3 +79,9 @@
 - Transkriptler incelemede (19 Ekim) yeniden indirildi; soruların üretildiği andaki (17 Ekim) transkriptle birebir aynı olduğu doğrulanamadı (kayıtlarda transkript yok) — **emin değilim**.
 - Videoya bakılmadı; transkriptin konuşmayı doğru yazıp yazmadığı değerlendirilmedi.
 - Düzeltme önerisi yapılmadı, kod değiştirilmedi.
+
+## Karar
+
+- `quotes.py` bu bulgularla değiştirilmedi.
+- Gerekçe: güncel kurallarla gözlenen yanlış red örneği 1 tane: sıcaklık sorusu ([dogrulama-yanlis-red-1.md](dogrulama-yanlis-red-1.md), "350-400" / "350400"). Bu dosyada incelenen diğer 2 doğrulanamayan soruda model alıntıyı transkripte göre değiştirmişti. Daha fazla örnek toplanınca yeniden bakılacak.
+- Not: matematik S3'te sıra sayılarının yazım farkı ("birinci" / "1inci") doğrulayıcının eşleyemediği bir fark olarak kayıtlı; düzeltilmedi.
