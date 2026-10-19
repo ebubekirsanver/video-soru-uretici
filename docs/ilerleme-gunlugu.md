@@ -388,3 +388,11 @@ Kod değiştirilmedi, model çağrısı yapılmadı.
 
 - **12e tarayıcı gözlemi** ([asama-12e-tarayici-gozlemi-1.md](bulgular/asama-12e-tarayici-gozlemi-1.md)): kullanıcı kemosentez videosunda destek kontrolü açıkken 5 soru üretti. Kutu ve açıklama metni, "Destek kontrolü: support-v1" satırı, istek sırasında kutunun kilitlenmesi ve alt not görüldü. 5 sorunun 5'i doğrulandı; destek kontrolü 3 desteklemiyor, 2 destekliyor. "kısmen", "kontrol edilemedi" ve dar ekran görülmedi. Kör etiketleme yapılmadığı için ölçüm değil gözlem; tek çalıştırma. Çalıştırma kaydı istekteki paylaşım kodu (`si=`) nedeniyle depoya kopyalanmadı.
 - **Yol haritası:** 12e doğrulama notu güncellendi; Aşama 6'ya istem ("en az 5 kelime") ile kod (3-4 kelimelik alıntıyı tek geçişte kabul) arasındaki bilinçli tolerans not edildi (`questions-v1` sabit, istem değişikliği `v2` olarak değerlendirilecek).
+
+## Özet konu zamanlarında blok etiketi kontrolü (2026-10-19)
+
+- `services/summary.py`: modelin verdiği her konu zamanı için, değerin isteme verilen blok etiketlerinden (`int(b.start)`) biri olup olmadığı `start_verified` alanıyla işaretleniyor. Değer değiştirilmiyor; süre sınırına sıkıştırılan değer doğrulanmış sayılmıyor. Alan uç nokta yanıtında ve şemada var.
+- Konunun videoda gerçekten o anda başladığı hâlâ doğrulanmıyor.
+- Arayüz (`frontend/app/summary-result.tsx`): blok etiketi olmayan zamanın yanında "(doğrulanamadı)" işareti; alt not koddaki gerçek durumla uyumlu olacak şekilde düzeltildi.
+- Doğrulama: `pytest` → 216 test geçti (önceki 207 + 9 yeni; uç nokta yanıtını birebir karşılaştıran 1 test yeni alana göre güncellendi). `npm run typecheck` ve `npm run build` hatasız. Kart örnek yanıtla render edilip denetlendi; tarayıcıda gözle bakılmadı.
+- Çalıştırma kaydının sürümü (`record_version`) değişmedi; yanıttaki alan eklemesi kayıt biçimini değiştirmiyor.
