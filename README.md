@@ -21,6 +21,8 @@ Dört katmanlı yapı: Sunum, Uygulama ve Orkestrasyon, Veri ve İndeksleme, Yap
 
 Tasarım kararlarının literatür gerekçeleri: [docs/01-literatur-degerlendirmesi.docx](docs/01-literatur-degerlendirmesi.docx)
 
+Mimarinin bugünkü kodla karşılaştırması (kodlanmış hâl RAG'siz taban çizgisidir): [docs/mimari-kod-karsilastirmasi.md](docs/mimari-kod-karsilastirmasi.md)
+
 ## Aşamalar
 
 Yol haritası ve her aşamanın kaydı: [docs/yol-haritasi.md](docs/yol-haritasi.md) · [docs/ilerleme-gunlugu.md](docs/ilerleme-gunlugu.md)
