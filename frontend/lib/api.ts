@@ -13,7 +13,10 @@ export interface SummaryRequest {
 
 export interface SummaryTopic {
   title: string;
-  start_seconds: number;
+  start_seconds: number; // modelin verdiği değer
+  // true: değer isteme verilen blok etiketlerinden biri. Konunun videoda
+  // gerçekten o anda başladığını göstermez.
+  start_verified: boolean;
 }
 
 export interface SummaryResponse {

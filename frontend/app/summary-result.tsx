@@ -41,7 +41,15 @@ export default function SummaryResult({ result }: { result: SummaryResponse }) {
                 rel="noopener noreferrer"
                 title="Videoyu bu saniyeden yeni sekmede aç"
               >
-                <span className="time">{formatTimestamp(topic.start_seconds)}</span>
+                <span className="time">
+                  {formatTimestamp(topic.start_seconds)}
+                  {!topic.start_verified && (
+                    <span className="time-unverified" title="Bu zaman, isteme verilen blok etiketlerinden biri değil">
+                      {" "}
+                      (doğrulanamadı)
+                    </span>
+                  )}
+                </span>
                 <span className="topic-title">{topic.title}</span>
               </a>
             </li>
@@ -49,7 +57,9 @@ export default function SummaryResult({ result }: { result: SummaryResponse }) {
         </ol>
       )}
       <p className="note">
-        Konu zamanları modelin ürettiği blok başlangıçlarına dayanır; henüz transkriptle doğrulanmamıştır.
+        Konu zamanları modelin verdiği değerlerdir. Yalnızca verilen blok etiketlerinden biri olup olmadığı denetlenir;
+        konunun videoda gerçekten o anda başladığı doğrulanmamıştır. “(doğrulanamadı)” işareti, modelin verdiği zamanın
+        bu blok etiketlerinden biri olmadığını gösterir.
       </p>
     </article>
   );

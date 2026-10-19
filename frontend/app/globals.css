@@ -261,6 +261,13 @@ button.primary:disabled {
   font-variant-numeric: tabular-nums;
 }
 
+/* Blok etiketlerinden biri olmayan konu zamanı */
+.topics .time-unverified {
+  color: var(--down);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
 .result-card .note {
   margin: 12px 0 0;
   color: var(--muted);
