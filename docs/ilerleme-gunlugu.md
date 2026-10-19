@@ -370,3 +370,14 @@ Aşama 12'nin son parçası; yalnızca frontend değişti, backend'e dokunulmad�
   - Gözlem:
     - Aynı videoda üç ayrı çalıştırmada sorular farklı çıktı; birinde 5 yerine 4 soru döndü (3'ü doğrulanmış).
     - Doğrulanamayan bir soruda alıntı "350-400 S D" yazıyor, soru ve cevapta "350-400 °C" yazıyor. Kayıttaki asıl neden henüz incelenmedi.
+
+## Belge güncellemesi · Doğrulanamayan sorular ve mimari-kod karşılaştırması (2026-10-19)
+
+Kod değiştirilmedi, model çağrısı yapılmadı.
+
+- **Doğrulanamayan 3 sorunun nedeni yazıldı:**
+  - Sıcaklık sorusu (kemosentez, 12e testi): alıntıda "350-400", transkriptte "350400"; normalleştirme tireyi boşluğa çevirdiği için doğrulayıcı transkriptte bulunan alıntıyı reddetti ([dogrulama-yanlis-red-1.md](bulgular/dogrulama-yanlis-red-1.md)).
+  - Genelleme denemesindeki matematik S3 ve ingilizce S5: ikisinde de model alıntıyı transkripte göre değiştirmişti (matematik S3: iki ayrı yer birleştirilmiş, sıra sayıları yazıyla; ingilizce S5: "negatifi" / "negatif") ([dogrulama-yanlis-red-2.md](bulgular/dogrulama-yanlis-red-2.md)).
+  - Karar: `quotes.py` değiştirilmedi; güncel kurallarla yanlış red örneği 1 tane, daha fazla örnek toplanınca yeniden bakılacak.
+- **Mimari-kod karşılaştırması yapıldı** ([docs/mimari-kod-karsilastirmasi.md](mimari-kod-karsilastirmasi.md)): kodlanmış hâl RAG'siz taban çizgisi, mimari görseli hedef sistem. 25 bileşen: 4 var, 8 kısmen, 13 yok. Gecikme/token ölçümü yok; RAG'li taraf henüz kurulamaz. Kök `README.md`'ye bağlantı eklendi.
+- **Belge durumları düzeltildi** (`docs/yol-haritasi.md`): Aşama 12 "prototip tamamlandı; arayüz ileride yeniden tasarlanacak"; Aşama 9'da yapılan = alıntı-cevap destek kontrolü, yapılmayan = sadakat (RAGAs), Bloom uyum, yazım hataları, tekrar ayıklama (benzerlik eşiğiyle); Aşama 14'te yapılan = çalıştırma kaydı, yapılmayan = aşama bazlı gecikme ve token ölçümü.
