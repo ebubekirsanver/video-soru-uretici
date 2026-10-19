@@ -396,3 +396,22 @@ Kod değiştirilmedi, model çağrısı yapılmadı.
 - Arayüz (`frontend/app/summary-result.tsx`): blok etiketi olmayan zamanın yanında "(doğrulanamadı)" işareti; alt not koddaki gerçek durumla uyumlu olacak şekilde düzeltildi.
 - Doğrulama: `pytest` → 216 test geçti (önceki 207 + 9 yeni; uç nokta yanıtını birebir karşılaştıran 1 test yeni alana göre güncellendi). `npm run typecheck` ve `npm run build` hatasız. Kart örnek yanıtla render edilip denetlendi; tarayıcıda gözle bakılmadı.
 - Çalıştırma kaydının sürümü (`record_version`) değişmedi; yanıttaki alan eklemesi kayıt biçimini değiştirmiyor.
+
+## Aşama 14 · Aşama süreleri, token sayıları ve hata kaydı (2026-10-19)
+
+- **Ne yapıldı:** `/api/summary` ve `/api/questions` çalıştırma kaydına yeni alanlar eklendi. API yanıtı değişmedi.
+  - `outcome`: `ok` ya da `error`.
+  - `metrics.stages`: aşama süreleri (ms). Özet: `transcript_fetch_ms`, `clean_ms`, `llm_summary_ms`, `summary_parse_ms`, `total_ms`. Sorular: `transcript_fetch_ms`, `clean_ms`, `llm_questions_ms`, `quote_verify_ms`, destek kontrolü açıksa `support_check_ms`, `total_ms`. `quote_verify_ms` model çağrısı dışındaki süredir (yanıt ayrıştırma, yapı denetimi, tekrar ayıklama, alıntı doğrulama, seçenek karıştırma).
+  - `metrics.llm_calls`: her model çağrısı için `purpose` (summary/questions/support), `ms`, `model`, `ok`, `prompt_tokens`, `completion_tokens`, `total_tokens`. OpenAI yanıtında `usage` yoksa token alanları `null`.
+  - `metrics.dropped` (yalnızca sorular): yapı denetiminde ve tekrar olarak atılan soru sayısı.
+  - Hatalı istekler (422, 404, 502, 503) dosya adında `-error` ile kaydediliyor; `error` alanı: `status_code`, `kind` (invalid_url, transcript_unavailable, llm_not_configured, llm_failed, invalid_json), kısa `detail`, `stage`; o ana kadarki süreler `metrics` içinde; `response` null.
+  - Hata metninden API anahtarı, yetki başlığı ve anahtar benzeri dizgiler temizleniyor; yeni kayıtlarda istek bağlantısındaki `si=` paylaşım kodu siliniyor.
+  - `record_version` 3'ten 4'e çıktı; `load_run` eski kayıtlarda `outcome="ok"`, `metrics=None`, `error=None` veriyor.
+  - Eşzamanlılık: ölçümler isteğe özel bir nesnede (`services/metrics.py`, `RunMetrics`), token bilgisi `ContextVar`'da tutuluyor; `LLMClient.complete` hâlâ `str` döndürüyor.
+- **Nasıl doğrulandı:** `pytest` → 238 test geçti (önceki 216 + 22 yeni, `tests/test_metrics.py`). Model çağrıları sahte `chat.completions` ile; gerçek OpenAI çağrısı yapılmadı. İç içe iki istek testi, token bilgisi genel bir değişkende tutulduğunda düştü (geçici bozma denemesi, geri alındı). Sürümü denetleyen 4 test 3'ten 4'e, hatada kayıt olmadığını denetleyen 1 test `-error` kaydı bekleyecek biçimde güncellendi.
+- **Bilinen sınırlar:**
+  - Maliyet hesaplanmıyor; fiyat kullanıcıdan gelecek.
+  - Kayıtları görme ya da özetleme aracı yok.
+  - Günlük (logging) yapılandırması bakılmadı.
+  - Gerçek bir çalıştırmayla kayıt henüz gözle incelenmedi; gerçek `usage` değerleri görülmedi.
+  - `/api/transcript` uç noktası kaydedilmiyor (değişmedi). Beklenmeyen 500 hataları kayda geçmiyor.
