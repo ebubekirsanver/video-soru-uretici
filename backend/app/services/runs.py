@@ -36,7 +36,9 @@ RunKind = Literal["summary", "questions"]
 #    çağrıları ve token sayıları, sorularda atılan soru sayıları) ve hata
 #    kayıtlarında error (status_code, kind, detail, stage). Hata kayıtlarında
 #    response null'dır. Kaydın kendi alanları değiştiği için sürüm arttı.
-RECORD_VERSION = 4
+# 5 (Aşama 9, b): + sorularda writing_check (kural sürümü ve soru başına kodla
+#    bulunan yazım hatası işaretleri) ve metrics.stages içinde writing_check_ms.
+RECORD_VERSION = 5
 
 
 def _now() -> datetime:
@@ -62,10 +64,11 @@ def save_run(
     support_check: dict | None = None,
     metrics: dict | None = None,
     error: dict | None = None,
+    writing_check: dict | None = None,
 ) -> Path | None:
     """Kaydı `YYYYMMDD-HHMMSS-<video_id>-<kind>.json` adıyla yazar; yazılan dosyanın yolunu döndürür.
 
-    `quote_audit`, `support_check` ve `metrics` yalnızca kayda yazılır, API
+    `quote_audit`, `support_check`, `writing_check` ve `metrics` yalnızca kayda yazılır, API
     yanıtında yer almaz; `response` alanı API yanıtıyla birebir aynı kalır
     (yanıtta açıkça verilmemiş alanlar kayda da yazılmaz). `error` verilirse
     kayıt hata kaydıdır: dosya adı `-error` ile biter, `response` null olur.
@@ -98,6 +101,8 @@ def save_run(
             record["quote_audit"] = quote_audit
         if support_check is not None:
             record["support_check"] = support_check
+        if writing_check is not None:
+            record["writing_check"] = writing_check
         text = json.dumps(record, ensure_ascii=False, indent=2)
 
         runs_dir = Path(settings.runs_dir)
@@ -126,7 +131,8 @@ def load_run(path: Path) -> dict:
     boş liste olarak doldurulur. `support_check` yalnızca destek kontrolü açık
     çalıştırılmış sürüm 3 kayıtlarında vardır; yoksa None olur. Sürüm 3 ve
     öncesinde yalnızca başarılı istekler kaydedildiği için `outcome` "ok",
-    `metrics` ve `error` None olur. Böylece okuyan kod hata vermez.
+    `metrics` ve `error` None olur. `writing_check` sürüm 5'ten önce yoktur
+    (ve özet kayıtlarında hiç yoktur); yoksa None olur. Böylece okuyan kod hata vermez.
     """
     record = json.loads(Path(path).read_text(encoding="utf-8"))
     record.setdefault("record_version", 1)
@@ -135,4 +141,5 @@ def load_run(path: Path) -> dict:
     record.setdefault("outcome", "ok")
     record.setdefault("metrics", None)
     record.setdefault("error", None)
+    record.setdefault("writing_check", None)
     return record

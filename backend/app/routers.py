@@ -21,6 +21,7 @@ from app.services.summary import summarize
 from app.services.support_check import SUPPORT_PROMPT_VERSION, check_support
 from app.services.text_clean import clean_transcript, prepare_transcript
 from app.services.transcript import Transcript, TranscriptUnavailable, fetch_transcript
+from app.services.writing_check import check_questions as check_writing
 from app.services.youtube import InvalidYouTubeUrl, extract_video_id
 
 router = APIRouter(prefix="/api", tags=["transkript"])
@@ -147,6 +148,11 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
         _save_error_run("questions", "questions", body, exc, m)
         raise
 
+    # Yazım kuralları (yalnızca kodla, model çağrısı yok) karıştırılmış son sorular üzerinde
+    # çalışır; sonuç yalnızca kayda yazılır, soru atılmaz
+    with m.stage("writing_check"):
+        writing_check = check_writing(questions)
+
     # Destek kontrolü varsayılan olarak kapalı: her doğrulanmış soru için ek bir ücretli çağrı yapar
     supports = None
     if body.check_support:
@@ -210,5 +216,6 @@ def get_questions(body: QuestionsRequest, llm: LLMClient = Depends(get_llm)) -> 
         quote_audit=quote_audit,
         support_check=support_check,
         metrics=m.as_dict(),
+        writing_check=writing_check,
     )
     return response

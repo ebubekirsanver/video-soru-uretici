@@ -203,14 +203,16 @@ def test_questions_stage_times_with_support_check(setup, runs_dir, monkeypatch):
     client.post("/api/questions", json={"url": VID, "check_support": True})
     _, record = only_record(runs_dir)
     # Saat: 0 başlangıç; fetch 10-20; clean 30-40; model adımı 50-80 (çağrı 60-70);
-    # destek kontrolü 90-140 (iki çağrı 100-110, 120-130); toplam 150
+    # yazım kuralları 90-100 (Aşama 9, b'de eklendi); destek kontrolü 110-160
+    # (iki çağrı 120-130, 140-150); toplam 170
     assert record["metrics"]["stages"] == {
         "transcript_fetch_ms": 10.0,
         "clean_ms": 10.0,
         "llm_questions_ms": 10.0,
         "quote_verify_ms": 20.0,
+        "writing_check_ms": 10.0,
         "support_check_ms": 50.0,
-        "total_ms": 150.0,
+        "total_ms": 170.0,
     }
 
 
@@ -218,8 +220,9 @@ def test_no_support_stage_when_check_off(setup, runs_dir):
     setup(make_llm(FakeCompletions()))
     client.post("/api/questions", json={"url": VID})
     _, record = only_record(runs_dir)
+    # writing_check_ms Aşama 9 (b)'de eklendi
     assert set(record["metrics"]["stages"]) == {
-        "transcript_fetch_ms", "clean_ms", "llm_questions_ms", "quote_verify_ms", "total_ms"
+        "transcript_fetch_ms", "clean_ms", "llm_questions_ms", "quote_verify_ms", "writing_check_ms", "total_ms"
     }
 
 

@@ -150,7 +150,7 @@ def test_on_record_has_support_check(setup, runs_dir):
     r = client.post("/api/questions", json={"url": VID, "check_support": True})
     (path,) = runs_dir.glob("*.json")
     record = runs.load_run(path)
-    assert record["record_version"] == 4  # Aşama 14: kayda outcome/metrics/error eklendi
+    assert record["record_version"] == 5  # Aşama 9 (b): kayda writing_check eklendi
     assert record["request"]["check_support"] is True
     assert record["response"] == r.json()
     sc = record["support_check"]

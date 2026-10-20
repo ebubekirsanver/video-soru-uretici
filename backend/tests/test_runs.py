@@ -136,7 +136,7 @@ def test_quote_audit_in_record(runs_enabled, use_llm, fake_transcript):
 
     (path,) = saved_files(runs_enabled)
     record = json.loads(path.read_text(encoding="utf-8"))
-    assert record["record_version"] == 4  # Aşama 14: kayda outcome/metrics/error eklendiği için sürüm 4
+    assert record["record_version"] == 5  # Aşama 9 (b): kayda writing_check eklendiği için sürüm 5
     assert record["response"] == r.json()  # yanıt kayıtta değiştirilmeden durur
 
     exact, trimmed, unverified = record["quote_audit"]
@@ -172,8 +172,8 @@ def test_summary_record_has_no_quote_audit(runs_enabled, use_llm, fake_transcrip
     client.post("/api/summary", json={"url": VID})
     (path,) = saved_files(runs_enabled)
     record = json.loads(path.read_text(encoding="utf-8"))
-    # Aşama 14: kayda outcome/metrics/error eklendiği için sürüm 4
-    assert record["record_version"] == 4 and "quote_audit" not in record and "support_check" not in record
+    # Aşama 9 (b): kayda writing_check eklendiği için sürüm 5
+    assert record["record_version"] == 5 and "quote_audit" not in record and "support_check" not in record
 
 
 def test_load_run_reads_old_format_record():
@@ -191,8 +191,8 @@ def test_load_run_reads_new_format_record(runs_enabled, use_llm, fake_transcript
     client.post("/api/questions", json={"url": VID})
     (path,) = saved_files(runs_enabled)
     record = runs.load_run(path)
-    # Aşama 14: kayda outcome/metrics/error eklendiği için sürüm 4
-    assert record["record_version"] == 4 and len(record["quote_audit"]) == 3 and record["support_check"] is None
+    # Aşama 9 (b): kayda writing_check eklendiği için sürüm 5
+    assert record["record_version"] == 5 and len(record["quote_audit"]) == 3 and record["support_check"] is None
 
 
 def test_saved_run_contains_no_api_key(runs_enabled, use_llm, fake_transcript):
