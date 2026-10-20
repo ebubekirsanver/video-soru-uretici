@@ -92,7 +92,12 @@ Listelerdeki kelimeler normalleştirilmiş hâldedir.
 
 ### 16: sayısal sıra
 - **Kural:** Bütün seçenekler tek bir sayıdan oluşuyorsa, önündeki ve arkasındaki metin her seçenekte aynıysa (ör. "1923", "%20", "350 °C") ve sayılar artan ya da azalan sırada değilse işaretlenir.
-- **Sayı biçimi:** Ondalık ayırıcı olarak virgül ve nokta kabul edilir. Binlik ayırıcıyla yazılmış sayılar ("1.500") ondalık okunur.
+- **Sayı biçimi (Türkçe yazım):**
+  - Noktadan sonra tam üç rakamlık gruplar binlik ayırıcıdır: "1.500" = 1500, "1.250.000" = 1250000.
+  - Virgül ondalık ayırıcıdır: "1,5" = 1,5.
+  - Noktadan sonra üç rakamdan farklı sayıda rakam geliyorsa ("1.5", "3.14") nokta ondalık sayılır.
+  - **Belirsizlik:** İngilizce yazımla "bir buçuk" anlamındaki "1.500" de 1500 okunur. İngilizce binlik yazımı "1,500" ise 1,5 okunur.
+  - **Değerlendirmeden önce düzeltildi (2026-10-20):** İlk hâlinde "1.500" ondalık (1,5) okunuyordu. Kural henüz hiçbir kayıtta kullanılmamıştı (`backend/runs/` altında `writing-rules-v1` içeren kayıt yoktu), bu yüzden sürüm `writing-rules-v1` olarak kaldı.
 - **Karıştırma değişikliği (2026-10-20):** Önceden kod (`shuffle_options`) seçenekleri her soruda karıştırıyordu; model sayıları sıralı yazsa bile son soruda sıra bozuluyor, işaret de çoğu zaman karıştırmadan geliyordu.
   - Artık seçeneklerin tamamı bu tanıma uyuyorsa (aynı birimle tek bir sayı ya da yıl) seçenekler karıştırılmıyor, küçükten büyüğe sıralanıyor ve `correct_index` buna göre güncelleniyor.
   - Sayı tanımı 16. kuralla aynı fonksiyondan geliyor (`writing_check.numeric_option_values`).

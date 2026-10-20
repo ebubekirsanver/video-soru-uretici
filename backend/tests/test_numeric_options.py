@@ -9,7 +9,7 @@ import random
 
 from app.services.questions import generate_questions, shuffle_options
 from app.services.transcript import Segment, Transcript
-from app.services.writing_check import check_question
+from app.services.writing_check import check_question, numeric_option_values
 
 
 def old_shuffle(question, options, correct_index):
@@ -84,3 +84,25 @@ def test_rule_16_not_flagged_on_final_questions():
     assert q.options == ["1919", "1920", "1923", "1938"]
     assert q.options[q.correct_index] == "1923"
     assert 16 not in [f.rule_id for f in check_question(q.question, q.options, q.correct_index)]
+
+
+# --- Türkçe sayı yazımı ---------------------------------------------------------
+
+
+def test_thousands_separator_sorted():
+    shuffled, correct = shuffle_options("Kaç kişi katıldı?", ["1.500", "800", "2.000", "950"], 0)
+    assert shuffled == ["800", "950", "1.500", "2.000"]
+    assert shuffled[correct] == "1.500"
+
+
+def test_decimal_comma_values_sorted():
+    shuffled, correct = shuffle_options("Değer kaçtır?", ["1,5", "2,25", "0,75", "3"], 1)
+    assert shuffled == ["0,75", "1,5", "2,25", "3"]
+    assert shuffled[correct] == "2,25"
+
+
+def test_turkish_number_reading():
+    assert numeric_option_values(["1.500", "1.250.000", "1.500,5", "1,5"]) == [1500.0, 1250000.0, 1500.5, 1.5]
+    # Noktadan sonra üç rakamdan farklı sayıda rakam: nokta ondalık sayılır (eski davranış)
+    assert numeric_option_values(["1.5", "3.14", "2.0", "10"]) == [1.5, 3.14, 2.0, 10.0]
+

@@ -93,7 +93,9 @@ _K_TYPE_PAIR = re.compile(rf"(?<!\w){_PREMISE}\s*(?:,|ve|veya|ile)\s*{_PREMISE}(
 _K_TYPE_ONLY = re.compile(rf"^\s*(?:Yalnız|Yalnızca|Sadece)\s+{_PREMISE}(?!\w)", re.IGNORECASE)
 
 # 16: önünde/arkasında aynı metin olan tek bir sayı ("1923", "%20", "350 °C", "1923 yılında")
-_NUMBER_OPTION = re.compile(r"^(\D*?)(-?\d+(?:[.,]\d+)?)(\D*)$")
+# Sayı: Türkçe binlik ayırıcılı ("1.500", "1.250.000", "1.500,5") ya da tek ayırıcılı ("1,5", "3.14")
+_NUMBER_OPTION = re.compile(r"^(\D*?)(-?\d{1,3}(?:\.\d{3})+(?:,\d+)?|-?\d+(?:[.,]\d+)?)(\D*)$")
+_THOUSANDS = re.compile(r"^-?\d{1,3}(?:\.\d{3})+(?:,\d+)?$")
 
 
 @dataclass
@@ -171,11 +173,24 @@ def _check_k_type(options: list[str]) -> list[WritingFlag]:
     return [_flag(14, "; ".join(hits))] if hits else []
 
 
+def _parse_number(text: str) -> float:
+    """Türkçe yazımla sayı okur.
+
+    Noktadan sonra tam üç rakamlık gruplar binlik ayırıcıdır ("1.500" = 1500,
+    "1.250.000" = 1250000), virgül ondalıktır ("1,5" = 1.5). Noktadan sonra üç
+    rakamdan farklı sayıda rakam geliyorsa ("1.5", "3.14") nokta ondalık sayılır.
+    Belirsizlik: İngilizce yazımlı "1.500" (bir buçuk) de 1500 okunur.
+    """
+    if _THOUSANDS.match(text):
+        return float(text.replace(".", "").replace(",", "."))
+    return float(text.replace(",", "."))
+
+
 def _parse_number_option(option: str) -> tuple[str, float, str] | None:
     m = _NUMBER_OPTION.match(option.strip())
     if not m:
         return None
-    return normalize(m.group(1)), float(m.group(2).replace(",", ".")), normalize(m.group(3))
+    return normalize(m.group(1)), _parse_number(m.group(2)), normalize(m.group(3))
 
 
 def numeric_option_values(options: list[str]) -> list[float] | None:
