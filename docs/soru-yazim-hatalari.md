@@ -43,7 +43,7 @@
 | 13 | Unfocused stem | Kök tek başına net bir soru sormuyor. | model | |
 | 14 | Complex or K-type | "I ve II", "Yalnız I" gibi birleşik seçenekler var. | kodla-kısmen | Romen rakamı ya da A-E büyük harfleriyle gösterilen öncüller aranır. |
 | 15 | Grammatical cues | Kök ile yalnızca doğru seçenek dilbilgisi olarak uyuşuyor. | bu sürümde kontrol edilmiyor | Türkçede ek uyumu (hâl ekleri, çoğul) için morfoloji çözümleyicisi gerekir; teknoloji kararı olduğu için eklenmedi. |
-| 16 | Lost sequence | Sayısal ya da kronolojik seçenekler sıralı değil. | kodla | **Bizim kodumuz seçenekleri karıştırdığı için bu işaret çoğu zaman karıştırmanın sonucudur.** Aşağıya bakın. |
+| 16 | Lost sequence | Sayısal ya da kronolojik seçenekler sıralı değil. | kodla | 2026-10-20'den beri kod, tamamı sayısal seçenekleri karıştırmak yerine sıralıyor; son sorularda bu işaret artık beklenmiyor. Aşağıya bakın. |
 | 17 | Vague terms | Seçeneklerde belirsiz sıklık ya da miktar ifadeleri var. | kodla-kısmen | Yalnızca tam kelime ya da öbek eşleşir. |
 | 18 | More than one correct | Birden çok seçenek doğru olabilir. | model | Transkripte göre yargı gerekir; sadakat denetimiyle örtüşür. |
 | 19 | Negative worded | Soru kökü olumsuz. | kodla-kısmen | Yanlış pozitif olabilir. Aşağıya bakın. |
@@ -93,8 +93,12 @@ Listelerdeki kelimeler normalleştirilmiş hâldedir.
 ### 16: sayısal sıra
 - **Kural:** Bütün seçenekler tek bir sayıdan oluşuyorsa, önündeki ve arkasındaki metin her seçenekte aynıysa (ör. "1923", "%20", "350 °C") ve sayılar artan ya da azalan sırada değilse işaretlenir.
 - **Sayı biçimi:** Ondalık ayırıcı olarak virgül ve nokta kabul edilir. Binlik ayırıcıyla yazılmış sayılar ("1.500") ondalık okunur.
-- **Karıştırma etkisi:** Kod (`shuffle_options`) seçenekleri her soruda karıştırıyor. Bu yüzden model sayıları sıralı yazsa bile son soruda sıra çoğu zaman bozulur, işaret de çoğu zaman bizim karıştırmamızdan gelir.
-- **Bu sürümde:** Karıştırma değiştirilmedi, çünkü API yanıtı değişmeyecekti. Sayısal seçenekleri sıralı bırakmak ayrı bir karar.
+- **Karıştırma değişikliği (2026-10-20):** Önceden kod (`shuffle_options`) seçenekleri her soruda karıştırıyordu; model sayıları sıralı yazsa bile son soruda sıra bozuluyor, işaret de çoğu zaman karıştırmadan geliyordu.
+  - Artık seçeneklerin tamamı bu tanıma uyuyorsa (aynı birimle tek bir sayı ya da yıl) seçenekler karıştırılmıyor, küçükten büyüğe sıralanıyor ve `correct_index` buna göre güncelleniyor.
+  - Sayı tanımı 16. kuralla aynı fonksiyondan geliyor (`writing_check.numeric_option_values`).
+  - Diğer sorularda karıştırma değişmedi. API yanıtının biçimi aynı.
+  - Bu yüzden 16. kural son sorularda artık işaretlememeli. Kural yine de kodda duruyor; karıştırmadan bağımsız olarak da denetlenebilsin diye.
+  - Kuralın tanımı değişmediği için kural sürümü `writing-rules-v1` olarak kaldı.
 
 ### 17: belirsiz ifadeler (seçeneklerde)
 - **Kelimeler:** bazen, genellikle, genelde, sıklıkla, çoğunlukla, nadiren, ara sıra, zaman zaman, çoğu zaman

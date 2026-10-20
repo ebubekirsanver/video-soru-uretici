@@ -439,3 +439,20 @@ Kod değiştirilmedi, model çağrısı yapılmadı.
   - 1, 2, 5, 8, 13 ve 18. maddeler model gerektiriyor; 7 ve 15. maddeler için güvenilir bir Türkçe kural bulunamadı.
   - Olumsuz kök (19) ve kelime tekrarı (12) kurallarında yanlış pozitif ve kaçırma bekleniyor.
   - Sayısal sıra (16) işareti, kodun seçenekleri karıştırması yüzünden çoğu zaman karıştırmadan geliyor; karıştırma değiştirilmedi.
+
+## Sayısal seçeneklerin sıralanması (2026-10-20)
+
+- **Ne yapıldı:**
+  - `shuffle_options` artık seçeneklerin tamamı aynı birimle tek bir sayı ya da yılsa seçenekleri karıştırmıyor; küçükten büyüğe sıralıyor ve `correct_index`'i buna göre güncelliyor.
+  - Gerekçe: Moore vd. (2023), Tablo 1, madde 16 (Lost sequence). Önceki karıştırma, model sayıları sıralı yazsa bile sırayı bozuyordu.
+  - Sayı tanımı 16. kuralla aynı fonksiyondan geliyor (`writing_check.numeric_option_values`).
+  - Diğer sorularda karıştırma değişmedi. API yanıtının biçimi aynı. Kural sürümü `writing-rules-v1` olarak kaldı.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 283 test geçti (önceki 276 ve 7 yeni test, `tests/test_numeric_options.py`). Mevcut testler değişmedi.
+  - Sayılar ve yıllar sıralanıyor, `correct_index` doğru seçeneği gösteriyor.
+  - Karışık (sayı ve metin) ya da birimleri farklı seçenekler eskisiyle aynı biçimde karıştırılıyor.
+  - Son sorularda 16. kural işaretlemiyor.
+  - Model çağrısı yapılmadı.
+- **Bilinen sınırlar:**
+  - Binlik ayırıcıyla yazılmış sayılar ("1.500") ondalık okunuyor.
+  - Yazıyla yazılmış sayılar ve tarih aralıkları ("1914-1918") sayısal sayılmıyor, bu yüzden eskisi gibi karıştırılıyor.
