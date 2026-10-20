@@ -415,3 +415,27 @@ Kod değiştirilmedi, model çağrısı yapılmadı.
   - Günlük (logging) yapılandırması bakılmadı.
   - Gerçek bir çalıştırmayla kayıt henüz gözle incelenmedi; gerçek `usage` değerleri görülmedi.
   - `/api/transcript` uç noktası kaydedilmiyor (değişmedi). Beklenmeyen 500 hataları kayda geçmiyor.
+
+## Aşama 9 (b) · Kodla kontrol edilen soru yazım kuralları (2026-10-20)
+
+- **Ne yapıldı:**
+  - Moore vd. (2023, arXiv 2307.08161, Tablo 1) 19 maddelik soru yazım hataları listesi [docs/soru-yazim-hatalari.md](soru-yazim-hatalari.md) belgesine yazıldı. Kullanıcı madde adlarını ve sırasını makaledeki tabloyla karşılaştırdı.
+  - Her madde sınıflandı: kodla, kodla-kısmen, model ya da bu sürümde kontrol edilmiyor.
+  - `services/writing_check.py` (`writing-rules-v1`) 11 maddeyi kodla kontrol ediyor: 3, 4, 6, 9, 10, 11, 12, 14, 16, 17, 19.
+  - Kurallar yalnızca işaretliyor; soru atılmıyor, API yanıtı değişmedi.
+  - Kontrol, seçenekler karıştırıldıktan sonraki son sorular üzerinde çalışıyor.
+  - Sonuç kayıtta `writing_check` alanına (soru başına `rule_id`, `rule_name`, `detail`), süresi `metrics.stages.writing_check_ms` alanına yazılıyor.
+  - `record_version` 4'ten 5'e çıktı; `load_run` eski kayıtlarda `writing_check=None` veriyor.
+  - Eşikler ve anahtar kelime listeleri kodda sabit ve belgede yazılı (ör. en uzun seçenek için 1,3 kat).
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 276 test geçti (önceki 238 ve 38 yeni test, `tests/test_writing_check.py`).
+  - Her kural için olumlu ve olumsuz örnek var.
+  - En uzun seçenek kuralının karıştırılmış `correct_index` ile çalıştığı, API yanıtının değişmediği ve işaretlerin yalnızca kayda yazıldığı test edildi.
+  - Güncellenen mevcut testler: sürümü denetleyen 4 test 4'ten 5'e. Soru uç noktasının aşama anahtarlarını birebir denetleyen 2 test, yeni `writing_check_ms` aşaması nedeniyle güncellendi.
+  - Model çağrısı yapılmadı.
+- **Bilinen sınırlar:**
+  - Kurallar mevcut sorular üzerinde çalıştırılmadı; isabetleri ölçülmedi.
+  - Liste İngilizce sorular için hazırlandı, Türkçede denenmedi.
+  - 1, 2, 5, 8, 13 ve 18. maddeler model gerektiriyor; 7 ve 15. maddeler için güvenilir bir Türkçe kural bulunamadı.
+  - Olumsuz kök (19) ve kelime tekrarı (12) kurallarında yanlış pozitif ve kaçırma bekleniyor.
+  - Sayısal sıra (16) işareti, kodun seçenekleri karıştırması yüzünden çoğu zaman karıştırmadan geliyor; karıştırma değiştirilmedi.
