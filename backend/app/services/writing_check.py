@@ -178,15 +178,24 @@ def _parse_number_option(option: str) -> tuple[str, float, str] | None:
     return normalize(m.group(1)), float(m.group(2).replace(",", ".")), normalize(m.group(3))
 
 
-def _check_sequence(options: list[str]) -> list[WritingFlag]:
+def numeric_option_values(options: list[str]) -> list[float] | None:
+    """Bütün seçenekler aynı birimle tek bir sayıysa sayıları döndürür, değilse None.
+
+    Önündeki ve arkasındaki metin her seçenekte aynı olmalı ("1923", "%20",
+    "350 °C"). 16. kural ve seçenek karıştırma (`questions.shuffle_options`)
+    aynı tanımı kullanır.
+    """
     parsed = [_parse_number_option(o) for o in options]
     if any(p is None for p in parsed):
-        return []
-    # Önündeki ve arkasındaki metin bütün seçeneklerde aynı olmalı (aynı birim)
+        return None
     if len({(p[0], p[2]) for p in parsed}) != 1:
-        return []
-    values = [p[1] for p in parsed]
-    if len(set(values)) < 2 or values == sorted(values) or values == sorted(values, reverse=True):
+        return None
+    return [p[1] for p in parsed]
+
+
+def _check_sequence(options: list[str]) -> list[WritingFlag]:
+    values = numeric_option_values(options)
+    if values is None or len(set(values)) < 2 or values == sorted(values) or values == sorted(values, reverse=True):
         return []
     return [_flag(16, "Sayısal seçenekler sıralı değil: " + ", ".join(o.strip() for o in options))]
 

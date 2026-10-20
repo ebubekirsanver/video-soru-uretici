@@ -20,6 +20,7 @@ from app.services.llm import LLMClient, LLMError
 from app.services.prompts import BLOCK_SECONDS, fill_prompt, load_prompt, transcript_context
 from app.services.quotes import QuoteLocator, normalize
 from app.services.transcript import Transcript
+from app.services.writing_check import numeric_option_values
 
 logger = logging.getLogger(__name__)
 
@@ -146,7 +147,19 @@ def shuffle_options(question: str, options: list[str], correct_index: int) -> tu
     Tohum soru metninden türetilir (sha256; Python'un hash() fonksiyonu her
     çalıştırmada değiştiği için kullanılmaz), böylece aynı soru her seferinde
     aynı sırayı verir ve sonuçlar tekrarlanabilir.
+
+    İstisna: seçeneklerin tamamı aynı birimle tek bir sayı ya da yılsa
+    karıştırılmaz, küçükten büyüğe sıralanır. Sayısal seçenekleri karışık
+    sırada vermek bir soru yazım hatasıdır: Moore vd. (2023), Tablo 1,
+    madde 16 (Lost sequence). Sayı tanımı 16. kuralla aynıdır
+    (`writing_check.numeric_option_values`).
     """
+    values = numeric_option_values(options)
+    if values is not None:
+        # sorted kararlıdır: eşit değerler modelin verdiği sırada kalır
+        order = sorted(range(len(options)), key=lambda i: values[i])
+        return [options[i] for i in order], order.index(correct_index)
+
     seed = int.from_bytes(hashlib.sha256(question.encode("utf-8")).digest()[:8], "big")
     order = list(range(len(options)))
     random.Random(seed).shuffle(order)
