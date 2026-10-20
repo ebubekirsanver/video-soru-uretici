@@ -1,0 +1,684 @@
+{
+  "experiment": "asama-9-yazim-kurallari-1",
+  "note": "Yalnızca kodla yapılan kontrol; model çağrısı yok. Etiketler .md dosyasında elle verilecek.",
+  "run_at": "2026-10-20T18:22:25+03:00",
+  "rules_version": "writing-rules-v1",
+  "code_commit": "12a9a638f69aa2d8dd5934049acafd6b94afa363",
+  "source_files": [
+    {
+      "file": "asama-12d-test-1.json",
+      "sha256": "99e705a310b29a317cf78df5bbb46757c325f15991b776ae23731d7ae357d57a",
+      "questions_in_file": 5
+    },
+    {
+      "file": "asama-6-test-1-kemosentez.json",
+      "sha256": "9cc69ce186d7277739fb22a59ff4f58f85ef95ae329a3d7da32aba89aaa20462",
+      "questions_in_file": 4
+    },
+    {
+      "file": "asama-6-test-2-kemosentez.json",
+      "sha256": "0ef6daf96267e5193dcd6187b5832f2a91eec2f6ebdd75011e333546d2ffe72f",
+      "questions_in_file": 4
+    },
+    {
+      "file": "asama-6-test-2-tarih.json",
+      "sha256": "6f79b586f03005c7237e4422061b3ec27af0c595e4b0c7623a9470c01ae1598a",
+      "questions_in_file": 5
+    },
+    {
+      "file": "dogrulama-yanlis-red-1.json",
+      "sha256": "1f2854d5025f525a1eb9a74ea1599cb3ee8a051589db58f769e458cc6bc8dd50",
+      "questions_in_file": 4
+    },
+    {
+      "file": "genelleme-1-edebiyat.json",
+      "sha256": "1cfbaaadf3bc25a923ec9fbe599b90134d208f6769f00b349b3b125fe519196c",
+      "questions_in_file": 5
+    },
+    {
+      "file": "genelleme-1-ingilizce.json",
+      "sha256": "1d97ad31bce6568f37c850e9022fb3167f68314f403bd5ea746a3bda5e885469",
+      "questions_in_file": 5
+    },
+    {
+      "file": "genelleme-1-matematik.json",
+      "sha256": "acfd8bf11a3968b10d7845b44a11cc4b01fa23399c5dcc916badf40a98d986d6",
+      "questions_in_file": 5
+    },
+    {
+      "file": "genelleme-1-python.json",
+      "sha256": "73086274ecf88bac9d333b188dbc00f5a04f650d999b7294c57745d6f1076d7d",
+      "questions_in_file": 5
+    }
+  ],
+  "unique_questions": 36,
+  "duplicates_skipped": 6,
+  "flag_counts": {
+    "3": 0,
+    "4": 3,
+    "6": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "14": 0,
+    "16": 5,
+    "17": 0,
+    "19": 4
+  },
+  "flagged_questions": 12,
+  "results": [
+    {
+      "file": "asama-12d-test-1.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 1,
+      "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretirler?",
+      "options": [
+        "Kimyasal enerji",
+        "Işık enerjisi",
+        "Termal enerji",
+        "Mekanik enerji"
+      ],
+      "correct_index": 0,
+      "correct_option": "Kimyasal enerji",
+      "flags": []
+    },
+    {
+      "file": "asama-12d-test-1.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 2,
+      "question": "Hidrotermal bacaların etrafında hangi canlılar yaşayabilir?",
+      "options": [
+        "Yalnızca memeliler",
+        "Kemosentetik canlılar",
+        "Fotosentetik canlılar",
+        "Sadece balıklar"
+      ],
+      "correct_index": 1,
+      "correct_option": "Kemosentetik canlılar",
+      "flags": []
+    },
+    {
+      "file": "asama-12d-test-1.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 3,
+      "question": "Kemosentez sırasında hangi madde açığa çıkmaz?",
+      "options": [
+        "Su",
+        "Oksijen",
+        "Enerji",
+        "Karbondioksit"
+      ],
+      "correct_index": 1,
+      "correct_option": "Oksijen",
+      "flags": [
+        {
+          "rule_id": 19,
+          "rule_name": "Negative worded",
+          "detail": "Olumsuz ifade: çıkmaz"
+        }
+      ]
+    },
+    {
+      "file": "asama-12d-test-1.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 4,
+      "question": "Kemosentetik canlıların hücre yapısı nedir?",
+      "options": [
+        "Mikroskobik",
+        "Hibrid",
+        "Prokaryot",
+        "Ökaryot"
+      ],
+      "correct_index": 2,
+      "correct_option": "Prokaryot",
+      "flags": []
+    },
+    {
+      "file": "asama-12d-test-1.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 5,
+      "question": "Kemosentez hangi koşullarda gerçekleşebilir?",
+      "options": [
+        "Sadece gece",
+        "Gündüz ve gece",
+        "Sadece su altında",
+        "Sadece gündüz"
+      ],
+      "correct_index": 1,
+      "correct_option": "Gündüz ve gece",
+      "flags": []
+    },
+    {
+      "file": "asama-6-test-1-kemosentez.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 2,
+      "question": "Hidrotermal bacaların bulunduğu yerler hakkında hangi ifade doğrudur?",
+      "options": [
+        "Işık vardır",
+        "Yüzeyde bulunur",
+        "Sıcaklık 0°C'dir",
+        "Okyanus tabanında yer alır"
+      ],
+      "correct_index": 3,
+      "correct_option": "Okyanus tabanında yer alır",
+      "flags": [
+        {
+          "rule_id": 4,
+          "rule_name": "Longest option correct",
+          "detail": "Doğru seçenek 26 karakter, en uzun çeldirici 16 karakter"
+        }
+      ]
+    },
+    {
+      "file": "asama-6-test-1-kemosentez.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 3,
+      "question": "Kemosentez yapan canlıların hücre yapısı nedir?",
+      "options": [
+        "Süper hücre",
+        "Ökaryot",
+        "Prokaryot",
+        "Hibrid"
+      ],
+      "correct_index": 2,
+      "correct_option": "Prokaryot",
+      "flags": []
+    },
+    {
+      "file": "asama-6-test-2-kemosentez.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 1,
+      "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretimi gerçekleştirir?",
+      "options": [
+        "Termal enerji",
+        "Işık enerjisi",
+        "Nükleer enerji",
+        "Kimyasal enerji"
+      ],
+      "correct_index": 3,
+      "correct_option": "Kimyasal enerji",
+      "flags": []
+    },
+    {
+      "file": "asama-6-test-2-kemosentez.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 2,
+      "question": "Hidrotermal bacaların bulunduğu ortamda hangi canlılar yaşayabilir?",
+      "options": [
+        "Sadece balıklar",
+        "Sadece memeliler",
+        "Kemosentetik canlılar",
+        "Fotosentetik canlılar"
+      ],
+      "correct_index": 2,
+      "correct_option": "Kemosentetik canlılar",
+      "flags": []
+    },
+    {
+      "file": "asama-6-test-2-tarih.json",
+      "video_id": "aaCHLYO3Fzg",
+      "index_in_file": 1,
+      "question": "Malazgirt Savaşı hangi yıllarda gerçekleşmiştir?",
+      "options": [
+        "1081",
+        "1066",
+        "1096",
+        "1071"
+      ],
+      "correct_index": 3,
+      "correct_option": "1071",
+      "flags": [
+        {
+          "rule_id": 16,
+          "rule_name": "Lost sequence",
+          "detail": "Sayısal seçenekler sıralı değil: 1081, 1066, 1096, 1071"
+        }
+      ]
+    },
+    {
+      "file": "asama-6-test-2-tarih.json",
+      "video_id": "aaCHLYO3Fzg",
+      "index_in_file": 2,
+      "question": "Danışmentlilerin kurulduğu bölgeler arasında hangisi yer almaz?",
+      "options": [
+        "Amasya",
+        "İzmir",
+        "Kayseri",
+        "Tokat"
+      ],
+      "correct_index": 1,
+      "correct_option": "İzmir",
+      "flags": [
+        {
+          "rule_id": 19,
+          "rule_name": "Negative worded",
+          "detail": "Olumsuz ifade: almaz"
+        }
+      ]
+    },
+    {
+      "file": "asama-6-test-2-tarih.json",
+      "video_id": "aaCHLYO3Fzg",
+      "index_in_file": 3,
+      "question": "Kösedağ Savaşı'nda Türkiye Selçuklu Devleti kime karşı savaşmıştır?",
+      "options": [
+        "Moğollar",
+        "Gürcüler",
+        "Bizans",
+        "Haçlılar"
+      ],
+      "correct_index": 0,
+      "correct_option": "Moğollar",
+      "flags": []
+    },
+    {
+      "file": "asama-6-test-2-tarih.json",
+      "video_id": "aaCHLYO3Fzg",
+      "index_in_file": 4,
+      "question": "Mir Kefalon Savaşı'nın önemi nedir?",
+      "options": [
+        "Haçlıların Anadolu'ya girmesi",
+        "Bizans'ın Anadolu'daki hakimiyetini artırması",
+        "Anadolu'dan Türklerin atılma ihtimalini ortadan kaldırması",
+        "Türklerin denizcilik yapmaya başlaması"
+      ],
+      "correct_index": 2,
+      "correct_option": "Anadolu'dan Türklerin atılma ihtimalini ortadan kaldırması",
+      "flags": []
+    },
+    {
+      "file": "asama-6-test-2-tarih.json",
+      "video_id": "aaCHLYO3Fzg",
+      "index_in_file": 5,
+      "question": "1. Haçlı Seferi'nin temel amacı nedir?",
+      "options": [
+        "Bizans'ı güçlendirmek",
+        "Kudüs'ü ele geçirmek",
+        "Türkleri Anadolu'dan atmak",
+        "Ticaret yollarını kontrol etmek"
+      ],
+      "correct_index": 1,
+      "correct_option": "Kudüs'ü ele geçirmek",
+      "flags": []
+    },
+    {
+      "file": "dogrulama-yanlis-red-1.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 1,
+      "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretir?",
+      "options": [
+        "Nükleer enerji",
+        "Işık enerjisi",
+        "Kimyasal enerji",
+        "Termal enerji"
+      ],
+      "correct_index": 2,
+      "correct_option": "Kimyasal enerji",
+      "flags": []
+    },
+    {
+      "file": "dogrulama-yanlis-red-1.json",
+      "video_id": "109kCbVtU1U",
+      "index_in_file": 2,
+      "question": "Hidrotermal bacaların iç kısımlarındaki sıcaklık aralığı nedir?",
+      "options": [
+        "200-300 °C",
+        "400-450 °C",
+        "350-400 °C",
+        "100-200 °C"
+      ],
+      "correct_index": 2,
+      "correct_option": "350-400 °C",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-edebiyat.json",
+      "video_id": "fgOxbhEMnQQ",
+      "index_in_file": 1,
+      "question": "Milli Edebiyat Dönemi'nin temel özelliklerinden biri nedir?",
+      "options": [
+        "Arapça ve Farsça sözcüklerin kullanımı",
+        "Sanat için sanat anlayışı",
+        "Halka yönelme",
+        "Sadece İstanbul Türkçesi kullanılması"
+      ],
+      "correct_index": 2,
+      "correct_option": "Halka yönelme",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-edebiyat.json",
+      "video_id": "fgOxbhEMnQQ",
+      "index_in_file": 2,
+      "question": "Milli Edebiyat Dönemi'nde hangi dil anlayışı benimsenmiştir?",
+      "options": [
+        "Fransızca",
+        "Arapça",
+        "Sade Türkçe",
+        "Ağır ve süslü dil"
+      ],
+      "correct_index": 2,
+      "correct_option": "Sade Türkçe",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-edebiyat.json",
+      "video_id": "fgOxbhEMnQQ",
+      "index_in_file": 3,
+      "question": "Milli Edebiyat Dönemi'nde hangi akım ön plana çıkmıştır?",
+      "options": [
+        "Türkçülük",
+        "İslamcılık",
+        "Osmanlıcılık",
+        "Batıcılık"
+      ],
+      "correct_index": 0,
+      "correct_option": "Türkçülük",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-edebiyat.json",
+      "video_id": "fgOxbhEMnQQ",
+      "index_in_file": 4,
+      "question": "Milli Edebiyat Dönemi'nde eserlerinde Anadolu insanını konu alan yazar kimdir?",
+      "options": [
+        "Ömer Seyfettin",
+        "Halide Edip Adıvar",
+        "Refik Halit Karay",
+        "Yakup Kadri Karaosmanoğlu"
+      ],
+      "correct_index": 2,
+      "correct_option": "Refik Halit Karay",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-edebiyat.json",
+      "video_id": "fgOxbhEMnQQ",
+      "index_in_file": 5,
+      "question": "Milli Edebiyat Dönemi'nde hangi tür hikaye yazılmaktadır?",
+      "options": [
+        "Durum hikayesi",
+        "Roman",
+        "Kısa hikaye",
+        "Olay hikayesi"
+      ],
+      "correct_index": 3,
+      "correct_option": "Olay hikayesi",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-ingilizce.json",
+      "video_id": "FetnCoTS9qY",
+      "index_in_file": 1,
+      "question": "Yüz kalıbı hangi durumlarda kullanılır?",
+      "options": [
+        "Sadece olumlu cümlelerde",
+        "Gelecek zaman için",
+        "Geçmişte sürekli yapılan ama artık yapılmayan eylemler için",
+        "Sadece olumsuz cümlelerde"
+      ],
+      "correct_index": 2,
+      "correct_option": "Geçmişte sürekli yapılan ama artık yapılmayan eylemler için",
+      "flags": [
+        {
+          "rule_id": 4,
+          "rule_name": "Longest option correct",
+          "detail": "Doğru seçenek 59 karakter, en uzun çeldirici 25 karakter"
+        }
+      ]
+    },
+    {
+      "file": "genelleme-1-ingilizce.json",
+      "video_id": "FetnCoTS9qY",
+      "index_in_file": 2,
+      "question": "Yüz kalıbının olumsuz hali nasıl oluşturulur?",
+      "options": [
+        "Yüz ifadesi + özne + didn't",
+        "Özne + didn't + yüz ifadesi",
+        "Özne + yüz ifadesi + did",
+        "Özne + yüz ifadesi + didn't"
+      ],
+      "correct_index": 1,
+      "correct_option": "Özne + didn't + yüz ifadesi",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-ingilizce.json",
+      "video_id": "FetnCoTS9qY",
+      "index_in_file": 3,
+      "question": "Yüz kalıbı ile soru cümlesi oluştururken hangi ifade cümlenin başında yer alır?",
+      "options": [
+        "Is",
+        "Did",
+        "Does",
+        "Do"
+      ],
+      "correct_index": 1,
+      "correct_option": "Did",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-ingilizce.json",
+      "video_id": "FetnCoTS9qY",
+      "index_in_file": 4,
+      "question": "Yüz kalıbı ile olumlu bir cümle kurmak için hangi özne kullanılmaz?",
+      "options": [
+        "It",
+        "She",
+        "He",
+        "I"
+      ],
+      "correct_index": 0,
+      "correct_option": "It",
+      "flags": [
+        {
+          "rule_id": 19,
+          "rule_name": "Negative worded",
+          "detail": "Olumsuz ifade: kullanılmaz"
+        }
+      ]
+    },
+    {
+      "file": "genelleme-1-ingilizce.json",
+      "video_id": "FetnCoTS9qY",
+      "index_in_file": 5,
+      "question": "Yüz kalıbı ile olumsuz cümle kurarken hangi kelime kullanılmaz?",
+      "options": [
+        "Aren't",
+        "Did",
+        "Didn't",
+        "Wasn't"
+      ],
+      "correct_index": 2,
+      "correct_option": "Didn't",
+      "flags": [
+        {
+          "rule_id": 19,
+          "rule_name": "Negative worded",
+          "detail": "Olumsuz ifade: kullanılmaz"
+        }
+      ]
+    },
+    {
+      "file": "genelleme-1-matematik.json",
+      "video_id": "edSvMQ77TmU",
+      "index_in_file": 1,
+      "question": "Açıortay teoremi neyi ifade eder?",
+      "options": [
+        "Bir açının kollarının oranı",
+        "Bir üçgenin alanını",
+        "Bir üçgenin çevresini",
+        "Bir açının ölçüsünü"
+      ],
+      "correct_index": 0,
+      "correct_option": "Bir açının kollarının oranı",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-matematik.json",
+      "video_id": "edSvMQ77TmU",
+      "index_in_file": 2,
+      "question": "İç açıortay teoremi hangi durumlarda kullanılır?",
+      "options": [
+        "Açıortay çizildiğinde",
+        "İkizkenar üçgenlerde",
+        "Dış açıortay çizildiğinde",
+        "Dik üçgenlerde"
+      ],
+      "correct_index": 0,
+      "correct_option": "Açıortay çizildiğinde",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-matematik.json",
+      "video_id": "edSvMQ77TmU",
+      "index_in_file": 3,
+      "question": "Açıortay teoremi ile ilgili oranlar nasıl yazılır?",
+      "options": [
+        "Kenarortay ile",
+        "Kenar uzunlukları ile",
+        "Açı ölçüleri ile",
+        "Dış açı ile"
+      ],
+      "correct_index": 1,
+      "correct_option": "Kenar uzunlukları ile",
+      "flags": [
+        {
+          "rule_id": 4,
+          "rule_name": "Longest option correct",
+          "detail": "Doğru seçenek 21 karakter, en uzun çeldirici 16 karakter"
+        }
+      ]
+    },
+    {
+      "file": "genelleme-1-matematik.json",
+      "video_id": "edSvMQ77TmU",
+      "index_in_file": 4,
+      "question": "Açıortay teoremi ispatında hangi yöntem önerilmektedir?",
+      "options": [
+        "Dış açı yöntemi",
+        "Kenarortay yöntemi",
+        "Eşlik benzerlik yöntemi",
+        "Dik üçgen yöntemi"
+      ],
+      "correct_index": 2,
+      "correct_option": "Eşlik benzerlik yöntemi",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-matematik.json",
+      "video_id": "edSvMQ77TmU",
+      "index_in_file": 5,
+      "question": "Açıortay teoremi uygulandığında hangi oranlar eşit olur?",
+      "options": [
+        "Dış açı uzunlukları",
+        "Kenar uzunlukları",
+        "Kenarortay uzunlukları",
+        "Açı ölçüleri"
+      ],
+      "correct_index": 1,
+      "correct_option": "Kenar uzunlukları",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-python.json",
+      "video_id": "CEr_UiR4Gvk",
+      "index_in_file": 1,
+      "question": "Python hangi yıl yayınlanmıştır?",
+      "options": [
+        "1991",
+        "1994",
+        "2000",
+        "1989"
+      ],
+      "correct_index": 0,
+      "correct_option": "1991",
+      "flags": [
+        {
+          "rule_id": 16,
+          "rule_name": "Lost sequence",
+          "detail": "Sayısal seçenekler sıralı değil: 1991, 1994, 2000, 1989"
+        }
+      ]
+    },
+    {
+      "file": "genelleme-1-python.json",
+      "video_id": "CEr_UiR4Gvk",
+      "index_in_file": 2,
+      "question": "Python hangi sürümünü bu eğitimde kullanacağını belirtmiştir?",
+      "options": [
+        "Python 2.7",
+        "Python 3.11",
+        "Python 3.13",
+        "Python 3.12"
+      ],
+      "correct_index": 2,
+      "correct_option": "Python 3.13",
+      "flags": [
+        {
+          "rule_id": 16,
+          "rule_name": "Lost sequence",
+          "detail": "Sayısal seçenekler sıralı değil: Python 2.7, Python 3.11, Python 3.13, Python 3.12"
+        }
+      ]
+    },
+    {
+      "file": "genelleme-1-python.json",
+      "video_id": "CEr_UiR4Gvk",
+      "index_in_file": 3,
+      "question": "Python ile hangi alanda çalışmalar yapılabilir?",
+      "options": [
+        "Sadece masaüstü yazılımı",
+        "Veri analizi",
+        "Sadece oyun geliştirme",
+        "Sadece web geliştirme"
+      ],
+      "correct_index": 1,
+      "correct_option": "Veri analizi",
+      "flags": []
+    },
+    {
+      "file": "genelleme-1-python.json",
+      "video_id": "CEr_UiR4Gvk",
+      "index_in_file": 4,
+      "question": "Python'un ilk resmi sürümü ne zaman çıkmıştır?",
+      "options": [
+        "2000",
+        "2008",
+        "1994",
+        "1991"
+      ],
+      "correct_index": 2,
+      "correct_option": "1994",
+      "flags": [
+        {
+          "rule_id": 16,
+          "rule_name": "Lost sequence",
+          "detail": "Sayısal seçenekler sıralı değil: 2000, 2008, 1994, 1991"
+        }
+      ]
+    },
+    {
+      "file": "genelleme-1-python.json",
+      "video_id": "CEr_UiR4Gvk",
+      "index_in_file": 5,
+      "question": "Python 2'nin son sürümü ne zaman çıkmıştır?",
+      "options": [
+        "2020",
+        "2015",
+        "2008",
+        "2010"
+      ],
+      "correct_index": 3,
+      "correct_option": "2010",
+      "flags": [
+        {
+          "rule_id": 16,
+          "rule_name": "Lost sequence",
+          "detail": "Sayısal seçenekler sıralı değil: 2020, 2015, 2008, 2010"
+        }
+      ]
+    }
+  ]
+}
