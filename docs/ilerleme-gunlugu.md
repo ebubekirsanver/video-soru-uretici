@@ -454,5 +454,26 @@ Kod değiştirilmedi, model çağrısı yapılmadı.
   - Son sorularda 16. kural işaretlemiyor.
   - Model çağrısı yapılmadı.
 - **Bilinen sınırlar:**
-  - Binlik ayırıcıyla yazılmış sayılar ("1.500") ondalık okunuyor.
+  - Binlik ayırıcıyla yazılmış sayılar ("1.500") ondalık okunuyor. (20 Ekim'de düzeltildi, bkz. 2583c79)
   - Yazıyla yazılmış sayılar ve tarih aralıkları ("1914-1918") sayısal sayılmıyor, bu yüzden eskisi gibi karıştırılıyor.
+
+## Türkçe sayı okuma düzeltmesi ve yazım kuralları değerlendirmesi 1 (2026-10-20)
+
+- **Türkçe sayı okuma (`2583c79`):**
+  - `numeric_option_values` artık noktadan sonra tam üç rakamlık grupları binlik ayırıcı ("1.500" = 1500, "1.250.000" = 1250000), virgülü ondalık ("1,5" = 1,5) okuyor.
+  - Noktadan sonra üç rakamdan farklı sayıda rakam varsa ("1.5", "3.14") eski davranış korunuyor. Belirsizlik `docs/soru-yazim-hatalari.md`'de yazılı.
+  - `backend/runs/` altında `writing-rules-v1` içeren kayıt olmadığı için kural sürümü değişmedi; "değerlendirmeden önce düzeltildi" notu eklendi.
+  - `pytest` sonucu: 286 test geçti (önceki 283 ve 3 yeni test).
+- **Yazım kuralları değerlendirmesi 1** ([bulgu](bulgular/asama-9-yazim-kurallari-1.md)):
+  - İkili ölçüt, değerlendirme çalışmadan önce commit'lendi.
+  - Betik, `docs/bulgular` altındaki commit'li sorular üzerinde bir kez çalıştı; model çağrısı yok.
+  - 36 benzersiz soru (5 video) tarandı, 12 işaret çıktı.
+  - Kullanıcının etiketleri: 9 doğru, 3 yanlış. Kural başına: 16 (Lost sequence) 5/5 doğru, 19 (Negative worded) 4/4 doğru, 4 (Longest option correct) 0/3 doğru.
+  - Sınırlar:
+    - Yalnızca yanlış pozitifler ölçüldü; işaretlenmeyen 24 soru etiketlenmedi, kaçırılan hatalar ölçülmedi.
+    - Etiketler sonuçlar görüldükten sonra verildi.
+    - Örnek küçük.
+    - 16. kural işaretleri eski karıştırmadan kaynaklanmış olabilir.
+- **4. kural kararı:**
+  - Eşik (1,3) bu sonuçlara bakarak değiştirilmedi. Değişiklik gerekirse `writing-rules-v2` olarak yeni sorularla değerlendirilecek.
+  - Kullanıcının görüşü: "doğru seçeneğin belirgin uzun olmasının önüne geçilmeli." Bu, `questions-v1` değiştirilmeden ileride ele alınacak: soru istemi v2'de bir kural olarak ya da Aşama 10 (yeniden üretim) içinde.
