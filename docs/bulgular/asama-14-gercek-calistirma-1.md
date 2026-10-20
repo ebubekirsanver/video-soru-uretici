@@ -25,17 +25,23 @@
 
 ## Hata isteği (videosu olmayan bağlantı)
 
-- `...-error.json` adıyla bir hata kaydı oluştu.
+- **Deneme:** Kullanıcı 20 Ekim 2026'da arayüzden, biçimi geçerli ama videosu olmayan bir bağlantıyla (`watch?v=xxxxxxxxxxx`) istek gönderdi.
+- **Arayüzde görülen:** "Bu videonun altyazısı alınamadı. Video bulunamadı ya da erişilemiyor."
+- `...-error.json` adıyla bir hata kaydı oluştu. Kullanıcı bu denemede dosyanın tam adını aktarmadı.
 - Kullanıcı kayıtta şunları gördü:
   - `outcome: "error"`
-  - `error.kind` ve `error.stage` alanları dolu
+  - `error.status_code: 404`
+  - `error.kind: "transcript_unavailable"`
+  - `error.stage: "transcript_fetch"`
+  - `error.detail: "Video bulunamadı ya da erişilemiyor."`
   - `response: null`
   - dosyada `sk-` dizgisi yok
+- **Not, geçersiz biçimli bağlantı:** Arayüz, geçersiz biçimli bir bağlantıyı (ör. `abc`) kendi içinde durduruyor. Bu durumda backend'e istek gitmiyor ve hata kaydı oluşmuyor. Bu yüzden `invalid_url` kaydı arayüzden üretilemedi, yalnızca birim testlerle kapsanıyor.
 
 ## Sınırlar
 
 - **Tek çalıştırma:** Ortalama değil, tekrar yapılmadı.
 - **Maliyet hesaplanmadı:** Fiyat kayda yazılmıyor, kayıtta yalnızca model adı ve token sayıları var.
 - **Destek çağrısı sayısı kontrol edilmedi:** Yanıttaki "kaynağı doğrulanan" soru sayısının destek çağrısı sayısıyla (3) eşleştiği kullanıcı tarafından kontrol edilmedi. Yalnızca süre toplamının (3980,9 ms / 4009,2 ms) tutarlı olduğu görüldü.
-- **Hata kaydındaki değerler bu belgeye yazılmadı:** `error.kind` ve `error.stage` alanlarının hangi değeri aldığı aktarılmadı, yalnızca alanların var olduğu görüldü.
+- **Gerçek çalıştırmada yalnızca bir hata türü denendi:** `transcript_unavailable`. `invalid_url`, `llm_not_configured`, `llm_failed` ve `invalid_json` kayıtları yalnızca birim testlerle kapsanıyor.
 - **Kayıt dosyalarını yalnızca kullanıcı inceledi:** Dosyalar depoya kopyalanmadı ve asistan tarafından ayrıca okunmadı.
