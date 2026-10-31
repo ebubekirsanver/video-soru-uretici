@@ -753,3 +753,19 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Düzey tanımları Anderson ve Krathwohl (2001) kitabıyla karşılaştırılmadı.
   - Konu sayısı 6 olmayan videolarda düzeyler elle verilmeli.
 
+## Aşama 8 · questions-v3 ile iki koşulun ilk işlerlik denemesi (2026-10-31)
+
+- **Ne yapıldı** ([bulgu](bulgular/asama-8-v3-denemesi-1.md)):
+  - Kemosentez videosu (`109kCbVtU1U`) ile konu çıkarma (`topics-v1`, 6 konu), tohumlu Bloom eşlemesi ve `questions-v3` ile full ve rag koşulları birer kez çalıştırıldı (`k=5`, benzerlik eşiği 0,80).
+  - Plan ve konular çalıştırmadan önce kullanıcıya gösterildi. Kullanıcının konular hakkındaki gözlemi sonuçlardan önce dosyaya yazıldı.
+  - Toplam 13 OpenAI çağrısı yapıldı.
+- **Sonuçlar:**
+  - **full:** 6 soru, 5'inin alıntısı bulundu, 1 benzerlik işareti, 2 yazım kuralı işareti, 53515 token.
+  - **rag:** 6 soru, 6'sının alıntısı bulundu, 0 benzerlik işareti, 3 yazım kuralı işareti, 19899 token.
+  - Önceden belirlenen tek karşılaştırma, benzerlik işaretli çift sayısı: 7b'de (sonradan ölçülen skorlarla) full 3, rag 3; bu denemede full 1, rag 0. Soru sayıları farklı.
+- **Nasıl doğrulandı:** Betik API üzerinden FastAPI TestClient ile çalıştı. Kod değişmedi; `pytest` sonucu: 390 test geçti.
+- **Bilinen sınırlar:**
+  - Tek video, tek çalıştırma, koşul başına 6 soru.
+  - Soru kalitesi ve Bloom düzey uyumu ölçülmedi.
+  - Konular iç içe (kullanıcı gözlemi).
+
