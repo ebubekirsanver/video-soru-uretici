@@ -20,7 +20,7 @@ from typing import Literal
 
 from app.services.llm import TOKEN_FIELDS, LLMClient, LLMNotConfigured, last_usage, reset_usage
 
-Purpose = Literal["summary", "questions", "support"]
+Purpose = Literal["summary", "questions", "support", "topics"]
 
 # Testlerde sabit saat verilebilsin diye ayrı ad
 clock = time.perf_counter

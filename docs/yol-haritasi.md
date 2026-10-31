@@ -135,7 +135,7 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
 | 4 · Bölümleme | ana (yalnızca sabit boyut) | Güz 9–10 | kısmen (7a) |
 | 5 · LLM katmanı + özet | belirtilmedi | planda haftası yok | tamamlandı |
 | 6 · Temel soru üretimi (RAG'siz) | ana: AS1'in tam transkript koşulu | Güz 9–10'da RAG koşuluyla aynı istemle karşılaştırılacak | tamamlandı; kodu var (questions-v1) |
-| 7 · Gömme + ChromaDB + erişim | ana | Güz 9–10 | kısmen (7a, 7b: soru üretimine bağlandı; gerçek videoyla iki koşul henüz çalıştırılmadı) |
+| 7 · Gömme + ChromaDB + erişim | ana | Güz 9–10 | kısmen (7a, 7b: soru üretimine bağlandı; konular ayrı adımdan, topics-v1; iki koşul gerçek videoda bir kez işlerlik denemesiyle çalıştırıldı, kalite ölçülmedi) |
 | 8 · Bloom yönlendirmeli istem | ana | Güz 11–12 | yapılmadı |
 | 9 · Otomatik doğrulama | ana (kalan kısımlar); RAGAs ve otomatik yazım denetimi değerlendirmede yalnızca yardımcı ölçüt | kalan kısımlar Güz 11–12 | kısmen (alıntı-cevap destek kontrolü, kodla yazım kuralları `writing-rules-v1`) |
 | 10 · Yeniden üretim döngüsü | belirtilmedi (en çok 1–2 tur) | planda haftası yok | yapılmadı |

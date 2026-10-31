@@ -22,6 +22,24 @@ class TranscriptResponse(BaseModel):
     segments: list[TranscriptSegment]
 
 
+class TopicsRequest(BaseModel):
+    url: str = Field(description="YouTube video bağlantısı")
+    count: int = Field(default=6, ge=1, le=10, description="İstenen konu sayısı (1-10)")
+
+
+class TopicOut(BaseModel):
+    title: str = Field(description="Kısa başlık")
+    description: str = Field(description="Bu konuda videoda anlatılanı söyleyen tek cümle")
+    text: str = Field(description='Soru üretimine ve erişime verilecek metin: "Başlık: açıklama"')
+
+
+class TopicsResponse(BaseModel):
+    video_id: str
+    prompt_version: str = Field(description="Konu çıkarma istemi sürümü (topics-v1)")
+    model: str
+    topics: list[TopicOut]
+
+
 class SummaryRequest(BaseModel):
     url: str = Field(description="YouTube video bağlantısı")
     transcript_mode: Literal["clean", "raw"] = Field(

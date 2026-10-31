@@ -88,15 +88,21 @@ class TopicLLM:
         self.same_as = same_as or {}  # konu -> sorusu kopyalanacak başka konu (tekrar)
         self.quotes = quotes or {}
         self.summary_topics = summary_topics or [t for t, _, _ in TOPIC_SEGMENTS]
-        self.question_calls, self.summary_calls = [], []
+        self.question_calls, self.summary_calls, self.topic_calls = [], [], []
 
     def complete(self, system, user, json_mode=False):
         if "özetleyen" in system:  # summary_system.txt
             self.summary_calls.append(user)
             topics = [{"title": t, "start_seconds": 0} for t in self.summary_topics]
             return json.dumps({"summary": "Özet.", "topics": topics}, ensure_ascii=False)
+        if "konu çıkaran" in system:  # topics_v1_system.txt
+            self.topic_calls.append(user)
+            topics = [{"title": t, "description": f"{t} videoda anlatılıyor."} for t in self.summary_topics]
+            return json.dumps({"topics": topics}, ensure_ascii=False)
         self.question_calls.append((system, user))
         topic = re.search(r"^Konu: (.+)$", user, re.MULTILINE).group(1)
+        # Konu çıkarma adımından gelen konular "Başlık: açıklama" biçimindedir
+        topic = topic.split(": ")[0]
         if topic in self.empty_topics:
             return json.dumps({"questions": []})
         if topic in self.invalid_topics:
@@ -273,16 +279,42 @@ def test_empty_and_invalid_are_not_mixed(setup):
     assert tg["outcome_counts"] == {"ok": 0, "empty": 2, "invalid": 1, "duplicate": 0}
 
 
-def test_topics_from_summary_when_not_given(setup):
+def test_topics_from_extraction_when_not_given(setup):
+    # topics verilmezse konular özet servisinden değil konu çıkarma adımından (topics-v1) gelir
     llm = setup(TopicLLM())
     r = client.post("/api/questions", json={"url": VID, "context_mode": "full", "count": 2})
     assert r.status_code == 200
-    assert len(llm.summary_calls) == 1
-    assert [q["topic"] for q in r.json()["questions"]] == ["fotosentez klorofil", "hidrotermal bacalar"]
+    assert llm.summary_calls == []
+    assert len(llm.topic_calls) == 1
+    texts = ["fotosentez klorofil: fotosentez klorofil videoda anlatılıyor.",
+             "hidrotermal bacalar: hidrotermal bacalar videoda anlatılıyor."]
+    assert [q["topic"] for q in r.json()["questions"]] == texts
     record = last_record(setup.runs_dir)
-    assert record["topic_generation"]["topics_source"] == "summary"
-    assert record["topic_generation"]["topics"] == ["fotosentez klorofil", "hidrotermal bacalar"]
-    assert [c["purpose"] for c in record["metrics"]["llm_calls"]] == ["summary", "questions", "questions"]
+    tg = record["topic_generation"]
+    assert tg["topics_source"] == "topics-v1"
+    assert tg["topics"] == texts
+    assert tg["topic_extraction"]["requested_count"] == 2 and tg["topic_extraction"]["returned_count"] == 2
+    assert [c["purpose"] for c in record["metrics"]["llm_calls"]] == ["topics", "questions", "questions"]
+    assert {"llm_topics_ms", "topics_parse_ms"} <= set(record["metrics"]["stages"])
+
+
+def test_extracted_topic_text_goes_to_prompt_and_retrieval(setup, tmp_path):
+    # "Başlık: açıklama" metni hem soru istemine ({topic}) hem erişim sorgusuna gider
+    queries = []
+
+    class SpyIndex(TranscriptIndex):
+        def retrieve(self, video_id, query, k=5, **kwargs):
+            queries.append(query)
+            return super().retrieve(video_id, query, k=k, **kwargs)
+
+    llm = setup(TopicLLM(summary_topics=["mitoz bölünme"]), index=SpyIndex(FakeEmbedder(), path=tmp_path / "spy"))
+    r = client.post("/api/questions", json={"url": VID, "context_mode": "rag", "count": 1})
+    assert r.status_code == 200
+    text = "mitoz bölünme: mitoz bölünme videoda anlatılıyor."
+    assert queries == [text]
+    (_, user), = llm.question_calls
+    assert f"Konu: {text}" in user
+    assert llm.summary_calls == []
 
 
 def test_given_topics_do_not_call_summary(setup):
@@ -375,7 +407,7 @@ def test_record_v6_rag_fields(setup):
     assert body["context_mode"] == "rag" and body["prompt_version"] == "questions-v2"
 
     record = last_record(setup.runs_dir)
-    assert record["record_version"] == 6
+    assert record["record_version"] == 7  # konu çıkarma (topics-v1) kayıtları eklendiği için sürüm 7
     assert record["response"] == body
     assert record["request"]["context_mode"] == "rag" and record["request"]["k"] == 2
     tg = record["topic_generation"]

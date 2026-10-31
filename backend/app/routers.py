@@ -11,6 +11,9 @@ from app.schemas import (
     SummaryResponse,
     SummaryTopic,
     SupportOut,
+    TopicOut,
+    TopicsRequest,
+    TopicsResponse,
     TranscriptRequest,
     TranscriptResponse,
     TranscriptSegment,
@@ -26,6 +29,8 @@ from app.services.summary import summarize
 from app.services.support_check import SUPPORT_PROMPT_VERSION, check_support
 from app.services.text_clean import clean_transcript, prepare_transcript
 from app.services.topic_questions import PROMPT_VERSION_V2, generate_topic_questions
+from app.services.topics import PROMPT_VERSION as TOPICS_PROMPT_VERSION
+from app.services.topics import TopicExtraction, extract_topics
 from app.services.transcript import Transcript, TranscriptUnavailable, fetch_transcript
 from app.services.writing_check import check_questions as check_writing
 from app.services.youtube import InvalidYouTubeUrl, extract_video_id
@@ -56,18 +61,26 @@ def _save_error_run(kind, purpose, body, exc: HTTPException, metrics: RunMetrics
     save_run(kind, _video_id_or_none(body.url), body, None, metrics=metrics.as_dict(), error=error)
 
 
-def _resolve_topics(body: QuestionsRequest, context: Transcript, llm: LLMClient, m: RunMetrics) -> tuple[list[str], str]:
-    """Konu tabanlı üretimin konuları ve kaynağı.
+def _extract_topics(reference: Transcript, llm: LLMClient, m: RunMetrics, count: int) -> TopicExtraction:
+    """Temiz transkriptin tamamından konu çıkarır (topics-v1); süreler ve model çağrısı ölçülür."""
+    with m.model_step("llm_topics", "topics_parse", "topics"):
+        return extract_topics(reference, m.track(llm, "topics"), count)
+
+
+def _resolve_topics(
+    body: QuestionsRequest, reference: Transcript, llm: LLMClient, m: RunMetrics
+) -> tuple[list[str], str, TopicExtraction | None]:
+    """Konu tabanlı üretimin konuları, kaynağı ve (varsa) konu çıkarma sonucu.
 
     `topics` gönderildiyse hepsi kullanılır (count yok sayılır); deneyde iki
-    koşula aynı konular böyle verilir. Gönderilmediyse konular özet
-    servisinden alınır ve ilk `count` konu kullanılır.
+    koşula aynı konular böyle verilir. Gönderilmediyse konular konu çıkarma
+    adımından (topics-v1, istekteki count kadar) gelir. Konu metni
+    "Başlık: açıklama" biçimindedir; soru istemine ve erişime aynı metin gider.
     """
     if body.topics:
-        return list(body.topics), "request"
-    with m.model_step("llm_summary", "summary_parse", "summary"):
-        summary = summarize(context, m.track(llm, "summary"))
-    return [t.title for t in summary.topics][: body.count], "summary"
+        return list(body.topics), "request", None
+    extraction = _extract_topics(reference, llm, m, body.count)
+    return [t.text for t in extraction.topics], TOPICS_PROMPT_VERSION, extraction
 
 
 def _load_transcript(url: str) -> Transcript:
@@ -96,6 +109,42 @@ def get_transcript(body: TranscriptRequest) -> TranscriptResponse:
         duration_seconds=transcript.duration_seconds,
         segments=[TranscriptSegment(text=s.text, start=s.start, duration=s.duration) for s in transcript.segments],
     )
+
+
+@router.post("/topics", response_model=TopicsResponse, tags=["konu"])
+def get_topics(body: TopicsRequest, llm: LLMClient = Depends(get_llm)) -> TopicsResponse:
+    """Videodan birbirinden farklı, videonun farklı bölümlerini kapsayan konular çıkarır (topics-v1).
+
+    Her konunun `text` alanı ("Başlık: açıklama"), deneyde iki koşula
+    (`context_mode` full / rag) `topics` olarak verilecek metindir.
+    """
+    m = RunMetrics()
+    try:
+        with m.stage("transcript_fetch"):
+            raw = _load_transcript(body.url)
+        with m.stage("clean"):
+            # Konular her zaman temiz transkriptin tamamından çıkarılır
+            transcript = clean_transcript(raw)
+            if not transcript.segments:
+                raise HTTPException(status_code=404, detail="Temizlikten sonra konu çıkarılacak transkript kalmadı.")
+        try:
+            extraction = _extract_topics(transcript, llm, m, body.count)
+        except LLMNotConfigured as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        except LLMError as exc:
+            raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except HTTPException as exc:
+        _save_error_run("topics", "topics", body, exc, m)
+        raise
+
+    response = TopicsResponse(
+        video_id=transcript.video_id,
+        prompt_version=TOPICS_PROMPT_VERSION,
+        model=llm.model,
+        topics=[TopicOut(title=t.title, description=t.description, text=t.text) for t in extraction.topics],
+    )
+    save_run("topics", response.video_id, body, response, metrics=m.as_dict(), topic_extraction=extraction.as_record())
+    return response
 
 
 @router.post("/summary", response_model=SummaryResponse, tags=["özet"])
@@ -177,7 +226,8 @@ def get_questions(
                     questions = generate_questions(context, reference, m.track(llm, "questions"), body.count, dropped=dropped)
                 m.dropped = dropped
             else:
-                topics, topics_source = _resolve_topics(body, context, llm, m)
+                # Konular temiz transkriptten çıkarılır; iki koşula aynı konular gitsin diye
+                topics, topics_source, extraction = _resolve_topics(body, reference, llm, m)
                 rag = body.context_mode == "rag"
                 # Dizin yalnızca RAG isteğinde açılır
                 index = index_provider() if rag else None
@@ -195,6 +245,7 @@ def get_questions(
                     "k": body.k if rag else None,
                     "topics": topics,
                     "topics_source": topics_source,
+                    "topic_extraction": extraction.as_record() if extraction else None,
                     "chunking": CHUNKING_VERSION if rag else None,
                     "embedding_model": index.embedder.model if rag else None,
                     "per_topic": [asdict(t) for t in generation.traces],

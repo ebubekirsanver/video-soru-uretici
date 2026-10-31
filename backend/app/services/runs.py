@@ -22,7 +22,7 @@ from app.config import get_settings
 
 logger = logging.getLogger(__name__)
 
-RunKind = Literal["summary", "questions"]
+RunKind = Literal["summary", "questions", "topics"]
 
 # Kayıt biçimi sürümü. 1: saved_at, endpoint, request, response.
 # 2: + record_version ve sorularda quote_audit (modelin ham alıntısı, kırpılan kelimeler).
@@ -45,7 +45,13 @@ RunKind = Literal["summary", "questions"]
 #    Konu başına sonuç (per_topic[].outcome: ok / empty / invalid / duplicate)
 #    ve outcome_counts sürüm 6 henüz hiçbir gerçek kayıtta kullanılmamışken
 #    eklendi; bu yüzden sürüm 6'da kaldı.
-RECORD_VERSION = 6
+# 7 (konu çıkarma, topics-v1): + /api/topics kayıtları (endpoint /api/topics,
+#    topic_extraction: istem sürümü, istenen ve dönen konu sayısı, eksiklik,
+#    atılan konular, konular). Soru kayıtlarında topic_generation.topics_source
+#    artık "topics-v1" ya da "request" olabilir; topics-v1 ise
+#    topic_generation.topic_extraction da yazılır. backend/runs'ta sürüm 6
+#    kayıtları bulunduğu için sürüm arttı.
+RECORD_VERSION = 7
 
 
 def _now() -> datetime:
@@ -73,6 +79,7 @@ def save_run(
     error: dict | None = None,
     writing_check: dict | None = None,
     topic_generation: dict | None = None,
+    topic_extraction: dict | None = None,
 ) -> Path | None:
     """Kaydı `YYYYMMDD-HHMMSS-<video_id>-<kind>.json` adıyla yazar; yazılan dosyanın yolunu döndürür.
 
@@ -113,6 +120,8 @@ def save_run(
             record["writing_check"] = writing_check
         if topic_generation is not None:
             record["topic_generation"] = topic_generation
+        if topic_extraction is not None:
+            record["topic_extraction"] = topic_extraction
         text = json.dumps(record, ensure_ascii=False, indent=2)
 
         runs_dir = Path(settings.runs_dir)
@@ -143,7 +152,8 @@ def load_run(path: Path) -> dict:
     öncesinde yalnızca başarılı istekler kaydedildiği için `outcome` "ok",
     `metrics` ve `error` None olur. `writing_check` sürüm 5'ten önce yoktur
     (ve özet kayıtlarında hiç yoktur); yoksa None olur. `topic_generation`
-    yalnızca sürüm 6'dan beri, context_mode verilmiş isteklerde vardır; yoksa None. Böylece okuyan kod hata vermez.
+    yalnızca sürüm 6'dan beri, context_mode verilmiş isteklerde vardır; yoksa None.
+    `topic_extraction` yalnızca sürüm 7'den beri /api/topics kayıtlarında vardır; yoksa None. Böylece okuyan kod hata vermez.
     """
     record = json.loads(Path(path).read_text(encoding="utf-8"))
     record.setdefault("record_version", 1)
@@ -154,4 +164,5 @@ def load_run(path: Path) -> dict:
     record.setdefault("error", None)
     record.setdefault("writing_check", None)
     record.setdefault("topic_generation", None)
+    record.setdefault("topic_extraction", None)
     return record

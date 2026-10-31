@@ -11,7 +11,7 @@
 | 4 · Bölümleme | Sabit boyutlu, zaman damgalı parçalar (fixed-150-30) eklendi; anlamsal bölütleme ikincil deney. | kısmen (7a) |
 | 5 · LLM katmanı ve özet | Model katmanı kuruldu, videodan Türkçe özet ve konu başlıkları üretiliyor. | tamamlandı |
 | 6 · Temel soru üretimi | Transkriptin tamamından soru üretiliyor, alıntısı transkriptte aranıyor. Ana deney, AS1'in tam transkript koşulu; Güz 9–10'da RAG koşuluyla aynı istemle karşılaştırılacak; kodu var (questions-v1). | tamamlandı |
-| 7 · Gömme ve erişim (RAG) | BGE-M3 gömme, ChromaDB dizini ve erişim eklendi; soru üretimine bağlandı: konu başına bir soru, tam transkript ya da RAG bağlamıyla (questions-v2). Gerçek videoyla iki koşul henüz çalıştırılmadı. | kısmen (7a, 7b) |
+| 7 · Gömme ve erişim (RAG) | BGE-M3 gömme, ChromaDB dizini ve erişim eklendi; soru üretimine bağlandı: konu başına bir soru, tam transkript ya da RAG bağlamıyla (questions-v2). Konular ayrı bir adımdan geliyor (topics-v1). İki koşul gerçek videoda bir kez işlerlik denemesiyle çalıştırıldı; kalite ölçülmedi. | kısmen (7a, 7b) |
 | 8 · Bloom yönlendirmeli istem | Yapılmadı. | yapılmadı |
 | 9 · Otomatik doğrulama | Alıntı-cevap destek kontrolü ve kodla yazım kuralları var; sadakat, Bloom ve benzerlikle tekrar eleme yok. | kısmen |
 | 10 · Yeniden üretim | Yapılmadı. | yapılmadı |
@@ -641,4 +641,39 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
 - **Bilinen sınırlar:**
   - Tek video, tek çalıştırma, 5 konu; kalite ölçülmedi; konular özet servisinden geldi.
   - RAG'deki ilk erişim süresi BGE-M3'ün ilk yüklenmesini de içeriyor.
+
+## Konu çıkarma adımı: istem topics-v1 (2026-10-31)
+
+- **Neden:** 7b koşul denemesinde ([bulgu](bulgular/asama-7b-kosul-denemesi-1.md)) özetten gelen konular birbirine yakındı ve sorular tekrar etti. Özet servisi 3–8 arası konu veriyor; deneyde her videoda 6 konu gerekiyor (Aşama 8'de her konuya bir Bloom düzeyi eşlenecek).
+- **Ne yapıldı:**
+  - **İstem `topics-v1`** (`app/prompts/topics_v1_system.txt`, `topics_v1_user.txt`):
+    - Girdi, tam temiz transkript (~30 sn'lik bloklar) ve istenen konu sayısı.
+    - İstemin kuralları: tam `count` konu; birbirinden açıkça farklı; videonun farklı bölümlerini kapsayan; transkriptte açıkça anlatılmış; her konu için en fazla 8 kelimelik başlık ve tek cümlelik açıklama.
+  - **Servis** (`services/topics.py`, `extract_topics`):
+    - Boş başlık ya da açıklamalı konu atılıyor.
+    - Normalleştirilmiş başlığı aynı olan konulardan ilki tutuluyor.
+    - Fazlası gelirse ilk `count` alınıyor.
+    - Az gelirse hata verilmiyor; eksiklik kayda yazılıyor (`shortfall`).
+    - Soru üretimine ve erişime verilen konu metni "Başlık: açıklama"; questions-v2 dosyaları değişmedi.
+  - **API:**
+    - Yeni `POST /api/topics` (`count` 1–10, varsayılan 6); çalıştırma kaydı yazılıyor (kind `topics`).
+    - `/api/questions`'ta `context_mode` verilip `topics` verilmezse konular artık özet servisinden değil `extract_topics`'ten (istekteki `count` kadar) geliyor. Kayıtta `topics_source` `topics-v1` ya da `request`.
+    - `context_mode` verilmezse hiçbir şey değişmedi.
+    - Özet servisine, frontend'e ve questions-v1/v2 istem dosyalarına dokunulmadı.
+  - **Kayıt sürümü 7:** `backend/runs`'ta sürüm 6 kayıtları (7b denemesi) bulunduğu için sürüm artırıldı. Yeni alanlar:
+    - `/api/topics` kayıtlarında `topic_extraction`
+    - soru kayıtlarında `topic_generation.topic_extraction`
+    - `metrics.stages` içinde `llm_topics_ms`, `topics_parse_ms`
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 362 test geçti (önceki 338 ve 24 yeni test: `tests/test_topics.py` 23, `tests/test_topic_questions.py` 1).
+  - Sahte LLM kullanıldı; model (OpenAI) çağrısı yapılmadı.
+  - Güncellenen mevcut testler:
+    - Sürümü denetleyen 6 test 6'dan 7'ye güncellendi.
+    - Konuların özetten geldiğini denetleyen test, artık konu çıkarma adımından geldiğini denetleyecek biçimde değiştirildi; bu, istenen davranış değişikliği.
+- **Bilinen sınırlar:**
+  - Gerçek videoda denenmedi.
+  - Konuların farklılığı kodla değil, yalnızca istemle ve başlık eşitliğiyle sağlanıyor.
+  - Başlığın en fazla 8 kelime olması kodda denetlenmiyor.
+  - Anlamca benzer soru ayıklaması sonraki adım.
+  - `/api/questions`'ta konu sayısı istekteki `count` alanından geliyor; bu alanın varsayılanı 5. Deneyde 6 konu için `count: 6` gönderilmeli ya da konular `/api/topics`'ten alınıp `topics` ile verilmeli.
 
