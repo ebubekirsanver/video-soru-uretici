@@ -10,7 +10,7 @@
 | 3 · Whisper yedeği, WER | Yapılmadı; altyazısı olmayan video seçilirse gerekecek. | ertelendi |
 | 4 · Bölümleme | Yalnızca ~30 saniyelik bloklama var; asıl bölümleme yapılmadı. | ertelendi |
 | 5 · LLM katmanı ve özet | Model katmanı kuruldu, videodan Türkçe özet ve konu başlıkları üretiliyor. | tamamlandı |
-| 6 · Temel soru üretimi | Transkriptin tamamından soru üretiliyor, alıntısı transkriptte aranıyor. | tamamlandı |
+| 6 · Temel soru üretimi | Transkriptin tamamından soru üretiliyor, alıntısı transkriptte aranıyor. Ana deney, AS1'in tam transkript koşulu; Güz 9–10'da RAG koşuluyla aynı istemle karşılaştırılacak; kodu var (questions-v1). | tamamlandı |
 | 7 · Gömme ve erişim (RAG) | Yapılmadı. | yapılmadı |
 | 8 · Bloom yönlendirmeli istem | Yapılmadı. | yapılmadı |
 | 9 · Otomatik doğrulama | Alıntı-cevap destek kontrolü ve kodla yazım kuralları var; sadakat, Bloom ve benzerlikle tekrar eleme yok. | kısmen |
