@@ -19,11 +19,12 @@ from app.schemas import (
     TranscriptSegment,
 )
 from app.services.chunking import CHUNKING_VERSION
-from app.services.embeddings import EmbeddingUnavailable
+from app.services.embeddings import EmbeddingUnavailable, get_embedder_provider
 from app.services.llm import LLMClient, LLMError, LLMNotConfigured, get_llm
 from app.services.metrics import RunMetrics, error_record
 from app.services.questions import PROMPT_VERSION, generate_questions
 from app.services.retrieval import get_index_provider
+from app.services.similarity import SIMILARITY_VERSION, flag_similar, similarity_record
 from app.services.runs import save_run
 from app.services.summary import summarize
 from app.services.support_check import SUPPORT_PROMPT_VERSION, check_support
@@ -193,6 +194,7 @@ def get_questions(
     body: QuestionsRequest,
     llm: LLMClient = Depends(get_llm),
     index_provider=Depends(get_index_provider),
+    embedder_provider=Depends(get_embedder_provider),
 ) -> QuestionsResponse:
     """Doğrulanmış çoktan seçmeli sorular üretir.
 
@@ -269,6 +271,17 @@ def get_questions(
     with m.stage("writing_check"):
         writing_check = check_writing(questions)
 
+    # Anlamca benzer soru çiftleri (yalnızca questions-v2 yolu): yalnızca işaretlenir,
+    # soru atılmaz; sonuç yalnızca kayda yazılır. Gömme modeli yüklenemezse istek
+    # bozulmaz, kayda hata yazılır (sorular zaten üretilmiş olur).
+    similarity_check = None
+    if body.context_mode:
+        with m.stage("similarity_check"):
+            try:
+                similarity_check = similarity_record(questions, flag_similar(questions, embedder_provider()))
+            except EmbeddingUnavailable as exc:
+                similarity_check = {"rules_version": SIMILARITY_VERSION, "error": str(exc)}
+
     # Destek kontrolü varsayılan olarak kapalı: her doğrulanmış soru için ek bir ücretli çağrı yapar
     supports = None
     if body.check_support:
@@ -337,5 +350,6 @@ def get_questions(
         metrics=m.as_dict(),
         writing_check=writing_check,
         topic_generation=topic_generation,
+        similarity_check=similarity_check,
     )
     return response

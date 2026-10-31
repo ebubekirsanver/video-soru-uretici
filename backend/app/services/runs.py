@@ -51,6 +51,10 @@ RunKind = Literal["summary", "questions", "topics"]
 #    artık "topics-v1" ya da "request" olabilir; topics-v1 ise
 #    topic_generation.topic_extraction da yazılır. backend/runs'ta sürüm 6
 #    kayıtları bulunduğu için sürüm arttı.
+#    + context_mode verilmiş soru kayıtlarında similarity_check (kural sürümü,
+#    eşik ve geçici olup olmadığı, eşiği geçen soru çiftleri ve skorları) ve
+#    metrics.stages içinde similarity_check_ms. Sürüm 7 henüz hiçbir gerçek
+#    kayıtta kullanılmamışken eklendi; bu yüzden sürüm 7'de kaldı.
 RECORD_VERSION = 7
 
 
@@ -80,6 +84,7 @@ def save_run(
     writing_check: dict | None = None,
     topic_generation: dict | None = None,
     topic_extraction: dict | None = None,
+    similarity_check: dict | None = None,
 ) -> Path | None:
     """Kaydı `YYYYMMDD-HHMMSS-<video_id>-<kind>.json` adıyla yazar; yazılan dosyanın yolunu döndürür.
 
@@ -122,6 +127,8 @@ def save_run(
             record["topic_generation"] = topic_generation
         if topic_extraction is not None:
             record["topic_extraction"] = topic_extraction
+        if similarity_check is not None:
+            record["similarity_check"] = similarity_check
         text = json.dumps(record, ensure_ascii=False, indent=2)
 
         runs_dir = Path(settings.runs_dir)
@@ -165,4 +172,5 @@ def load_run(path: Path) -> dict:
     record.setdefault("writing_check", None)
     record.setdefault("topic_generation", None)
     record.setdefault("topic_extraction", None)
+    record.setdefault("similarity_check", None)
     return record

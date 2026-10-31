@@ -677,3 +677,33 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Anlamca benzer soru ayıklaması sonraki adım.
   - `/api/questions`'ta konu sayısı istekteki `count` alanından geliyor; bu alanın varsayılanı 5. Deneyde 6 konu için `count: 6` gönderilmeli ya da konular `/api/topics`'ten alınıp `topics` ile verilmeli.
 
+## Aşama 9 · Anlamca benzer soruları işaretleme: similarity-v1 (2026-10-31)
+
+- **Neden:** 7b koşul denemesinde metni birebir aynı olmayan ama aynı bilgiyi soran sorular kaldı. Örnek: full'da üç "kimyasal enerji", rag'de üç "prokaryot" sorusu. `drop_duplicates` yalnızca birebir aynı metni yakalıyor.
+- **Ne yapıldı:**
+  - **Elle etiketleme** ([bulgu](bulgular/asama-9-benzer-sorular-1.md)):
+    - 7b denemesindeki soruların her koşul içindeki 16 çifti listelendi.
+    - İkili ölçüt ("aynı bilgi" / "farklı") önceden yazıldı.
+    - Kullanıcı etiketledi ve etiketleri ölçümden önce commit'ledi: 6 "aynı bilgi", 10 "farklı".
+  - **Servis** (`services/similarity.py`):
+    - `flag_similar` her sorunun "soru metni + doğru cevap" metnini gömüyor ve aynı istekteki çiftlerin kosinüs benzerliğini hesaplıyor; eşiği geçen çiftleri işaretliyor.
+    - Soru atılmıyor.
+    - Sürüm `similarity-v1`; eşik 0,80 (16 çiftlik ölçümle seçildi; pilot videolarda yeniden bakılacak).
+  - **Bağlama:**
+    - Yalnızca `context_mode` verilmiş `/api/questions` isteklerinde (questions-v2 yolu) çalışıyor; v1 yolu değişmedi.
+    - Sonuç kayıtta `similarity_check` alanında: kural sürümü, eşik, işaretli çiftler ve skorları. Süresi `metrics.stages.similarity_check_ms`.
+    - API yanıtı değişmedi.
+    - Gömme modeli yüklenemezse istek bozulmuyor, kayda hata yazılıyor.
+  - **Kayıt sürümü:** 7'de kaldı, çünkü `backend/runs`'ta sürüm 7 kaydı yoktu (gerekçe sürüm açıklamasında).
+  - **Ölçüm:** Gerçek BGE-M3 ile, bir kez çalıştırıldı.
+    - (a) soru + doğru cevap: "aynı bilgi" en düşük 0,9066; "farklı" en yüksek 0,6690; ayrışıyor.
+    - (b) yalnızca soru: 0,9030 / 0,7710; ayrışıyor.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 372 test geçti (önceki 362 ve 10 yeni test, `tests/test_similarity.py`).
+  - Sahte gömme kullanıldı. Model (OpenAI) çağrısı yapılmadı.
+  - `tests/test_topic_questions.py` fixture'ına gömme sağlayıcısını sahte gömmeyle değiştiren tek satır eklendi; böylece v2 testleri gerçek BGE-M3 yüklemiyor.
+- **Bilinen sınırlar:**
+  - Tek video, 16 çift, tek etiketleyen.
+  - Eşik aynı veride seçilirse iyimser olur; pilot videolarda yeniden bakılacak.
+  - Eşik 0,80 (16 çiftlik ölçümle seçildi; pilot videolarda yeniden bakılacak).
+

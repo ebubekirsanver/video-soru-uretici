@@ -61,3 +61,12 @@ class SentenceTransformerClient:
 def get_embedder() -> EmbeddingClient:
     """Ayarlardaki modelle tek bir gömme istemcisi (model bir kez yüklensin diye önbellekli)."""
     return SentenceTransformerClient(get_settings().embedding_model)
+
+
+def get_embedder_provider():
+    """FastAPI bağımlılığı: gömme istemcisini döndüren bir fonksiyon.
+
+    İstemci yalnızca gerektiğinde (ör. benzer soru işaretlemede) alınır; eski
+    (v1) isteklerde hiç kullanılmaz. Testlerde sahte gömmeyle değiştirilir.
+    """
+    return get_embedder

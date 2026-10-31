@@ -15,7 +15,7 @@ from fastapi.testclient import TestClient
 from app.config import get_settings
 from app.main import app
 from app.services import runs
-from app.services.embeddings import EmbeddingUnavailable
+from app.services.embeddings import EmbeddingUnavailable, get_embedder_provider
 from app.services.llm import get_llm
 from app.services.retrieval import TranscriptIndex, get_index_provider
 from app.services.transcript import Segment, Transcript
@@ -133,6 +133,8 @@ def setup(monkeypatch, tmp_path):
             state["index"] = index
         app.dependency_overrides[get_llm] = lambda: llm
         app.dependency_overrides[get_index_provider] = lambda: (lambda: state["index"])
+        # Benzer soru işaretlemesi (similarity-v1) gerçek BGE-M3 yüklemesin: dizinin sahte gömmesi kullanılır
+        app.dependency_overrides[get_embedder_provider] = lambda: (lambda: state["index"].embedder)
         return llm
 
     use.state = state
