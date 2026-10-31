@@ -1,0 +1,22 @@
+{
+  "experiment": "asama-7b-kosul-denemesi-1",
+  "step": "ozet",
+  "created_at": "2026-10-31T18:36:22+03:00",
+  "video_id": "109kCbVtU1U",
+  "summary_model": "gpt-4o-mini",
+  "summary_topics_all": [
+    "Kemosentez Nedir?",
+    "Hidrotermal Bacalar ve Canlılar",
+    "Kemosentetik Canlıların Özellikleri",
+    "Fotosentez ve Kemosentez Farkları",
+    "Kemosentez ve Ekosistem"
+  ],
+  "topics": [
+    "Kemosentez Nedir?",
+    "Hidrotermal Bacalar ve Canlılar",
+    "Kemosentetik Canlıların Özellikleri",
+    "Fotosentez ve Kemosentez Farkları",
+    "Kemosentez ve Ekosistem"
+  ],
+  "summary_tokens": 7893
+}

@@ -198,6 +198,7 @@ def get_questions(
                     "chunking": CHUNKING_VERSION if rag else None,
                     "embedding_model": index.embedder.model if rag else None,
                     "per_topic": [asdict(t) for t in generation.traces],
+                    "outcome_counts": generation.outcome_counts,
                     "no_question_topics": generation.no_question_topics,
                 }
         except EmbeddingUnavailable as exc:

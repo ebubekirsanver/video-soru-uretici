@@ -82,8 +82,10 @@ class TopicLLM:
 
     model = "fake-model"
 
-    def __init__(self, empty_topics=(), quotes=None, summary_topics=None):
+    def __init__(self, empty_topics=(), quotes=None, summary_topics=None, invalid_topics=(), same_as=None):
         self.empty_topics = set(empty_topics)
+        self.invalid_topics = set(invalid_topics)  # yapısı bozuk soru döner
+        self.same_as = same_as or {}  # konu -> sorusu kopyalanacak başka konu (tekrar)
         self.quotes = quotes or {}
         self.summary_topics = summary_topics or [t for t, _, _ in TOPIC_SEGMENTS]
         self.question_calls, self.summary_calls = [], []
@@ -97,7 +99,11 @@ class TopicLLM:
         topic = re.search(r"^Konu: (.+)$", user, re.MULTILINE).group(1)
         if topic in self.empty_topics:
             return json.dumps({"questions": []})
-        q = question_for(topic)
+        if topic in self.invalid_topics:
+            bad = question_for(topic)
+            bad["options"] = ["Yalnızca", "iki seçenek"]  # tam 4 seçenek değil
+            return json.dumps({"questions": [bad]}, ensure_ascii=False)
+        q = question_for(self.same_as.get(topic, topic))
         if topic in self.quotes:
             q["source_quote"] = self.quotes[topic]
         return json.dumps({"questions": [q]}, ensure_ascii=False)
@@ -234,6 +240,37 @@ def test_one_call_per_topic_and_empty_topic_skipped(setup):
     assert tg["no_question_topics"] == ["hidrotermal bacalar"]
     assert [t["produced"] for t in tg["per_topic"]] == [True, False, True]
     assert [c["purpose"] for c in record["metrics"]["llm_calls"]] == ["questions"] * 3
+
+
+def test_outcomes_empty_invalid_duplicate_counted_separately(setup):
+    topics = ["fotosentez klorofil", "hidrotermal bacalar", "prokaryot hücre", "mitoz bölünme"]
+    setup(TopicLLM(
+        empty_topics={"hidrotermal bacalar"},  # model boş liste döndürür
+        invalid_topics={"prokaryot hücre"},  # model soru döndürür ama yapı denetiminden geçmez
+        same_as={"mitoz bölünme": "fotosentez klorofil"},  # ilk konunun sorusunun tekrarı
+    ))
+    r = client.post("/api/questions", json={"url": VID, "context_mode": "full", "topics": topics})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["returned_count"] == 1
+    assert [q["topic"] for q in body["questions"]] == ["fotosentez klorofil"]
+
+    record = last_record(setup.runs_dir)
+    tg = record["topic_generation"]
+    assert [t["outcome"] for t in tg["per_topic"]] == ["ok", "empty", "invalid", "duplicate"]
+    assert tg["outcome_counts"] == {"ok": 1, "empty": 1, "invalid": 1, "duplicate": 1}
+    # Geriye dönük uyumlu: no_question_topics yapı denetiminden geçen soru gelmeyen konular (empty + invalid)
+    assert tg["no_question_topics"] == ["hidrotermal bacalar", "prokaryot hücre"]
+    assert [t["produced"] for t in tg["per_topic"]] == [True, False, False, True]
+    assert record["metrics"]["dropped"] == {"structure_invalid": 1, "duplicate": 1, "extra_ignored": 0}
+
+
+def test_empty_and_invalid_are_not_mixed(setup):
+    setup(TopicLLM(empty_topics={"fotosentez klorofil", "mitoz bölünme"}, invalid_topics={"prokaryot hücre"}))
+    topics = ["fotosentez klorofil", "prokaryot hücre", "mitoz bölünme"]
+    client.post("/api/questions", json={"url": VID, "context_mode": "rag", "topics": topics})
+    tg = last_record(setup.runs_dir)["topic_generation"]
+    assert tg["outcome_counts"] == {"ok": 0, "empty": 2, "invalid": 1, "duplicate": 0}
 
 
 def test_topics_from_summary_when_not_given(setup):

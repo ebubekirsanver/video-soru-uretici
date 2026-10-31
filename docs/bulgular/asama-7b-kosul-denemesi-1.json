@@ -1,0 +1,596 @@
+{
+  "experiment": "asama-7b-kosul-denemesi-1",
+  "step": "kosullar",
+  "run_at": "2026-10-31T18:42:09+03:00",
+  "video_id": "109kCbVtU1U",
+  "topics": [
+    "Kemosentez Nedir?",
+    "Hidrotermal Bacalar ve Canlılar",
+    "Kemosentetik Canlıların Özellikleri",
+    "Fotosentez ve Kemosentez Farkları",
+    "Kemosentez ve Ekosistem"
+  ],
+  "conditions": [
+    {
+      "mode": "full",
+      "response": {
+        "video_id": "109kCbVtU1U",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v2",
+        "requested_count": 5,
+        "returned_count": 4,
+        "verified_count": 4,
+        "questions": [
+          {
+            "question": "Kemosentez yapan canlılar hangi tür enerji kaynağını kullanarak besin üretirler?",
+            "options": [
+              "Işık enerjisi",
+              "Termal enerji",
+              "Nükleer enerji",
+              "Kimyasal enerji"
+            ],
+            "correct_index": 3,
+            "explanation": "Kemosentez yapan canlılar, kimyasal enerjiyi kullanarak besin üretimini gerçekleştirirler.",
+            "source_quote": "Kemosentetiklerde kimyasal enerjiyi kullanarak besin üretimini gerçekleştiriyor.",
+            "source_start_seconds": 693.839,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentez Nedir?"
+          },
+          {
+            "question": "Hidrotermal bacaların etrafında hangi canlılar kemosentez yaparak besin üretir?",
+            "options": [
+              "Kediler",
+              "Yengeçler",
+              "Kuşlar",
+              "Ağaçlar"
+            ],
+            "correct_index": 1,
+            "explanation": "Hidrotermal bacaların etrafında kemosentez yapan bakterilerle beslenen canlılar arasında yengeçler bulunmaktadır.",
+            "source_quote": "Bu nedenle okyanus derinliklerinde özellikle bu bacaların etrafında kemosentez yapan bakterilerle beslenen farklı biyolojik canlılara rastlanabilir.",
+            "source_start_seconds": 247.64,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Hidrotermal Bacalar ve Canlılar"
+          },
+          {
+            "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretimi gerçekleştirir?",
+            "options": [
+              "Termal enerji",
+              "Işık enerjisi",
+              "Mekanik enerji",
+              "Kimyasal enerji"
+            ],
+            "correct_index": 3,
+            "explanation": "Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretimi yaparlar.",
+            "source_quote": "Kemosentetiklerde kimyasal enerjiyi kullanarak besin üretimini gerçekleştiriyor.",
+            "source_start_seconds": 693.839,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentetik Canlıların Özellikleri"
+          },
+          {
+            "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretirler?",
+            "options": [
+              "Kimyasal enerji",
+              "Işık enerjisi",
+              "Termal enerji",
+              "Mekanik enerji"
+            ],
+            "correct_index": 0,
+            "explanation": "Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretimini gerçekleştirirler.",
+            "source_quote": "Kemosentetiklerde kimyasal enerjiyi kullanarak besin üretimini gerçekleştiriyor.",
+            "source_start_seconds": 693.839,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Fotosentez ve Kemosentez Farkları"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v2",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Kemosentez Nedir?",
+          "Hidrotermal Bacalar ve Canlılar",
+          "Kemosentetik Canlıların Özellikleri",
+          "Fotosentez ve Kemosentez Farkları",
+          "Kemosentez ve Ekosistem"
+        ],
+        "topics_source": "request",
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Kemosentez Nedir?",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok"
+          },
+          {
+            "topic": "Hidrotermal Bacalar ve Canlılar",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok"
+          },
+          {
+            "topic": "Kemosentetik Canlıların Özellikleri",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok"
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok"
+          },
+          {
+            "topic": "Kemosentez ve Ekosistem",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "duplicate"
+          }
+        ],
+        "outcome_counts": {
+          "ok": 4,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 1
+        },
+        "no_question_topics": []
+      },
+      "writing_flags": [],
+      "stages": {
+        "transcript_fetch_ms": 1827.9,
+        "clean_ms": 9.4,
+        "llm_questions_ms": 12508.8,
+        "quote_verify_ms": 36.5,
+        "writing_check_ms": 1.4,
+        "total_ms": 14384.2
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3078.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 7996,
+          "completion_tokens": 133,
+          "total_tokens": 8129
+        },
+        {
+          "purpose": "questions",
+          "ms": 2537.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8000,
+          "completion_tokens": 150,
+          "total_tokens": 8150
+        },
+        {
+          "purpose": "questions",
+          "ms": 2143.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8000,
+          "completion_tokens": 130,
+          "total_tokens": 8130
+        },
+        {
+          "purpose": "questions",
+          "ms": 2328.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8001,
+          "completion_tokens": 130,
+          "total_tokens": 8131
+        },
+        {
+          "purpose": "questions",
+          "ms": 2421.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 7998,
+          "completion_tokens": 155,
+          "total_tokens": 8153
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 39995,
+        "completion_tokens": 698,
+        "total_tokens": 40693
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 1,
+        "extra_ignored": 0
+      }
+    },
+    {
+      "mode": "rag",
+      "response": {
+        "video_id": "109kCbVtU1U",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v2",
+        "requested_count": 5,
+        "returned_count": 5,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "Kemosentez yapan canlılar hangi hücre yapısına sahiptir?",
+            "options": [
+              "Ökaryot hücre yapısına",
+              "Hücre yapısı yoktur",
+              "Sadece bitkilerde bulunur",
+              "Prokaryot hücre yapısına"
+            ],
+            "correct_index": 3,
+            "explanation": "Kemosentez yapan canlıların tamamı prokaryot hücre yapısına sahiptir.",
+            "source_quote": "canlılara da kemosentetik canlılar adını veriyoruz. Bu canlıların tamamı prokaryot hücre yapısına sahip olan canlılardır.",
+            "source_start_seconds": 578.32,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "Kemosentez Nedir?"
+          },
+          {
+            "question": "Hidrotermal bacaların etrafında hangi tür canlılar yaşayabilir?",
+            "options": [
+              "Süper besin üreten canlılar",
+              "Ototrof olmayan canlılar",
+              "Fotosentetik canlılar",
+              "Kemosentetik canlılar"
+            ],
+            "correct_index": 3,
+            "explanation": "Hidrotermal bacaların etrafında kemosentetik canlılar yaşar çünkü bu canlılar kimyasal enerjiyi kullanarak besin üretir.",
+            "source_quote": "Demek ki bu ortamda kemosentetik canlılar varsa bu canlıda kimyasal enerjiyi kullanarak besin ürettiğine göre demek ki bu zorlu şartta canlı yaşayabiliyor",
+            "source_start_seconds": 224.599,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Hidrotermal Bacalar ve Canlılar"
+          },
+          {
+            "question": "Kemosentetik canlılar hangi tür hücre yapısına sahiptir?",
+            "options": [
+              "Hücre duvarı olmayan",
+              "Ökaryot",
+              "Prokaryot",
+              "Hücre çekirdeği olan"
+            ],
+            "correct_index": 2,
+            "explanation": "Kemosentetik canlıların tamamı prokaryot hücre yapısına sahiptir.",
+            "source_quote": "Kemosentez yapan canlılara da kemosentetik canlılar adını veriyoruz. Bu canlıların tamamı prokaryot hücre yapısına sahip olan canlılardır.",
+            "source_start_seconds": 578.32,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentetik Canlıların Özellikleri"
+          },
+          {
+            "question": "Fotosentez ile kemosentez arasındaki temel fark nedir?",
+            "options": [
+              "Fotosentezde güneş ışığı kullanılır, kemosentezde kimyasal enerji kullanılır.",
+              "Kemosentezde klorofil pigmenti kullanılır, fotosentezde kullanılmaz.",
+              "Kemosentezde oksijen üretilir, fotosentezde üretilmez.",
+              "Fotosentezde iki tepkime vardır, kemosentezde bir tepkime vardır."
+            ],
+            "correct_index": 0,
+            "explanation": "Fotosentezde enerji kaynağı güneş ışığıdır, kemosentezde ise kimyasal enerji kullanılır.",
+            "source_quote": "Fotosentezde enerji kaynağı neydi? Güneş ışığıydı genel ifadeyle. Ya da bunun yerine ışık enerjisi denilebilir. Kimyasal enerji kemosentezde kullanılıyordu.",
+            "source_start_seconds": 1080.159,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Fotosentez ve Kemosentez Farkları"
+          },
+          {
+            "question": "Kemosentez yapan canlıların hücre yapısı nedir?",
+            "options": [
+              "Hücre yapısı yoktur",
+              "Prokaryot hücre yapısına sahiptirler",
+              "Ökaryot hücre yapısına sahiptirler",
+              "Her iki hücre yapısına da sahiptirler"
+            ],
+            "correct_index": 1,
+            "explanation": "Kemosentez yapan canlılar, tamamının prokaryot hücre yapısına sahip olduğu belirtilmiştir.",
+            "source_quote": "canlılara da kemosentetik canlılar adını veriyoruz. Bu canlıların tamamı prokaryot hücre yapısına sahip olan canlılardır.",
+            "source_start_seconds": 578.32,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "Kemosentez ve Ekosistem"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v2",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Kemosentez Nedir?",
+          "Hidrotermal Bacalar ve Canlılar",
+          "Kemosentetik Canlıların Özellikleri",
+          "Fotosentez ve Kemosentez Farkları",
+          "Kemosentez ve Ekosistem"
+        ],
+        "topics_source": "request",
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Kemosentez Nedir?",
+            "context_words": 759,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 10,
+                "start_seconds": 547.64,
+                "end_seconds": 614.52,
+                "score": 0.61098
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.608871
+              },
+              {
+                "chunk_index": 21,
+                "start_seconds": 1152.96,
+                "end_seconds": 1229.04,
+                "score": 0.595438
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 769.399,
+                "end_seconds": 839.2,
+                "score": 0.594577
+              },
+              {
+                "chunk_index": 26,
+                "start_seconds": 1426.4,
+                "end_seconds": 1492.0,
+                "score": 0.576419
+              }
+            ],
+            "outcome": "ok"
+          },
+          {
+            "topic": "Hidrotermal Bacalar ve Canlılar",
+            "context_words": 759,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 101.52,
+                "end_seconds": 176.88,
+                "score": 0.593059
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 444.919,
+                "end_seconds": 511.88,
+                "score": 0.554084
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.546149
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 156.2,
+                "end_seconds": 234.16,
+                "score": 0.543912
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 271.6,
+                "end_seconds": 349.04,
+                "score": 0.514971
+              }
+            ],
+            "outcome": "ok"
+          },
+          {
+            "topic": "Kemosentetik Canlıların Özellikleri",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.629494
+              },
+              {
+                "chunk_index": 26,
+                "start_seconds": 1426.4,
+                "end_seconds": 1492.0,
+                "score": 0.620841
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 547.64,
+                "end_seconds": 614.52,
+                "score": 0.620327
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.617886
+              },
+              {
+                "chunk_index": 16,
+                "start_seconds": 881.72,
+                "end_seconds": 947.84,
+                "score": 0.612926
+              }
+            ],
+            "outcome": "ok"
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları",
+            "context_words": 764,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 21,
+                "start_seconds": 1152.96,
+                "end_seconds": 1229.04,
+                "score": 0.717579
+              },
+              {
+                "chunk_index": 18,
+                "start_seconds": 983.88,
+                "end_seconds": 1054.84,
+                "score": 0.707174
+              },
+              {
+                "chunk_index": 19,
+                "start_seconds": 1039.36,
+                "end_seconds": 1111.44,
+                "score": 0.676164
+              },
+              {
+                "chunk_index": 26,
+                "start_seconds": 1426.4,
+                "end_seconds": 1492.0,
+                "score": 0.653345
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.647534
+              }
+            ],
+            "outcome": "ok"
+          },
+          {
+            "topic": "Kemosentez ve Ekosistem",
+            "context_words": 760,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 10,
+                "start_seconds": 547.64,
+                "end_seconds": 614.52,
+                "score": 0.557263
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.546438
+              },
+              {
+                "chunk_index": 26,
+                "start_seconds": 1426.4,
+                "end_seconds": 1492.0,
+                "score": 0.536129
+              },
+              {
+                "chunk_index": 18,
+                "start_seconds": 983.88,
+                "end_seconds": 1054.84,
+                "score": 0.534958
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 271.6,
+                "end_seconds": 349.04,
+                "score": 0.532607
+              }
+            ],
+            "outcome": "ok"
+          }
+        ],
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": []
+      },
+      "writing_flags": [],
+      "stages": {
+        "transcript_fetch_ms": 11840.6,
+        "clean_ms": 10.5,
+        "index_ms": 88.7,
+        "retrieval_ms": 71818.9,
+        "llm_questions_ms": 11348.8,
+        "quote_verify_ms": 25.4,
+        "writing_check_ms": 2.6,
+        "total_ms": 95346.0
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 2561.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2414,
+          "completion_tokens": 158,
+          "total_tokens": 2572
+        },
+        {
+          "purpose": "questions",
+          "ms": 2401.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2442,
+          "completion_tokens": 172,
+          "total_tokens": 2614
+        },
+        {
+          "purpose": "questions",
+          "ms": 1662.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2381,
+          "completion_tokens": 149,
+          "total_tokens": 2530
+        },
+        {
+          "purpose": "questions",
+          "ms": 2262.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2457,
+          "completion_tokens": 223,
+          "total_tokens": 2680
+        },
+        {
+          "purpose": "questions",
+          "ms": 2461.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2449,
+          "completion_tokens": 170,
+          "total_tokens": 2619
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 12143,
+        "completion_tokens": 872,
+        "total_tokens": 13015
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    }
+  ]
+}

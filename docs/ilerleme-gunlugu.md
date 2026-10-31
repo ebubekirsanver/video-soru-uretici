@@ -623,3 +623,22 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Konular özet servisinden geliyor; sayıları ve başlıkları videoya göre, hatta çalıştırmadan çalıştırmaya değişiyor. Deneyde iki koşula aynı konular `topics` ile verilmeli.
   - Bloom yönlendirmesi yok (Aşama 8).
 
+## Aşama 7b · Konu sonucu kaydı ve iki koşulun ilk işlerlik denemesi (2026-10-31)
+
+- **Kayıt düzeltmesi** (`services/topic_questions.py`):
+  - Her konunun sonucu ayrı yazılıyor: `ok`, `empty` (model boş liste döndürdü), `invalid` (soru döndü ama yapı denetiminden geçmedi), `duplicate` (tekrar olarak atıldı). Kayıtta `per_topic[].outcome` ve `outcome_counts` alanları var.
+  - `no_question_topics` geriye dönük uyumlu bırakıldı (empty + invalid). `produced` alanı da duruyor.
+  - Kayıt sürümü 6'da kaldı, çünkü sürüm 6 henüz hiçbir gerçek kayıtta kullanılmamıştı (kod yorumunda yazılı).
+  - 2 yeni test eklendi.
+- **İşlerlik denemesi** ([bulgu](bulgular/asama-7b-kosul-denemesi-1.md)):
+  - Kemosentez videosu (`109kCbVtU1U`) ile yapıldı. Özet servisi bir kez çalıştı ve 5 konu döndürdü. İki koşul aynı 5 konuyla, `k=5` ile birer kez çalıştı. Plan ve konular çalıştırmadan önce kullanıcıya gösterildi.
+  - Sonuçlar:
+    - **full:** 4 soru (1 konu tekrar olarak atıldı), 4'ünün alıntısı transkriptte bulundu, 40693 token.
+    - **rag:** 5 soru, 5'inin alıntısı bulundu, 13015 token.
+    - Yazım kuralı işareti iki koşulda da 0.
+  - Kalite değerlendirilmedi; bu bir AS1 değerlendirmesi değil.
+- **Nasıl doğrulandı:** `pytest` sonucu: 338 test geçti (önceki 336 ve 2 yeni test). Deneme betiği API üzerinden FastAPI TestClient ile çalıştı. Toplam 11 OpenAI çağrısı yapıldı (özet 1, full 5, rag 5).
+- **Bilinen sınırlar:**
+  - Tek video, tek çalıştırma, 5 konu; kalite ölçülmedi; konular özet servisinden geldi.
+  - RAG'deki ilk erişim süresi BGE-M3'ün ilk yüklenmesini de içeriyor.
+

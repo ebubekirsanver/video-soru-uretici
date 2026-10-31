@@ -33,6 +33,13 @@ USER_PROMPT_FILE = "questions_v2_user.txt"
 
 ContextMode = Literal["full", "rag"]
 
+# Konu başına sonuç (AS1 analizinde ayrı sayılır):
+# ok: geçerli soru üretildi ve son listede
+# empty: model boş liste döndürdü (konu bağlamda yok dedi)
+# invalid: model soru döndürdü ama hiçbiri yapı denetiminden geçmedi
+# duplicate: geçerli soru üretildi ama başka bir konunun sorusunun tekrarı olarak atıldı
+TopicOutcome = Literal["ok", "empty", "invalid", "duplicate"]
+
 # Veri bölümünü ayıran etiket; bağlamda ya da konuda geçerse silinir
 _CONTEXT_TAG = re.compile(r"</?\s*bağlam\s*>", re.IGNORECASE)
 _PLACEHOLDER = re.compile(r"\{(topic|context)\}")
@@ -73,8 +80,11 @@ class TopicTrace:
 
     topic: str
     context_words: int
-    produced: bool  # model bu konu için soru döndürdü mü
+    # Geriye dönük uyumluluk için duruyor: model bu konu için yapı denetiminden
+    # geçen bir soru döndürdü mü (ok ve duplicate için True)
+    produced: bool
     retrieved: list[dict] | None = None  # yalnızca rag: chunk_index, start/end_seconds, score
+    outcome: TopicOutcome = "ok"
 
 
 @dataclass
@@ -85,7 +95,18 @@ class TopicGeneration:
 
     @property
     def no_question_topics(self) -> list[str]:
-        return [t.topic for t in self.traces if not t.produced]
+        """Geriye dönük uyumlu: yapı denetiminden geçen soru gelmeyen konular (empty + invalid).
+
+        Ayrımı için konu başına `outcome` alanına bakılır.
+        """
+        return [t.topic for t in self.traces if t.outcome in ("empty", "invalid")]
+
+    @property
+    def outcome_counts(self) -> dict[str, int]:
+        counts = {"ok": 0, "empty": 0, "invalid": 0, "duplicate": 0}
+        for t in self.traces:
+            counts[t.outcome] += 1
+        return counts
 
 
 def generate_topic_questions(
@@ -110,7 +131,8 @@ def generate_topic_questions(
         döndürür; süreler çalıştırma kaydı için ölçülür.
 
     Model bir konu için soru döndürmezse (boş liste) o konu atlanır, hata
-    verilmez; `no_question_topics` içinde görünür.
+    verilmez. Her konunun sonucu (`ok` / `empty` / `invalid` / `duplicate`)
+    `TopicTrace.outcome` alanında tutulur.
     """
     if context_mode not in ("full", "rag"):
         raise ValueError(f"Geçersiz context_mode: {context_mode!r}")
@@ -127,7 +149,7 @@ def generate_topic_questions(
         shared_context = full_context(context_transcript)
 
     system = load_prompt(SYSTEM_PROMPT_FILE)
-    candidates, candidate_topics, traces = [], [], []
+    candidates, candidate_topics, candidate_traces, traces = [], [], [], []
     structure_invalid = extra_ignored = 0
     for topic in topics:
         retrieved = None
@@ -146,14 +168,22 @@ def generate_topic_questions(
         raw = llm.complete(system=system, user=build_topic_user_prompt(topic, context), json_mode=True)
         parsed = parse_questions(raw)
         # parse_questions başarılıysa yanıt bir "questions" listesi içerir
-        structure_invalid += len(json.loads(raw)["questions"]) - len(parsed)
+        returned = len(json.loads(raw)["questions"])
+        structure_invalid += returned - len(parsed)
         if parsed:
+            outcome = "ok"  # tekrar olarak atılırsa aşağıda "duplicate" olur
             candidates.append(parsed[0])
             candidate_topics.append(topic)
+            candidate_traces.append(len(traces))
             extra_ignored += len(parsed) - 1  # istem en çok 1 soru istiyor
-        traces.append(TopicTrace(topic, context_word_count(context), bool(parsed), retrieved))
+        else:
+            outcome = "empty" if returned == 0 else "invalid"
+        traces.append(TopicTrace(topic, context_word_count(context), bool(parsed), retrieved, outcome))
 
     unique = drop_duplicates(candidates)
+    for q, trace_index in zip(candidates, candidate_traces):
+        if not any(q is u for u in unique):
+            traces[trace_index].outcome = "duplicate"
     kept = [(q, t) for q, t in zip(candidates, candidate_topics) if any(q is u for u in unique)]
     questions = verify_candidates([q for q, _ in kept], reference, [t for _, t in kept])
     dropped = {

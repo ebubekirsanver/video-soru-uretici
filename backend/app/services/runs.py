@@ -42,6 +42,9 @@ RunKind = Literal["summary", "questions"]
 #    (istem sürümü, koşul, k, konular ve kaynağı, parçalama sürümü, gömme modeli,
 #    konu başına bağlamın kelime sayısı ve RAG'de erişilen parçalar, soru
 #    üretilmeyen konular); metrics.stages içinde index_ms ve retrieval_ms.
+#    Konu başına sonuç (per_topic[].outcome: ok / empty / invalid / duplicate)
+#    ve outcome_counts sürüm 6 henüz hiçbir gerçek kayıtta kullanılmamışken
+#    eklendi; bu yüzden sürüm 6'da kaldı.
 RECORD_VERSION = 6
 
 
