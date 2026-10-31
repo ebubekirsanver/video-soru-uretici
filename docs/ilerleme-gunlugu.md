@@ -1,5 +1,26 @@
 # İlerleme günlüğü
 
+## Kısa özet
+
+| Aşama | Ne yapıldı | Durum |
+|---|---|---|
+| 0 · Proje iskeleti | Depo klasörleri kuruldu, literatür değerlendirmesi ve mimari görseli eklendi. | tamamlandı |
+| 1 · FastAPI iskeleti | Sunucu, sağlık kontrolü ve Swagger ekranı çalışıyor. | tamamlandı |
+| 2 · Transkript | YouTube bağlantısından zaman damgalı transkript alınıyor. | tamamlandı |
+| 3 · Whisper yedeği, WER | Yapılmadı; altyazısı olmayan video seçilirse gerekecek. | ertelendi |
+| 4 · Bölümleme | Yalnızca ~30 saniyelik bloklama var; asıl bölümleme yapılmadı. | ertelendi |
+| 5 · LLM katmanı ve özet | Model katmanı kuruldu, videodan Türkçe özet ve konu başlıkları üretiliyor. | tamamlandı |
+| 6 · Temel soru üretimi | Transkriptin tamamından soru üretiliyor, alıntısı transkriptte aranıyor. | tamamlandı |
+| 7 · Gömme ve erişim (RAG) | Yapılmadı. | yapılmadı |
+| 8 · Bloom yönlendirmeli istem | Yapılmadı. | yapılmadı |
+| 9 · Otomatik doğrulama | Alıntı-cevap destek kontrolü ve kodla yazım kuralları var; sadakat, Bloom ve benzerlikle tekrar eleme yok. | kısmen |
+| 10 · Yeniden üretim | Yapılmadı. | yapılmadı |
+| 11 · Görev kuyruğu | Yapılmadı. | yapılmadı |
+| 12 · Web arayüzü | Bağlantı formu, özet kartı ve soru kartları olan bir prototip yapıldı. | tamamlandı (prototip) |
+| 13 · Öğretmen onay ekranı | Yapılmadı. | yapılmadı |
+| 14 · İzleme ve günlükleme | Her isteğin süresi, token sayısı ve hataları kayda yazılıyor; maliyet hesabı ve kayıt görme aracı yok. | kısmen |
+| 15 · Değerlendirme | Yapılmadı. | yapılmadı |
+
 Her aşamada yapılanlar, kararlar ve doğrulama sonucu burada tutulur.
 
 ## Aşama 0 · Proje iskeleti (2026-10-12)
@@ -477,3 +498,18 @@ Kod değiştirilmedi, model çağrısı yapılmadı.
 - **4. kural kararı:**
   - Eşik (1,3) bu sonuçlara bakarak değiştirilmedi. Değişiklik gerekirse `writing-rules-v2` olarak yeni sorularla değerlendirilecek.
   - Kullanıcının görüşü: "doğru seçeneğin belirgin uzun olmasının önüne geçilmeli." Bu, `questions-v1` değiştirilmeden ileride ele alınacak: soru istemi v2'de bir kural olarak ya da Aşama 10 (yeniden üretim) içinde.
+
+## Belge güncellemesi · Hafta-1 geri bildirimi sonrası plan (2026-10-31)
+
+- **Neden:** Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yeniden yazıldı ve kapsam daraltıldı. Depodaki belgeler hâlâ eski kapsamı anlatıyordu.
+- **Ne yapıldı:**
+  - `docs/02-teknik-mimari.png` kullanıcının verdiği yeni görselle değiştirildi.
+  - `CLAUDE.md`:
+    - Whisper için large-v3 yazıldı.
+    - Kural 6 ana deney (RAG / tam transkript) ve ikincil deney ayrımına göre güncellendi.
+    - "Araştırma soruları ve deney tasarımı" bölümü eklendi.
+    - "Şu anki durum" bölümünün sonuna plan notu eklendi.
+  - `docs/yol-haritasi.md`: Sona "Plan güncellemesi (2026-10-31)" bölümü eklendi. Bölümde şunlar var: araştırma soruları ve başarı ölçütleri, veri seti, değerlendirme, mimari kararları, iş-zaman planı, aşamaların yeni plandaki yeri ile ana ve ikincil deney listeleri. Eski durum bölümleri değiştirilmedi.
+  - `docs/mimari-kod-karsilastirmasi.md`: Karşılaştırmanın eski görsele göre olduğunu belirten not eklendi. Tablo değiştirilmedi.
+  - Bu günlüğün başına "Kısa özet" tablosu eklendi.
+- **Kod değişmedi:** Model çağrısı yapılmadı. `pytest` sonucu: 286 test geçti.
