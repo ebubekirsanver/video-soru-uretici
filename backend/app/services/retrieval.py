@@ -5,8 +5,10 @@ Bir videonun temizlenmiş transkripti sabit boyutlu parçalara bölünür
 kosinüs benzerliğiyle dizinlenir. `retrieve` yalnızca istenen videonun
 parçaları içinde arar ve en ilgiliden başlayarak döndürür.
 
-Önbellek: aynı video aynı parçalama sürümüyle zaten dizindeyse yeniden
-gömülmez (planın risk bölümündeki "gömmeler önbellekte tutulur" kararı).
+Önbellek: aynı video aynı parçalama sürümüyle zaten dizindeyse ve parça
+metinleri değişmemişse yeniden gömülmez (planın risk bölümündeki "gömmeler
+önbellekte tutulur" kararı). Metin değişikliği her parçanın sha256 özetiyle
+(`text_sha256`) anlaşılır.
 Bir koleksiyon tek bir gömme modeline aittir; model adı koleksiyonun üst
 verisinde tutulur. Farklı bir modelle (farklı vektör boyutu) aynı dizin
 açılırsa hata verilir: başka model için başka bir dizin klasörü kullanılmalı.
@@ -14,6 +16,7 @@ açılırsa hata verilir: başka model için başka bir dizin klasörü kullanı
 Bu adımda soru üretimine bağlı değildir (bağlama Aşama 7b'de).
 """
 
+import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -42,6 +45,11 @@ class IndexResult:
     chunking: str
     chunk_count: int
     embedded: bool  # False: parçalar zaten dizindeydi, gömme yapılmadı
+
+
+def text_sha256(text: str) -> str:
+    """Parça metninin sha256 özeti; metin değişince yeniden gömmek için."""
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 def chunk_id(video_id: str, chunking: str, index: int) -> str:
@@ -81,13 +89,23 @@ class TranscriptIndex:
     def _existing_ids(self, video_id: str, chunking: str) -> list[str]:
         return self._collection.get(where=self._where(video_id, chunking), include=[])["ids"]
 
+    def _existing_hashes(self, video_id: str, chunking: str) -> dict[str, str | None]:
+        """Dizindeki parça kimliği → metin özeti (özet yoksa None)."""
+        found = self._collection.get(where=self._where(video_id, chunking), include=["metadatas"])
+        return {i: (m or {}).get("text_sha256") for i, m in zip(found["ids"], found["metadatas"])}
+
     def index_chunks(self, chunks: list[Chunk]) -> IndexResult:
         """Bir videonun parçalarını gömüp dizine ekler; zaten dizindeyse yeniden gömmez.
 
         Parçaların hepsi aynı videoya ve aynı parçalama sürümüne ait olmalı.
-        Dizindeki parça kimlikleri yeni parçalarla birebir aynıysa gömme
-        yapılmaz. Farklıysa (ör. transkript değişmiş) o videonun bu sürümdeki
-        eski parçaları silinip yenileri yazılır.
+        Gömme yalnızca dizindeki parça kimlikleri yeni parçalarla birebir aynı
+        VE her parçanın metin özeti (`text_sha256`) aynıysa atlanır. Değilse
+        (ör. transkript değişmiş, parça sayısı aynı kalsa bile) o videonun bu
+        sürümdeki eski parçaları silinip yenileri yazılır.
+
+        Not: Özet üst verisi eklenmeden önce oluşturulmuş bir dizinde parçaların
+        özeti yoktur; bu yüzden böyle bir dizindeki her video bir kez yeniden
+        gömülür.
         """
         if not chunks:
             raise ValueError("Dizinlenecek parça yok.")
@@ -96,11 +114,12 @@ class TranscriptIndex:
             raise ValueError("Parçalar aynı videoya ve aynı parçalama sürümüne ait olmalı.")
 
         ids = [chunk_id(video_id, chunking, c.chunk_index) for c in chunks]
-        existing = self._existing_ids(video_id, chunking)
-        if sorted(existing) == sorted(ids):
+        wanted = {i: text_sha256(c.text) for i, c in zip(ids, chunks)}
+        existing = self._existing_hashes(video_id, chunking)
+        if existing == wanted:
             return IndexResult(video_id, chunking, len(chunks), embedded=False)
         if existing:
-            self._collection.delete(ids=existing)
+            self._collection.delete(ids=list(existing))
 
         vectors = self.embedder.embed([c.text for c in chunks])
         self._collection.add(
@@ -115,8 +134,9 @@ class TranscriptIndex:
                     "start_seconds": c.start_seconds,
                     "end_seconds": c.end_seconds,
                     "embedding_model": self.embedder.model,
+                    "text_sha256": wanted[i],
                 }
-                for c in chunks
+                for i, c in zip(ids, chunks)
             ],
         )
         return IndexResult(video_id, chunking, len(chunks), embedded=True)

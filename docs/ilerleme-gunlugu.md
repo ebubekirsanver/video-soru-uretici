@@ -559,3 +559,22 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - BGE-M3 testlerde değil, yalnızca gerçek çalıştırmada yüklenir. `sentence-transformers` bu ortamda henüz kurulmadı.
   - Gerçek videoyla erişim denemesi yapılmadı.
 
+## Aşama 7a · Önbellek düzeltmesi ve ilk gerçek erişim denemesi (2026-10-31)
+
+- **Önbellek düzeltmesi** (`services/retrieval.py`):
+  - **Sorun:** `index_chunks` yalnızca parça kimliklerine bakıyordu. Transkriptin metni değişip parça sayısı aynı kalırsa eski gömmeler kullanılmaya devam ediyordu.
+  - **Çözüm:** Her parçanın metninin sha256 özeti üst veriye (`text_sha256`) yazılıyor. Gömme artık yalnızca kimlikler ve bütün özetler aynıysa atlanıyor.
+  - **Eski dizinler:** Bu değişiklikten önce oluşturulmuş bir dizinde özet olmadığı için her video bir kez yeniden gömülür (kod yorumunda yazılı).
+  - **Testler:** 2 yeni test (parça sayısı aynı, metni değişmiş transkript yeniden gömülür; özetsiz eski dizin bir kez yeniden gömülür, sonra önbellek çalışır).
+- **Kurulum:** `pip install -r requirements.txt` ile sentence-transformers 6.2.0 ve torch 2.15.0 kuruldu. BGE-M3 ilk kullanımda Hugging Face önbelleğine indi; ölçülen boyut 4,3 GB (iki ağırlık dosyası).
+- **Erişim denemesi 1** ([bulgu](bulgular/asama-7a-erisim-denemesi-1.md)):
+  - Kemosentez videosu (`109kCbVtU1U`), temiz transkript: 28 parça (`fixed-150-30`). İlk model yükleme 96,5 sn (indirme dahil), dizinleme 43,1 sn.
+  - Sorgular ve beklenen zamanlar çalıştırmadan önce yazıldı ve kullanıcı onayladı. Betik bir kez çalıştırıldı.
+  - Sonuç: a (~124 sn) ilk sıradaki parçada var. b (~435 sn) ilk sırada da ilk 3'te de yok; ilk iki sıradaki parçalarda "prokaryot" geçiyor ve bunlar Aşama 6 belgesindeki tekrarları (582,3 / 736,2 sn) kapsıyor. c'yi kullanıcı değerlendirecek.
+  - Model (OpenAI) çağrısı yapılmadı.
+- **Nasıl doğrulandı:** `pytest` sonucu: 311 test geçti (önceki 309 ve 2 yeni test).
+- **Bilinen sınırlar:**
+  - Deneme tek video, 3 sorgu, tek çalıştırma; isabet iddiası yok.
+  - Beklenen zamanlar 30 sn'lik blok etiketlerinden geliyor, aralık kontrolü kaba bir ölçüt.
+  - Erişim henüz soru üretimine bağlanmadı (Aşama 7b).
+

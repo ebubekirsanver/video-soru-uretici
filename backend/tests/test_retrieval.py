@@ -76,6 +76,37 @@ def test_changed_transcript_is_reindexed(index):
     assert sorted(c.chunk_index for c in found) == [0, 1]  # eski parçalar silindi
 
 
+def test_same_count_changed_text_is_reembedded(index):
+    index.index_chunks(make_chunks("vidA"))
+    changed = TOPICS[:3] + ["mayoz eşey hücresi krossing over çeşitlilik"]  # parça sayısı aynı (4)
+    result = index.index_chunks(make_chunks("vidA", changed))
+    assert result.embedded is True
+    assert len(index.embedder.calls) == 2
+    found = index.retrieve("vidA", "mayoz krossing over", k=1)
+    assert found[0].chunk_index == 3 and found[0].text == changed[3]
+    assert index.retrieve("vidA", "mayoz", k=10)[0].text != TOPICS[3]
+    assert TOPICS[3] not in [c.text for c in index.retrieve("vidA", "mitoz", k=10)]
+
+
+def test_index_without_hashes_is_reembedded_once(index):
+    # Özet üst verisi eklenmeden önce oluşturulmuş dizini taklit et: aynı kimlikler, özet yok
+    chunks = make_chunks("vidA")
+    index._collection.add(
+        ids=[chunk_id("vidA", CHUNKING_VERSION, c.chunk_index) for c in chunks],
+        embeddings=index.embedder.embed([c.text for c in chunks]),
+        documents=[c.text for c in chunks],
+        metadatas=[
+            {"video_id": "vidA", "chunking": CHUNKING_VERSION, "chunk_index": c.chunk_index,
+             "start_seconds": c.start_seconds, "end_seconds": c.end_seconds}
+            for c in chunks
+        ],
+    )
+    index.embedder.calls.clear()
+    assert index.index_chunks(chunks).embedded is True  # özet olmadığı için bir kez yeniden gömülür
+    assert index.index_chunks(chunks).embedded is False  # sonra önbellek çalışır
+    assert len(index.embedder.calls) == 1
+
+
 def test_retrieve_most_relevant_first(index):
     index.index_chunks(make_chunks("vidA"))
     found = index.retrieve("vidA", "hidrotermal baca kükürt bakteri", k=4)
