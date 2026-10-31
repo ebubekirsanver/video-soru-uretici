@@ -122,7 +122,27 @@ class V1LLM:
         return json.dumps({"questions": items}, ensure_ascii=False)
 
 
-client = TestClient(app)
+class BloomDefaultClient(TestClient):
+    """Aşama 8'den beri context_mode isteklerinde konu sayısı 6 değilse bloom_levels gerekiyor.
+
+    Bu dosyadaki testler düzeyden bağımsız davranışı (koşullar, kayıt, doğrulama)
+    denetlediği için, context_mode ve topics olup bloom_levels olmayan isteklere
+    her konu için "Hatırlama" eklenir. Bloom davranışı tests/test_bloom.py'de denetlenir.
+    """
+
+    def post(self, url, *args, json=None, **kwargs):
+        if (
+            url == "/api/questions"
+            and isinstance(json, dict)
+            and json.get("context_mode")
+            and isinstance(json.get("topics"), list)
+            and "bloom_levels" not in json
+        ):
+            json = {**json, "bloom_levels": ["Hatırlama"] * len(json["topics"])}
+        return super().post(url, *args, json=json, **kwargs)
+
+
+client = BloomDefaultClient(app)
 
 
 @pytest.fixture

@@ -48,8 +48,11 @@ class Question:
     model_quote: str = ""
     trimmed_head: list[str] = field(default_factory=list)
     trimmed_tail: list[str] = field(default_factory=list)
-    # Konu tabanlı üretimde (questions-v2) sorunun ait olduğu konu; v1'de None
+    # Konu tabanlı üretimde (questions-v2/v3) sorunun ait olduğu konu; v1'de None
     topic: str | None = None
+    # questions-v3: hedef Bloom düzeyi ve modelin "reasoning" metni (yalnızca kayıt); v1'de boş
+    bloom_level: str | None = None
+    reasoning: str = ""
 
 
 # LLM'in döndürdüğü tek bir sorunun beklenen yapısı
@@ -59,6 +62,8 @@ class _QuestionModel(BaseModel):
     correct_index: int
     explanation: str
     source_quote: str
+    # questions-v3'te model önce sorunun neden hedef düzeyde olduğunu yazar; v1/v2'de yok
+    reasoning: str | None = None
 
     @field_validator("question", "explanation", "source_quote")
     @classmethod
@@ -202,11 +207,16 @@ def generate_questions(
     return verify_candidates(candidates, reference)
 
 
-def verify_candidates(candidates: list[_QuestionModel], reference: Transcript, topics: list[str] | None = None) -> list[Question]:
+def verify_candidates(
+    candidates: list[_QuestionModel],
+    reference: Transcript,
+    topics: list[str] | None = None,
+    bloom_levels: list[str] | None = None,
+) -> list[Question]:
     """Yapı denetiminden geçmiş soruların alıntısını temiz transkriptte arar ve seçenekleri karıştırır.
 
     reference: alıntıların arandığı temizlenmiş transkriptin tamamı (RAG koşulunda da).
-    topics: verilirse her soruya sırasıyla konu atanır (questions-v2).
+    topics / bloom_levels: verilirse her soruya sırasıyla konu ve hedef Bloom düzeyi atanır.
     """
     locator = QuoteLocator(reference.segments)
     questions = []
@@ -233,6 +243,8 @@ def verify_candidates(candidates: list[_QuestionModel], reference: Transcript, t
                 trimmed_head=found.trimmed_head if found else [],
                 trimmed_tail=found.trimmed_tail if found else [],
                 topic=topics[n] if topics else None,
+                bloom_level=bloom_levels[n] if bloom_levels else None,
+                reasoning=(q.reasoning or "").strip(),
             )
         )
     return questions

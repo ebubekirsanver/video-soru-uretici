@@ -1,4 +1,4 @@
-"""Aşama 7b: konu tabanlı soru üretimi, AS1'in iki koşulu (full / rag), istem questions-v2.
+"""Aşama 7b: konu tabanlı soru üretimi, AS1'in iki koşulu (full / rag); Aşama 8'den beri istem questions-v3.
 
 Sahte LLM, sahte gömme ve her testte geçici bir Chroma klasörü kullanılır;
 gerçek model çağrısı ya da indirme yoktur.
@@ -30,6 +30,11 @@ TOPIC_SEGMENTS = [
     ("prokaryot hücre", "kemosentetik canlıların tamamı prokaryot hücre yapısına sahiptir", 200.0),
     ("mitoz bölünme", "mitoz bölünmede kromozom sayısı yavru hücrelerde korunur", 300.0),
 ]
+
+
+KNOWN_TITLES = {t for t, _, _ in TOPIC_SEGMENTS}
+# Aşama 8: tohumlu Bloom eşlemesi 6 konu ister; konu çıkarma testlerinde 4 bilinen + 2 bilinmeyen konu
+SIX_TITLES = [t for t, _, _ in TOPIC_SEGMENTS] + ["ekosistem dengesi", "enerji akışı"]
 
 
 def make_transcript():
@@ -109,13 +114,35 @@ class TopicLLM:
             bad = question_for(topic)
             bad["options"] = ["Yalnızca", "iki seçenek"]  # tam 4 seçenek değil
             return json.dumps({"questions": [bad]}, ensure_ascii=False)
+        if self.same_as.get(topic, topic) not in KNOWN_TITLES:
+            return json.dumps({"questions": []})  # konu bağlamda yok
         q = question_for(self.same_as.get(topic, topic))
         if topic in self.quotes:
             q["source_quote"] = self.quotes[topic]
         return json.dumps({"questions": [q]}, ensure_ascii=False)
 
 
-client = TestClient(app)
+class BloomDefaultClient(TestClient):
+    """Aşama 8'den beri context_mode isteklerinde konu sayısı 6 değilse bloom_levels gerekiyor.
+
+    Bu dosyadaki testler düzeyden bağımsız davranışı (koşullar, kayıt, doğrulama)
+    denetlediği için, context_mode ve topics olup bloom_levels olmayan isteklere
+    her konu için "Hatırlama" eklenir. Bloom davranışı tests/test_bloom.py'de denetlenir.
+    """
+
+    def post(self, url, *args, json=None, **kwargs):
+        if (
+            url == "/api/questions"
+            and isinstance(json, dict)
+            and json.get("context_mode")
+            and isinstance(json.get("topics"), list)
+            and "bloom_levels" not in json
+        ):
+            json = {**json, "bloom_levels": ["Hatırlama"] * len(json["topics"])}
+        return super().post(url, *args, json=json, **kwargs)
+
+
+client = BloomDefaultClient(app)
 
 
 @pytest.fixture
@@ -282,21 +309,22 @@ def test_empty_and_invalid_are_not_mixed(setup):
 
 
 def test_topics_from_extraction_when_not_given(setup):
-    # topics verilmezse konular özet servisinden değil konu çıkarma adımından (topics-v1) gelir
-    llm = setup(TopicLLM())
-    r = client.post("/api/questions", json={"url": VID, "context_mode": "full", "count": 2})
+    # topics verilmezse konular özet servisinden değil konu çıkarma adımından (topics-v1) gelir.
+    # Aşama 8'den beri tohumlu Bloom eşlemesi 6 konu istediği için count 6.
+    llm = setup(TopicLLM(summary_topics=SIX_TITLES))
+    r = client.post("/api/questions", json={"url": VID, "context_mode": "full", "count": 6})
     assert r.status_code == 200
     assert llm.summary_calls == []
     assert len(llm.topic_calls) == 1
-    texts = ["fotosentez klorofil: fotosentez klorofil videoda anlatılıyor.",
-             "hidrotermal bacalar: hidrotermal bacalar videoda anlatılıyor."]
-    assert [q["topic"] for q in r.json()["questions"]] == texts
+    texts = [f"{t}: {t} videoda anlatılıyor." for t in SIX_TITLES]
+    # Transkriptte geçen 4 konu için soru döner; bilinmeyen 2 konu boş liste
+    assert [q["topic"] for q in r.json()["questions"]] == texts[:4]
     record = last_record(setup.runs_dir)
     tg = record["topic_generation"]
     assert tg["topics_source"] == "topics-v1"
     assert tg["topics"] == texts
-    assert tg["topic_extraction"]["requested_count"] == 2 and tg["topic_extraction"]["returned_count"] == 2
-    assert [c["purpose"] for c in record["metrics"]["llm_calls"]] == ["topics", "questions", "questions"]
+    assert tg["topic_extraction"]["requested_count"] == 6 and tg["topic_extraction"]["returned_count"] == 6
+    assert [c["purpose"] for c in record["metrics"]["llm_calls"]] == ["topics"] + ["questions"] * 6
     assert {"llm_topics_ms", "topics_parse_ms"} <= set(record["metrics"]["stages"])
 
 
@@ -309,13 +337,12 @@ def test_extracted_topic_text_goes_to_prompt_and_retrieval(setup, tmp_path):
             queries.append(query)
             return super().retrieve(video_id, query, k=k, **kwargs)
 
-    llm = setup(TopicLLM(summary_topics=["mitoz bölünme"]), index=SpyIndex(FakeEmbedder(), path=tmp_path / "spy"))
-    r = client.post("/api/questions", json={"url": VID, "context_mode": "rag", "count": 1})
+    llm = setup(TopicLLM(summary_topics=SIX_TITLES), index=SpyIndex(FakeEmbedder(), path=tmp_path / "spy"))
+    r = client.post("/api/questions", json={"url": VID, "context_mode": "rag", "count": 6})
     assert r.status_code == 200
-    text = "mitoz bölünme: mitoz bölünme videoda anlatılıyor."
-    assert queries == [text]
-    (_, user), = llm.question_calls
-    assert f"Konu: {text}" in user
+    texts = [f"{t}: {t} videoda anlatılıyor." for t in SIX_TITLES]
+    assert queries == texts
+    assert [user.splitlines()[0] for _, user in llm.question_calls] == [f"Konu: {t}" for t in texts]
     assert llm.summary_calls == []
 
 
@@ -406,14 +433,14 @@ def test_record_v6_rag_fields(setup):
     setup(TopicLLM())
     r = client.post("/api/questions", json={"url": VID, "context_mode": "rag", "topics": ["mitoz bölünme", "hidrotermal bacalar"], "k": 2})
     body = r.json()
-    assert body["context_mode"] == "rag" and body["prompt_version"] == "questions-v2"
+    assert body["context_mode"] == "rag" and body["prompt_version"] == "questions-v3"  # Aşama 8: v2 yerine v3
 
     record = last_record(setup.runs_dir)
     assert record["record_version"] == 7  # konu çıkarma (topics-v1) kayıtları eklendiği için sürüm 7
     assert record["response"] == body
     assert record["request"]["context_mode"] == "rag" and record["request"]["k"] == 2
     tg = record["topic_generation"]
-    assert tg["prompt_version"] == "questions-v2" and tg["context_mode"] == "rag" and tg["k"] == 2
+    assert tg["prompt_version"] == "questions-v3" and tg["context_mode"] == "rag" and tg["k"] == 2
     assert tg["chunking"] == "fixed-150-30" and tg["embedding_model"] == "fake-embedder"
     assert tg["topics"] == ["mitoz bölünme", "hidrotermal bacalar"]
     for t in tg["per_topic"]:

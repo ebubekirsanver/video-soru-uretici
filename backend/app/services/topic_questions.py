@@ -1,4 +1,4 @@
-"""Konu tabanlı soru üretimi: AS1'in iki koşulu (Aşama 7b, istem questions-v2).
+"""Konu tabanlı soru üretimi: AS1'in iki koşulu (Aşama 7b) ve Bloom yönlendirmesi (Aşama 8, istem questions-v3).
 
 Her konu için bir model çağrısıyla tek soru üretilir. İki koşulda da aynı
 konular, aynı istem ve aynı model kullanılır; tek fark modele verilen bağlam:
@@ -8,6 +8,12 @@ konular, aynı istem ve aynı model kullanılır; tek fark modele verilen bağla
 - "rag": o konu için `retrieve(video_id, konu, k)` ile bulunan parçalar, en
   ilgili parça başta olacak şekilde (N. F. Liu vd., 2024: uzun bağlamda
   ortadaki bilgi gözden kaçabiliyor). Erişim sorgusu konunun başlığıdır.
+
+Aşama 8'den beri istem questions-v3: her konuya bir hedef Bloom düzeyi eşlenir;
+isteme yalnızca o düzeyin tanımı ve örneği konur (`bloom.py`). Model önce
+"reasoning" alanında sorunun neden hedef düzeyde olduğunu yazar (düşünce
+zinciri); bu metin yalnızca çalıştırma kaydına girer. questions-v2 dosyaları
+geçmiş kaydı olarak duruyor, kullanılmıyor.
 
 Üretilen sorular v1 ile aynı doğrulamadan geçer (`questions.py`): yapı
 denetimi, tekrar ayıklama, alıntının TAM temiz transkriptte aranması (RAG
@@ -20,16 +26,17 @@ from contextlib import nullcontext
 from dataclasses import dataclass, field
 from typing import Callable, Literal
 
+from app.services.bloom import example_text, get_level
 from app.services.llm import LLMClient
 from app.services.prompts import BLOCK_SECONDS, load_prompt, transcript_context
 from app.services.questions import Question, drop_duplicates, parse_questions, verify_candidates
 from app.services.retrieval import RetrievedChunk, TranscriptIndex
 from app.services.transcript import Transcript
 
-# İstem değişirse yeni dosyalar (v3) açılır
-PROMPT_VERSION_V2 = "questions-v2"
-SYSTEM_PROMPT_FILE = "questions_v2_system.txt"
-USER_PROMPT_FILE = "questions_v2_user.txt"
+# İstem değişirse yeni dosyalar (v4) açılır. questions-v2 dosyaları geçmiş kaydı olarak duruyor.
+PROMPT_VERSION_V3 = "questions-v3"
+SYSTEM_PROMPT_FILE = "questions_v3_system.txt"
+USER_PROMPT_FILE = "questions_v3_user.txt"
 
 ContextMode = Literal["full", "rag"]
 
@@ -42,7 +49,7 @@ TopicOutcome = Literal["ok", "empty", "invalid", "duplicate"]
 
 # Veri bölümünü ayıran etiket; bağlamda ya da konuda geçerse silinir
 _CONTEXT_TAG = re.compile(r"</?\s*bağlam\s*>", re.IGNORECASE)
-_PLACEHOLDER = re.compile(r"\{(topic|context)\}")
+_PLACEHOLDER = re.compile(r"\{(topic|context|bloom_level|bloom_definition|bloom_example)\}")
 _TIME_LABEL = re.compile(r"^\[\d+\]\s*", re.MULTILINE)
 
 
@@ -65,12 +72,20 @@ def context_word_count(context: str) -> int:
     return len(_TIME_LABEL.sub("", context).split())
 
 
-def build_topic_user_prompt(topic: str, context: str) -> str:
-    """Konu ve bağlamı kullanıcı istemine tek geçişte yerleştirir.
+def build_topic_user_prompt(topic: str, context: str, bloom_level: str) -> str:
+    """Konu, bağlam ve hedef Bloom düzeyini (yalnızca o düzeyin tanımı ve örneği) kullanıcı istemine yerleştirir.
 
-    Bağlamın ya da konunun içinde "{topic}" gibi bir metin geçse bile yeniden işlenmez.
+    Tek geçişte yerleştirilir: bağlamın ya da konunun içinde "{topic}" gibi bir
+    metin geçse bile yeniden işlenmez. İki koşulda yalnızca bu alanlar değişir.
     """
-    values = {"topic": _clean(topic).strip(), "context": context}
+    level = get_level(bloom_level)
+    values = {
+        "topic": _clean(topic).strip(),
+        "context": context,
+        "bloom_level": level.name,
+        "bloom_definition": level.definition,
+        "bloom_example": example_text(level),
+    }
     return _PLACEHOLDER.sub(lambda m: values[m.group(1)], load_prompt(USER_PROMPT_FILE))
 
 
@@ -85,6 +100,7 @@ class TopicTrace:
     produced: bool
     retrieved: list[dict] | None = None  # yalnızca rag: chunk_index, start/end_seconds, score
     outcome: TopicOutcome = "ok"
+    bloom_level: str | None = None  # hedef düzey
 
 
 @dataclass
@@ -116,6 +132,7 @@ def generate_topic_questions(
     reference: Transcript,
     llm: LLMClient,
     *,
+    bloom_levels: list[str],
     index: TranscriptIndex | None = None,
     k: int = 5,
     timer: Callable[[str], object] | None = None,
@@ -129,6 +146,7 @@ def generate_topic_questions(
         yeniden gömülmez), sonra her konu için erişim yapılır.
     timer: `timer("index")` / `timer("retrieval")` bir bağlam yöneticisi
         döndürür; süreler çalıştırma kaydı için ölçülür.
+    bloom_levels: konularla aynı sırada ve uzunlukta hedef Bloom düzeyleri.
 
     Model bir konu için soru döndürmezse (boş liste) o konu atlanır, hata
     verilmez. Her konunun sonucu (`ok` / `empty` / `invalid` / `duplicate`)
@@ -136,6 +154,8 @@ def generate_topic_questions(
     """
     if context_mode not in ("full", "rag"):
         raise ValueError(f"Geçersiz context_mode: {context_mode!r}")
+    if len(bloom_levels) != len(topics):
+        raise ValueError("bloom_levels konularla aynı uzunlukta olmalı.")
     timer = timer or (lambda name: nullcontext())
     video_id = reference.video_id
 
@@ -149,9 +169,9 @@ def generate_topic_questions(
         shared_context = full_context(context_transcript)
 
     system = load_prompt(SYSTEM_PROMPT_FILE)
-    candidates, candidate_topics, candidate_traces, traces = [], [], [], []
+    candidates, candidate_topics, candidate_levels, candidate_traces, traces = [], [], [], [], []
     structure_invalid = extra_ignored = 0
-    for topic in topics:
+    for topic, bloom_level in zip(topics, bloom_levels):
         retrieved = None
         if context_mode == "rag":
             with timer("retrieval"):
@@ -165,7 +185,7 @@ def generate_topic_questions(
         else:
             context = shared_context
 
-        raw = llm.complete(system=system, user=build_topic_user_prompt(topic, context), json_mode=True)
+        raw = llm.complete(system=system, user=build_topic_user_prompt(topic, context, bloom_level), json_mode=True)
         parsed = parse_questions(raw)
         # parse_questions başarılıysa yanıt bir "questions" listesi içerir
         returned = len(json.loads(raw)["questions"])
@@ -174,18 +194,19 @@ def generate_topic_questions(
             outcome = "ok"  # tekrar olarak atılırsa aşağıda "duplicate" olur
             candidates.append(parsed[0])
             candidate_topics.append(topic)
+            candidate_levels.append(bloom_level)
             candidate_traces.append(len(traces))
             extra_ignored += len(parsed) - 1  # istem en çok 1 soru istiyor
         else:
             outcome = "empty" if returned == 0 else "invalid"
-        traces.append(TopicTrace(topic, context_word_count(context), bool(parsed), retrieved, outcome))
+        traces.append(TopicTrace(topic, context_word_count(context), bool(parsed), retrieved, outcome, bloom_level))
 
     unique = drop_duplicates(candidates)
     for q, trace_index in zip(candidates, candidate_traces):
         if not any(q is u for u in unique):
             traces[trace_index].outcome = "duplicate"
-    kept = [(q, t) for q, t in zip(candidates, candidate_topics) if any(q is u for u in unique)]
-    questions = verify_candidates([q for q, _ in kept], reference, [t for _, t in kept])
+    kept = [(q, t, lv) for q, t, lv in zip(candidates, candidate_topics, candidate_levels) if any(q is u for u in unique)]
+    questions = verify_candidates([q for q, _, _ in kept], reference, [t for _, t, _ in kept], [lv for _, _, lv in kept])
     dropped = {
         "structure_invalid": structure_invalid,
         "duplicate": len(candidates) - len(unique),

@@ -173,7 +173,7 @@ def scrub_secrets(text: str, known_secrets: tuple[str, ...] = ()) -> str:
 
 ErrorKind = Literal[
     "invalid_url", "transcript_unavailable", "llm_not_configured", "llm_failed", "invalid_json",
-    "embedding_unavailable",
+    "embedding_unavailable", "bloom_mapping",
 ]
 
 

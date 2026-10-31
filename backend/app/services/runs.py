@@ -55,6 +55,10 @@ RunKind = Literal["summary", "questions", "topics"]
 #    eşik ve geçici olup olmadığı, eşiği geçen soru çiftleri ve skorları) ve
 #    metrics.stages içinde similarity_check_ms. Sürüm 7 henüz hiçbir gerçek
 #    kayıtta kullanılmamışken eklendi; bu yüzden sürüm 7'de kaldı.
+#    + Aşama 8 (questions-v3): topic_generation içinde bloom_mapping (konu –
+#    hedef düzey), bloom_mapping_source ("request" / "seeded") ve
+#    questions_reasoning (her sorunun reasoning metni); per_topic[].bloom_level.
+#    Sürüm 7 henüz hiçbir gerçek kayıtta kullanılmamışken eklendi; sürüm 7'de kaldı.
 RECORD_VERSION = 7
 
 

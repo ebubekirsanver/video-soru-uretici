@@ -12,7 +12,7 @@
 | 5 · LLM katmanı ve özet | Model katmanı kuruldu, videodan Türkçe özet ve konu başlıkları üretiliyor. | tamamlandı |
 | 6 · Temel soru üretimi | Transkriptin tamamından soru üretiliyor, alıntısı transkriptte aranıyor. Ana deney, AS1'in tam transkript koşulu; Güz 9–10'da RAG koşuluyla aynı istemle karşılaştırılacak; kodu var (questions-v1). | tamamlandı |
 | 7 · Gömme ve erişim (RAG) | BGE-M3 gömme, ChromaDB dizini ve erişim eklendi; soru üretimine bağlandı: konu başına bir soru, tam transkript ya da RAG bağlamıyla (questions-v2). Konular ayrı bir adımdan geliyor (topics-v1). İki koşul gerçek videoda bir kez işlerlik denemesiyle çalıştırıldı; kalite ölçülmedi. | kısmen (7a, 7b) |
-| 8 · Bloom yönlendirmeli istem | Yapılmadı. | yapılmadı |
+| 8 · Bloom yönlendirmeli istem | Her konuya bir hedef Bloom düzeyi eşleniyor; istem yalnızca o düzeyin tanımını ve örnek sorusunu veriyor (questions-v3). Gerçek videoda denenmedi, düzey uyumu ölçülmedi. | kısmen |
 | 9 · Otomatik doğrulama | Alıntı-cevap destek kontrolü ve kodla yazım kuralları var; sadakat, Bloom ve benzerlikle tekrar eleme yok. | kısmen |
 | 10 · Yeniden üretim | Yapılmadı. | yapılmadı |
 | 11 · Görev kuyruğu | Yapılmadı. | yapılmadı |
@@ -706,4 +706,50 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Tek video, 16 çift, tek etiketleyen.
   - Eşik aynı veride seçilirse iyimser olur; pilot videolarda yeniden bakılacak.
   - Eşik 0,80 (16 çiftlik ölçümle seçildi; pilot videolarda yeniden bakılacak).
+
+## Aşama 8 · Bloom yönlendirmeli istem: questions-v3 (2026-10-31)
+
+- **Neden:** AS2, Bloom yönlendirmeli istemin soruların hedef düzeye uyumunu ne ölçüde sağladığını soruyor. Literatür dayanağı:
+  - Scaria vd. (2024): düşünce zinciri, düzey açıklaması ve örnek soru en iyi sonucu verdi; aşırı bilgi başarıyı düşürdü.
+  - Tourigny vd. (2026): soruların çoğu hedeften düşük düzeyde çıktı.
+  - Aşama 6 Bulgu 3: 4 sorunun hepsi hatırlama düzeyindeydi.
+- **Ne yapıldı:**
+  - **Protokol** (`docs/bloom-istem-protokolu.md`):
+    - Altı düzeyin tanımı, eylem fiilleri ve çoktan seçmeli biçimi yazıldı (Anderson ve Krathwohl, 2001 çerçevesine dayanarak; kitap okunmadı, belgede not var).
+    - Ortak bir örnek bağlam ve her düzey için bir örnek soru eklendi. Örnekler deney alanlarından değil (coğrafya: hava basıncı ve rüzgâr).
+    - Konu–düzey eşleme kuralı yazıldı.
+    - Kullanıcı commit'ledi.
+  - **Tek kaynak** (`app/prompts/bloom_levels.json`): Tanımlar, örnek bağlam ve örnek sorular protokol belgesinden çıkarıldı. `tests/test_bloom.py` iki metnin birebir aynı olduğunu denetliyor.
+  - **İstem `questions-v3`** (`app/prompts/questions_v3_system.txt`, `questions_v3_user.txt`):
+    - questions-v2'nin bütün kuralları korundu.
+    - Hedef düzeyde soru yazma kuralı eklendi; örnek soru başka konudandır, konusu ve bilgisi kullanılmaz.
+    - Hatırlamadan üst düzeylerde yeni senaryo kurulabilir, ama gereken bilgi bağlamda olmalı.
+    - Model önce `reasoning` alanında sorunun neden hedef düzeyde olduğunu yazıyor (düşünce zinciri).
+    - Kullanıcı istemine yalnızca hedef düzeyin adı, tanımı ve örneği (örnek bağlamla birlikte) konuyor. İki koşulda yalnızca `{topic}`, `{context}`, `{bloom_level}`, `{bloom_definition}`, `{bloom_example}` değişiyor.
+    - questions-v2 dosyaları geçmiş kaydı olarak duruyor.
+  - **Eşleme** (`services/bloom.py`):
+    - `bloom_levels` istekte verilirse kullanılıyor (`topics` ile aynı uzunlukta ve yalnızca `topics` ile birlikte).
+    - Verilmezse 6 konuya 6 düzey, video_id'den türetilen sabit tohumla karıştırılarak eşleniyor; iki koşulda aynı eşleme çıkıyor.
+    - Konu sayısı 6 değilse ve `bloom_levels` yoksa 422 (kullanıcı kararı). Konu çıkarma adımı 6'dan az konu döndürürse de 422; kayıtta hata türü `bloom_mapping`.
+  - **API:**
+    - `context_mode` verilmiş isteklerde istem artık `questions-v3`.
+    - Yanıtta her soruda `bloom_level` var: hedef düzey; sorunun gerçekten bu düzeyde olduğu iddia edilmiyor (alan açıklamasında yazılı).
+    - `reasoning` yanıtta yok.
+  - **Kayıt:**
+    - `topic_generation` içinde `bloom_mapping`, `bloom_mapping_source` (`request` / `seeded`), `questions_reasoning`; `per_topic[].bloom_level`.
+    - Kayıt sürümü 7'de kaldı, çünkü `backend/runs`'ta sürüm 7 kaydı yoktu.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 390 test geçti (önceki 372 ve 18 yeni test, `tests/test_bloom.py`).
+  - Sahte LLM ve sahte gömme kullanıldı; model (OpenAI) çağrısı yapılmadı.
+  - Mevcut testlerdeki değişiklikler:
+    - `tests/test_topic_questions.py` ve `tests/test_similarity.py`'de test istemcisi, `bloom_levels` göndermeyen `context_mode` isteklerine her konu için "Hatırlama" ekliyor. Bu testler düzeyden bağımsız 7b davranışını denetliyor ve 6'dan az konu gönderiyor.
+    - Konu çıkarma testleri 6 konuyla çalışacak biçimde uyarlandı.
+    - Sürüm beklentisi `questions-v2`'den `questions-v3`'e güncellendi.
+- **Bilinen sınırlar:**
+  - Gerçek videoda denenmedi.
+  - Düzey uyumu ölçülmedi; ölçüm iki değerlendiriciyle yapılacak.
+  - "Yaratma" düzeyinin çoktan seçmeli biçimde zor olduğu literatürde biliniyor (Scaria vd., 2024).
+  - Örnek sorular Claude taslağıdır, kullanıcı gözden geçirdi.
+  - Düzey tanımları Anderson ve Krathwohl (2001) kitabıyla karşılaştırılmadı.
+  - Konu sayısı 6 olmayan videolarda düzeyler elle verilmeli.
 

@@ -1,0 +1,91 @@
+{
+  "source": "docs/bloom-istem-protokolu.md",
+  "note": "Tanımlar, örnek bağlam ve örnek sorular protokol belgesindeki metinlerle birebir aynıdır; tests/test_bloom.py bunu denetler. Belge değişirse bu dosya da güncellenir.",
+  "example_context": "\"Hava basıncı, havanın yeryüzüne uyguladığı ağırlıktır. Yükseklere çıkıldıkça hava seyrekleşir ve basınç azalır. Sıcaklık arttığında hava genişler, hafifler ve yükselir; bu yüzden ısınan yerlerde alçak basınç oluşur. Soğuyan hava ise ağırlaşıp alçalır ve yüksek basınç oluşturur. Rüzgâr, yüksek basınç alanından alçak basınç alanına doğru eser; iki alan arasındaki basınç farkı ne kadar büyükse rüzgâr o kadar hızlı eser. Gündüz kara denizden daha çabuk ısındığı için kıyılarda gündüz denizden karaya doğru meltem eser.\"",
+  "levels": [
+    {
+      "name": "Hatırlama",
+      "key": "remember",
+      "definition": "İlgili bilgiyi uzun süreli bellekten geri getirmek.",
+      "example": [
+        "Soru: Rüzgâr hangi yönde eser?",
+        "A) Alçak basınç alanından yüksek basınç alanına",
+        "B) Yüksek basınç alanından alçak basınç alanına",
+        "C) Basıncın eşit olduğu alanlar boyunca",
+        "D) Yükseklerden alçaklara doğru, basınçtan bağımsız olarak",
+        "Doğru cevap: B",
+        "Gerekçe (neden bu düzeyde): Bağlamda doğrudan söylenen bir bilgiyi tanımayı ölçer; yorum ya da uygulama gerektirmez."
+      ]
+    },
+    {
+      "name": "Anlama",
+      "key": "understand",
+      "definition": "Sözlü, yazılı ya da görsel öğretim iletilerinden anlam kurmak.",
+      "example": [
+        "Soru: \"Isınan yerlerde alçak basınç oluşur\" bilgisinin nedenini en iyi açıklayan ifade hangisidir?",
+        "A) Isınan havanın miktarı artar.",
+        "B) Isınan hava ağırlaşıp yere doğru alçalır.",
+        "C) Isınan hava genişleyip hafifler ve yükselir, bu yüzden yere uyguladığı ağırlık azalır.",
+        "D) Isınan yerlerde rüzgâr esmediği için hava hareketsiz kalır.",
+        "Doğru cevap: C",
+        "Gerekçe (neden bu düzeyde): Bağlamdaki bilgiyi farklı sözlerle yeniden ifade etmeyi ve açıklamayı ölçer; ezber cümleyi tanımak yetmez."
+      ]
+    },
+    {
+      "name": "Uygulama",
+      "key": "apply",
+      "definition": "Bir işlemi (yöntemi, kuralı) verilen bir durumda yürütmek ya da kullanmak.",
+      "example": [
+        "Soru: Bir dağcı deniz seviyesinden 3000 metre yüksekliğe tırmanıyor. Anlatılana göre dağcının bulunduğu yerdeki hava basıncı nasıl değişir?",
+        "A) Azalır.",
+        "B) Artar.",
+        "C) Değişmez.",
+        "D) Önce artar, sonra azalır.",
+        "Doğru cevap: A",
+        "Gerekçe (neden bu düzeyde): Bağlamdaki kuralı (yükseldikçe basınç azalır) bağlamda geçmeyen yeni bir duruma uygulamayı ölçer. Gereken bilgi bağlamda var; yalnızca senaryo yeni."
+      ]
+    },
+    {
+      "name": "Çözümleme",
+      "key": "analyze",
+      "definition": "Bir bütünü parçalarına ayırmak ve parçaların birbiriyle ve genel yapıyla ya da amaçla nasıl ilişkili olduğunu belirlemek.",
+      "example": [
+        "Soru: Kıyıda gündüz denizden karaya meltem esmesini açıklayan doğru sıra hangisidir?",
+        "A) Deniz daha çabuk ısınır → denizde alçak basınç oluşur → hava karadan denize akar.",
+        "B) Kara daha çabuk ısınır → karada alçak basınç oluşur → hava denizden karaya akar.",
+        "C) Kara soğur → karada yüksek basınç oluşur → hava karadan denize akar.",
+        "D) Deniz soğur → iki alan arasındaki basınç farkı kalkar → rüzgâr durur.",
+        "Doğru cevap: B",
+        "Gerekçe (neden bu düzeyde): Bağlamdaki ayrı bilgileri (ısınma, basınç, rüzgâr yönü) birbirine bağlayıp neden–sonuç zincirini kurmayı ölçer."
+      ]
+    },
+    {
+      "name": "Değerlendirme",
+      "key": "evaluate",
+      "definition": "Ölçütlere ve standartlara dayanarak yargıda bulunmak.",
+      "example": [
+        "Soru: İki öğrenci tartışıyor. Ali: \"İki şehir arasındaki basınç farkı artarsa aralarında esen rüzgâr hızlanır.\" Ayşe: \"Rüzgârın hızı yalnızca sıcaklığa bağlıdır, basınç farkının bir etkisi yoktur.\" Anlatılanlara göre hangi değerlendirme doğrudur?",
+        "A) Ali'nin iddiası desteklenir, Ayşe'ninki desteklenmez.",
+        "B) Ayşe'nin iddiası desteklenir, Ali'ninki desteklenmez.",
+        "C) İki iddia da desteklenir.",
+        "D) İki iddia da anlatılanlarla çelişir.",
+        "Doğru cevap: A",
+        "Gerekçe (neden bu düzeyde): İddiaları bağlamdaki bilgiyi ölçüt alarak yargılamayı ölçer; doğru cevap için bilgiyi hatırlamak yetmez, iddiaları ona göre tartmak gerekir."
+      ]
+    },
+    {
+      "name": "Yaratma",
+      "key": "create",
+      "definition": "Öğeleri bir araya getirerek tutarlı ya da işlevsel bir bütün oluşturmak; öğeleri yeni bir örüntü ya da yapı içinde yeniden düzenlemek.",
+      "example": [
+        "Soru: Bir öğrenci \"ısınan hava yükselir\" bilgisini sınıfta göstermek için bir düzenek planlıyor. Aşağıdaki planlardan hangisi bu amaca en uygundur?",
+        "A) İki odanın sıcaklığını termometreyle ölçüp karşılaştırmak.",
+        "B) Rüzgârlı bir günde dışarıdaki bir bayrağın hareketini izlemek.",
+        "C) Yanan bir mumun biraz yukarısına hafif bir kâğıt fırıldak asıp fırıldağın dönüp dönmediğini gözlemek.",
+        "D) Bir balonu buzdolabına koyup bir saat sonra boyutunu ölçmek.",
+        "Doğru cevap: C",
+        "Gerekçe (neden bu düzeyde): Bağlamdaki bilgiyi kullanarak bir amaca uygun planı seçmeyi ölçer; çoktan seçmeli biçimde yaratma düzeyine en yakın biçim budur. Bu düzeyin çoktan seçmeli soruyla tam ölçülemediği ve modellerin burada zorlandığı literatürde biliniyor (Scaria vd., 2024)."
+      ]
+    }
+  ]
+}

@@ -93,6 +93,12 @@ class QuestionsRequest(BaseModel):
     k: int = Field(
         default=5, ge=1, le=10, description="RAG'de konu başına erişilen parça sayısı (1-10). Yalnızca context_mode ile."
     )
+    # --- Aşama 8: hedef Bloom düzeyleri (istem questions-v3) ---
+    bloom_levels: list[Literal["Hatırlama", "Anlama", "Uygulama", "Çözümleme", "Değerlendirme", "Yaratma"]] | None = Field(
+        default=None,
+        description="topics ile aynı sırada ve uzunlukta hedef Bloom düzeyleri. Yalnızca topics ile verilebilir. "
+        "Verilmezse 6 konuya 6 düzey, video_id'den türetilen sabit tohumla eşlenir; konu sayısı 6 değilse verilmesi gerekir.",
+    )
 
     @field_validator("topics")
     @classmethod
@@ -106,8 +112,21 @@ class QuestionsRequest(BaseModel):
 
     @model_validator(mode="after")
     def _check_condition_fields(self) -> "QuestionsRequest":
-        if self.context_mode is None and {"topics", "k"} & self.model_fields_set:
-            raise ValueError("topics ve k yalnızca context_mode ile kullanılabilir")
+        if self.context_mode is None and {"topics", "k", "bloom_levels"} & self.model_fields_set:
+            raise ValueError("topics, k ve bloom_levels yalnızca context_mode ile kullanılabilir")
+        if self.bloom_levels is not None:
+            if self.topics is None:
+                raise ValueError("bloom_levels yalnızca topics ile birlikte verilebilir")
+            if len(self.bloom_levels) != len(self.topics):
+                raise ValueError("bloom_levels, topics ile aynı uzunlukta olmalı")
+        elif self.context_mode is not None:
+            # Tohumlu Bloom eşlemesi yalnızca 6 konu için yapılır (protokol; kullanıcı kararı)
+            topic_count = len(self.topics) if self.topics is not None else self.count
+            if topic_count != 6:
+                raise ValueError(
+                    "bloom_levels verilmediğinde konu sayısı 6 olmalı (topics ya da count); "
+                    "başka sayıda konu için bloom_levels verilmeli"
+                )
         if self.context_mode == "rag" and self.transcript_mode == "raw":
             # RAG dizini temiz transkriptten kurulur; ham/temiz karşılaştırması ikincil deneydir
             raise ValueError("context_mode=rag yalnızca transcript_mode=clean ile kullanılabilir")
@@ -118,7 +137,7 @@ class QuestionsRequest(BaseModel):
         # Eski biçimli (context_mode'suz) isteklerin çalıştırma kaydındaki gövdesi değişmesin
         data = handler(self)
         if self.context_mode is None and isinstance(data, dict):
-            for key in ("context_mode", "topics", "k"):
+            for key in ("context_mode", "topics", "k", "bloom_levels"):
                 data.pop(key, None)
         return data
 
@@ -153,6 +172,11 @@ class QuestionOut(BaseModel):
     )
     # Yalnızca context_mode verildiğinde yanıtta yer alır
     topic: str | None = Field(default=None, description="Sorunun üretildiği konu (yalnızca context_mode ile)")
+    bloom_level: str | None = Field(
+        default=None,
+        description="Hedef Bloom düzeyi (yalnızca context_mode ile). Sorunun istemde hedeflendiği düzeydir; "
+        "sorunun gerçekten bu düzeyde olduğu iddia edilmez.",
+    )
     # Yalnızca check_support=true iken yanıtta yer alır; kapalıyken anahtar hiç görünmez
     support: SupportOut | None = Field(
         default=None, description="Alıntı-cevap destek kontrolü (model değerlendirmesi; yalnızca check_support=true iken)"

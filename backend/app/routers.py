@@ -29,7 +29,8 @@ from app.services.runs import save_run
 from app.services.summary import summarize
 from app.services.support_check import SUPPORT_PROMPT_VERSION, check_support
 from app.services.text_clean import clean_transcript, prepare_transcript
-from app.services.topic_questions import PROMPT_VERSION_V2, generate_topic_questions
+from app.services.bloom import seeded_mapping
+from app.services.topic_questions import PROMPT_VERSION_V3, generate_topic_questions
 from app.services.topics import PROMPT_VERSION as TOPICS_PROMPT_VERSION
 from app.services.topics import TopicExtraction, extract_topics
 from app.services.transcript import Transcript, TranscriptUnavailable, fetch_transcript
@@ -82,6 +83,24 @@ def _resolve_topics(
         return list(body.topics), "request", None
     extraction = _extract_topics(reference, llm, m, body.count)
     return [t.text for t in extraction.topics], TOPICS_PROMPT_VERSION, extraction
+
+
+def _resolve_bloom_levels(body: QuestionsRequest, topics: list[str], video_id: str) -> tuple[list[str], str]:
+    """Konuların hedef Bloom düzeyleri ve eşlemenin kaynağı (protokol: docs/bloom-istem-protokolu.md).
+
+    `bloom_levels` istekte verildiyse olduğu gibi kullanılır ("request"; uzunluk
+    istek doğrulamasında denetlenir). Verilmediyse 6 konuya 6 düzey video_id'den
+    türetilen sabit tohumla eşlenir ("seeded"); iki koşulda aynı eşleme çıkar.
+    Konu çıkarma adımı 6'dan az konu döndürürse tohumlu eşleme yapılamaz: 422.
+    """
+    if body.bloom_levels is not None:
+        return list(body.bloom_levels), "request"
+    try:
+        return seeded_mapping(video_id, len(topics)), "seeded"
+    except ValueError as exc:
+        error = HTTPException(status_code=422, detail=str(exc))
+        error.run_kind = "bloom_mapping"
+        raise error from exc
 
 
 def _load_transcript(url: str) -> Transcript:
@@ -230,6 +249,7 @@ def get_questions(
             else:
                 # Konular temiz transkriptten çıkarılır; iki koşula aynı konular gitsin diye
                 topics, topics_source, extraction = _resolve_topics(body, reference, llm, m)
+                bloom_levels, bloom_source = _resolve_bloom_levels(body, topics, reference.video_id)
                 rag = body.context_mode == "rag"
                 # Dizin yalnızca RAG isteğinde açılır
                 index = index_provider() if rag else None
@@ -237,12 +257,12 @@ def get_questions(
                 with m.model_step("llm_questions", "quote_verify", "questions", exclude=("index", "retrieval")):
                     generation = generate_topic_questions(
                         topics, body.context_mode, context, reference, m.track(llm, "questions"),
-                        index=index, k=body.k, timer=m.accumulate,
+                        bloom_levels=bloom_levels, index=index, k=body.k, timer=m.accumulate,
                     )
                 questions = generation.questions
                 m.dropped = generation.dropped
                 topic_generation = {
-                    "prompt_version": PROMPT_VERSION_V2,
+                    "prompt_version": PROMPT_VERSION_V3,
                     "context_mode": body.context_mode,
                     "k": body.k if rag else None,
                     "topics": topics,
@@ -253,6 +273,14 @@ def get_questions(
                     "per_topic": [asdict(t) for t in generation.traces],
                     "outcome_counts": generation.outcome_counts,
                     "no_question_topics": generation.no_question_topics,
+                    # Hedef düzeylerdir; soruların gerçekten bu düzeyde olduğu iddia edilmez
+                    "bloom_mapping": [{"topic": t, "bloom_level": lv} for t, lv in zip(topics, bloom_levels)],
+                    "bloom_mapping_source": bloom_source,
+                    # Modelin "reasoning" metni yalnızca kayda yazılır, API yanıtına girmez
+                    "questions_reasoning": [
+                        {"index": i, "topic": q.topic, "bloom_level": q.bloom_level, "reasoning": q.reasoning}
+                        for i, q in enumerate(questions, 1)
+                    ],
                 }
         except EmbeddingUnavailable as exc:
             error = HTTPException(status_code=503, detail=str(exc))
@@ -299,7 +327,7 @@ def get_questions(
             source_start_seconds=q.source_start_seconds,
             verified=q.verified,
             quote_match=q.quote_match,
-            **({"topic": q.topic} if body.context_mode else {}),
+            **({"topic": q.topic, "bloom_level": q.bloom_level} if body.context_mode else {}),
             **({"support": SupportOut(label=supports[i].label, reason=supports[i].reason)} if supports else {}),
         )
         question_outs.append(out)
@@ -308,7 +336,7 @@ def get_questions(
         video_id=raw.video_id,
         transcript_mode=body.transcript_mode,
         model=llm.model,
-        prompt_version=PROMPT_VERSION_V2 if body.context_mode else PROMPT_VERSION,
+        prompt_version=PROMPT_VERSION_V3 if body.context_mode else PROMPT_VERSION,
         # Konu tabanlı üretimde istenen soru sayısı kullanılan konu sayısıdır
         requested_count=len(topics) if body.context_mode else body.count,
         returned_count=len(questions),
