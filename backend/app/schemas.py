@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator, model_serializer, model_validator
 
 
 class TranscriptRequest(BaseModel):
@@ -58,6 +58,51 @@ class QuestionsRequest(BaseModel):
         description="true ise alıntısı transkriptte bulunan her soru için ayrı bir model çağrısıyla "
         "alıntının doğru cevabı destekleyip desteklemediği sorulur (soru sayısı kadar ek ücretli çağrı)",
     )
+    # --- Aşama 7b: AS1 koşulları (konu tabanlı, istem questions-v2) ---
+    # context_mode verilmezse eski davranış (questions-v1, tam transkript) aynen sürer.
+    context_mode: Literal["full", "rag"] | None = Field(
+        default=None,
+        description="Verilirse konu başına bir soru questions-v2 ile üretilir. full: transkriptin tamamı, "
+        "rag: konu için erişilen parçalar. Verilmezse eski davranış (questions-v1).",
+    )
+    topics: list[str] | None = Field(
+        default=None,
+        min_length=1,
+        max_length=10,
+        description="Konular (1-10). Verilirse hepsi kullanılır ve count yok sayılır; verilmezse konular özet "
+        "servisinden alınır (ilk count konu). Yalnızca context_mode ile.",
+    )
+    k: int = Field(
+        default=5, ge=1, le=10, description="RAG'de konu başına erişilen parça sayısı (1-10). Yalnızca context_mode ile."
+    )
+
+    @field_validator("topics")
+    @classmethod
+    def _topics_not_empty(cls, value: list[str] | None) -> list[str] | None:
+        if value is None:
+            return value
+        value = [t.strip() for t in value]
+        if any(not t for t in value):
+            raise ValueError("konu boş olamaz")
+        return value
+
+    @model_validator(mode="after")
+    def _check_condition_fields(self) -> "QuestionsRequest":
+        if self.context_mode is None and {"topics", "k"} & self.model_fields_set:
+            raise ValueError("topics ve k yalnızca context_mode ile kullanılabilir")
+        if self.context_mode == "rag" and self.transcript_mode == "raw":
+            # RAG dizini temiz transkriptten kurulur; ham/temiz karşılaştırması ikincil deneydir
+            raise ValueError("context_mode=rag yalnızca transcript_mode=clean ile kullanılabilir")
+        return self
+
+    @model_serializer(mode="wrap")
+    def _hide_unused_fields(self, handler):
+        # Eski biçimli (context_mode'suz) isteklerin çalıştırma kaydındaki gövdesi değişmesin
+        data = handler(self)
+        if self.context_mode is None and isinstance(data, dict):
+            for key in ("context_mode", "topics", "k"):
+                data.pop(key, None)
+        return data
 
 
 class SupportOut(BaseModel):
@@ -88,6 +133,8 @@ class QuestionOut(BaseModel):
         description="exact: alıntı birebir bulundu; trimmed: kenarlarından en fazla 2 kelime "
         "kırpılarak bulundu; null: bulunamadı"
     )
+    # Yalnızca context_mode verildiğinde yanıtta yer alır
+    topic: str | None = Field(default=None, description="Sorunun üretildiği konu (yalnızca context_mode ile)")
     # Yalnızca check_support=true iken yanıtta yer alır; kapalıyken anahtar hiç görünmez
     support: SupportOut | None = Field(
         default=None, description="Alıntı-cevap destek kontrolü (model değerlendirmesi; yalnızca check_support=true iken)"
@@ -103,6 +150,10 @@ class QuestionsResponse(BaseModel):
     returned_count: int
     verified_count: int
     questions: list[QuestionOut]
+    # Yalnızca context_mode verildiğinde yanıtta yer alır
+    context_mode: Literal["full", "rag"] | None = Field(
+        default=None, description="AS1 koşulu (yalnızca context_mode verildiyse)"
+    )
     # Yalnızca check_support=true iken yanıtta yer alır
     support_prompt_version: str | None = Field(
         default=None, description="Destek kontrolünde kullanılan istem sürümü (yalnızca check_support=true iken)"

@@ -15,6 +15,10 @@ from typing import Protocol
 from app.config import get_settings
 
 
+class EmbeddingUnavailable(Exception):
+    """Gömme modeli yüklenemedi (paket kurulu değil, indirme başarısız vb.)."""
+
+
 class EmbeddingClient(Protocol):
     model: str
 
@@ -38,9 +42,12 @@ class SentenceTransformerClient:
 
     def _load(self):
         if self._model is None:
-            from sentence_transformers import SentenceTransformer
+            try:
+                from sentence_transformers import SentenceTransformer
 
-            self._model = SentenceTransformer(self.model)
+                self._model = SentenceTransformer(self.model)
+            except Exception as exc:  # paket yok, indirme ya da yükleme hatası
+                raise EmbeddingUnavailable(f"Gömme modeli ({self.model}) yüklenemedi: {exc}") from exc
         return self._model
 
     def embed(self, texts: list[str]) -> list[list[float]]:

@@ -48,6 +48,8 @@ class Question:
     model_quote: str = ""
     trimmed_head: list[str] = field(default_factory=list)
     trimmed_tail: list[str] = field(default_factory=list)
+    # Konu tabanlı üretimde (questions-v2) sorunun ait olduğu konu; v1'de None
+    topic: str | None = None
 
 
 # LLM'in döndürdüğü tek bir sorunun beklenen yapısı
@@ -197,9 +199,18 @@ def generate_questions(
         dropped["duplicate"] = len(parsed) - len(unique)
     candidates = unique[:count]
 
+    return verify_candidates(candidates, reference)
+
+
+def verify_candidates(candidates: list[_QuestionModel], reference: Transcript, topics: list[str] | None = None) -> list[Question]:
+    """Yapı denetiminden geçmiş soruların alıntısını temiz transkriptte arar ve seçenekleri karıştırır.
+
+    reference: alıntıların arandığı temizlenmiş transkriptin tamamı (RAG koşulunda da).
+    topics: verilirse her soruya sırasıyla konu atanır (questions-v2).
+    """
     locator = QuoteLocator(reference.segments)
     questions = []
-    for q in candidates:
+    for n, q in enumerate(candidates):
         found = locator.match(q.source_quote)
         if found:
             # Doğrulanan alıntıda öğrenciye videoda gerçekten geçen metin gösterilir
@@ -221,6 +232,7 @@ def generate_questions(
                 model_quote=q.source_quote,
                 trimmed_head=found.trimmed_head if found else [],
                 trimmed_tail=found.trimmed_tail if found else [],
+                topic=topics[n] if topics else None,
             )
         )
     return questions

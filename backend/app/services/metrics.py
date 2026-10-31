@@ -54,7 +54,20 @@ class RunMetrics:
             self.stages[f"{name}_ms"] = _ms(start)
 
     @contextmanager
-    def model_step(self, llm_stage: str, rest_stage: str, purpose: Purpose):
+    def accumulate(self, name: str):
+        """`stage` gibi, ama aynı ad tekrar kullanılınca süreler toplanır (ör. konu başına erişim)."""
+        start = clock()
+        try:
+            yield
+        except BaseException:
+            self.failed_stage = self.failed_stage or name
+            raise
+        finally:
+            key = f"{name}_ms"
+            self.stages[key] = round(self.stages.get(key, 0.0) + (clock() - start) * 1000, 1)
+
+    @contextmanager
+    def model_step(self, llm_stage: str, rest_stage: str, purpose: Purpose, exclude: tuple[str, ...] = ()):
         """Model çağrısını içeren bir servis çağrısını ikiye böler.
 
         `llm_stage`: bu amaçla yapılan model çağrılarının toplam süresi.
@@ -62,6 +75,8 @@ class RunMetrics:
         sorularda alıntı doğrulama, seçenek karıştırma).
         Hata olursa: model yanıt verdiyse hata ayrıştırma/denetim adımındadır
         (`rest_stage`), vermediyse model çağrısındadır (`llm_stage`).
+        `exclude`: blok içinde ayrıca ölçülen aşamalar (ör. dizinleme, erişim);
+        süreleri `rest_stage`'den düşülür, iki kez sayılmaz.
         """
         start = clock()
         try:
@@ -72,8 +87,9 @@ class RunMetrics:
         finally:
             total = (clock() - start) * 1000
             llm = sum(c["ms"] for c in self.llm_calls if c["purpose"] == purpose)
+            excluded = sum(self.stages.get(f"{name}_ms", 0.0) for name in exclude)
             self.stages[f"{llm_stage}_ms"] = round(llm, 1)
-            self.stages[f"{rest_stage}_ms"] = round(max(total - llm, 0.0), 1)
+            self.stages[f"{rest_stage}_ms"] = round(max(total - llm - excluded, 0.0), 1)
 
     def model_returned(self, purpose: Purpose) -> bool:
         """Bu amaçla yapılan çağrılardan en az biri yanıt döndürdü mü?"""
@@ -155,7 +171,10 @@ def scrub_secrets(text: str, known_secrets: tuple[str, ...] = ()) -> str:
     return text
 
 
-ErrorKind = Literal["invalid_url", "transcript_unavailable", "llm_not_configured", "llm_failed", "invalid_json"]
+ErrorKind = Literal[
+    "invalid_url", "transcript_unavailable", "llm_not_configured", "llm_failed", "invalid_json",
+    "embedding_unavailable",
+]
 
 
 def error_kind(status_code: int, metrics: RunMetrics, purpose: Purpose) -> ErrorKind | None:
@@ -169,14 +188,20 @@ def error_kind(status_code: int, metrics: RunMetrics, purpose: Purpose) -> Error
     return {422: "invalid_url", 404: "transcript_unavailable", 503: "llm_not_configured"}.get(status_code)
 
 
-def error_record(status_code: int, detail: str, metrics: RunMetrics, purpose: Purpose, known_secrets=()) -> dict:
-    """Kayda yazılacak `error` alanı (kısa, gizli bilgiden arındırılmış)."""
+def error_record(
+    status_code: int, detail: str, metrics: RunMetrics, purpose: Purpose, known_secrets=(), kind: ErrorKind | None = None
+) -> dict:
+    """Kayda yazılacak `error` alanı (kısa, gizli bilgiden arındırılmış).
+
+    `kind` verilirse HTTP kodundan çıkarılan tür yerine o yazılır (ör. 503'te
+    gömme modeli yüklenemediyse `embedding_unavailable`).
+    """
     detail = scrub_secrets(str(detail), tuple(known_secrets))
     if len(detail) > MAX_DETAIL_CHARS:
         detail = detail[: MAX_DETAIL_CHARS - 1].rstrip() + "…"
     return {
         "status_code": status_code,
-        "kind": error_kind(status_code, metrics, purpose),
+        "kind": kind or error_kind(status_code, metrics, purpose),
         "detail": detail,
         "stage": metrics.failed_stage,
     }

@@ -24,7 +24,8 @@ import chromadb
 from chromadb.config import Settings as ChromaSettings
 
 from app.services.chunking import CHUNKING_VERSION, Chunk, fixed_size_chunks
-from app.services.embeddings import EmbeddingClient
+from app.config import get_settings
+from app.services.embeddings import EmbeddingClient, get_embedder
 from app.services.transcript import Segment
 
 COLLECTION_NAME = "transcript_chunks"
@@ -176,3 +177,25 @@ class TranscriptIndex:
         ]
         # Chroma uzaklığa göre sıralı döndürür; yine de skora göre açıkça sıralanır
         return sorted(found, key=lambda c: c.score, reverse=True)
+
+
+_default_index: TranscriptIndex | None = None
+
+
+def default_index() -> TranscriptIndex:
+    """Ayarlardaki gömme modeli ve dizin klasörüyle tek bir dizin (ilk kullanımda açılır)."""
+    global _default_index
+    if _default_index is None:
+        _default_index = TranscriptIndex(get_embedder(), path=get_settings().chroma_dir)
+    return _default_index
+
+
+def get_index_provider():
+    """FastAPI bağımlılığı: dizini döndüren bir fonksiyon.
+
+    Dizin yalnızca RAG isteğinde, fonksiyon çağrılınca açılır; tam transkript
+    ve eski (v1) isteklerde Chroma'ya hiç dokunulmaz. Testlerde geçici
+    klasörlü bir dizinle değiştirilir.
+    """
+    return default_index
+

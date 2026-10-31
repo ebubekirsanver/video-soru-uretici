@@ -11,7 +11,7 @@
 | 4 · Bölümleme | Sabit boyutlu, zaman damgalı parçalar (fixed-150-30) eklendi; anlamsal bölütleme ikincil deney. | kısmen (7a) |
 | 5 · LLM katmanı ve özet | Model katmanı kuruldu, videodan Türkçe özet ve konu başlıkları üretiliyor. | tamamlandı |
 | 6 · Temel soru üretimi | Transkriptin tamamından soru üretiliyor, alıntısı transkriptte aranıyor. Ana deney, AS1'in tam transkript koşulu; Güz 9–10'da RAG koşuluyla aynı istemle karşılaştırılacak; kodu var (questions-v1). | tamamlandı |
-| 7 · Gömme ve erişim (RAG) | BGE-M3 gömme, ChromaDB dizini ve erişim fonksiyonu eklendi; soru üretimine henüz bağlı değil (7b). | kısmen (7a) |
+| 7 · Gömme ve erişim (RAG) | BGE-M3 gömme, ChromaDB dizini ve erişim eklendi; soru üretimine bağlandı: konu başına bir soru, tam transkript ya da RAG bağlamıyla (questions-v2). Gerçek videoyla iki koşul henüz çalıştırılmadı. | kısmen (7a, 7b) |
 | 8 · Bloom yönlendirmeli istem | Yapılmadı. | yapılmadı |
 | 9 · Otomatik doğrulama | Alıntı-cevap destek kontrolü ve kodla yazım kuralları var; sadakat, Bloom ve benzerlikle tekrar eleme yok. | kısmen |
 | 10 · Yeniden üretim | Yapılmadı. | yapılmadı |
@@ -577,4 +577,49 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Deneme tek video, 3 sorgu, tek çalıştırma; isabet iddiası yok.
   - Beklenen zamanlar 30 sn'lik blok etiketlerinden geliyor, aralık kontrolü kaba bir ölçüt.
   - Erişim henüz soru üretimine bağlanmadı (Aşama 7b).
+
+## Aşama 7b · RAG soru üretimine bağlandı: AS1'in iki koşulu (2026-10-31)
+
+- **Ne yapıldı:**
+  - **İstem `questions-v2`** (`app/prompts/questions_v2_system.txt`, `questions_v2_user.txt`):
+    - v1'in kurallarına dayanıyor. Tek soru üretiliyor ve soru verilen konuyla ilgili oluyor.
+    - "Transkript" yerine "bağlam" deniyor. Konu bağlamda geçmiyorsa model boş liste döndürüyor.
+    - "Farklı bölümleri kapsasın" kuralı çıkarıldı.
+    - İki koşulda istem metni birebir aynı; yalnızca `{topic}` ve `{context}` değişiyor.
+    - v1 istem dosyalarına dokunulmadı.
+  - **Konu tabanlı üretim** (`services/topic_questions.py`, `generate_topic_questions`):
+    - Her konu için bir model çağrısı yapılıyor.
+    - `full` koşulunda bağlam, transkriptin tamamı (~30 sn'lik bloklar, Aşama 6 gibi).
+    - `rag` koşulunda video önce dizinleniyor (önbellek varsa yeniden gömülmüyor). Sonra her konu için `retrieve(video_id, konu, k)` ile bulunan parçalar, en ilgilisi başta olacak biçimde `[başlangıç saniyesi] metin` olarak veriliyor (N. F. Liu vd., 2024). Erişim sorgusu konunun başlığı.
+    - Üretilen sorular v1 ile aynı doğrulamadan geçiyor: yapı denetimi, tekrar ayıklama, alıntının TAM temiz transkriptte aranması (RAG'de de) ve seçenek karıştırma. Doğrulama döngüsü `questions.py`'de ortak bir fonksiyona (`verify_candidates`) çıkarıldı; v1 de onu kullanıyor.
+    - Model bir konu için soru döndürmezse o konu atlanıyor ve kayda yazılıyor.
+  - **API** (`/api/questions`):
+    - Yeni isteğe bağlı alanlar: `context_mode` (`full` / `rag`), `topics` (1–10), `k` (1–10, varsayılan 5).
+    - `topics` verilmezse konular özet servisinden alınıyor (ilk `count` konu). Verilirse hepsi kullanılıyor, `count` yok sayılıyor (kullanıcı kararı).
+    - `rag` ile `transcript_mode=raw` birlikte gelirse 422 (kullanıcı kararı). `topics` ya da `k`, `context_mode` olmadan gelirse 422.
+    - Yanıta yalnızca `context_mode` verilince `context_mode` ve her soruda `topic` ekleniyor; `prompt_version` `questions-v2` oluyor.
+    - `context_mode` verilmezse yanıt ve kayıttaki istek gövdesi bugünküyle aynı.
+    - Gömme modeli yüklenemezse 503 dönüyor; kayıtta hata türü `embedding_unavailable`.
+  - **Kayıt** (`record_version` 6):
+    - `topic_generation` alanı: istem sürümü, koşul, k, konular ve kaynağı (istek/özet), parçalama sürümü, gömme modeli, konu başına bağlamın kelime sayısı, RAG'de erişilen parçalar (`chunk_index`, zamanlar, skor), soru üretilmeyen konular.
+    - `metrics.stages` içinde `index_ms` ve `retrieval_ms` ayrı görünüyor. Konu başına model çağrıları `metrics.llm_calls`'a düşüyor.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 336 test geçti (önceki 311 ve 25 yeni test, `tests/test_topic_questions.py`).
+  - Sahte LLM, sahte gömme ve geçici Chroma kullanıldı; model (OpenAI) çağrısı yapılmadı.
+  - Denetlenenler:
+    - `context_mode` yokken eski davranış
+    - iki koşulda sistem isteminin birebir aynı olması
+    - full'da tüm blokların, rag'de yalnızca erişilen parçaların (en ilgilisi başta) verilmesi
+    - RAG'de alıntının tam transkriptte aranması ve `source_start_seconds`
+    - konu başına tek çağrı ve boş konunun atlanması
+    - konuların özetten alınması ya da istekten gelmesi
+    - `k` değerinin uygulanması
+    - 422 ve 503 hataları
+    - kayıttaki yeni alanlar
+  - Kayıt sürümünü denetleyen 5 mevcut test, sürüm 6'ya çıktığı için 5'ten 6'ya güncellendi.
+- **Bilinen sınırlar:**
+  - Gerçek videoyla iki koşul henüz çalıştırılmadı.
+  - `k=5` ve konu başlığının erişim sorgusu olarak kullanılması ölçülerek seçilmedi.
+  - Konular özet servisinden geliyor; sayıları ve başlıkları videoya göre, hatta çalıştırmadan çalıştırmaya değişiyor. Deneyde iki koşula aynı konular `topics` ile verilmeli.
+  - Bloom yönlendirmesi yok (Aşama 8).
 
