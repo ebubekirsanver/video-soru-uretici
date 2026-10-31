@@ -70,3 +70,97 @@ Aşama sırası ve içeriği ilerledikçe güncellenebilir.
   - Doğrulanmadı: "kısmen" hâli; "kontrol edilemedi" hâli; dar ekran; karanlık tema dışındaki görünümler.
   - Gözlem: aynı videoda üç ayrı çalıştırmada sorular farklı çıktı, birinde 5 yerine 4 soru döndü (3'ü doğrulanmış). Doğrulanamayan bir soruda alıntı "350-400 S D", soru ve cevap "350-400 °C" yazıyor (kayıttaki asıl neden henüz incelenmedi).
 - Aşama 7, 8, 10 ve 11 yapılmadı; Aşama 3 ve 4 ertelenmiş durumda.
+
+## Plan güncellemesi (2026-10-31): Hafta-1 geri bildirimi sonrası
+
+Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yeniden yazıldı ve kapsam daraltıldı. Yukarıdaki "Durum" bölümleri geçmiş kaydıdır, değiştirilmedi.
+
+### Araştırma soruları ve başarı ölçütleri
+
+| | Soru | Başarı ölçütü |
+|---|---|---|
+| AS1 | Türkçe ders videolarında RAG ile seçilen bağlam, transkriptin tamamını vermeye göre üretilen soruların kalitesini (kabul edilebilir soru oranı, kaynağa dayalılık) artırıyor mu? | RAG koşulunda kabul edilebilir (0–1 yazım hatası) soru oranı en az %70 ve tam transkript koşulundan yüksek |
+| AS2 | Bloom yönlendirmeli istem, soruların hedeflenen Bloom düzeyine uyumunu ne ölçüde sağlıyor? | Hedef Bloom düzeyine uyum en az %60, değerlendiriciler arası Cohen's kappa en az 0,60 |
+| AS3 | Öğrenciler sistemi ve soruları kullanılabilirlik, açıklık ve yararlılık açısından nasıl değerlendiriyor? | Ortalama SUS en az 68; açıklık ve yararlılık ortalaması 5 üzerinden en az 3,5 |
+
+### Veri seti ve değerlendirme
+
+- **Pilot:** 6 alandan (biyoloji, tarih, matematik, İngilizce, edebiyat, Python) 6 pilot video, toplam ~120 dk. Hepsinde otomatik Türkçe altyazı var.
+- **Asıl değerlendirme:** Aynı 6 alandan ikişer, toplam 12 video.
+  - Her videoda iki koşul (RAG / tam transkript) × Bloom'un 6 düzeyinden birer soru = 144 soru.
+  - İki koşulda aynı model (GPT-4o-mini) ve aynı istem.
+- **Değerlendiriciler:** İki değerlendirici, kör (koşul gizli, karışık sıra). Her soru için şunlar puanlanır:
+  - Bloom düzeyi
+  - 19 maddelik yazım hatası listesine göre hata sayısı
+  - kaynağa dayalılık
+  - cevaplanabilirlik (1–5)
+- **Uyum ve öğrenci değerlendirmesi:** Cohen's kappa. 10 öğrenciyle SUS.
+- **Yardımcı ölçütler:** RAGAs ve otomatik yazım denetimi yalnızca yardımcı ölçüttür.
+
+### Mimari kararları
+
+- **LLM:** Yalnızca GPT-4o-mini (Llama-3 çıkarıldı).
+- **Transkript:** Altyazı varsa altyazı, yoksa Whisper large-v3.
+- **Bölütleme ve erişim:** Ana deneyde sabit boyutlu bölütleme ve çok dilli gömme modeli (BGE-M3) + ChromaDB. Parça üst verisi: video_id ve zaman.
+- **İsteme verilen bağlam:** Erişimle seçilen en ilgili birkaç parça, en ilgilisi başta olacak biçimde verilir.
+- **Adım bazlı kayıt:** Erişilen parçalar, isteme verilen bağlam ve üretim çıktısı kaydedilir.
+- **Otomatik denetim:** Kaynağa dayalılık, yazım hataları, tekrar eleme. Düzeltme/yeniden üretim turları az tutulur (literatüre göre 1–2).
+- **Öğrenciye ulaşma:** Sorular öğretmen onayından sonra öğrenciye gider.
+
+### İş-zaman planı
+
+| Dönem | İş |
+|---|---|
+| Güz 7–8 | Video seçimi ve veri seti tablosu |
+| Güz 9–10 | Tam transkript koşulu ve RAG hattı (bölütleme, gömme, erişim) → prototip sürüm 1 |
+| Güz 11–12 | Bloom yönlendirmeli istem, çeldirici adımı, tekrar eleme; pilot videolarda üretim |
+| Güz 13–14 | Değerlendirme yönergesi, iki değerlendiriciyle pilot etiketleme ve kappa |
+| Bahar 1–2 | Düzeltmeler ve öğretmen onay ekranı → prototip sürüm 2 |
+| Bahar 3–4 | 144 soru üretimi |
+| Bahar 5–6 | Kör uzman değerlendirmesi |
+| Bahar 7–8 | Öğrenci değerlendirmesi (SUS) |
+| Bahar 9–10 | Analizler |
+| Bahar 11–14 | Rapor ve sunum |
+
+### Aşamaların yeni plandaki yeri
+
+"Şu anki durum" sütunu yukarıdaki durum bölümlerinden ve ilerleme günlüğünden alındı.
+
+| Aşama | Ana deney mi, ikincil mi | İş-zaman planında hafta | Şu anki durum |
+|---|---|---|---|
+| 0 · Proje iskeleti | belirtilmedi | planda haftası yok | tamamlandı |
+| 1 · FastAPI iskeleti | belirtilmedi | planda haftası yok | tamamlandı |
+| 2 · URL ayrıştırma + transkript | belirtilmedi | planda haftası yok | tamamlandı |
+| 3 · Whisper yedeği, WER | yalnızca altyazısı olmayan video seçilirse gerekli (pilot videoların hepsinde otomatik altyazı var) | planda haftası yok | ertelendi |
+| 4 · Bölümleme | ana (yalnızca sabit boyut) | Güz 9–10 | ertelendi (~30 sn'lik bloklama `services/chunking.py`'de var) |
+| 5 · LLM katmanı + özet | belirtilmedi | planda haftası yok | tamamlandı |
+| 6 · Temel soru üretimi (RAG'siz) | belirtilmedi | planda haftası yok | tamamlandı |
+| 7 · Gömme + ChromaDB + erişim | ana | Güz 9–10 | yapılmadı |
+| 8 · Bloom yönlendirmeli istem | ana | Güz 11–12 | yapılmadı |
+| 9 · Otomatik doğrulama | ana (kalan kısımlar); RAGAs ve otomatik yazım denetimi değerlendirmede yalnızca yardımcı ölçüt | kalan kısımlar Güz 11–12 | kısmen (alıntı-cevap destek kontrolü, kodla yazım kuralları `writing-rules-v1`) |
+| 10 · Yeniden üretim döngüsü | belirtilmedi (en çok 1–2 tur) | planda haftası yok | yapılmadı |
+| 11 · Asenkron görev kuyruğu | belirtilmedi | planda haftası yok | yapılmadı |
+| 12 · Web arayüzü | belirtilmedi | planda haftası yok | prototip tamamlandı (12a-12e) |
+| 13 · Öğretmen onay ekranı | belirtilmedi | Bahar 1–2 | yapılmadı |
+| 14 · İzleme ve günlükleme | belirtilmedi | planda haftası yok | kısmen (kayıt tarafı tamam) |
+| 15 · Değerlendirme | ana | Bahar 3–10 | yapılmadı |
+
+### Ana deneyler
+
+- **AS1:** RAG / tam transkript karşılaştırması. 12 video × 2 koşul × 6 Bloom düzeyi = 144 soru, iki kör değerlendirici.
+- **AS2:** Bloom yönlendirmeli istemin hedef düzeye uyumu, Cohen's kappa.
+- **AS3:** 10 öğrenciyle SUS; açıklık ve yararlılık puanları.
+
+### İkincil deneyler
+
+Bunlar yalnızca ana deneyler bittikten sonra, zaman kalırsa yapılır. AS1–AS3'ü yanıtlamak için gerekli değildir.
+
+- Sabit ve anlamsal bölütleme
+- Farklı gömme modelleri
+- Yeniden sıralama (cross-encoder)
+- Ham ve temiz transkript
+- Ön test/son test
+
+### Not
+
+Yeni mimari görseli 31 Ekim'de eklendi; docs/mimari-kod-karsilastirmasi.md 19 Ekim'deki eski görsele göredir.
