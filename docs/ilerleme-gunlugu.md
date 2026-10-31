@@ -8,10 +8,10 @@
 | 1 · FastAPI iskeleti | Sunucu, sağlık kontrolü ve Swagger ekranı çalışıyor. | tamamlandı |
 | 2 · Transkript | YouTube bağlantısından zaman damgalı transkript alınıyor. | tamamlandı |
 | 3 · Whisper yedeği, WER | Yapılmadı; altyazısı olmayan video seçilirse gerekecek. | ertelendi |
-| 4 · Bölümleme | Yalnızca ~30 saniyelik bloklama var; asıl bölümleme yapılmadı. | ertelendi |
+| 4 · Bölümleme | Sabit boyutlu, zaman damgalı parçalar (fixed-150-30) eklendi; anlamsal bölütleme ikincil deney. | kısmen (7a) |
 | 5 · LLM katmanı ve özet | Model katmanı kuruldu, videodan Türkçe özet ve konu başlıkları üretiliyor. | tamamlandı |
 | 6 · Temel soru üretimi | Transkriptin tamamından soru üretiliyor, alıntısı transkriptte aranıyor. Ana deney, AS1'in tam transkript koşulu; Güz 9–10'da RAG koşuluyla aynı istemle karşılaştırılacak; kodu var (questions-v1). | tamamlandı |
-| 7 · Gömme ve erişim (RAG) | Yapılmadı. | yapılmadı |
+| 7 · Gömme ve erişim (RAG) | BGE-M3 gömme, ChromaDB dizini ve erişim fonksiyonu eklendi; soru üretimine henüz bağlı değil (7b). | kısmen (7a) |
 | 8 · Bloom yönlendirmeli istem | Yapılmadı. | yapılmadı |
 | 9 · Otomatik doğrulama | Alıntı-cevap destek kontrolü ve kodla yazım kuralları var; sadakat, Bloom ve benzerlikle tekrar eleme yok. | kısmen |
 | 10 · Yeniden üretim | Yapılmadı. | yapılmadı |
@@ -513,3 +513,49 @@ Kod değiştirilmedi, model çağrısı yapılmadı.
   - `docs/mimari-kod-karsilastirmasi.md`: Karşılaştırmanın eski görsele göre olduğunu belirten not eklendi. Tablo değiştirilmedi.
   - Bu günlüğün başına "Kısa özet" tablosu eklendi.
 - **Kod değişmedi:** Model çağrısı yapılmadı. `pytest` sonucu: 286 test geçti.
+
+## Aşama 7a · Sabit boyutlu parçalar, gömme, ChromaDB dizini ve erişim (2026-10-31)
+
+RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve frontend değişmedi.
+
+- **Ne yapıldı:**
+  - **Sabit boyutlu parçalama** (`services/chunking.py`, `fixed_size_chunks`):
+    - Temizlenmiş transkriptin segmentleri bölünmeden, yaklaşık 150 kelimelik parçalara toplanıyor.
+    - Bir parça 150 kelimeye ulaşınca kapanıyor. Sonraki parça, önceki parçanın son segmentlerinden toplam en az 30 kelimelik kısımla başlıyor.
+    - Ayarlar `CHUNK_WORDS = 150`, `CHUNK_OVERLAP_WORDS = 30`; sürüm adı `fixed-150-30`.
+    - Her parçanın üst verisi: `video_id`, `chunk_index`, `start_seconds`, `end_seconds`, `text`, `chunking`.
+    - Gerekçe: Sabit boyutlu bölütleme gerçek belgelerde anlamsal bölütlemeden genellikle kötü değil (Qu vd., 2025). 30 sn'lik bloklar (~70 kelime) tek başına soru için az bağlam veriyor.
+    - Mevcut `group_into_blocks` ve `format_blocks` aynen kaldı; özet ve soru istemleri onları kullanmaya devam ediyor.
+  - **Gömme katmanı** (`services/embeddings.py`):
+    - `EmbeddingClient` arayüzü kuruldu.
+    - Gerçek uygulama sentence-transformers ile BGE-M3 (`BAAI/bge-m3`) kullanıyor, vektörler normalize ediliyor.
+    - Model import sırasında değil, ilk kullanımda bir kez yükleniyor. Model adı ayardan geliyor (`EMBEDDING_MODEL`).
+  - **ChromaDB dizini ve erişim** (`services/retrieval.py`, `TranscriptIndex`):
+    - Kalıcı dizin `backend/chroma`'da (ayar `CHROMA_DIR`, git dışında).
+    - Tek koleksiyon, kosinüs benzerliği. Parça kimliği `video_id:sürüm:chunk_index`.
+    - `index_transcript` bir videoyu parçalayıp gömüyor. Aynı video aynı parçalama sürümüyle zaten dizindeyse yeniden gömmüyor (gömmeler önbellekte).
+    - `retrieve(video_id, query, k=5)` yalnızca o videonun parçalarında arıyor ve sonuçları en ilgiliden başlayarak döndürüyor: `chunk_index`, zamanlar, metin, benzerlik skoru.
+    - Koleksiyon tek bir gömme modeline ait. Başka bir modelle açılırsa hata veriyor.
+  - **Bağımlılıklar:** `requirements.txt`'e `chromadb>=1.5` ve `sentence-transformers>=3.0` eklendi.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 309 test geçti (önceki 286 ve 23 yeni test).
+    - `tests/test_chunking.py`: 8 yeni test.
+    - `tests/test_embeddings.py`: 5 test.
+    - `tests/test_retrieval.py`: 10 test.
+  - Denetlenenler:
+    - parça boyutu ve örtüşme
+    - zamanlar
+    - segmentlerin bölünmemesi
+    - boş girdi ve tek uzun segment
+    - ikinci dizinlemede yeniden gömme olmaması
+    - yalnızca istenen videonun parçalarının dönmesi
+    - en ilgili parçanın ilk sırada olması
+    - `k` değerinin uygulanması
+  - Testlerde sahte, deterministik bir gömme sınıfı kullanıldı. Chroma her testte ayrı geçici klasörde açıldı.
+  - Gerçek model yüklenmedi, indirme yapılmadı, model (OpenAI) çağrısı yapılmadı.
+- **Bilinen sınırlar:**
+  - Soru üretimine henüz bağlanmadı (Aşama 7b).
+  - Parça boyutu (150/30) ölçülerek seçilmedi.
+  - BGE-M3 testlerde değil, yalnızca gerçek çalıştırmada yüklenir. `sentence-transformers` bu ortamda henüz kurulmadı.
+  - Gerçek videoyla erişim denemesi yapılmadı.
+

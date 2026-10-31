@@ -31,16 +31,8 @@ YouTube ders videosu bağlantısından zaman damgalı transkript çıkaran, tran
 
 ## Çalışma kuralları
 1. **Aşama aşama ilerle.** Aynı anda yalnızca tek bir aşamaya çalış. Aşamayı yol haritasından al, kapsamın dışına çıkma.
-2. **Her aşama bitince:** testleri çalıştır (`cd backend && pytest`), `docs/ilerleme-gunlugu.md` dosyasına aşamanın kaydını ekle (ne yapıldı, nasıl doğrulandı, bilinen sınırlar), sonra commit at.
-3. **Küçük, anlamlı commit'ler** at. Push'u kullanıcı yapar, sen yalnızca commit at.
-   - Mesajın ilk satırı sade Türkçe, tek cümle olsun ve ne yapıldığını doğrudan anlatsın. `feat:`, `fix:`, `docs:` gibi teknik önekler **kullanılmaz**.
-   - İlk satır emir kipiyle bitsin: "ekle", "geliştir", "düzelt", "doğrula", "iyileştir" gibi.
-   - Gerekirse bir boş satır bırakıp kısa bir açıklama yaz: neden yapıldı, nasıl doğrulandı.
-   - Örnekler:
-     - `Transkript temizlemeyi ekle ve ham/temiz seçimini mümkün kıl`
-     - `Videodan çoktan seçmeli soru üretimini ve kaynak alıntısı doğrulamasını ekle`
-     - `Soru tekrarlarını benzerlik eşiğiyle ele`
-     - `API anahtarı eksikken anlaşılır hata mesajı ver`
+2. **Her iş bitince:** testleri çalıştır (`cd backend && pytest`), `docs/ilerleme-gunlugu.md` dosyasına kaydı ekle (ne yapıldı, nasıl doğrulandı, bilinen sınırlar), sonra değişen dosyaları ve her değişikliğin ne işe yaradığını kullanıcıya sade Türkçeyle anlat.
+3. **Commit ve push yapma.** Commit'i kullanıcı değişiklikleri inceledikten sonra kendi mesajıyla atar. Commit mesajı önerme.
    - Eski commit'ler yeniden yazılmaz: rebase, amend ya da force push yapılmaz. Eski önekli mesajlar olduğu gibi kalır.
 4. **Test yaz.** Dış servis çağrılarını (YouTube, OpenAI) testlerde sahte nesnelerle taklit et.
 5. **Gizli bilgi:** `.env`, API anahtarı ve kişisel veri commit'lenmez.
@@ -65,7 +57,9 @@ npm run typecheck
 ```
 
 ## Şu anki durum
-**Backend (Aşama 0, 1, 2, 5, 6 tamamlandı):** iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma; seçeneklerin tamamı aynı birimle sayı ya da yılsa karıştırılmaz, küçükten büyüğe sıralanır). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Özet konu zamanlarında blok etiketi kontrolü var (`start_verified`: modelin verdiği değer isteme verilen blok etiketlerinden biri mi; değer değiştirilmez); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Testler: `pytest` → 283 test.
+**Backend (Aşama 0, 1, 2, 5, 6 tamamlandı):** iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma; seçeneklerin tamamı aynı birimle sayı ya da yılsa karıştırılmaz, küçükten büyüğe sıralanır). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Özet konu zamanlarında blok etiketi kontrolü var (`start_verified`: modelin verdiği değer isteme verilen blok etiketlerinden biri mi; değer değiştirilmez); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Testler: `pytest` → 309 test.
+
+**Aşama 7a (RAG altyapısı): kısmen.** Sabit boyutlu parçalar (`services/chunking.py`, `fixed-150-30`), BGE-M3 gömme katmanı (`services/embeddings.py`), ChromaDB dizini ve erişim (`services/retrieval.py`); soru üretimine henüz bağlı değil (Aşama 7b).
 
 **Aşama 14 (izleme ve günlükleme): kısmen, kayıt tarafı tamam.** Özet ve soru istekleri `backend/runs/` altına kaydediliyor (`services/runs.py`, git dışında; `services/metrics.py`). Kayıtta aşama bazlı süre (`metrics.stages`), her model çağrısının süresi, model adı ve token sayıları (`metrics.llm_calls`), atılan soru sayıları (`metrics.dropped`) var; hatalı istekler `-error` kaydı olarak yazılıyor (`error`: status_code, kind, detail, stage; gizli bilgi ve `si=` temizlenir). `record_version` 4. API yanıtı değişmedi. Gerçek çalıştırmada elle doğrulandı (2026-10-20, `docs/bulgular/asama-14-gercek-calistirma-1.md`; tek çalıştırma). Yok: maliyet hesabı (fiyat kullanıcıdan gelecek, kayda yazılmıyor), kayıtları görme/özetleme aracı; günlük (logging) yapılandırması bakılmadı.
 

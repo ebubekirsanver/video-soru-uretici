@@ -14,6 +14,8 @@ venv/
 
 # Veri
 chroma_data/
+# ChromaDB dizini (gömmeler yerelde tutulur, yeniden üretilebilir)
+backend/chroma/
 *.sqlite3
 *.db
 # Yerel çalıştırma kayıtları (seçilenler elle docs/bulgular'a kopyalanır)
