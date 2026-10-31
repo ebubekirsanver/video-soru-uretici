@@ -1,5 +1,7 @@
 # Mimari ile kodun karşılaştırması
 
+> **Not (2026-10-31):** Bu karşılaştırma eski mimari görseline göredir; yeni görsel 31 Ekim'de eklendi; karşılaştırma RAG hattından sonra yenilenecek.
+
 **Tarih:** 19 Ekim 2026 · **Kod durumu:** commit `b6431b7`
 
 > **Kodlanmış hâl = RAG'siz taban çizgisi. Mimari görseli ([02-teknik-mimari.png](02-teknik-mimari.png)) hedef sistemdir.** Bu tablo, hedefteki her bileşenin bugünkü kodda karşılığı olup olmadığını gösterir; bir değerlendirme ya da başarı iddiası değildir.
