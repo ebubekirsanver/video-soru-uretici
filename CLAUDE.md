@@ -5,6 +5,16 @@ Bu bir üniversite bitirme projesidir. Geliştirici öğrencidir ve ilerlemeyi d
 ## Proje nedir
 YouTube ders videosu bağlantısından zaman damgalı transkript çıkaran, transkriptten özet ve **kaynağı gösterilebilir, doğrulanabilir** sorular üreten bir web uygulaması. Sorular resmî sınav için değil, alıştırma ve hızlı tanı içindir. Her soru videonun ilgili anına bağlanır ve öğretmen onayından geçer.
 
+## Araştırma soruları ve deney tasarımı
+- **AS1:** Türkçe ders videolarında RAG ile seçilen bağlam, transkriptin tamamını vermeye göre üretilen soruların kalitesini (kabul edilebilir soru oranı, kaynağa dayalılık) artırıyor mu?
+  - Başarı ölçütü: RAG koşulunda kabul edilebilir (0–1 yazım hatası) soru oranı en az %70 ve tam transkript koşulundan yüksek.
+- **AS2:** Bloom yönlendirmeli istem, soruların hedeflenen Bloom düzeyine uyumunu ne ölçüde sağlıyor?
+  - Başarı ölçütü: uyum en az %60, değerlendiriciler arası Cohen's kappa en az 0,60.
+- **AS3:** Öğrenciler sistemi ve soruları kullanılabilirlik, açıklık ve yararlılık açısından nasıl değerlendiriyor?
+  - Başarı ölçütü: ortalama SUS en az 68; açıklık ve yararlılık ortalaması 5 üzerinden en az 3,5.
+- **Deney:** 6 alandan ikişer, 12 video × 2 koşul (RAG / tam transkript) × Bloom'un 6 düzeyinden birer soru = 144 soru. İki koşulda aynı model (GPT-4o-mini) ve aynı istem.
+- **Değerlendirme:** iki kör değerlendirici, Cohen's kappa; 10 öğrenciyle SUS. Ayrıntı: `docs/yol-haritasi.md` (Plan güncellemesi, 2026-10-31).
+
 ## Önce oku
 - `docs/02-teknik-mimari.png`: dört katmanlı mimari (Sunum, Uygulama ve Orkestrasyon, Veri ve İndeksleme, Yapay Zekâ ve Bilişsel Doğrulama)
 - `docs/01-literatur-degerlendirmesi.docx`: her tasarım kararının literatür gerekçesi
@@ -13,7 +23,7 @@ YouTube ders videosu bağlantısından zaman damgalı transkript çıkaran, tran
 
 ## Teknoloji kararları (değiştirme, önce sor)
 - Backend: Python, FastAPI. Kod `backend/app` altında, testler `backend/tests` altında.
-- Transkript: `youtube-transcript-api`, altyazı yoksa Whisper yedeği (Aşama 3).
+- Transkript: `youtube-transcript-api`, altyazı yoksa Whisper large-v3 yedeği (Aşama 3).
 - LLM: OpenAI GPT-4o-mini. API anahtarı `.env` içinde, koda ve commit'e asla yazılmaz.
 - Vektör DB: ChromaDB, gömme modeli BGE-M3. Kuyruk ve önbellek: Celery + Redis.
 - Frontend: React / Next.js (Aşama 12).
@@ -37,7 +47,7 @@ YouTube ders videosu bağlantısından zaman damgalı transkript çıkaran, tran
    - Çalıştırma kayıtları (`backend/runs/`) `docs/bulgular`'a kopyalanmadan önce gizli bilgi için taranır (API anahtarı, yetki başlığı, parola/token, `.env`, e-posta, yerel dosya yolu).
    - Kopyalamadan önce istek bağlantılarındaki YouTube paylaşım kodu (`si=...`) temizlenir.
    - Daha önce commit'lenmiş eski dosyalara dokunulmaz; geçmiş yeniden yazılmaz.
-6. **Literatürle uyumlu kal:** her teknolojiyi bir sorunu çözdüğü ve etkisi ölçülebildiği için ekle. Karşılaştırma gerektiren yerlerde (sabit boyutlu ve anlamsal bölütleme, RAG'li ve RAG'siz, ham ve temiz transkript) ikisini de kodda seçilebilir bırak ki ölçülebilsin.
+6. **Literatürle uyumlu kal:** her teknolojiyi bir sorunu çözdüğü ve etkisi ölçülebildiği için ekle. Ana karşılaştırma RAG / tam transkripttir (AS1); ikisi de kodda seçilebilir olmalı. Sabit / anlamsal bölütleme, ham / temiz transkript, gömme modeli ve yeniden sıralama ikincil deneylerdir: kodda seçilebilir kalabilirler, ama varsayılan sabit boyutlu bölütleme ve temiz transkripttir. İkincil deneyler ana deneylerden önce yapılmaz.
 7. **Anlaşılır ol:** kullanıcı öğrencidir. Yaptığın değişikliği kısa ve sade Türkçeyle açıkla, kod yorumlarını Türkçe yaz.
 8. **Kendi başlatmadığın süreçleri asla kapatma** (uvicorn, `npm run dev` vb.). Port doluysa oradaki süreci durdurma: kullanıcıya söyle ya da başka bir port kullan. Yalnızca kendi başlattığın süreci, komut satırını kontrol ederek kapat.
 
@@ -78,3 +88,5 @@ npm run typecheck
 **Yapılmayanlar:** Aşama 7, 8, 10 ve 11; Aşama 3 ve 4 ertelendi; Aşama 9 ve 14'ün eksik kısımları (yukarıda); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Sırada Aşama 9'un sonraki adımları, Aşama 7 ya da ertelenen Aşama 3 / 4 var; kullanıcı seçer.
 
 Windows notu: `python` komutu PATH'te değil; sanal ortam `backend\.venv` (`py -3.12 -m venv .venv` ile kuruldu), komutlar `.\.venv\Scripts\python.exe -m pytest` biçiminde çalıştırılır.
+
+Plan 31 Ekim 2026'da Hafta-1 geri bildirimine göre güncellendi; ayrıntı docs/yol-haritasi.md'de.
