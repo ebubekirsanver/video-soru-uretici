@@ -1,0 +1,1011 @@
+{
+  "experiment": "pilot-1",
+  "name": "tarih",
+  "video_id": "aaCHLYO3Fzg",
+  "url": "https://youtu.be/aaCHLYO3Fzg",
+  "run_at": "2026-11-04T20:12:25+03:00",
+  "error": null,
+  "video": {
+    "title": "10.Sınıf Tarih - 1.Ünite Türkistan'dan Türkiye'ye  | yeni müfredat ( maarif model )",
+    "channel": "Ardıç Tarih"
+  },
+  "transcript": {
+    "language": "tr",
+    "is_generated": true,
+    "segments": 845,
+    "duration_seconds": 1979.68,
+    "duration": "32:59",
+    "words": 4116,
+    "chunks": 35
+  },
+  "topics": {
+    "prompt_version": "topics-v1",
+    "items": [
+      {
+        "title": "Malazgirt Savaşı'nın Önemi",
+        "description": "Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+        "text": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır."
+      },
+      {
+        "title": "Birinci Beylikler Dönemi",
+        "description": "Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+        "text": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır."
+      },
+      {
+        "title": "Haçlı Seferlerinin Nedenleri",
+        "description": "Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+        "text": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır."
+      },
+      {
+        "title": "Miri Kefalon Savaşı",
+        "description": "Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+        "text": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır."
+      },
+      {
+        "title": "Kösedağ Savaşı'nın Sonuçları",
+        "description": "Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır.",
+        "text": "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır."
+      },
+      {
+        "title": "İkinci Beylikler Dönemi",
+        "description": "Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+        "text": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır."
+      }
+    ],
+    "extraction": {
+      "prompt_version": "topics-v1",
+      "requested_count": 6,
+      "returned_count": 6,
+      "shortfall": 0,
+      "dropped": {
+        "empty": 0,
+        "duplicate": 0,
+        "extra": 0
+      },
+      "topics": [
+        {
+          "title": "Malazgirt Savaşı'nın Önemi",
+          "description": "Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır."
+        },
+        {
+          "title": "Birinci Beylikler Dönemi",
+          "description": "Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır."
+        },
+        {
+          "title": "Haçlı Seferlerinin Nedenleri",
+          "description": "Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır."
+        },
+        {
+          "title": "Miri Kefalon Savaşı",
+          "description": "Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır."
+        },
+        {
+          "title": "Kösedağ Savaşı'nın Sonuçları",
+          "description": "Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır."
+        },
+        {
+          "title": "İkinci Beylikler Dönemi",
+          "description": "Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır."
+        }
+      ]
+    },
+    "stages": {
+      "transcript_fetch_ms": 1670.9,
+      "clean_ms": 3.8,
+      "llm_topics_ms": 5868.5,
+      "topics_parse_ms": 0.7,
+      "total_ms": 7544.0
+    },
+    "tokens": {
+      "prompt_tokens": 10215,
+      "completion_tokens": 287,
+      "total_tokens": 10502,
+      "cost_usd": 0.001704
+    }
+  },
+  "bloom_levels": [
+    "Çözümleme",
+    "Anlama",
+    "Değerlendirme",
+    "Hatırlama",
+    "Yaratma",
+    "Uygulama"
+  ],
+  "conditions": {
+    "full": {
+      "mode": "full",
+      "response": {
+        "video_id": "aaCHLYO3Fzg",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 5,
+        "verified_count": 3,
+        "questions": [
+          {
+            "question": "Malazgirt Savaşı'nın ardından Anadolu'da hangi gelişme kesinleşmiştir?",
+            "options": [
+              "Anadolu'nun Türkleşmesi ve İslamlaşması",
+              "Türklerin Anadolu'dan atılma ihtimali",
+              "Haçlı seferlerinin başlaması",
+              "Bizans'ın Anadolu'daki hakimiyeti"
+            ],
+            "correct_index": 0,
+            "explanation": "Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması sürecinin başlangıcını simgeler.",
+            "source_quote": "Bu savaş bir dönüm noktasıydı. Bu savaşa yurt açan, yurt kuran savaşı da derler. Çünkü Anadolu'da Türklerin yerleşmesinde bu savaş dönüm noktası olmuş.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "question": "Malazgirt Savaşı'nın ardından Anadolu'da kurulan beyliklerin ortak özellikleri nelerdir?",
+            "options": [
+              "Kurucuları yalnızca Türk olmayan liderlerdir.",
+              "Sadece Bizans ile mücadele etmişlerdir.",
+              "Anadolu'yu Türkleştiren ve Müslümanlaştıran beyliklerdir.",
+              "Sadece denizcilik faaliyetleriyle tanınmışlardır."
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap, beyliklerin Anadolu'yu Türkleştirme ve Müslümanlaştırma işlevini vurgulayan bilgidir.",
+            "source_quote": "Anadolu'yu Türkleştirenler, Anadolu'yu Müslümanlaştıranlar işte bu beylikler.",
+            "source_start_seconds": 285.919,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Aşağıdaki ifadelerden hangisi Haçlı seferlerinin nedenleri hakkında doğru bir değerlendirme yapmaktadır?",
+            "options": [
+              "Haçlı seferleri, Hristiyanların Kudüs'ü ele geçirmek amacıyla dini bir motivasyonla gerçekleştirilmiştir.",
+              "Haçlı seferleri, sadece Katoliklerin Ortodokslarla olan çatışmalarından kaynaklanmıştır.",
+              "Haçlı seferleri yalnızca ekonomik nedenlerle başlatılmıştır.",
+              "Haçlı seferleri, Türklerin Anadolu'dan atılması amacıyla yapılmamıştır."
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, Haçlı seferlerinin temel amacının Kudüs'ü ele geçirmek olduğu bilgisine dayanmaktadır.",
+            "source_quote": "Dolayısıyla Kudüs'ü Müslüman dünyasından almak amacıyla dini bir sebeple ne yapıyorlar? Saldırıyorlar.",
+            "source_start_seconds": 602.399,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Miri Kefalon Savaşı hangi yıl gerçekleşmiştir?",
+            "options": [
+              "1071",
+              "1096",
+              "1176",
+              "1243"
+            ],
+            "correct_index": 2,
+            "explanation": "Miri Kefalon Savaşı, 1176 yılında gerçekleşmiştir ve bu savaş, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "source_quote": "Miri Kefolon Savaşı Türkiye Selçuklu Devleti'nin yapmış olduğu bir savaştır. ... Bu savaş 1176 yılında gerçekleşmiştir.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Kösedağ Savaşı'ndan sonra Anadolu'da hangi durum meydana gelmiştir?",
+            "options": [
+              "Moğol egemenliği sona ermiştir.",
+              "Ticaret yolları güvenli hale gelmiştir.",
+              "Anadolu'da ikinci beylikler dönemi başlamıştır.",
+              "Türkiye Selçuklu Devleti'nin merkezi otoritesi güçlenmiştir."
+            ],
+            "correct_index": 2,
+            "explanation": "Kösedağ Savaşı'ndan sonra Türkiye Selçuklu Devleti'nin yenilmesi, Anadolu'da merkezi otoritenin zayıflamasına ve ikinci beylikler döneminin başlamasına yol açmıştır.",
+            "source_quote": "Anadolu'da ikinci beylikler ortaya çıkıyor.",
+            "source_start_seconds": 1565.0,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+            "bloom_level": "Uygulama"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+          "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+          "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+          "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+          "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır.",
+          "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+            "context_words": 4116,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+            "context_words": 4116,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+            "context_words": 4116,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "context_words": 4116,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır.",
+            "context_words": 4116,
+            "produced": false,
+            "retrieved": null,
+            "outcome": "empty",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+            "context_words": 4116,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama"
+          }
+        ],
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 1,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [
+          "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır."
+        ],
+        "bloom_mapping": [
+          {
+            "topic": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+            "bloom_level": "Uygulama"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, Malazgirt Savaşı'nın sonuçlarını ve bu sonuçların Anadolu'nun Türkleşmesi ve İslamlaşması üzerindeki etkilerini analiz etmeyi gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda geçen bilgiyi anlama ve açıklama yeteneğini ölçmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, Haçlı seferlerinin nedenlerini değerlendirirken, verilen bilgileri ölçüt olarak kullanarak yargıda bulunmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, Miri Kefalon Savaşı'nın tarihini ve önemini hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, Kösedağ Savaşı'nın sonuçlarını ve bu sonuçların Anadolu'daki beyliklerin ortaya çıkışına etkisini anlamayı gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "writing_flags": [
+        {
+          "question_index": 2,
+          "rule_id": 12
+        },
+        {
+          "question_index": 5,
+          "rule_id": 12
+        }
+      ],
+      "stages": {
+        "transcript_fetch_ms": 1661.4,
+        "clean_ms": 14.0,
+        "llm_questions_ms": 36093.5,
+        "quote_verify_ms": 60.2,
+        "writing_check_ms": 3.6,
+        "similarity_check_ms": 1144.0,
+        "total_ms": 38977.0
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 6588.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 11307,
+          "completion_tokens": 248,
+          "total_tokens": 11555
+        },
+        {
+          "purpose": "questions",
+          "ms": 8138.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 11258,
+          "completion_tokens": 232,
+          "total_tokens": 11490
+        },
+        {
+          "purpose": "questions",
+          "ms": 5783.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 11298,
+          "completion_tokens": 272,
+          "total_tokens": 11570
+        },
+        {
+          "purpose": "questions",
+          "ms": 3345.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 11221,
+          "completion_tokens": 179,
+          "total_tokens": 11400
+        },
+        {
+          "purpose": "questions",
+          "ms": 2992.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 11356,
+          "completion_tokens": 5,
+          "total_tokens": 11361
+        },
+        {
+          "purpose": "questions",
+          "ms": 9245.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 11240,
+          "completion_tokens": 229,
+          "total_tokens": 11469
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 67680,
+        "completion_tokens": 1165,
+        "total_tokens": 68845,
+        "cost_usd": 0.010851
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "rag": {
+      "mode": "rag",
+      "response": {
+        "video_id": "aaCHLYO3Fzg",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 5,
+        "verified_count": 4,
+        "questions": [
+          {
+            "question": "Malazgirt Savaşı'nın ardından Anadolu'da Türklerin yerleşmesini ve hakimiyetini pekiştiren gelişmelerden hangisi doğrudur?",
+            "options": [
+              "Türkler, Anadolu'da yerleşim yapmadan önce tamamen göçebe yaşam sürdü.",
+              "Malazgirt Savaşı, Türklerin Anadolu'dan çekilmesine neden oldu.",
+              "Bizans, Anadolu'dan Türkleri atmayı başardı.",
+              "Anadolu'da Türk beylikleri kurulmaya başladı."
+            ],
+            "correct_index": 3,
+            "explanation": "Malazgirt Savaşı, Anadolu'da Türk beyliklerinin kurulmasına zemin hazırlamış ve Türklerin yerleşik hayata geçişini hızlandırmıştır.",
+            "source_quote": "Bu savaş bir dönüm noktasıydı. Bu savaşa zaten yurt açan, yurt kuran savaşı da derler. Çünkü Anadolu'da Türklerin yerleşmesinde bu savaş dönüm noktası olmuş.",
+            "source_start_seconds": 88.28,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "question": "Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler hangi savaşın ardından ortaya çıkmıştır?",
+            "options": [
+              "Küçük Asya Savaşı",
+              "Dandanakan Savaşı",
+              "Malazgirt Savaşı",
+              "Ahlat Savaşı"
+            ],
+            "correct_index": 2,
+            "explanation": "Malazgirt Savaşı, Anadolu'da Türklerin yerleşimini sağlamış ve bu savaştan sonra 1. Beylikler dönemi başlamıştır.",
+            "source_quote": "Bu savaştan sonra Anadolu'da 1. Beylikler dönemi başlamış.",
+            "source_start_seconds": 99.439,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Haçlı seferlerinin temel nedenleri arasında aşağıdakilerden hangisi yer almaktadır?",
+            "options": [
+              "Ortodoks kilisesini desteklemek",
+              "Kudüs'ü ele geçirmek",
+              "Yeni topraklar kazanmak",
+              "Müslümanlarla barış sağlamak"
+            ],
+            "correct_index": 1,
+            "explanation": "Kudüs'ü ele geçirmek, Haçlı seferlerinin temel dini amacıdır ve bu bağlamda açıkça belirtilmiştir.",
+            "source_quote": "Dolayısıyla Kudüs'ü Müslüman dünyasından almak amacıyla dini bir sebeple ne yapıyorlar? Saldırıyorlar. Temel dini amaçları neymiş? Kudüs'ü ele geçirmekmiş.",
+            "source_start_seconds": 602.399,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Mir Kefalon Savaşı hangi yıl gerçekleşmiştir?",
+            "options": [
+              "1165",
+              "1176",
+              "1180",
+              "1200"
+            ],
+            "correct_index": 1,
+            "explanation": "Mir Kefalon Savaşı 1176 yılında gerçekleşmiştir ve bu savaşın tarihi, Türklerin Anadolu'dan atılamayacağını kesinleştiren bir olaydır.",
+            "source_quote": "Bu savaş 1176 yılında yapıldı.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler hangi bölgelerde yoğunlaşmıştır?",
+            "options": [
+              "Güneyde",
+              "Batıda",
+              "Doğuda",
+              "Kuzeyde"
+            ],
+            "correct_index": 1,
+            "explanation": "İkinci beylikler, Türkiye Selçuklu Devleti'nin merkezi otoritesinin zayıflaması ve Moğol baskısı nedeniyle Anadolu'nun batısında yoğunlaşmıştır.",
+            "source_quote": "O zaman ik beylikler nerede yoğunlaşır? Bu bölgelerde.",
+            "source_start_seconds": 1614.32,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+            "bloom_level": "Uygulama"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+          "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+          "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+          "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+          "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır.",
+          "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 24,
+                "start_seconds": 1387.84,
+                "end_seconds": 1457.08,
+                "score": 0.626479
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 49.84,
+                "end_seconds": 124.44,
+                "score": 0.62623
+              },
+              {
+                "chunk_index": 23,
+                "start_seconds": 1330.799,
+                "end_seconds": 1402.6,
+                "score": 0.576082
+              },
+              {
+                "chunk_index": 26,
+                "start_seconds": 1495.44,
+                "end_seconds": 1563.04,
+                "score": 0.572724
+              },
+              {
+                "chunk_index": 31,
+                "start_seconds": 1794.399,
+                "end_seconds": 1867.24,
+                "score": 0.569052
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+            "context_words": 763,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 99.439,
+                "end_seconds": 188.32,
+                "score": 0.75807
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 49.84,
+                "end_seconds": 124.44,
+                "score": 0.729582
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 171.28,
+                "end_seconds": 262.36,
+                "score": 0.721114
+              },
+              {
+                "chunk_index": 27,
+                "start_seconds": 1547.48,
+                "end_seconds": 1621.96,
+                "score": 0.668978
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 244.319,
+                "end_seconds": 324.6,
+                "score": 0.657579
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+            "context_words": 758,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 9,
+                "start_seconds": 545.0,
+                "end_seconds": 619.04,
+                "score": 0.785667
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 658.8,
+                "end_seconds": 740.04,
+                "score": 0.716956
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 720.12,
+                "end_seconds": 791.72,
+                "score": 0.695263
+              },
+              {
+                "chunk_index": 19,
+                "start_seconds": 1115.84,
+                "end_seconds": 1186.68,
+                "score": 0.661999
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 602.399,
+                "end_seconds": 678.04,
+                "score": 0.661955
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 22,
+                "start_seconds": 1273.96,
+                "end_seconds": 1348.84,
+                "score": 0.712438
+              },
+              {
+                "chunk_index": 23,
+                "start_seconds": 1330.799,
+                "end_seconds": 1402.6,
+                "score": 0.66664
+              },
+              {
+                "chunk_index": 30,
+                "start_seconds": 1727.2,
+                "end_seconds": 1812.56,
+                "score": 0.653606
+              },
+              {
+                "chunk_index": 24,
+                "start_seconds": 1387.84,
+                "end_seconds": 1457.08,
+                "score": 0.653216
+              },
+              {
+                "chunk_index": 21,
+                "start_seconds": 1223.28,
+                "end_seconds": 1291.24,
+                "score": 0.621211
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır.",
+            "context_words": 753,
+            "produced": false,
+            "retrieved": [
+              {
+                "chunk_index": 26,
+                "start_seconds": 1495.44,
+                "end_seconds": 1563.04,
+                "score": 0.721098
+              },
+              {
+                "chunk_index": 25,
+                "start_seconds": 1441.559,
+                "end_seconds": 1512.16,
+                "score": 0.678821
+              },
+              {
+                "chunk_index": 32,
+                "start_seconds": 1851.519,
+                "end_seconds": 1925.44,
+                "score": 0.66312
+              },
+              {
+                "chunk_index": 33,
+                "start_seconds": 1907.0,
+                "end_seconds": 1979.68,
+                "score": 0.655771
+              },
+              {
+                "chunk_index": 24,
+                "start_seconds": 1387.84,
+                "end_seconds": 1457.08,
+                "score": 0.650367
+              }
+            ],
+            "outcome": "empty",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 27,
+                "start_seconds": 1547.48,
+                "end_seconds": 1621.96,
+                "score": 0.692285
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 49.84,
+                "end_seconds": 124.44,
+                "score": 0.612813
+              },
+              {
+                "chunk_index": 31,
+                "start_seconds": 1794.399,
+                "end_seconds": 1867.24,
+                "score": 0.606621
+              },
+              {
+                "chunk_index": 25,
+                "start_seconds": 1441.559,
+                "end_seconds": 1512.16,
+                "score": 0.605464
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 99.439,
+                "end_seconds": 188.32,
+                "score": 0.603438
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama"
+          }
+        ],
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 1,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [
+          "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır."
+        ],
+        "bloom_mapping": [
+          {
+            "topic": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Kösedağ Savaşı'nın Sonuçları: Kösedağ Savaşı, Türkiye Selçuklu Devleti'nin Moğollara karşı yenilmesiyle sonuçlanmıştır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+            "bloom_level": "Uygulama"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Malazgirt Savaşı'nın Önemi: Malazgirt Savaşı, Anadolu'nun Türkleşmesi ve İslamlaşması için bir dönüm noktasıdır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olduğu, Malazgirt Savaşı'nın sonuçları ve Anadolu'daki Türk hakimiyetinin nasıl şekillendiğini analiz etmeyi gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Birinci Beylikler Dönemi: Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler, Türklerin yerleşimini sağlamıştır.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgiyi anlamaya yönelik bir soru sormasından kaynaklanmaktadır. Soru, bağlamda geçen beyliklerin hangi savaştan sonra kurulduğunu sorgulamaktadır."
+          },
+          {
+            "index": 3,
+            "topic": "Haçlı Seferlerinin Nedenleri: Haçlı seferleri, Kudüs'ü ele geçirmek amacıyla Hristiyanlar tarafından başlatılmıştır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, Haçlı seferlerinin nedenleri üzerine yapılan değerlendirmeyi gerektirmesidir. Öğrencilerin, verilen bilgileri kullanarak farklı sebeplerin etkilerini tartmaları beklenmektedir."
+          },
+          {
+            "index": 4,
+            "topic": "Miri Kefalon Savaşı: Miri Kefalon Savaşı, Anadolu'dan Türklerin atılamayacağını kesinleştiren bir savaştır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, Mir Kefalon Savaşı ile ilgili temel bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "İkinci Beylikler Dönemi: Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler dönemi başlamıştır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bağlamda Anadolu'daki beyliklerin hangi koşullar altında kurulduğunu anlamayı ve bu bilgiyi yeni bir duruma uygulamayı gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "writing_flags": [
+        {
+          "question_index": 2,
+          "rule_id": 12
+        }
+      ],
+      "stages": {
+        "transcript_fetch_ms": 1593.5,
+        "clean_ms": 9.7,
+        "index_ms": 44256.9,
+        "retrieval_ms": 1349.2,
+        "llm_questions_ms": 14970.1,
+        "quote_verify_ms": 40.9,
+        "writing_check_ms": 2.6,
+        "similarity_check_ms": 931.7,
+        "total_ms": 63155.0
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3295.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3228,
+          "completion_tokens": 285,
+          "total_tokens": 3513
+        },
+        {
+          "purpose": "questions",
+          "ms": 2681.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3358,
+          "completion_tokens": 214,
+          "total_tokens": 3572
+        },
+        {
+          "purpose": "questions",
+          "ms": 2895.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3238,
+          "completion_tokens": 234,
+          "total_tokens": 3472
+        },
+        {
+          "purpose": "questions",
+          "ms": 2320.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3160,
+          "completion_tokens": 150,
+          "total_tokens": 3310
+        },
+        {
+          "purpose": "questions",
+          "ms": 880.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3331,
+          "completion_tokens": 5,
+          "total_tokens": 3336
+        },
+        {
+          "purpose": "questions",
+          "ms": 2896.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3246,
+          "completion_tokens": 199,
+          "total_tokens": 3445
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 19561,
+        "completion_tokens": 1087,
+        "total_tokens": 20648,
+        "cost_usd": 0.003586
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    }
+  },
+  "samples": [
+    {
+      "slot": "full-1",
+      "mode": "full",
+      "bloom_level": "Çözümleme",
+      "question": "Malazgirt Savaşı'nın ardından Anadolu'da hangi gelişme kesinleşmiştir?",
+      "options": [
+        "Anadolu'nun Türkleşmesi ve İslamlaşması",
+        "Türklerin Anadolu'dan atılma ihtimali",
+        "Haçlı seferlerinin başlaması",
+        "Bizans'ın Anadolu'daki hakimiyeti"
+      ],
+      "correct_answer": "Anadolu'nun Türkleşmesi ve İslamlaşması",
+      "source_quote": "Bu savaş bir dönüm noktasıydı. Bu savaşa yurt açan, yurt kuran savaşı da derler. Çünkü Anadolu'da Türklerin yerleşmesinde bu savaş dönüm noktası olmuş.",
+      "source_time": "yok",
+      "verified": false
+    },
+    {
+      "slot": "rag-2",
+      "mode": "rag",
+      "bloom_level": "Anlama",
+      "question": "Malazgirt Savaşı'ndan sonra Anadolu'da kurulan ilk beylikler hangi savaşın ardından ortaya çıkmıştır?",
+      "options": [
+        "Küçük Asya Savaşı",
+        "Dandanakan Savaşı",
+        "Malazgirt Savaşı",
+        "Ahlat Savaşı"
+      ],
+      "correct_answer": "Malazgirt Savaşı",
+      "source_quote": "Bu savaştan sonra Anadolu'da 1. Beylikler dönemi başlamış.",
+      "source_time": "1:39",
+      "verified": true
+    },
+    {
+      "slot": "rag-6",
+      "mode": "rag",
+      "bloom_level": "Uygulama",
+      "question": "Kösedağ Savaşı'ndan sonra Anadolu'da ikinci beylikler hangi bölgelerde yoğunlaşmıştır?",
+      "options": [
+        "Güneyde",
+        "Batıda",
+        "Doğuda",
+        "Kuzeyde"
+      ],
+      "correct_answer": "Batıda",
+      "source_quote": "O zaman ik beylikler nerede yoğunlaşır? Bu bölgelerde.",
+      "source_time": "26:54",
+      "verified": true
+    }
+  ],
+  "totals": {
+    "seconds": 109.7,
+    "prompt_tokens": 97456,
+    "completion_tokens": 2539,
+    "total_tokens": 99995,
+    "cost_usd": 0.016141
+  }
+}

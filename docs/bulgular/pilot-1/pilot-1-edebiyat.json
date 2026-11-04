@@ -1,0 +1,117 @@
+{
+  "experiment": "pilot-1",
+  "name": "edebiyat",
+  "video_id": "fgOxbhEMnQQ",
+  "url": "https://youtu.be/fgOxbhEMnQQ",
+  "run_at": "2026-11-04T20:16:43+03:00",
+  "error": {
+    "type": "PilotError",
+    "detail": "/api/questions: 404 Transkript YouTube'dan alınamadı."
+  },
+  "video": {
+    "title": "Milli Edebiyat Dönemi Hikâyesi  | 10. Sınıf Edebiyat #2026",
+    "channel": "tonguç 10. SINIF"
+  },
+  "transcript": {
+    "language": "tr",
+    "is_generated": true,
+    "segments": 393,
+    "duration_seconds": 755.96,
+    "duration": "12:35",
+    "words": 1881,
+    "chunks": 16
+  },
+  "topics": {
+    "prompt_version": "topics-v1",
+    "items": [
+      {
+        "title": "Milli Edebiyat Dönemi Nedir?",
+        "description": "Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+        "text": "Milli Edebiyat Dönemi Nedir?: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır."
+      },
+      {
+        "title": "Yeni Lisan Hareketi",
+        "description": "Yeni Lisan, Türkçeyi sadeleştirme hareketidir.",
+        "text": "Yeni Lisan Hareketi: Yeni Lisan, Türkçeyi sadeleştirme hareketidir."
+      },
+      {
+        "title": "Halk Edebiyatı ve Folklor",
+        "description": "Halk Edebiyatı, halkın kültürünü eserlerde işler.",
+        "text": "Halk Edebiyatı ve Folklor: Halk Edebiyatı, halkın kültürünü eserlerde işler."
+      },
+      {
+        "title": "Balkan Savaşları ve Edebiyat",
+        "description": "Balkan Savaşları, Türk edebiyatında önemli bir tema olmuştur.",
+        "text": "Balkan Savaşları ve Edebiyat: Balkan Savaşları, Türk edebiyatında önemli bir tema olmuştur."
+      },
+      {
+        "title": "Osmanlıcılık ve Türkçülük Akımları",
+        "description": "Osmanlıcılık, devletin bütünlüğünü korumayı amaçlar.",
+        "text": "Osmanlıcılık ve Türkçülük Akımları: Osmanlıcılık, devletin bütünlüğünü korumayı amaçlar."
+      },
+      {
+        "title": "Olay ve Durum Hikayeleri",
+        "description": "Olay hikayeleri, beklenmedik sonlar içerir; durum hikayeleri ise hayatın kesitlerini anlatır.",
+        "text": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlar içerir; durum hikayeleri ise hayatın kesitlerini anlatır."
+      }
+    ],
+    "extraction": {
+      "prompt_version": "topics-v1",
+      "requested_count": 6,
+      "returned_count": 6,
+      "shortfall": 0,
+      "dropped": {
+        "empty": 0,
+        "duplicate": 0,
+        "extra": 0
+      },
+      "topics": [
+        {
+          "title": "Milli Edebiyat Dönemi Nedir?",
+          "description": "Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır."
+        },
+        {
+          "title": "Yeni Lisan Hareketi",
+          "description": "Yeni Lisan, Türkçeyi sadeleştirme hareketidir."
+        },
+        {
+          "title": "Halk Edebiyatı ve Folklor",
+          "description": "Halk Edebiyatı, halkın kültürünü eserlerde işler."
+        },
+        {
+          "title": "Balkan Savaşları ve Edebiyat",
+          "description": "Balkan Savaşları, Türk edebiyatında önemli bir tema olmuştur."
+        },
+        {
+          "title": "Osmanlıcılık ve Türkçülük Akımları",
+          "description": "Osmanlıcılık, devletin bütünlüğünü korumayı amaçlar."
+        },
+        {
+          "title": "Olay ve Durum Hikayeleri",
+          "description": "Olay hikayeleri, beklenmedik sonlar içerir; durum hikayeleri ise hayatın kesitlerini anlatır."
+        }
+      ]
+    },
+    "stages": {
+      "transcript_fetch_ms": 1678.1,
+      "clean_ms": 1.8,
+      "llm_topics_ms": 4017.9,
+      "topics_parse_ms": 0.5,
+      "total_ms": 5698.4
+    },
+    "tokens": {
+      "prompt_tokens": 4829,
+      "completion_tokens": 238,
+      "total_tokens": 5067,
+      "cost_usd": 0.000867
+    }
+  },
+  "bloom_levels": [
+    "Yaratma",
+    "Anlama",
+    "Değerlendirme",
+    "Uygulama",
+    "Çözümleme",
+    "Hatırlama"
+  ]
+}

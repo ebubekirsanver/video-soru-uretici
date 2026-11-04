@@ -1,0 +1,8 @@
+{
+  "experiment": "pilot-1",
+  "bge_m3_load_seconds": 64.8,
+  "price_usd_per_1m": {
+    "input": 0.15,
+    "output": 0.6
+  }
+}

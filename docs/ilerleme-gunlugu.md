@@ -769,3 +769,17 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Soru kalitesi ve Bloom düzey uyumu ölçülmedi.
   - Konular iç içe (kullanıcı gözlemi).
 
+## Pilot üretim 1 (2026-11-04)
+
+- **Ne yapıldı** ([bulgu](bulgular/pilot-1/pilot-1.md)):
+  - 6 pilot video için iki koşul (`full` / `rag`, `questions-v3`, `k=5`) çalıştırıldı. Plan, örnek soru seçim sırası ve Bloom eşlemesi çalıştırmadan önce yazıldı; kullanıcı onayladı.
+  - Tamamlanan 4 video: biyoloji, tarih, matematik, ingilizce. Toplam 308067 token, 0,051333 USD (liste fiyatıyla tahmin).
+  - Edebiyatta konu çıkarma ve `full` bitti, `rag` çalışmadı. Python'da transkript alınamadı.
+  - Altyazı hatası adayları yazıldı (15 aday ve bilinen örnekler); kullanıcı doğrulaması bekliyor.
+- **Neden tamamlanmadı:** YouTube, 19. transkript isteğinden sonra bu IP'yi engelledi (hata türü `IpBlocked`). Plan gereği yeniden deneme yapılmadı. Toplam 59 OpenAI çağrısı yapıldı.
+- **Nasıl doğrulandı:** Kod değişmedi; `pytest` sonucu: 390 test geçti.
+- **Bilinen sınırlar:**
+  - Edebiyat `rag` ve Python eksik.
+  - Her video tek çalıştırma; kalite, kaynağa dayalılık ve Bloom uyumu ölçülmedi.
+  - Betik hata anında edebiyatın `full` verisini video dosyasına yazmadı; kayıt `backend/runs` altında, sayılar ham çıktıda.
+
