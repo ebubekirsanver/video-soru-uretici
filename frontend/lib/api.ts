@@ -82,6 +82,7 @@ export type ApiErrorKind =
   | "invalid_request" // 422: istek gövdesi şemaya uymadı (doğrulama listesi)
   | "transcript_unavailable" // 404: altyazı yok / kapalı / video erişilemiyor / temizlikten sonra boş
   | "llm_not_configured" // 503: sunucuda OpenAI API anahtarı tanımlı değil
+  | "youtube_blocked" // 503: YouTube bu ağdan gelen istekleri engelledi
   | "llm_failed" // 502: OpenAI çağrısı başarısız ya da yanıt bozuk
   | "server" // diğer HTTP hataları (ör. 500)
   | "network" // sunucuya hiç ulaşılamadı (kapalı, yanlış adres ya da CORS)
@@ -130,7 +131,11 @@ function kindForStatus(status: number, body: unknown): ApiErrorKind {
     return isList ? "invalid_request" : "invalid_url";
   }
   if (status === 404) return "transcript_unavailable";
-  if (status === 503) return "llm_not_configured";
+  if (status === 503) {
+    // Hata türü yalnızca çalıştırma kaydında; API yanıtında ayırt edici olan mesajın kendisi
+    const detail = readDetail(body);
+    return detail?.includes("YouTube") && detail.includes("engelledi") ? "youtube_blocked" : "llm_not_configured";
+  }
   if (status === 502) return "llm_failed";
   return "server";
 }
@@ -193,6 +198,9 @@ export function describeError(err: unknown): { title: string; detail: string | n
         title: "Sunucuda OpenAI API anahtarı tanımlı değil.",
         detail: "Backend'deki .env dosyasına OPENAI_API_KEY eklenip sunucu yeniden başlatılmalı.",
       };
+    case "youtube_blocked":
+      // Backend'in mesajı zaten Türkçe ve ne yapılacağını söylüyor
+      return { title: err.detail ?? "YouTube bu ağdan gelen istekleri geçici olarak engelledi.", detail: null };
     case "llm_failed":
       // Ayrıntı OpenAI'den geldiği için İngilizce olabilir; başlık sade Türkçe
       return { title: "Yapay zekâ servisinden geçerli bir yanıt alınamadı. Biraz sonra yeniden deneyin.", detail: err.detail };
