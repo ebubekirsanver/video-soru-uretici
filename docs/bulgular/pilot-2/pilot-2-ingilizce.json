@@ -1,0 +1,2057 @@
+{
+  "experiment": "pilot-2",
+  "name": "ingilizce",
+  "video_id": "FetnCoTS9qY",
+  "url": "https://youtu.be/FetnCoTS9qY",
+  "run_at": "2026-11-04T23:29:38+03:00",
+  "topics": [
+    {
+      "title": "Gelenekler ve Önemli Kelimeler",
+      "description": "Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+      "text": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır."
+    },
+    {
+      "title": "Yüz Kalıbının Kullanımı",
+      "description": "Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+      "text": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır."
+    },
+    {
+      "title": "Olumlu Cümle Yapısı",
+      "description": "Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+      "text": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır."
+    },
+    {
+      "title": "Olumsuz Cümle Yapısı",
+      "description": "Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+      "text": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır."
+    },
+    {
+      "title": "Soru Cümlesi Oluşturma",
+      "description": "Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+      "text": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır."
+    },
+    {
+      "title": "Alıştırma Soruları",
+      "description": "Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+      "text": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır."
+    }
+  ],
+  "bloom_levels": [
+    "Hatırlama",
+    "Değerlendirme",
+    "Uygulama",
+    "Anlama",
+    "Yaratma",
+    "Çözümleme"
+  ],
+  "skipped": null,
+  "error": null,
+  "runs": {
+    "v3-full": {
+      "label": "v3-full",
+      "prompt_version": "questions-v3",
+      "mode": "full",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "FetnCoTS9qY",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "Dersin başlangıcında hangi konular tanıtılmaktadır?",
+            "options": [
+              "Teknoloji ve ulaşım",
+              "Gelenekler ve önemli kelimeler",
+              "Sosyal hayat ve çiftçilik",
+              "Duygular ve alışkanlıklar"
+            ],
+            "correct_index": 1,
+            "explanation": "Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "source_quote": "Bu dersimizde on sınıfın dördüncü ünitesi olan gördüğü tions yani gelenekler Az önce hep birlikte işleyeceğiz dersimize bunu da içerisinde bulunan bilmeniz gereken önemli kelimelerle başlayacağız",
+            "source_start_seconds": 2.34,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbının kullanımına uygun bir örnek değildir?",
+            "options": [
+              "O, gençken futbol oynardı.",
+              "Onlar, geçen yaz sinemaya gitmezdi.",
+              "Ben çocukken yüzerdim.",
+              "Biz, geçen yıl tatile gitmedik."
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap 'Onlar, geçen yaz sinemaya gitmezdi.' cümlesidir çünkü bu cümlede yüz kalıbı kullanılmamıştır.",
+            "source_quote": "yüz kalıbı şu amaçlarla kullanılır geçmişte sürekli olarak yapılan Ama artık yapılmayan eylemleriniz den yada alışkanlıklarınızdan bahsedecek siniz",
+            "source_start_seconds": 304.98,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbı kullanılarak doğru bir şekilde oluşturulmuştur?",
+            "options": [
+              "Ben çocukken yüzmeyi severdim.",
+              "Ben çocukken yüzmeyi sevmem.",
+              "Ben çocukken yüzmeyi sevmedim.",
+              "Ben çocukken yüzmeyi sevmiyorum."
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, yüz kalıbının olumlu formunu doğru bir şekilde kullanarak geçmişteki bir alışkanlığı ifade etmektedir.",
+            "source_quote": "kalıbını kullanarak Eğer olumlu bir cümle kurmak istiyorsanız şu kurallara dikkat etmemiz gerekir",
+            "source_start_seconds": 333.09,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Yüz kalıbıyla olumsuz bir cümle kurmak için hangi kelime kullanılmalıdır?",
+            "options": [
+              "does",
+              "did",
+              "do",
+              "had"
+            ],
+            "correct_index": 1,
+            "explanation": "Olumsuz cümle kurarken geçmiş zaman için 'did' kelimesi kullanılır.",
+            "source_quote": "negatif form olumsuz hal demektir Eğer yüz kalıbını kullanarak olumsuz bir cümle bu istiyorsak şu kalıplara dikkat etmeliyiz Biz cümleyi bir özne ile başlarız ay ve Yuh Bey he she it özel lerinden biri Tabletimi yazdıktan sonra negatifi geçiyor lan did kelimesini kullanırız",
+            "source_start_seconds": 467.649,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbı kullanılarak doğru bir soru cümlesi oluşturulmuştur?",
+            "options": [
+              "Did you playing football when you were a child?",
+              "Do you play football when you were a child?",
+              "Did you played football when you were a child?",
+              "Did you play football when you were a child?"
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, geçmişte yapılan bir eylemi sormak için doğru yapı olan 'Did you play...' ifadesidir.",
+            "source_quote": "Eğer yüz ifadesini soru yapacaksak şu kurallara dikkat etmeliyiz Biz sürekli olarak cümlenin başında da ifadesini kullanırız ardından İngilizce'de bulunan yedi tane Özen'in bir tanesini yazarız ve daha sonra yüz kalıbının kendisini yazdıktan sonra fiilin birinci haline ek almamış halinde kullanırız",
+            "source_start_seconds": 612.71,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Yüz kalıbını kullanarak olumsuz bir cümle oluşturmak için hangi ifadeyi kullanmalıyız?",
+            "options": [
+              "Does",
+              "Had",
+              "Did",
+              "Do"
+            ],
+            "correct_index": 2,
+            "explanation": "Olumsuz cümlelerde geçmiş zaman için 'did' ifadesi kullanılır ve ardından yüz kalıbı yazılır.",
+            "source_quote": "Eğer yüz kalıbını kullanarak olumsuz bir cümle bu istiyorsak şu kalıplara dikkat etmeliyiz Biz cümleyi bir özne ile başlarız ay ve Yuh Bey he she it özel lerinden biri Tabletimi yazdıktan sonra negatif anlam katmak için did kelimesini kullanırız.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+          "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+          "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+          "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+          "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+          "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda geçen bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Soruda, yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanımı değerlendirilmektedir. Öğrencilerin bu bilgiyi kullanarak bir yargıda bulunmaları istenmektedir."
+          },
+          {
+            "index": 3,
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, yüz kalıbının olumlu cümle yapısının kurallarını uygulamayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, yüz kalıbının olumsuz cümle yapısındaki kullanımını anlamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun hedef düzeyde olması, yüz kalıbıyla soru cümlesi oluşturma sürecini anlamayı ve uygulamayı gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, yüz kalıbının olumlu ve olumsuz hallerinin nasıl kullanıldığını anlamak ve bu bilgiyi cümle yapısına uygulamak üzerine odaklanmasındandır."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": [
+          {
+            "a": 4,
+            "b": 6,
+            "score": 0.946208,
+            "question_a": "Yüz kalıbıyla olumsuz bir cümle kurmak için hangi kelime kullanılmalıdır?",
+            "question_b": "Yüz kalıbını kullanarak olumsuz bir cümle oluşturmak için hangi ifadeyi kullanmalıyız?"
+          }
+        ]
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            19
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            6
+          ]
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            4
+          ]
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 5,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 1,
+        "similar_pairs": 1,
+        "seconds": 21.8
+      },
+      "stages": {
+        "transcript_fetch_ms": 25.1,
+        "clean_ms": 2.8,
+        "llm_questions_ms": 20734.2,
+        "quote_verify_ms": 29.5,
+        "writing_check_ms": 5.3,
+        "similarity_check_ms": 985.1,
+        "total_ms": 21782.6
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3197.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3880,
+          "completion_tokens": 194,
+          "total_tokens": 4074
+        },
+        {
+          "purpose": "questions",
+          "ms": 3768.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3958,
+          "completion_tokens": 230,
+          "total_tokens": 4188
+        },
+        {
+          "purpose": "questions",
+          "ms": 4153.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3901,
+          "completion_tokens": 207,
+          "total_tokens": 4108
+        },
+        {
+          "purpose": "questions",
+          "ms": 3259.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3916,
+          "completion_tokens": 215,
+          "total_tokens": 4131
+        },
+        {
+          "purpose": "questions",
+          "ms": 3424.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 4008,
+          "completion_tokens": 267,
+          "total_tokens": 4275
+        },
+        {
+          "purpose": "questions",
+          "ms": 2931.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3954,
+          "completion_tokens": 231,
+          "total_tokens": 4185
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 23617,
+        "completion_tokens": 1344,
+        "total_tokens": 24961,
+        "cost_usd": 0.004349
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v3-rag": {
+      "label": "v3-rag",
+      "prompt_version": "questions-v3",
+      "mode": "rag",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "FetnCoTS9qY",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 6,
+        "questions": [
+          {
+            "question": "Dersin başlangıcında hangi konu tanıtılmaktadır?",
+            "options": [
+              "Eğitim ve alışkanlıklar",
+              "Gelenekler ve önemli kelimeler",
+              "Teknoloji ve ulaşım",
+              "Savaş ve sosyal hayat"
+            ],
+            "correct_index": 1,
+            "explanation": "Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "source_quote": "Bu dersimizde on sınıfın dördüncü ünitesi olan gördüğü tions yani gelenekler Az önce hep birlikte işleyeceğiz dersimize bunu da içerisinde bulunan bilmeniz gereken önemli kelimelerle başlayacağız",
+            "source_start_seconds": 2.34,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbının kullanımını doğru bir şekilde yargılamaktadır?",
+            "options": [
+              "Ben çocukken yüzmeyi sevmezdim.",
+              "Ben çocukken yüzerdim.",
+              "Ben çocukken yüzmeyi öğrenmedim.",
+              "Ben çocukken yüzmüyordum."
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap, geçmişte sürekli olarak yapılan ama artık yapılmayan bir eylemi ifade eden cümledir.",
+            "source_quote": "yüz kalıbı şu amaçlarla kullanılır geçmişte sürekli olarak yapılan Ama artık yapılmayan eylemleriniz den yada alışkanlıklarınızdan bahsedecek siniz",
+            "source_start_seconds": 304.98,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbı kullanılarak olumlu bir şekilde ifade edilmiştir?",
+            "options": [
+              "They did not go to the park.",
+              "She did not eat dinner.",
+              "I did not play football.",
+              "He did play football."
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap 'He did play football.' cümlesidir çünkü yüz kalıbı olumlu bir durumu ifade etmektedir.",
+            "source_quote": "Eğer olumlu bir cümle kurmak istiyorsanız şu kurallara dikkat etmemiz gerekir",
+            "source_start_seconds": 333.09,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Yüz kalıbı ile olumsuz bir cümle kurmak için hangi ifadeyi kullanmalıyız?",
+            "options": [
+              "Did yüzü",
+              "Did yüz",
+              "Did not yüz",
+              "Didn't yüz"
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap 'Didn't yüz' ifadesidir çünkü olumsuz cümle yaparken 'did' kelimesinden sonra 'yüz' ifadesini eklememiz gerekmektedir.",
+            "source_quote": "negatif belirtmek için did kelimesini kullanırız ama Özellikle belirtmek istediğim bir nokta vardır Burası sorularda en çok sorular noktadır dedim kelimesini kullandıktan sonra yüzüstü kelimesinde ufak bir değişiklik olacaktır yani din 102 olarak kullanmanızı yanlıştır",
+            "source_start_seconds": 501.96,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi, 'yüz kalıbı' kullanılarak doğru bir soru cümlesi oluşturulmuştur?",
+            "options": [
+              "Do you played football yesterday?",
+              "Did you playeds football yesterday?",
+              "Did you plays football yesterday?",
+              "Did you play football yesterday?"
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, 'Did you play football yesterday?' cümlesidir çünkü yüz kalıbı kullanılarak doğru bir soru cümlesi oluşturulmuştur.",
+            "source_quote": "Eğer yüz ifadesini soru yapacaksak şu kurallara dikkat etmeliyiz",
+            "source_start_seconds": 612.71,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Yüz kalıbının olumsuz cümle yapısında hangi kelime kullanılmalıdır?",
+            "options": [
+              "Do",
+              "Was",
+              "Does",
+              "Did"
+            ],
+            "correct_index": 3,
+            "explanation": "Olumsuz cümle yaparken 'did' kelimesi kullanılır ve ardından yüz kalıbı yazılır.",
+            "source_quote": "negatif anlamda Dandini kelimesini yazar Daha sonra yüz ifadesini kullanırız",
+            "source_start_seconds": 603.8,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+          "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+          "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+          "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+          "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+          "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 181.32,
+                "score": 0.62016
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.488607
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.467025
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.463022
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 403.09,
+                "end_seconds": 493.35,
+                "score": 0.447713
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "context_words": 763,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.620267
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 403.09,
+                "end_seconds": 493.35,
+                "score": 0.584382
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.58273
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 341.88,
+                "end_seconds": 424.73,
+                "score": 0.568178
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 708.57,
+                "end_seconds": 788.77,
+                "score": 0.561525
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "context_words": 764,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.653689
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.597682
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 708.57,
+                "end_seconds": 788.77,
+                "score": 0.576622
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.572692
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 403.09,
+                "end_seconds": 493.35,
+                "score": 0.54586
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "context_words": 723,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.632864
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 708.57,
+                "end_seconds": 788.77,
+                "score": 0.595882
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.595578
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 770.13,
+                "end_seconds": 836.91,
+                "score": 0.58948
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.588364
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "context_words": 723,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.610599
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.601226
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 708.57,
+                "end_seconds": 788.77,
+                "score": 0.552041
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.538545
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 770.13,
+                "end_seconds": 836.91,
+                "score": 0.531655
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.594222
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.553355
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 341.88,
+                "end_seconds": 424.73,
+                "score": 0.538388
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 650.09,
+                "end_seconds": 726.84,
+                "score": 0.537365
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.52164
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda geçen bilgiyi hatırlamayı ve geri getirmeyi gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanımı hakkında yapılan değerlendirmeyi gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgiyi kullanarak olumlu bir cümle kurma yeteneğini ölçmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olduğu, verilen bağlamda yüz kalıbının olumsuz cümle yapısındaki kullanımını anlamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgileri kullanarak bir soru cümlesi oluşturma sürecini anlamayı ve uygulamayı gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olduğu, yüz kalıbının olumlu, olumsuz ve soru hallerinin nasıl kullanıldığını anlamayı ve bu bilgiyi analiz etmeyi gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": [
+          {
+            "a": 4,
+            "b": 6,
+            "score": 0.806061,
+            "question_a": "Yüz kalıbı ile olumsuz bir cümle kurmak için hangi ifadeyi kullanmalıyız?",
+            "question_b": "Yüz kalıbının olumsuz cümle yapısında hangi kelime kullanılmalıdır?"
+          }
+        ]
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            6
+          ]
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            4
+          ]
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 6,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 1,
+        "similar_pairs": 1,
+        "seconds": 19.5
+      },
+      "stages": {
+        "transcript_fetch_ms": 1.6,
+        "clean_ms": 2.5,
+        "index_ms": 3.4,
+        "retrieval_ms": 1324.7,
+        "llm_questions_ms": 16868.7,
+        "quote_verify_ms": 20.1,
+        "writing_check_ms": 4.2,
+        "similarity_check_ms": 1277.0,
+        "total_ms": 19502.8
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 2927.9,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2797,
+          "completion_tokens": 195,
+          "total_tokens": 2992
+        },
+        {
+          "purpose": "questions",
+          "ms": 2958.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2893,
+          "completion_tokens": 217,
+          "total_tokens": 3110
+        },
+        {
+          "purpose": "questions",
+          "ms": 2564.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2834,
+          "completion_tokens": 183,
+          "total_tokens": 3017
+        },
+        {
+          "purpose": "questions",
+          "ms": 3512.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2748,
+          "completion_tokens": 239,
+          "total_tokens": 2987
+        },
+        {
+          "purpose": "questions",
+          "ms": 2694.9,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2840,
+          "completion_tokens": 204,
+          "total_tokens": 3044
+        },
+        {
+          "purpose": "questions",
+          "ms": 2211.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2849,
+          "completion_tokens": 170,
+          "total_tokens": 3019
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 16961,
+        "completion_tokens": 1208,
+        "total_tokens": 18169,
+        "cost_usd": 0.003269
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v4-full": {
+      "label": "v4-full",
+      "prompt_version": "questions-v4",
+      "mode": "full",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "FetnCoTS9qY",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v4",
+        "requested_count": 6,
+        "returned_count": 5,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "Dersin başlangıcında hangi konular tanıtılmaktadır?",
+            "options": [
+              "Savaş teknolojileri",
+              "Gelenekler ve önemli kelimeler",
+              "Tarım ve çiftçilik",
+              "Sosyal hayat ve giyim"
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap, dersin başlangıcında tanıtılan konular arasında gelenekler ve önemli kelimelerin yer aldığını belirtir.",
+            "source_quote": "Bu dersimizde on sınıfın dördüncü ünitesi olan gördüğü tions yani gelenekler Az önce hep birlikte işleyeceğiz dersimize bunu da içerisinde bulunan bilmeniz gereken önemli kelimelerle başlayacağız",
+            "source_start_seconds": 2.34,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbının kullanımını doğru bir şekilde ifade etmektedir?",
+            "options": [
+              "Ben çocukken yüzme dersi almıyordum.",
+              "Ben çocukken her gün yüzme dersi alıyordum.",
+              "Ben çocukken yüzme dersi almazdım.",
+              "Ben çocukken yüzme dersi almadım."
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap olan 'Ben çocukken yüzme dersi almazdım.' cümlesi, geçmişte sürekli olarak yapılmayan bir eylemi ifade eder ve yüz kalıbının doğru kullanımını gösterir.",
+            "source_quote": "yüz kalıbı şu amaçlarla kullanılır geçmişte sürekli olarak yapılan Ama artık yapılmayan eylemleriniz den yada alışkanlıklarınızdan bahsedecek siniz",
+            "source_start_seconds": 304.98,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbı kullanılarak doğru bir şekilde oluşturulmuştur?",
+            "options": [
+              "Ben çocukken yüzmeyi severdim.",
+              "Ben çocukken yüzmeyi sevmem.",
+              "Ben çocukken yüzmeyi sevmedim.",
+              "Ben çocukken yüzmeyi sevmiyordum."
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, geçmişte yapılan ama artık yapılmayan bir eylemi ifade eden olumlu bir cümledir.",
+            "source_quote": "kalıbını kullanarak Eğer olumlu bir cümle kurmak istiyorsanız şu kurallara dikkat etmemiz gerekir",
+            "source_start_seconds": 333.09,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Yüz kalıbıyla olumsuz bir cümle kurmak için hangi kelime kullanılmalıdır?",
+            "options": [
+              "do",
+              "did",
+              "does",
+              "had"
+            ],
+            "correct_index": 1,
+            "explanation": "Olumsuz cümle kurarken 'did' kelimesi kullanılır ve ardından yüz kalıbı yazılır.",
+            "source_quote": "negatif form olumsuz hal demektir Eğer yüz kalıbını kullanarak olumsuz bir cümle bu istiyorsak şu kalıplara dikkat etmeliyiz",
+            "source_start_seconds": 467.649,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Yüz kalıbının olumsuz haliyle cümle kurmak için hangi sırayı izlemeliyiz?",
+            "options": [
+              "Özne → fiil → yüz kalıbı → did",
+              "Özne → yüz kalıbı → did → fiil",
+              "Özne → did → yüz kalıbı → fiil",
+              "Did → özne → yüz kalıbı → fiil"
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap, olumsuz cümle kurarken özne ile başlayıp ardından 'did' ve yüz kalıbını kullanmayı gerektirir.",
+            "source_quote": "Eğer yüz kalıbını kullanarak olumsuz bir cümle bu istiyorsak şu kalıplara dikkat etmeliyiz Biz cümleyi bir özne ile başlarız ay ve Yuh Bey he she it özel lerinden biri Tabletimi yazdıktan sonra negatifi geçiyor lan did kelimesini kullanırız ardından yüz ifadesini yazarız",
+            "source_start_seconds": 467.649,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v4",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+          "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+          "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+          "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+          "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+          "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "duplicate",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "context_words": 1312,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 1
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda geçen bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olmasının nedeni, yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığını değerlendirerek yargıda bulunmayı gerektirmesidir."
+          },
+          {
+            "index": 3,
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olmasının nedeni, yüz kalıbının olumlu cümle yapısının kurallarını uygulamayı gerektirmesidir."
+          },
+          {
+            "index": 4,
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bağlamda yüz kalıbının olumsuz cümle yapısına dair bilgiyi anlamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, yüz kalıbının olumlu ve olumsuz hallerinin nasıl kullanıldığını anlamayı ve bu bilgiyi analiz etmeyi gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": true,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 1
+        },
+        "returned": 5,
+        "verified": 5,
+        "answer_in_stem": 1,
+        "example_leak": 0,
+        "writing_flags": 1,
+        "similar_pairs": 0,
+        "seconds": 20.8
+      },
+      "stages": {
+        "transcript_fetch_ms": 1.9,
+        "clean_ms": 2.8,
+        "llm_questions_ms": 19955.9,
+        "quote_verify_ms": 23.7,
+        "writing_check_ms": 4.7,
+        "similarity_check_ms": 813.3,
+        "total_ms": 20802.6
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3521.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 4158,
+          "completion_tokens": 197,
+          "total_tokens": 4355
+        },
+        {
+          "purpose": "questions",
+          "ms": 3585.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 4236,
+          "completion_tokens": 260,
+          "total_tokens": 4496
+        },
+        {
+          "purpose": "questions",
+          "ms": 2901.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 4179,
+          "completion_tokens": 208,
+          "total_tokens": 4387
+        },
+        {
+          "purpose": "questions",
+          "ms": 2791.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 4194,
+          "completion_tokens": 183,
+          "total_tokens": 4377
+        },
+        {
+          "purpose": "questions",
+          "ms": 3431.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 4286,
+          "completion_tokens": 239,
+          "total_tokens": 4525
+        },
+        {
+          "purpose": "questions",
+          "ms": 3725.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 4232,
+          "completion_tokens": 291,
+          "total_tokens": 4523
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 25285,
+        "completion_tokens": 1378,
+        "total_tokens": 26663,
+        "cost_usd": 0.00462
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 1,
+        "extra_ignored": 0
+      }
+    },
+    "v4-rag": {
+      "label": "v4-rag",
+      "prompt_version": "questions-v4",
+      "mode": "rag",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "FetnCoTS9qY",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v4",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "Dersin başlangıcında hangi konu tanıtılmaktadır?",
+            "options": [
+              "Eğitim ve alışkanlıklar",
+              "Gelenekler ve önemli kelimeler",
+              "Teknoloji ve savaş",
+              "Sosyal hayat ve çiftçilik"
+            ],
+            "correct_index": 1,
+            "explanation": "Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "source_quote": "Bu dersimizde on sınıfın dördüncü ünitesi olan gördüğü tions yani gelenekler Az önce hep birlikte işleyeceğiz dersimize bunu da içerisinde bulunan bilmeniz gereken önemli kelimelerle başlayacağız",
+            "source_start_seconds": 2.34,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbının doğru kullanımını gösterir?",
+            "options": [
+              "Ben çocukken futbol oynardım.",
+              "Ben çocukken futbol oynamıyorum.",
+              "Ben çocukken futbol oynuyorum.",
+              "Ben çocukken futbol oynamadım."
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, geçmişte sürekli olarak yapılan ama artık yapılmayan bir eylemi ifade eder.",
+            "source_quote": "yüz kalıbı şu amaçlarla kullanılır geçmişte sürekli olarak yapılan Ama artık yapılmayan eylemleriniz den yada alışkanlıklarınızdan bahsedecek siniz",
+            "source_start_seconds": 304.98,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi yüz kalıbıyla olumlu bir cümle kurma kuralına uygundur?",
+            "options": [
+              "I did not play football.",
+              "He did play football.",
+              "She did plays football.",
+              "They did not play football."
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap, yüz kalıbıyla olumlu cümle kurma kuralına uygun olan 'He did play football.' cümlesidir.",
+            "source_quote": "Eğer olumlu bir cümle kurmak istiyorsanız şu kurallara dikkat etmemiz gerekir bir cümle Öncelikle biraz ne ile başlarız",
+            "source_start_seconds": 333.09,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Yüz kalıbı ile olumsuz bir cümle kurmak için hangi ifadeyi kullanmalıyız?",
+            "options": [
+              "Doesn't yüz",
+              "Did yüz",
+              "Did not yüz",
+              "Didn't yüz"
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap 'Didn't yüz' ifadesidir çünkü olumsuz cümlelerde 'didn't' kullanılır ve ardından yüz kalıbı eklenir.",
+            "source_quote": "negatif yapar Kendini yüz ifadesini kullanırız daha sonra yanındaki zil ekleriz",
+            "source_start_seconds": 774.3,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Aşağıdaki cümlelerden hangisi, yüz kalıbını kullanarak geçmişte sürekli yapılan ama artık yapılmayan bir eylemi ifade etmek için doğru bir soru cümlesi oluşturur?",
+            "options": [
+              "Did you play football?",
+              "Did you played football?",
+              "Did you plays football?",
+              "Did you not play football?"
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, yüz kalıbının doğru kullanımıyla oluşturulmuş bir soru cümlesidir. 'Did' ile başlayan ve fiilin yalın haliyle devam eden cümle, geçmişte yapılan bir eylemi sormaktadır.",
+            "source_quote": "Eğer yüz ifadesini soru yapacaksak şu kurallara dikkat etmeliyiz Biz sürekli olarak cümlenin başında da ifadesini kullanırız ardından İngilizce'de bulunan yedi tane Özen'in bir tanesini yazarız ve daha sonra yüz kalıbının kendisini yazdıktan sonra fiilin birinci haline ek almamış halinde kullanırız",
+            "source_start_seconds": 612.71,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Yüz kalıbının olumlu bir cümlede nasıl kullanıldığını açıklayan doğru sıra hangisidir?",
+            "options": [
+              "A) Özne yazılır → yüz kalıbı eklenir → fiil yalın haliyle yazılır.",
+              "B) Yüz kalıbı yazılır → özne eklenir → fiil geçmiş zaman eki alır.",
+              "D) Fiil geçmiş zaman eki alır → özne yazılır → yüz kalıbı eklenir.",
+              "C) Did kelimesi yazılır → özne eklenir → yüz kalıbı eklenir."
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, yüz kalıbının olumlu cümlede nasıl kullanılacağını belirten kuralların sırasını doğru bir şekilde yansıtmaktadır.",
+            "source_quote": "Eğer olumlu bir cümle kurmak istiyorsanız şu kurallara dikkat etmemiz gerekir bir cümle Öncelikle biraz ne ile başlarız... ardından yüz ifadesini yazarız.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v4",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+          "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+          "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+          "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+          "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+          "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 181.32,
+                "score": 0.62016
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.488607
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.467025
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.463022
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 403.09,
+                "end_seconds": 493.35,
+                "score": 0.447713
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "context_words": 763,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.620267
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 403.09,
+                "end_seconds": 493.35,
+                "score": 0.584382
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.58273
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 341.88,
+                "end_seconds": 424.73,
+                "score": 0.568178
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 708.57,
+                "end_seconds": 788.77,
+                "score": 0.561525
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "context_words": 764,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.653689
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.597682
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 708.57,
+                "end_seconds": 788.77,
+                "score": 0.576622
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.572692
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 403.09,
+                "end_seconds": 493.35,
+                "score": 0.54586
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "context_words": 723,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.632864
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 708.57,
+                "end_seconds": 788.77,
+                "score": 0.595882
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.595578
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 770.13,
+                "end_seconds": 836.91,
+                "score": 0.58948
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.588364
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "context_words": 723,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.610599
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.601226
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 708.57,
+                "end_seconds": 788.77,
+                "score": 0.552041
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.538545
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 770.13,
+                "end_seconds": 836.91,
+                "score": 0.531655
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 279.47,
+                "end_seconds": 364.57,
+                "score": 0.594222
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 592.27,
+                "end_seconds": 667.8,
+                "score": 0.553355
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 341.88,
+                "end_seconds": 424.73,
+                "score": 0.538388
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 650.09,
+                "end_seconds": 726.84,
+                "score": 0.537365
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 473.55,
+                "end_seconds": 548.77,
+                "score": 0.52164
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Gelenekler ve Önemli Kelimeler: Dersin başlangıcında gelenekler ve önemli kelimeler tanıtılmaktadır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, bağlamda geçen bilgiyi hatırlamayı ölçer ve doğrudan bilgiye dayanmaktadır."
+          },
+          {
+            "index": 2,
+            "topic": "Yüz Kalıbının Kullanımı: Yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için kullanıldığı açıklanmaktadır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olduğu, yüz kalıbının geçmişte yapılan ama artık yapılmayan eylemler için nasıl kullanıldığını değerlendirmeyi gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Olumlu Cümle Yapısı: Yüz kalıbıyla olumlu cümle kurmanın kuralları detaylandırılmaktadır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olmasının nedeni, verilen kuralları bir cümle oluşturmak için uygulamayı gerektirmesidir."
+          },
+          {
+            "index": 4,
+            "topic": "Olumsuz Cümle Yapısı: Yüz kalıbıyla olumsuz cümle kurmanın gereklilikleri üzerinde durulmaktadır.",
+            "bloom_level": "Anlama",
+            "reasoning": "Bu soru, yüz kalıbının olumsuz cümle yapısındaki kullanımını anlamayı gerektirir."
+          },
+          {
+            "index": 5,
+            "topic": "Soru Cümlesi Oluşturma: Yüz kalıbıyla soru cümlesi oluşturmanın adımları açıklanmaktadır.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, yüz kalıbının kullanımını ve soru cümlesi oluşturma sürecini bir araya getirerek tutarlı bir yapı oluşturmayı gerektirir."
+          },
+          {
+            "index": 6,
+            "topic": "Alıştırma Soruları: Yüz kalıbıyla ilgili alıştırma soruları üzerinde çalışılmaktadır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, yüz kalıbının olumlu, olumsuz ve soru hallerinin nasıl kullanıldığını anlamaya yönelik parçaları analiz etmeyi gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            19
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 5,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 1,
+        "similar_pairs": 0,
+        "seconds": 21.2
+      },
+      "stages": {
+        "transcript_fetch_ms": 3.9,
+        "clean_ms": 2.4,
+        "index_ms": 3.4,
+        "retrieval_ms": 1378.8,
+        "llm_questions_ms": 18637.6,
+        "quote_verify_ms": 23.2,
+        "writing_check_ms": 5.9,
+        "similarity_check_ms": 1154.2,
+        "total_ms": 21209.9
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3177.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3075,
+          "completion_tokens": 197,
+          "total_tokens": 3272
+        },
+        {
+          "purpose": "questions",
+          "ms": 2951.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3171,
+          "completion_tokens": 206,
+          "total_tokens": 3377
+        },
+        {
+          "purpose": "questions",
+          "ms": 2714.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3112,
+          "completion_tokens": 201,
+          "total_tokens": 3313
+        },
+        {
+          "purpose": "questions",
+          "ms": 2715.9,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3026,
+          "completion_tokens": 173,
+          "total_tokens": 3199
+        },
+        {
+          "purpose": "questions",
+          "ms": 3603.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3118,
+          "completion_tokens": 293,
+          "total_tokens": 3411
+        },
+        {
+          "purpose": "questions",
+          "ms": 3474.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3127,
+          "completion_tokens": 297,
+          "total_tokens": 3424
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 18629,
+        "completion_tokens": 1367,
+        "total_tokens": 19996,
+        "cost_usd": 0.003615
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    }
+  }
+}

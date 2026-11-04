@@ -1,0 +1,2080 @@
+{
+  "experiment": "pilot-2",
+  "name": "biyoloji",
+  "video_id": "109kCbVtU1U",
+  "url": "https://youtu.be/109kCbVtU1U",
+  "run_at": "2026-11-04T23:29:33+03:00",
+  "topics": [
+    {
+      "title": "Kemosentez Nedir?",
+      "description": "Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+      "text": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir."
+    },
+    {
+      "title": "Hidrotermal Bacalar",
+      "description": "Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+      "text": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır."
+    },
+    {
+      "title": "Kemosentetik Canlılar",
+      "description": "Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+      "text": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir."
+    },
+    {
+      "title": "Üretici Canlılar",
+      "description": "Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+      "text": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler."
+    },
+    {
+      "title": "Kemosentez Ortamları",
+      "description": "Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+      "text": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler."
+    },
+    {
+      "title": "Fotosentez ve Kemosentez Farkları",
+      "description": "Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+      "text": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır."
+    }
+  ],
+  "bloom_levels": [
+    "Uygulama",
+    "Hatırlama",
+    "Değerlendirme",
+    "Yaratma",
+    "Anlama",
+    "Çözümleme"
+  ],
+  "skipped": null,
+  "error": null,
+  "runs": {
+    "v3-full": {
+      "label": "v3-full",
+      "prompt_version": "questions-v3",
+      "mode": "full",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "109kCbVtU1U",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 6,
+        "questions": [
+          {
+            "question": "Okyanus derinliklerinde ışık enerjisi bulunmadığı için kemosentetik canlılar nasıl besin üretir?",
+            "options": [
+              "Sadece su ve oksijen kullanarak besin üretirler.",
+              "Işık enerjisini kullanarak besin üretirler.",
+              "İnorganik maddeleri oksitlerler ve açığa çıkan enerjiyi kullanarak besin üretirler.",
+              "Besin üretimi için dışarıdan enerji alırlar."
+            ],
+            "correct_index": 2,
+            "explanation": "Kemosentetik canlılar, inorganik maddeleri oksitleyerek enerji açığa çıkarır ve bu enerjiyi besin üretiminde kullanır.",
+            "source_quote": "Kemosentetik canlılar inorganik maddeleri oksitlerler ve bunun sonucunda enerji açığa çıkartırlar.",
+            "source_start_seconds": 390.319,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Hidrotermal bacalar nerede bulunur?",
+            "options": [
+              "Kuru topraklarda",
+              "Göllerde",
+              "Dağların zirvelerinde",
+              "Okyanus tabanında"
+            ],
+            "correct_index": 3,
+            "explanation": "Hidrotermal bacalar, okyanus tabanında bulunan sıcak su kaynaklarıdır.",
+            "source_quote": "Hidrotermal bacalar su ve gaz fışkırtan sıcak su kaynaklarının okyanus tabanında yer alan benzerleridir.",
+            "source_start_seconds": 134.16,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Kemosentetik canlıların besin üretimi için hangi enerji kaynağını kullanması gerektiği konusunda aşağıdaki ifadelerden hangisi doğrudur?",
+            "options": [
+              "Sadece organik maddeleri kullanarak besin üretirler.",
+              "Işık enerjisi kullanarak besin üretirler.",
+              "Kimyasal enerjiyi kullanarak besin üretirler.",
+              "Besin üretimi için enerjiye ihtiyaç duymazlar."
+            ],
+            "correct_index": 2,
+            "explanation": "Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretimi gerçekleştirirler. Bu nedenle doğru cevap, kimyasal enerjiyi kullanarak besin üretirler ifadesidir.",
+            "source_quote": "Kemosentetik canlılar da kimyasal enerjiyi kullanarak bir besin üretimini gerçekleştirdiği için o zaman kesinlikle biz şunu dememiz lazım.",
+            "source_start_seconds": 340.12,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Kemosentetik canlıların besin üretimi için hangi enerji kaynağını kullanarak bir düzenek tasarlamak en uygundur?",
+            "options": [
+              "Klorofil pigmenti kullanmak",
+              "Güneş ışığını kullanmak",
+              "Sıcak su kaynaklarından enerji almak",
+              "İnorganik maddeleri oksitlemek"
+            ],
+            "correct_index": 3,
+            "explanation": "Kemosentetik canlılar, inorganik maddeleri oksitleyerek enerji üretirler ve bu enerjiyi besin sentezinde kullanırlar.",
+            "source_quote": "kemosentetik bakteriler için hemen bunun altını çizmek istiyorum. Uygun ortam oluştururlar.",
+            "source_start_seconds": 187.159,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretimini gerçekleştirirler?",
+            "options": [
+              "Işık enerjisi",
+              "Termal enerji",
+              "Mekanik enerji",
+              "Kimyasal enerji"
+            ],
+            "correct_index": 3,
+            "explanation": "Kemosentetik canlılar, inorganik maddeleri oksitleyerek kimyasal enerjiyi kullanarak besin üretimi gerçekleştirirler.",
+            "source_quote": "Kemosentetiklerde kimyasal enerjiyi kullanarak besin üretimini gerçekleştiriyor.",
+            "source_start_seconds": 693.839,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Fotosentez ve kemosentez arasındaki temel fark nedir?",
+            "options": [
+              "Kemosentez sadece bitkilerde gerçekleşir, fotosentez ise tüm canlılarda gerçekleşir.",
+              "Kemosentezde klorofil pigmenti bulunur, fotosentezde bulunmaz.",
+              "Fotosentezde oksijen açığa çıkar, kemosentezde ise her iki durumda da oksijen açığa çıkar.",
+              "Fotosentezde ışık enerjisi kullanılır, kemosentezde kimyasal enerji kullanılır."
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanıldığını belirtmektedir.",
+            "source_quote": "Üreticileri de biz ikiye ayırmıştık. Kullandığı enerji kaynağına göre. Eğer ışık enerjisini kullanarak besin üretiyorsa biz buna fotosentetik canlı demiştik. Kimyasal bir enerjiyi kullanarak besin üretimini gerçekleştiriyorsa o canlıya da kemosentetik canlı adını vermiştik.",
+            "source_start_seconds": 207.48,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+          "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+          "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+          "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+          "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+          "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, kemosentez ile ilgili bilgilerin belirli bir duruma uygulanmasını gerektirmesidir."
+          },
+          {
+            "index": 2,
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olduğu, hidrotermal bacalar hakkında doğrudan bilgi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, kemosentetik canlıların besin üretimi ile ilgili bilgilerin değerlendirilmesine dayanıyor. Soruda verilen bilgiler ışığında, kemosentetik canlıların besin üretimindeki rolü ve bu süreçteki enerji kaynakları hakkında yargıda bulunulması isteniyor."
+          },
+          {
+            "index": 4,
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Soruda, kemosentetik canlıların besin üretimi için gerekli olan enerji kaynağını kullanarak bir düzenek planı oluşturma isteği ölçülmektedir. Bu, yaratma düzeyinde bir düşünme becerisini gerektirir."
+          },
+          {
+            "index": 5,
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olduğu, kemosentez hakkında verilen bilgiyi anlamaya yönelik bir ifade aradığı için belirlenmiştir."
+          },
+          {
+            "index": 6,
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, fotosentez ve kemosentez arasındaki farkları analiz etmeyi ve bu farkların nasıl bir ilişki içinde olduğunu anlamayı gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": [
+          {
+            "a": 3,
+            "b": 5,
+            "score": 0.874187,
+            "question_a": "Kemosentetik canlıların besin üretimi için hangi enerji kaynağını kullanması gerektiği konusunda aşağıdaki ifadelerden hangisi doğrudur?",
+            "question_b": "Kemosentetik canlılar hangi enerji kaynağını kullanarak besin üretimini gerçekleştirirler?"
+          }
+        ]
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4,
+            19
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            5
+          ]
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            3
+          ]
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 6,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 2,
+        "similar_pairs": 1,
+        "seconds": 30.0
+      },
+      "stages": {
+        "transcript_fetch_ms": 21.0,
+        "clean_ms": 9.0,
+        "llm_questions_ms": 28266.5,
+        "quote_verify_ms": 59.5,
+        "writing_check_ms": 7.3,
+        "similarity_check_ms": 1682.0,
+        "total_ms": 30045.8
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 7933.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8626,
+          "completion_tokens": 244,
+          "total_tokens": 8870
+        },
+        {
+          "purpose": "questions",
+          "ms": 4450.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8604,
+          "completion_tokens": 171,
+          "total_tokens": 8775
+        },
+        {
+          "purpose": "questions",
+          "ms": 6214.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8682,
+          "completion_tokens": 288,
+          "total_tokens": 8970
+        },
+        {
+          "purpose": "questions",
+          "ms": 2935.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8734,
+          "completion_tokens": 227,
+          "total_tokens": 8961
+        },
+        {
+          "purpose": "questions",
+          "ms": 2744.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8637,
+          "completion_tokens": 177,
+          "total_tokens": 8814
+        },
+        {
+          "purpose": "questions",
+          "ms": 3988.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8696,
+          "completion_tokens": 317,
+          "total_tokens": 9013
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 51979,
+        "completion_tokens": 1424,
+        "total_tokens": 53403,
+        "cost_usd": 0.008651
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v3-rag": {
+      "label": "v3-rag",
+      "prompt_version": "questions-v3",
+      "mode": "rag",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "109kCbVtU1U",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "Kemosentetik canlılar, okyanus derinliklerinde ışık olmadan besin üretimi yaparken hangi maddeyi kullanarak enerji üretirler?",
+            "options": [
+              "Inorganik madde",
+              "Oksijen",
+              "Su",
+              "Organik madde"
+            ],
+            "correct_index": 0,
+            "explanation": "Kemosentetik canlılar, inorganik maddeleri oksitleyerek enerji üretirler.",
+            "source_quote": "Kemosentetik canlılar da kimyasal enerjiyi kullanarak bir besin üretimini gerçekleştirdiği için o zaman kesinlikle biz şunu dememiz lazım.",
+            "source_start_seconds": 340.12,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Hidrotermal bacalar nerede bulunur?",
+            "options": [
+              "Nehirlerde",
+              "Göllerde",
+              "Kıyılarda",
+              "Okyanus tabanında"
+            ],
+            "correct_index": 3,
+            "explanation": "Hidrotermal bacalar, okyanus tabanında yer alan sıcak su kaynaklarıdır.",
+            "source_quote": "Hidrotermal bacalar su ve gaz fışkırtan sıcak su kaynaklarının okyanus tabanında yer alan benzerleridir.",
+            "source_start_seconds": 134.16,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Kemosentetik canlıların besin üretimi ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+            "options": [
+              "Kemosentetik canlılar, yalnızca su ve oksijen ile besin üretir.",
+              "Kemosentetik canlılar, besin üretimi için ortamda ışık bulunmasını gerektirir.",
+              "Kemosentetik canlılar, yalnızca ışık enerjisi ile besin üretir.",
+              "Kemosentetik canlılar, inorganik maddeleri oksitleyerek enerji üretir."
+            ],
+            "correct_index": 3,
+            "explanation": "Kemosentetik canlılar, inorganik maddeleri oksitleyerek enerji üretir ve bu enerjiyi besin sentezinde kullanır.",
+            "source_quote": "Kemosentetik canlılar da kimyasal enerjiyi kullanarak bir besin üretimini gerçekleştirdiği için o zaman kesinlikle biz şunu dememiz lazım.",
+            "source_start_seconds": 340.12,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Bir öğrenci, okyanus derinliklerinde ışık olmadan besin üretebilen bir ekosistem tasarlamak istiyor. Bu ekosistemde hangi canlı türü bu tasarıma en uygun olur?",
+            "options": [
+              "Fotosentetik canlılar",
+              "Hayvanlar",
+              "Kemosentetik canlılar",
+              "Bitkiler"
+            ],
+            "correct_index": 2,
+            "explanation": "Kemosentetik canlılar, inorganik maddeleri oksitleyerek enerji üretebildikleri için ışık olmadan besin üretebilirler.",
+            "source_quote": "Kemosentetik canlılar inorganik maddeleri oksitlerler ve bunun sonucunda enerji açığa çıkartırlar.",
+            "source_start_seconds": 390.319,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Kemosentetik canlıların yaşadığı ortamlar arasında hangisi bulunmamaktadır?",
+            "options": [
+              "Ormanlık alanlar",
+              "Okyanus derinlikleri",
+              "Lağım çamuru",
+              "Çöplükler"
+            ],
+            "correct_index": 0,
+            "explanation": "Ormanlık alanlar kemosentetik canlıların yaşadığı bir ortam değildir; diğerleri ise bu canlıların yaşadığı yerlerdir.",
+            "source_quote": "Kemosentetik canlılara da kemosentetik canlılar adını veriyoruz. Bu canlıların tamamı prokaryot hücre yapısına sahip olan canlılardır. Peki bu canlıların yaşadığı ortamları konuşacak olursak... Okyanus dibi ya da derin deniz dibi... Bunun dışında çöplükleri, lağım çamuru işleme kazanlarını... belirtebilirim.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Fotosentez ve kemosentez arasındaki temel fark nedir?",
+            "options": [
+              "Fotosentezde kimyasal enerji kullanılır, kemosentezde ışık enerjisi kullanılır.",
+              "Kemosentezde oksijen üretilir, fotosentezde üretilmez.",
+              "Kemosentezde besin üretimi yoktur, fotosentezde vardır.",
+              "Fotosentezde klorofil kullanılır, kemosentezde kullanılmaz."
+            ],
+            "correct_index": 3,
+            "explanation": "Fotosentezde klorofil pigmenti kullanılırken, kemosentezde klorofil yoktur. Bu, iki süreç arasındaki en belirgin farklardan biridir.",
+            "source_quote": "Fotosentezde klorofil pigmenti kullanılır ama kemosentezde kullanılmaz.",
+            "source_start_seconds": 1094.12,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+          "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+          "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+          "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+          "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+          "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 22,
+                "start_seconds": 1212.44,
+                "end_seconds": 1283.44,
+                "score": 0.75999
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 769.399,
+                "end_seconds": 839.2,
+                "score": 0.710088
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.691952
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 331.52,
+                "end_seconds": 409.16,
+                "score": 0.688986
+              },
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.68,
+                "end_seconds": 66.56,
+                "score": 0.68771
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "context_words": 759,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 101.52,
+                "end_seconds": 176.88,
+                "score": 0.764498
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 156.2,
+                "end_seconds": 234.16,
+                "score": 0.603405
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.599983
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 444.919,
+                "end_seconds": 511.88,
+                "score": 0.586402
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 271.6,
+                "end_seconds": 349.04,
+                "score": 0.561044
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 10,
+                "start_seconds": 547.64,
+                "end_seconds": 614.52,
+                "score": 0.778504
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 331.52,
+                "end_seconds": 409.16,
+                "score": 0.777294
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.764022
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.758232
+              },
+              {
+                "chunk_index": 16,
+                "start_seconds": 881.72,
+                "end_seconds": 947.84,
+                "score": 0.755572
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "context_words": 760,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 12,
+                "start_seconds": 651.0,
+                "end_seconds": 731.48,
+                "score": 0.712291
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 392.56,
+                "end_seconds": 460.08,
+                "score": 0.680213
+              },
+              {
+                "chunk_index": 16,
+                "start_seconds": 881.72,
+                "end_seconds": 947.84,
+                "score": 0.67431
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 331.52,
+                "end_seconds": 409.16,
+                "score": 0.663149
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.658438
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 10,
+                "start_seconds": 547.64,
+                "end_seconds": 614.52,
+                "score": 0.729823
+              },
+              {
+                "chunk_index": 26,
+                "start_seconds": 1426.4,
+                "end_seconds": 1492.0,
+                "score": 0.725167
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.696477
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.662965
+              },
+              {
+                "chunk_index": 25,
+                "start_seconds": 1372.2,
+                "end_seconds": 1442.0,
+                "score": 0.64742
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "context_words": 762,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 18,
+                "start_seconds": 983.88,
+                "end_seconds": 1054.84,
+                "score": 0.752473
+              },
+              {
+                "chunk_index": 19,
+                "start_seconds": 1039.36,
+                "end_seconds": 1111.44,
+                "score": 0.739449
+              },
+              {
+                "chunk_index": 21,
+                "start_seconds": 1152.96,
+                "end_seconds": 1229.04,
+                "score": 0.733073
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.707043
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 769.399,
+                "end_seconds": 839.2,
+                "score": 0.705264
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Soruda kemosentez sürecinin nasıl işlediği ile ilgili bilgi uygulamaya yönelik bir durum verilmiştir. Öğrencinin, kemosentezde inorganik maddelerin oksitlenmesi ile enerji üretimi sürecini anlaması ve bu bilgiyi yeni bir senaryoya uygulaması beklenmektedir."
+          },
+          {
+            "index": 2,
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, hidrotermal bacalar hakkında doğrudan bilgi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, kemosentetik canlıların besin üretim süreçlerini değerlendirerek doğru bir yargıya varmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun hedef düzeyde olması, öğrencilerin üretici canlıların besin üretim süreçlerini bir araya getirerek yeni bir senaryo oluşturmasını gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, kemosentetik canlıların yaşadığı ortamların anlaşılmasını ve bu bilgiyi yorumlamayı gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, fotosentez ve kemosentez arasındaki farklılıkları analiz etmeyi gerektirmesindendir. Bu, öğrencinin iki süreç arasındaki ilişkileri anlamasını ve açıklamasını ölçer."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            19
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 5,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 2,
+        "similar_pairs": 0,
+        "seconds": 22.2
+      },
+      "stages": {
+        "transcript_fetch_ms": 4.7,
+        "clean_ms": 6.6,
+        "index_ms": 136.9,
+        "retrieval_ms": 1315.9,
+        "llm_questions_ms": 19081.8,
+        "quote_verify_ms": 53.0,
+        "writing_check_ms": 4.7,
+        "similarity_check_ms": 1443.0,
+        "total_ms": 22188.7
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3395.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3055,
+          "completion_tokens": 231,
+          "total_tokens": 3286
+        },
+        {
+          "purpose": "questions",
+          "ms": 2257.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3046,
+          "completion_tokens": 166,
+          "total_tokens": 3212
+        },
+        {
+          "purpose": "questions",
+          "ms": 3374.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3092,
+          "completion_tokens": 262,
+          "total_tokens": 3354
+        },
+        {
+          "purpose": "questions",
+          "ms": 3331.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3177,
+          "completion_tokens": 219,
+          "total_tokens": 3396
+        },
+        {
+          "purpose": "questions",
+          "ms": 3428.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3029,
+          "completion_tokens": 250,
+          "total_tokens": 3279
+        },
+        {
+          "purpose": "questions",
+          "ms": 3295.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3163,
+          "completion_tokens": 256,
+          "total_tokens": 3419
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 18562,
+        "completion_tokens": 1384,
+        "total_tokens": 19946,
+        "cost_usd": 0.003615
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v4-full": {
+      "label": "v4-full",
+      "prompt_version": "questions-v4",
+      "mode": "full",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "109kCbVtU1U",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v4",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 6,
+        "questions": [
+          {
+            "question": "Bir araştırmacı, okyanus derinliklerinde ışık olmayan bir ortamda kemosentetik canlıların besin üretim sürecini incelemektedir. Bu canlılar hangi maddeyi oksitleyerek enerji üretirler?",
+            "options": [
+              "İnorganik madde",
+              "Organik madde",
+              "Oksijen",
+              "Karbon dioksit"
+            ],
+            "correct_index": 0,
+            "explanation": "Kemosentetik canlılar, inorganik maddeleri oksitleyerek enerji üretirler.",
+            "source_quote": "Kemosentetik canlılar inorganik maddeleri oksitlerler ve bunun sonucunda enerji açığa çıkartırlar.",
+            "source_start_seconds": 390.319,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Hidrotermal bacalar, hangi derinlikte bulunan sıcak su kaynaklarıdır?",
+            "options": [
+              "Nehir yatağı",
+              "Göl tabanı",
+              "Okyanus tabanı",
+              "Deniz yüzeyi"
+            ],
+            "correct_index": 2,
+            "explanation": "Hidrotermal bacalar, okyanus tabanında yer alan sıcak su kaynaklarıdır.",
+            "source_quote": "Hidrotermal bacalar su ve gaz fışkırtan sıcak su kaynaklarının okyanus tabanında yer alan benzerleridir.",
+            "source_start_seconds": 134.16,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Kemosentetik canlıların okyanus derinliklerinde besin üretimi yapabilmesi, bu canlıların ekosistem içindeki diğer canlılarla olan ilişkisini nasıl etkiler?",
+            "options": [
+              "Kemosentetik canlılar, besin üretmediği için ekosistemdeki diğer canlıları olumsuz etkiler.",
+              "Kemosentetik canlılar, besin üreterek ekosistemdeki diğer canlıların yaşamını destekler.",
+              "Kemosentetik canlılar, sadece kendi türlerinin yaşamasına olanak tanır.",
+              "Kemosentetik canlılar, ekosistemdeki diğer canlılarla hiçbir ilişki kurmaz."
+            ],
+            "correct_index": 1,
+            "explanation": "Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin ürettikleri için, bu besinleri tüketen diğer canlıların yaşamını destekler.",
+            "source_quote": "demek ki bu zorlu şartta canlı yaşayabiliyor ve bu canlı besin üretiyor. O zaman bu besini de başka tüketici organizmalar da yiyebilir.",
+            "source_start_seconds": 231.28,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Kemosentez yapan bir canlı, besin üretimi için aşağıdaki hangi adımı gerçekleştirmelidir?",
+            "options": [
+              "C) Organik maddeleri parçalayarak enerji üretmek.",
+              "B) İnorganik maddeleri oksitleyerek enerji açığa çıkarmak.",
+              "D) Fotosentetik pigmentler kullanarak besin sentezlemek.",
+              "A) Işık enerjisini kullanarak su ve karbondioksiti birleştirmek."
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap, kemosentez yapan canlıların inorganik maddeleri oksitleyerek enerji açığa çıkarması gerektiğidir.",
+            "source_quote": "Kemosentetik canlılar inorganik maddeleri oksitlerler ve bunun sonucunda enerji açığa çıkartırlar.",
+            "source_start_seconds": 390.319,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Kemosentetik canlıların besin üretimi için hangi enerji kaynağını kullandığı en iyi şekilde aşağıdaki ifadelerden hangisiyle açıklanabilir?",
+            "options": [
+              "Mekanik enerji",
+              "Termal enerji",
+              "Işık enerjisi",
+              "Kimyasal enerji"
+            ],
+            "correct_index": 3,
+            "explanation": "Kemosentetik canlılar, inorganik maddeleri oksitleyerek kimyasal enerji üretir ve bu enerjiyi besin sentezinde kullanır.",
+            "source_quote": "Kemosentetik canlılar da kimyasal enerjiyi kullanarak bir besin üretimini gerçekleştirdiği için o zaman kesinlikle biz şunu dememiz lazım.",
+            "source_start_seconds": 340.12,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Fotosentez ve kemosentez arasındaki temel fark nedir?",
+            "options": [
+              "Her iki süreçte de ışık enerjisi kullanılır.",
+              "Fotosentezde ışık enerjisi kullanılır, kemosentezde kimyasal enerji kullanılır.",
+              "Her iki süreçte de kimyasal enerji kullanılır.",
+              "Fotosentezde kimyasal enerji kullanılır, kemosentezde ışık enerjisi kullanılır."
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap, fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılmasıdır.",
+            "source_quote": "Üreticileri de biz ikiye ayırmıştık. Kullandığı enerji kaynağına göre. Eğer ışık enerjisini kullanarak besin üretiyorsa biz buna fotosentetik canlı demiştik. Kimyasal bir enerjiyi kullanarak besin üretimini gerçekleştiriyorsa o canlıya da kemosentetik canlı adını vermiştik.",
+            "source_start_seconds": 207.48,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v4",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+          "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+          "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+          "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+          "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+          "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "context_words": 3287,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, kemosentez sürecinin uygulanabilirliğini bir senaryoya dayandırarak ölçmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda açıkça geçen bir bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Bu soru, kemosentetik canlıların besin üretim süreçlerini değerlendirerek, bu süreçlerin diğer canlılarla olan ilişkisini sorgulamaktadır. Sorunun doğru cevabı, bağlamda verilen bilgilere dayanarak kemosentetik canlıların ekosistem içindeki rolünü yargılamayı gerektirir."
+          },
+          {
+            "index": 4,
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun hedef düzeyde olması, kemosentez yapan canlıların besin üretim sürecini ve bu sürecin nasıl işlediğini anlamaya yönelik bir plan oluşturmayı gerektirmesidir."
+          },
+          {
+            "index": 5,
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgiyi anlamaya yönelik bir açıklama yapmayı gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, fotosentez ve kemosentez arasındaki farkları analiz etmeyi gerektirmesidir. Bu nedenle, iki süreç arasındaki enerji kaynaklarının karşılaştırılması istenmektedir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            19
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": true,
+          "example_leak": [],
+          "writing_rules": [
+            11
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 6,
+        "answer_in_stem": 1,
+        "example_leak": 0,
+        "writing_flags": 2,
+        "similar_pairs": 0,
+        "seconds": 26.9
+      },
+      "stages": {
+        "transcript_fetch_ms": 7.9,
+        "clean_ms": 8.6,
+        "llm_questions_ms": 25343.9,
+        "quote_verify_ms": 61.4,
+        "writing_check_ms": 8.1,
+        "similarity_check_ms": 1459.6,
+        "total_ms": 26890.2
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 8112.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8904,
+          "completion_tokens": 204,
+          "total_tokens": 9108
+        },
+        {
+          "purpose": "questions",
+          "ms": 2480.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8882,
+          "completion_tokens": 175,
+          "total_tokens": 9057
+        },
+        {
+          "purpose": "questions",
+          "ms": 3887.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8960,
+          "completion_tokens": 331,
+          "total_tokens": 9291
+        },
+        {
+          "purpose": "questions",
+          "ms": 3603.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 9012,
+          "completion_tokens": 254,
+          "total_tokens": 9266
+        },
+        {
+          "purpose": "questions",
+          "ms": 2875.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8915,
+          "completion_tokens": 205,
+          "total_tokens": 9120
+        },
+        {
+          "purpose": "questions",
+          "ms": 4384.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8974,
+          "completion_tokens": 304,
+          "total_tokens": 9278
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 53647,
+        "completion_tokens": 1473,
+        "total_tokens": 55120,
+        "cost_usd": 0.008931
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v4-rag": {
+      "label": "v4-rag",
+      "prompt_version": "questions-v4",
+      "mode": "rag",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "109kCbVtU1U",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v4",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "Bir kemosentetik canlı, okyanus derinliklerinde besin üretmek için hangi maddeyi oksitler?",
+            "options": [
+              "İnorganik madde",
+              "Organik madde",
+              "Su",
+              "Karbondioksit"
+            ],
+            "correct_index": 0,
+            "explanation": "Kemosentetik canlılar, besin üretimi için inorganik maddeleri oksitlerler.",
+            "source_quote": "Kemosentetik canlılar inorganik maddeleri oksitlerler ve bunun sonucunda enerji açığa çıkartırlar.",
+            "source_start_seconds": 390.319,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Hidrotermal bacalar nerede bulunur?",
+            "options": [
+              "Kıyılarda",
+              "Göllerde",
+              "Dağlık alanlarda",
+              "Okyanus tabanında"
+            ],
+            "correct_index": 3,
+            "explanation": "Hidrotermal bacalar, okyanus tabanında yer alan sıcak su kaynaklarıdır.",
+            "source_quote": "Hidrotermal bacalar su ve gaz fışkırtan sıcak su kaynaklarının okyanus tabanında yer alan benzerleridir.",
+            "source_start_seconds": 134.16,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Kemosentetik canlıların besin üretimi ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+            "options": [
+              "Kemosentetik canlılar besin üretimi için klorofil pigmentine ihtiyaç duyar.",
+              "Kemosentetik canlılar sadece okyanus yüzeyinde yaşar.",
+              "Kemosentetik canlılar yalnızca ışık altında besin üretir.",
+              "Kemosentetik canlılar inorganik maddeleri oksitleyerek enerji üretir."
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, kemosentetik canlıların inorganik maddeleri oksitleyerek enerji ürettiği bilgisinden kaynaklanmaktadır.",
+            "source_quote": "Kemosentetik canlılar inorganik maddeleri oksitlerler ve bunun sonucunda enerji açığa çıkartırlar.",
+            "source_start_seconds": 390.319,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Bir öğrenci, okyanus derinliklerinde ışık bulunmayan bir ortamda kemosentetik canlıların nasıl besin ürettiğini göstermek için bir deney düzenlemek istiyor. Aşağıdaki düzeneklerden hangisi bu amaca en uygundur?",
+            "options": [
+              "C) Bir akvaryumda balıkların beslenmesini gözlemlemek.",
+              "B) Bir su tankında inorganik maddeleri oksitleyerek gaz açığa çıkmasını sağlamak.",
+              "D) Bir toprak örneğinde fotosentez yapan bitkilerin büyümesini izlemek.",
+              "A) Bir bitkiyi güneş ışığı altında büyütmek."
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap, kemosentetik canlıların inorganik maddeleri oksitleyerek enerji ürettiğini gösteren bir deney düzeni olmasıdır.",
+            "source_quote": "Kemosentetik canlılar inorganik maddeleri oksitlerler ve bunun sonucunda enerji açığa çıkartırlar.",
+            "source_start_seconds": 390.319,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Kemosentetik canlıların yaşadığı ortamlar hakkında aşağıdakilerden hangisi doğrudur?",
+            "options": [
+              "Kemosentetik canlılar sadece tatlı su kaynaklarında bulunur.",
+              "Kemosentetik canlılar yalnızca karasal ortamlarda yaşar.",
+              "Kemosentetik canlılar derin deniz diplerinde ve çöplüklerde yaşayabilir.",
+              "Kemosentetik canlılar yalnızca okyanus yüzeyinde yaşar."
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap, kemosentetik canlıların zorlu şartlarda, derin deniz dipleri ve çöplükler gibi yerlerde yaşayabildiğini belirtmesidir.",
+            "source_quote": "Bu canlıların yaşadığı ortamları konuşacak olursak... okyanusların derinlikleri, derin deniz dipleri, çöplükler, lağımlar",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Fotosentez ve kemosentez arasındaki temel farklardan biri nedir?",
+            "options": [
+              "Kemosentezde besin üretimi yoktur, fotosentezde vardır.",
+              "Fotosentezde klorofil kullanılır, kemosentezde kullanılmaz.",
+              "Kemosentezde oksijen üretilir, fotosentezde üretilmez.",
+              "Fotosentezde enerji kaynağı kimyasal enerjidir, kemosentezde ışık enerjisi kullanılır."
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap, fotosentezde klorofil pigmentinin kullanılması ve kemosentezde kullanılmaması arasındaki farkı belirtmektedir.",
+            "source_quote": "Fotosentezde klorofil pigmenti kullanılır ama kemosentezde kullanılmaz.",
+            "source_start_seconds": 1094.12,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v4",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+          "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+          "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+          "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+          "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+          "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 22,
+                "start_seconds": 1212.44,
+                "end_seconds": 1283.44,
+                "score": 0.75999
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 769.399,
+                "end_seconds": 839.2,
+                "score": 0.710088
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.691952
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 331.52,
+                "end_seconds": 409.16,
+                "score": 0.688986
+              },
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.68,
+                "end_seconds": 66.56,
+                "score": 0.68771
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "context_words": 759,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 101.52,
+                "end_seconds": 176.88,
+                "score": 0.764498
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 156.2,
+                "end_seconds": 234.16,
+                "score": 0.603405
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.599983
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 444.919,
+                "end_seconds": 511.88,
+                "score": 0.586402
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 271.6,
+                "end_seconds": 349.04,
+                "score": 0.561044
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 10,
+                "start_seconds": 547.64,
+                "end_seconds": 614.52,
+                "score": 0.778504
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 331.52,
+                "end_seconds": 409.16,
+                "score": 0.777294
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.764022
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.758232
+              },
+              {
+                "chunk_index": 16,
+                "start_seconds": 881.72,
+                "end_seconds": 947.84,
+                "score": 0.755572
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "context_words": 760,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 12,
+                "start_seconds": 651.0,
+                "end_seconds": 731.48,
+                "score": 0.712291
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 392.56,
+                "end_seconds": 460.08,
+                "score": 0.680213
+              },
+              {
+                "chunk_index": 16,
+                "start_seconds": 881.72,
+                "end_seconds": 947.84,
+                "score": 0.67431
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 331.52,
+                "end_seconds": 409.16,
+                "score": 0.663149
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.658438
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "context_words": 755,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 10,
+                "start_seconds": 547.64,
+                "end_seconds": 614.52,
+                "score": 0.729823
+              },
+              {
+                "chunk_index": 26,
+                "start_seconds": 1426.4,
+                "end_seconds": 1492.0,
+                "score": 0.725167
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 216.84,
+                "end_seconds": 289.48,
+                "score": 0.696477
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.662965
+              },
+              {
+                "chunk_index": 25,
+                "start_seconds": 1372.2,
+                "end_seconds": 1442.0,
+                "score": 0.64742
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "context_words": 762,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 18,
+                "start_seconds": 983.88,
+                "end_seconds": 1054.84,
+                "score": 0.752473
+              },
+              {
+                "chunk_index": 19,
+                "start_seconds": 1039.36,
+                "end_seconds": 1111.44,
+                "score": 0.739449
+              },
+              {
+                "chunk_index": 21,
+                "start_seconds": 1152.96,
+                "end_seconds": 1229.04,
+                "score": 0.733073
+              },
+              {
+                "chunk_index": 13,
+                "start_seconds": 712.44,
+                "end_seconds": 786.84,
+                "score": 0.707043
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 769.399,
+                "end_seconds": 839.2,
+                "score": 0.705264
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Kemosentez Nedir?: Işık enerjisi kullanılmadan besin sentezine kemosentez denir.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, kemosentez sürecini uygulamaya yönelik bir senaryo sunarak bilgi kullanımını ölçer."
+          },
+          {
+            "index": 2,
+            "topic": "Hidrotermal Bacalar: Hidrotermal bacalar, okyanus tabanında sıcak su kaynaklarıdır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, hidrotermal bacalarla ilgili temel bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Kemosentetik Canlılar: Kemosentetik canlılar, kimyasal enerjiyi kullanarak besin üretir.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, kemosentetik canlıların besin üretimi ile ilgili bilgileri değerlendirerek doğru bir yargıya ulaşmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Üretici Canlılar: Üretici canlılar, inorganik maddeleri kullanarak organik besin sentezler.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgileri kullanarak bir düzenek veya plan oluşturma gerekliliğindendir. Öğrencinin kemosentetik canlıların besin üretim sürecini anlaması ve bu süreçle ilgili bir senaryo oluşturması beklenmektedir."
+          },
+          {
+            "index": 5,
+            "topic": "Kemosentez Ortamları: Kemosentetik canlılar, ekstrem çevre koşullarında yaşayabilirler.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamdaki bilgiyi anlamaya yönelik bir açıklama yapmayı gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Fotosentez ve Kemosentez Farkları: Fotosentezde ışık enerjisi kullanılırken, kemosentezde kimyasal enerji kullanılır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, fotosentez ve kemosentez arasındaki farklılıkları anlamak ve bu farklılıkları açıklamak için gerekli bilgileri analiz etmeyi gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            19
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 5,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 1,
+        "similar_pairs": 0,
+        "seconds": 22.1
+      },
+      "stages": {
+        "transcript_fetch_ms": 4.1,
+        "clean_ms": 6.5,
+        "index_ms": 5.8,
+        "retrieval_ms": 1269.1,
+        "llm_questions_ms": 19004.2,
+        "quote_verify_ms": 57.2,
+        "writing_check_ms": 7.4,
+        "similarity_check_ms": 1750.1,
+        "total_ms": 22104.9
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 2811.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3333,
+          "completion_tokens": 179,
+          "total_tokens": 3512
+        },
+        {
+          "purpose": "questions",
+          "ms": 2647.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3324,
+          "completion_tokens": 167,
+          "total_tokens": 3491
+        },
+        {
+          "purpose": "questions",
+          "ms": 3439.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3370,
+          "completion_tokens": 250,
+          "total_tokens": 3620
+        },
+        {
+          "purpose": "questions",
+          "ms": 3482.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3455,
+          "completion_tokens": 315,
+          "total_tokens": 3770
+        },
+        {
+          "purpose": "questions",
+          "ms": 3315.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3307,
+          "completion_tokens": 246,
+          "total_tokens": 3553
+        },
+        {
+          "purpose": "questions",
+          "ms": 3308.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3441,
+          "completion_tokens": 251,
+          "total_tokens": 3692
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 20230,
+        "completion_tokens": 1408,
+        "total_tokens": 21638,
+        "cost_usd": 0.003879
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    }
+  }
+}

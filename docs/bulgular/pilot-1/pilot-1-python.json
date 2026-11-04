@@ -3,13 +3,1071 @@
   "name": "python",
   "video_id": "CEr_UiR4Gvk",
   "url": "https://youtu.be/CEr_UiR4Gvk",
-  "run_at": "2026-11-04T20:17:14+03:00",
-  "error": {
-    "type": "TranscriptUnavailable",
-    "detail": "Transkript YouTube'dan alınamadı."
-  },
+  "run_at": "2026-11-04T23:28:16+03:00",
+  "error": null,
   "video": {
     "title": "Ders 1 Python Programlamaya Giriş",
     "channel": "Fehmi UYAR"
+  },
+  "transcript": {
+    "language": "tr",
+    "is_generated": true,
+    "segments": 242,
+    "duration_seconds": 565.96,
+    "duration": "9:25",
+    "words": 1239,
+    "chunks": 11
+  },
+  "topics": {
+    "prompt_version": "topics-v1",
+    "items": [
+      {
+        "title": "Python Nedir?",
+        "description": "Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+        "text": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir."
+      },
+      {
+        "title": "Python'un Kullanım Alanları",
+        "description": "Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+        "text": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır."
+      },
+      {
+        "title": "Python Söz Dizimi",
+        "description": "Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+        "text": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir."
+      },
+      {
+        "title": "Python 2 ve 3 Arasındaki Farklar",
+        "description": "Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+        "text": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır."
+      },
+      {
+        "title": "Python Kütüphaneleri",
+        "description": "Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+        "text": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır."
+      },
+      {
+        "title": "Python ile Oyun Geliştirme",
+        "description": "Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+        "text": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir."
+      }
+    ],
+    "extraction": {
+      "prompt_version": "topics-v1",
+      "requested_count": 6,
+      "returned_count": 6,
+      "shortfall": 0,
+      "dropped": {
+        "empty": 0,
+        "duplicate": 0,
+        "extra": 0
+      },
+      "topics": [
+        {
+          "title": "Python Nedir?",
+          "description": "Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir."
+        },
+        {
+          "title": "Python'un Kullanım Alanları",
+          "description": "Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır."
+        },
+        {
+          "title": "Python Söz Dizimi",
+          "description": "Python, İngilizceye benzer basit bir söz dizimine sahiptir."
+        },
+        {
+          "title": "Python 2 ve 3 Arasındaki Farklar",
+          "description": "Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır."
+        },
+        {
+          "title": "Python Kütüphaneleri",
+          "description": "Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır."
+        },
+        {
+          "title": "Python ile Oyun Geliştirme",
+          "description": "Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir."
+        }
+      ]
+    },
+    "stages": {
+      "transcript_fetch_ms": 31.5,
+      "clean_ms": 3.4,
+      "llm_topics_ms": 4261.0,
+      "topics_parse_ms": 0.6,
+      "total_ms": 4296.7
+    },
+    "tokens": {
+      "prompt_tokens": 2757,
+      "completion_tokens": 239,
+      "total_tokens": 2996,
+      "cost_usd": 0.000557
+    }
+  },
+  "bloom_levels": [
+    "Değerlendirme",
+    "Uygulama",
+    "Yaratma",
+    "Hatırlama",
+    "Çözümleme",
+    "Anlama"
+  ],
+  "conditions": {
+    "full": {
+      "mode": "full",
+      "response": {
+        "video_id": "CEr_UiR4Gvk",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "Python'un hangi özelliği, onu diğer programlama dillerine göre daha fazla tercih edilmesini sağlar?",
+            "options": [
+              "Yalnızca web geliştirme için kullanılması",
+              "Daha fazla satırla program yazma imkanı",
+              "Yorumlayıcı sistemde çalışmaması",
+              "İngilizceye benzer basit bir söz dizimi"
+            ],
+            "correct_index": 3,
+            "explanation": "Python'un İngilizceye benzer basit bir söz dizimi olması, yazılımcıların daha az karmaşık kod yazmasını sağlar ve bu nedenle tercih edilir.",
+            "source_quote": "python çok daha fazla İngilizceye yaklaştırılmıştır İngilizce ile benzer bir söz dizimi var python",
+            "source_start_seconds": 144.599,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Bir veri analisti, büyük veri setlerini analiz etmek için hangi Python kütüphanesini kullanmalıdır?",
+            "options": [
+              "Flask",
+              "Django",
+              "TensorFlow",
+              "Pandas"
+            ],
+            "correct_index": 3,
+            "explanation": "Pandas, veri analizi için yaygın olarak kullanılan bir Python kütüphanesidir.",
+            "source_quote": "veri analizi yapılabiliyor ki veri analizleri python' kullanır bakın pandas non python mat plot lip gibi kütüphaneler sayesinde veri setleri üzerinde kolaylıkla analiz yapılabiliyor",
+            "source_start_seconds": 356.96,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Python programlama dilinin söz dizimi ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+            "options": [
+              "Python, sadece web geliştirme için uygun bir dildir.",
+              "Python, her programlama dilinde olduğu gibi noktalı virgül kullanır.",
+              "Python, İngilizceye benzer bir söz dizimine sahiptir.",
+              "Python, yalnızca matematiksel hesaplamalar için kullanılır."
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap, Python'un İngilizceye benzer bir söz dizimine sahip olduğunu belirten ifadedir.",
+            "source_quote": "python' İngilizceye benzer basit bir söz dizimi vardır",
+            "source_start_seconds": 132.56,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Python 2 ve Python 3 arasındaki en önemli uyumsuzluk nedir?",
+            "options": [
+              "Python 2'nin daha fazla kütüphaneye sahip olması",
+              "Python 3'ün daha az satırla program yazmaya olanak tanıması",
+              "Python 2'nin daha hızlı çalışması",
+              "Python 3'ün önceki sürümlere tam uyumlu olmaması"
+            ],
+            "correct_index": 3,
+            "explanation": "Python 3, önceki sürümlere tam uyumlu değildir; bu nedenle Python 2 kodları Python 3'te çalışmayabilir.",
+            "source_quote": "python 3 dikkatli dinleyin önceki python sürümlerine tam uyumlu değil maalesef yani python 2 kodları python 3'te çalışmayabilir",
+            "source_start_seconds": 279.4,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Python'un hangi alanda kullanımı, diğer alanlarla ilişkili olarak en doğru şekilde açıklanmıştır?",
+            "options": [
+              "Python, sadece oyun geliştirme için uygundur.",
+              "Python, makine öğrenimi için kullanılabilir ve bu alan, veri analizi ile ilişkilidir.",
+              "Python, yalnızca web geliştirme için kullanılır.",
+              "Python, veri analizi için kullanılmaz."
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap, Python'un makine öğrenimi için kullanılabileceği ve bu kullanımın veri analizi ile ilişkili olduğunu belirtmesidir.",
+            "source_quote": "python makine öğreniminde kullanılıyor python bakın tensor Flow caros gibi kütüphaneler makine öğrenimi modelleri geliştirmek için kullanılıyor veri analizi yapılabiliyor ki veri analizleri python' kullanır",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "question": "Python programlama dili hangi alanlarda kullanılabilir?",
+            "options": [
+              "Sadece veri analizi",
+              "Sadece oyun geliştirme",
+              "Sadece web geliştirme",
+              "Oyun geliştirme, veri analizi, web geliştirme"
+            ],
+            "correct_index": 3,
+            "explanation": "Python, oyun geliştirme, veri analizi ve web geliştirme gibi birçok alanda kullanılabilmektedir.",
+            "source_quote": "Neler yapabilirsin şimdi python'da neler yapabilirsin sorusuna cevaplamam lazım yani ben bunu niye öğreniyorum da bir cevabıdır Aslında bu matematiksel hesaplamalar yapabiliyoruz",
+            "source_start_seconds": 334.759,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+            "bloom_level": "Anlama"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+          "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+          "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+          "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+          "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+          "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+            "context_words": 1239,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+            "context_words": 1239,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+            "context_words": 1239,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+            "context_words": 1239,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+            "context_words": 1239,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+            "context_words": 1239,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+            "bloom_level": "Anlama"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, Python'un kullanım alanları ve özellikleri hakkında verilen bilgileri değerlendirerek bir yargıya varmayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Soruda Python'un kullanım alanlarından birini belirli bir senaryoya uygulamak isteniyor. Bu, verilen bilgiyi bir durumda kullanma yeteneğini ölçüyor."
+          },
+          {
+            "index": 3,
+            "topic": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgileri kullanarak Python'un söz dizimini ve işlevselliğini bir araya getirerek yeni bir yapı oluşturmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olduğu, Python 2 ve Python 3 arasındaki temel farkı hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, Python'un çeşitli alanlardaki kullanımını ve bu alanların birbirleriyle nasıl ilişkili olduğunu anlamayı gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+            "bloom_level": "Anlama",
+            "reasoning": "Bu soru, bağlamda geçen bilgiyi anlamayı ve açıklamayı ölçmektedir. Öğrencinin Python'un hangi alanlarda kullanılabileceğini anlaması beklenmektedir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "writing_flags": [
+        {
+          "question_index": 3,
+          "rule_id": 12
+        },
+        {
+          "question_index": 5,
+          "rule_id": 4
+        },
+        {
+          "question_index": 5,
+          "rule_id": 12
+        },
+        {
+          "question_index": 6,
+          "rule_id": 4
+        }
+      ],
+      "stages": {
+        "transcript_fetch_ms": 1.6,
+        "clean_ms": 4.5,
+        "llm_questions_ms": 18482.0,
+        "quote_verify_ms": 40.7,
+        "writing_check_ms": 7.9,
+        "similarity_check_ms": 1439.0,
+        "total_ms": 19976.6
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3451.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3826,
+          "completion_tokens": 218,
+          "total_tokens": 4044
+        },
+        {
+          "purpose": "questions",
+          "ms": 2868.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3778,
+          "completion_tokens": 186,
+          "total_tokens": 3964
+        },
+        {
+          "purpose": "questions",
+          "ms": 3202.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3880,
+          "completion_tokens": 214,
+          "total_tokens": 4094
+        },
+        {
+          "purpose": "questions",
+          "ms": 3019.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3758,
+          "completion_tokens": 229,
+          "total_tokens": 3987
+        },
+        {
+          "purpose": "questions",
+          "ms": 3056.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3841,
+          "completion_tokens": 245,
+          "total_tokens": 4086
+        },
+        {
+          "purpose": "questions",
+          "ms": 2883.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3801,
+          "completion_tokens": 202,
+          "total_tokens": 4003
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 22884,
+        "completion_tokens": 1294,
+        "total_tokens": 24178,
+        "cost_usd": 0.004209
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "rag": {
+      "mode": "rag",
+      "response": {
+        "video_id": "CEr_UiR4Gvk",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 6,
+        "questions": [
+          {
+            "question": "Python'un hangi özelliği, diğer programlama dillerine göre yazılımcıların daha az satırla program yazmalarına olanak tanır?",
+            "options": [
+              "İngilizceye benzer söz dizimi",
+              "Yorumlayıcı sistemde çalışması",
+              "Makine diline çevirme gerekliliği",
+              "Zengin kütüphanesi olması"
+            ],
+            "correct_index": 0,
+            "explanation": "Python'un İngilizceye benzer söz dizimi, yazılımcıların daha az satırla kod yazmasını sağlar.",
+            "source_quote": "python geliştiricilerinin diğer bazı programlama dillerine göre daha az satırla program yazmalarına olanak tanıyan bir söz dizimine sahiptir",
+            "source_start_seconds": 152.4,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Bir yazılım geliştirici, bir web uygulaması oluşturmak istiyor. Python kullanarak bu uygulamayı geliştirmek için hangi framework'ü tercih etmelidir?",
+            "options": [
+              "NumPy",
+              "Django",
+              "TensorFlow",
+              "Pandas"
+            ],
+            "correct_index": 1,
+            "explanation": "Django, Python ile web geliştirme için popüler bir framework'tür ve bu tür projelerde tercih edilmelidir.",
+            "source_quote": "python bakın jango ve flash gibi popüler web frameworkleri ile Web siteleri geliştirmek için kullanılabilir",
+            "source_start_seconds": 377.039,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Python programlama dilinde bir komutun tamamlanması için hangi yapıyı kullanmalısınız?",
+            "options": [
+              "Parantez",
+              "Noktalı virgül",
+              "Yeni satır",
+              "Tırnak işareti"
+            ],
+            "correct_index": 2,
+            "explanation": "Python, bir komutu tamamlamak için yeni satırlar kullanır; diğer dillerde ise genellikle noktalı virgül veya parantez kullanılır.",
+            "source_quote": "python bir komutu tamamlamak için yeni Satırlar kullanır diğer programlama dillerinde ise noktalı virgül veya parantez kullanır",
+            "source_start_seconds": 209.76,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Python 2 ve Python 3 arasında önemli bir uyumsuzluk bulunmaktadır. Bu uyumsuzluk neyi ifade etmektedir?",
+            "options": [
+              "Python 2 ve Python 3 arasında tam uyum yoktur.",
+              "Python 3, Python 2'nin tüm özelliklerini destekler.",
+              "Python 3, Python 2'den daha az güncellenmiştir.",
+              "Python 2 kodları Python 3'te çalışabilir."
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, Python 2 kodlarının Python 3'te çalışamayabileceğini ifade eder; bu, iki sürüm arasındaki önemli bir uyumsuzluktur.",
+            "source_quote": "python 3 dikkatli dinleyin önceki python sürümlerine tam uyumlu değil maalesef yani python 2 kodları python 3'te çalışmayabilir",
+            "source_start_seconds": 279.4,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Python'un hangi alanlarda kullanılabileceğini belirten doğru ilişki aşağıdakilerden hangisidir?",
+            "options": [
+              "Python, sadece web geliştirme için uygundur.",
+              "Python, yalnızca görsel işlemler için kullanılmaktadır.",
+              "Python, yalnızca oyun geliştirme için kullanılır.",
+              "Python, veri analizi ve bilimsel hesaplamalar için kullanılabilir."
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, Python'un veri analizi ve bilimsel hesaplamalar için yaygın olarak kullanıldığını belirtmesidir.",
+            "source_quote": "python' La birlikte bazı hesaplamaları kolay bir şekilde yapabiliyor veri analizi yapılabiliyor ki veri analizleri python' kullanır",
+            "source_start_seconds": 352.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "question": "Python ile hangi kütüphane kullanılarak basit oyunlar geliştirilebilir?",
+            "options": [
+              "Pandas",
+              "TensorFlow",
+              "Pygame",
+              "NumPy"
+            ],
+            "correct_index": 2,
+            "explanation": "Pygame, Python ile basit oyunlar geliştirmek için kullanılan bir kütüphanedir.",
+            "source_quote": "python'da oyun geliştirebilirsiniz ama tabii ki pay Game gibi kütüphanelerle basit oyunlar geliş geliştirebilirsiniz",
+            "source_start_seconds": 444.44,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+            "bloom_level": "Anlama"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+          "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+          "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+          "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+          "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+          "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+            "context_words": 760,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 49.199,
+                "end_seconds": 117.36,
+                "score": 0.706092
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 209.76,
+                "end_seconds": 281.72,
+                "score": 0.672789
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 435.479,
+                "end_seconds": 506.4,
+                "score": 0.653947
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 100.6,
+                "end_seconds": 175.48,
+                "score": 0.644656
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 159.72,
+                "end_seconds": 228.8,
+                "score": 0.632314
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+            "context_words": 762,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 7,
+                "start_seconds": 374.96,
+                "end_seconds": 453.52,
+                "score": 0.726268
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 435.479,
+                "end_seconds": 506.4,
+                "score": 0.723832
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 49.199,
+                "end_seconds": 117.36,
+                "score": 0.708893
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 100.6,
+                "end_seconds": 175.48,
+                "score": 0.697663
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 321.56,
+                "end_seconds": 392.32,
+                "score": 0.667977
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+            "context_words": 760,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 100.6,
+                "end_seconds": 175.48,
+                "score": 0.747551
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 159.72,
+                "end_seconds": 228.8,
+                "score": 0.607647
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 435.479,
+                "end_seconds": 506.4,
+                "score": 0.597632
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 49.199,
+                "end_seconds": 117.36,
+                "score": 0.582978
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 209.76,
+                "end_seconds": 281.72,
+                "score": 0.563157
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+            "context_words": 763,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 5,
+                "start_seconds": 265.6,
+                "end_seconds": 338.44,
+                "score": 0.664411
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 159.72,
+                "end_seconds": 228.8,
+                "score": 0.630504
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 209.76,
+                "end_seconds": 281.72,
+                "score": 0.62368
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 321.56,
+                "end_seconds": 392.32,
+                "score": 0.598426
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 100.6,
+                "end_seconds": 175.48,
+                "score": 0.569454
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+            "context_words": 762,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 100.6,
+                "end_seconds": 175.48,
+                "score": 0.697786
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 435.479,
+                "end_seconds": 506.4,
+                "score": 0.695562
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 159.72,
+                "end_seconds": 228.8,
+                "score": 0.678159
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 321.56,
+                "end_seconds": 392.32,
+                "score": 0.654428
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 374.96,
+                "end_seconds": 453.52,
+                "score": 0.634368
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+            "context_words": 762,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 8,
+                "start_seconds": 435.479,
+                "end_seconds": 506.4,
+                "score": 0.75801
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 374.96,
+                "end_seconds": 453.52,
+                "score": 0.729281
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 100.6,
+                "end_seconds": 175.48,
+                "score": 0.699867
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 321.56,
+                "end_seconds": 392.32,
+                "score": 0.66937
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 49.199,
+                "end_seconds": 117.36,
+                "score": 0.647398
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+            "bloom_level": "Anlama"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Python Nedir?: Python, Guido van Rossum tarafından yaratılmış popüler bir programlama dilidir.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, Python'un kullanım alanları ve özellikleri hakkında verilen bilgileri değerlendirerek bir yargıya varmayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Python'un Kullanım Alanları: Python, web geliştirme, veri analizi ve makine öğrenimi gibi birçok alanda kullanılmaktadır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, Python'un kullanım alanlarını belirli bir senaryoya uygulamayı gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Python Söz Dizimi: Python, İngilizceye benzer basit bir söz dizimine sahiptir.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun hedef düzeyde olması, Python'un söz dizimini kullanarak yeni bir yapı oluşturmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Python 2 ve 3 Arasındaki Farklar: Python 2 ve Python 3 arasında önemli uyumsuzluklar bulunmaktadır.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olduğu, Python 2 ve Python 3 arasındaki temel farkı hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Python Kütüphaneleri: Python, zengin bir kütüphane ekosistemine sahip olup birçok işlemi kolaylaştırır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, Python'un farklı alanlarda kullanımını ve bu alanlar arasındaki ilişkileri analiz etmeyi gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Python ile Oyun Geliştirme: Python, oyun geliştirme için de kullanılabilir, örneğin Pygame kütüphanesi ile basit oyunlar yapılabilir.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgiyi anlamaya yönelik bir açıklama gerektirmesidir. Bu soru, Python'un oyun geliştirme alanındaki kullanımını anlamayı ölçmektedir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "writing_flags": [
+        {
+          "question_index": 4,
+          "rule_id": 12
+        }
+      ],
+      "stages": {
+        "transcript_fetch_ms": 1.8,
+        "clean_ms": 2.6,
+        "index_ms": 11964.0,
+        "retrieval_ms": 1628.2,
+        "llm_questions_ms": 17390.6,
+        "quote_verify_ms": 31.4,
+        "writing_check_ms": 7.2,
+        "similarity_check_ms": 1230.9,
+        "total_ms": 32257.6
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3235.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2864,
+          "completion_tokens": 225,
+          "total_tokens": 3089
+        },
+        {
+          "purpose": "questions",
+          "ms": 2854.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2802,
+          "completion_tokens": 176,
+          "total_tokens": 2978
+        },
+        {
+          "purpose": "questions",
+          "ms": 2603.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2918,
+          "completion_tokens": 187,
+          "total_tokens": 3105
+        },
+        {
+          "purpose": "questions",
+          "ms": 3238.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2855,
+          "completion_tokens": 243,
+          "total_tokens": 3098
+        },
+        {
+          "purpose": "questions",
+          "ms": 2964.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2907,
+          "completion_tokens": 217,
+          "total_tokens": 3124
+        },
+        {
+          "purpose": "questions",
+          "ms": 2494.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 2825,
+          "completion_tokens": 179,
+          "total_tokens": 3004
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 17171,
+        "completion_tokens": 1227,
+        "total_tokens": 18398,
+        "cost_usd": 0.003312
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    }
+  },
+  "samples": [
+    {
+      "slot": "full-5",
+      "mode": "full",
+      "bloom_level": "Çözümleme",
+      "question": "Python'un hangi alanda kullanımı, diğer alanlarla ilişkili olarak en doğru şekilde açıklanmıştır?",
+      "options": [
+        "Python, sadece oyun geliştirme için uygundur.",
+        "Python, makine öğrenimi için kullanılabilir ve bu alan, veri analizi ile ilişkilidir.",
+        "Python, yalnızca web geliştirme için kullanılır.",
+        "Python, veri analizi için kullanılmaz."
+      ],
+      "correct_answer": "Python, makine öğrenimi için kullanılabilir ve bu alan, veri analizi ile ilişkilidir.",
+      "source_quote": "python makine öğreniminde kullanılıyor python bakın tensor Flow caros gibi kütüphaneler makine öğrenimi modelleri geliştirmek için kullanılıyor veri analizi yapılabiliyor ki veri analizleri python' kullanır",
+      "source_time": "yok",
+      "verified": false
+    },
+    {
+      "slot": "full-3",
+      "mode": "full",
+      "bloom_level": "Yaratma",
+      "question": "Python programlama dilinin söz dizimi ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+      "options": [
+        "Python, sadece web geliştirme için uygun bir dildir.",
+        "Python, her programlama dilinde olduğu gibi noktalı virgül kullanır.",
+        "Python, İngilizceye benzer bir söz dizimine sahiptir.",
+        "Python, yalnızca matematiksel hesaplamalar için kullanılır."
+      ],
+      "correct_answer": "Python, İngilizceye benzer bir söz dizimine sahiptir.",
+      "source_quote": "python' İngilizceye benzer basit bir söz dizimi vardır",
+      "source_time": "2:12",
+      "verified": true
+    },
+    {
+      "slot": "rag-4",
+      "mode": "rag",
+      "bloom_level": "Hatırlama",
+      "question": "Python 2 ve Python 3 arasında önemli bir uyumsuzluk bulunmaktadır. Bu uyumsuzluk neyi ifade etmektedir?",
+      "options": [
+        "Python 2 ve Python 3 arasında tam uyum yoktur.",
+        "Python 3, Python 2'nin tüm özelliklerini destekler.",
+        "Python 3, Python 2'den daha az güncellenmiştir.",
+        "Python 2 kodları Python 3'te çalışabilir."
+      ],
+      "correct_answer": "Python 2 ve Python 3 arasında tam uyum yoktur.",
+      "source_quote": "python 3 dikkatli dinleyin önceki python sürümlerine tam uyumlu değil maalesef yani python 2 kodları python 3'te çalışmayabilir",
+      "source_time": "4:39",
+      "verified": true
+    }
+  ],
+  "totals": {
+    "seconds": 56.5,
+    "prompt_tokens": 42812,
+    "completion_tokens": 2760,
+    "total_tokens": 45572,
+    "cost_usd": 0.008078
   }
 }

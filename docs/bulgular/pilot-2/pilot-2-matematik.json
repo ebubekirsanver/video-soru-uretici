@@ -1,0 +1,2100 @@
+{
+  "experiment": "pilot-2",
+  "name": "matematik",
+  "video_id": "edSvMQ77TmU",
+  "url": "https://youtu.be/edSvMQ77TmU",
+  "run_at": "2026-11-04T23:29:37+03:00",
+  "topics": [
+    {
+      "title": "Açıortay Teoremi",
+      "description": "İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+      "text": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler."
+    },
+    {
+      "title": "Açıortayın Tanımı",
+      "description": "Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+      "text": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır."
+    },
+    {
+      "title": "İç Açıortay Teoremi İspatı",
+      "description": "İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+      "text": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır."
+    },
+    {
+      "title": "Açıortay Teoremi Uygulamaları",
+      "description": "Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+      "text": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır."
+    },
+    {
+      "title": "Dik Açıortay ve Kenarortay",
+      "description": "Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+      "text": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur."
+    },
+    {
+      "title": "Açıortay Teoremi ile Oranlama",
+      "description": "Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+      "text": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır."
+    }
+  ],
+  "bloom_levels": [
+    "Hatırlama",
+    "Uygulama",
+    "Değerlendirme",
+    "Yaratma",
+    "Anlama",
+    "Çözümleme"
+  ],
+  "skipped": null,
+  "error": null,
+  "runs": {
+    "v3-full": {
+      "label": "v3-full",
+      "prompt_version": "questions-v3",
+      "mode": "full",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "edSvMQ77TmU",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 5,
+        "verified_count": 4,
+        "questions": [
+          {
+            "question": "İç açıortay teoremi, bir üçgende hangi oranı belirler?",
+            "options": [
+              "Birinci kolun birinci parçaya oranı ile ikinci kolun ikinci parçaya oranı",
+              "Üçgenin çevresinin alanına oranı",
+              "Üçgenin iç açıları toplamına oranı",
+              "Birinci kolun ikinci parçaya oranı ile ikinci kolun birinci parçaya oranı"
+            ],
+            "correct_index": 0,
+            "explanation": "İç açıortay teoremi, bir üçgende bir açıyı ortalayan açıortayın, birinci kolun birinci parçaya oranı ile ikinci kolun ikinci parçaya oranının eşit olduğunu belirtir.",
+            "source_quote": "İç açıortay teoremi diyor. O zaman hadi bir de bunun ispatını yapalım.",
+            "source_start_seconds": 127.16,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Bir üçgende açıortay çizildiğinde, birinci kol 10 cm ve bu kolun ayırdığı parça 5 cm ise, ikinci kolun uzunluğu 15 cm olduğuna göre, bu kolun ayırdığı parça kaç cm'dir?",
+            "options": [
+              "7.5 cm",
+              "10 cm",
+              "12.5 cm",
+              "15 cm"
+            ],
+            "correct_index": 2,
+            "explanation": "Açıortay teoremi gereği, 10/5 = 15/x oranı kurulur. Buradan x = 12.5 cm bulunur.",
+            "source_quote": "madem kenar uzunluklarıyla çalışacağız, o zaman sana bir teorem vermem lazım.",
+            "source_start_seconds": 63.32,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "İç açıortay teoreminin ispatında hangi yöntem daha net bir sonuç verir?",
+            "options": [
+              "Dik üçgen yöntemi",
+              "Eşlik benzerlik yöntemi",
+              "Çizgi yöntemi",
+              "Kenarortay teoremi"
+            ],
+            "correct_index": 1,
+            "explanation": "İç açıortay teoreminin ispatı, eşlik benzerlik yöntemi ile daha anlaşılır bir şekilde yapılır.",
+            "source_quote": "madem kenar uzunluklarıyla çalışacağız, o zaman sana bir teorem vermem lazım. Dolayısıyla hadi gel iç açıortaylar için, yani üçgenin içerisinde bulunan açıortaylar için teoremimize hemen bir bakalım.",
+            "source_start_seconds": 63.32,
+            "verified": true,
+            "quote_match": "trimmed",
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Dik açıortay ve kenarortay özelliği taşıyan bir üçgenin hangi özelliği vardır?",
+            "options": [
+              "Eşkenar üçgen oluşturur.",
+              "İkizkenar üçgen oluşturur.",
+              "Dörtgen oluşturur.",
+              "Dik üçgen oluşturur."
+            ],
+            "correct_index": 1,
+            "explanation": "Dik açıortay, aynı zamanda kenarortay özelliği taşıdığı için ikizkenar üçgen oluşturur.",
+            "source_quote": "demek ki bu açıortay dik gidiyorsa demek ki bu açıortay dik gidiyorsa demek ki bu gittiği yerde de kenarortaylık sağlatacak.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Açıortay teoremi kullanılarak, bir üçgende C kenarının uzunluğu 10 birim, X parçasının uzunluğu 5 birim olduğunda, B kenarının uzunluğu ne olmalıdır?",
+            "options": [
+              "10 birim",
+              "15 birim",
+              "20 birim",
+              "25 birim"
+            ],
+            "correct_index": 1,
+            "explanation": "Açıortay teoremi gereği C/X = B/Y oranı sağlanmalıdır. C = 10, X = 5 olduğunda, B = 15 bulunur.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit, yani sol bölü sol parça gibi düşünebilirsin.",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+          "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+          "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+          "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+          "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+          "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "context_words": 3271,
+            "produced": false,
+            "retrieved": null,
+            "outcome": "empty",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 1,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [
+          "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır."
+        ],
+        "bloom_mapping": [
+          {
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay teoremi ile ilgili temel bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay teoreminin uygulanmasını gerektirmesindendir. Verilen durumda açıortay teoremi kullanılarak bir oran hesaplanması istenmektedir."
+          },
+          {
+            "index": 3,
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, iç açıortay teoreminin ispatı ile ilgili verilen bilgileri değerlendirerek bir yargıya varmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgiyi anlamayı ve açıklamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay teoreminin parçalarını (kenar uzunlukları ve oranlar) analiz ederek bir ilişki kurmayı gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": true,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 1,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 5,
+        "verified": 4,
+        "answer_in_stem": 1,
+        "example_leak": 0,
+        "writing_flags": 0,
+        "similar_pairs": 0,
+        "seconds": 27.2
+      },
+      "stages": {
+        "transcript_fetch_ms": 16.5,
+        "clean_ms": 6.2,
+        "llm_questions_ms": 25921.8,
+        "quote_verify_ms": 62.1,
+        "writing_check_ms": 4.9,
+        "similarity_check_ms": 1179.9,
+        "total_ms": 27192.0
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 4777.9,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8539,
+          "completion_tokens": 236,
+          "total_tokens": 8775
+        },
+        {
+          "purpose": "questions",
+          "ms": 8532.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8557,
+          "completion_tokens": 227,
+          "total_tokens": 8784
+        },
+        {
+          "purpose": "questions",
+          "ms": 3767.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8620,
+          "completion_tokens": 226,
+          "total_tokens": 8846
+        },
+        {
+          "purpose": "questions",
+          "ms": 1124.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8670,
+          "completion_tokens": 5,
+          "total_tokens": 8675
+        },
+        {
+          "purpose": "questions",
+          "ms": 3133.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8579,
+          "completion_tokens": 203,
+          "total_tokens": 8782
+        },
+        {
+          "purpose": "questions",
+          "ms": 4587.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8628,
+          "completion_tokens": 234,
+          "total_tokens": 8862
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 51593,
+        "completion_tokens": 1131,
+        "total_tokens": 52724,
+        "cost_usd": 0.008418
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v3-rag": {
+      "label": "v3-rag",
+      "prompt_version": "questions-v3",
+      "mode": "rag",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "edSvMQ77TmU",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 5,
+        "verified_count": 4,
+        "questions": [
+          {
+            "question": "İç açıortay teoremi, hangi oranların eşit olduğunu belirtir?",
+            "options": [
+              "C'nin Y'ye oranı ile B'nin X'e oranı",
+              "C'nin X'e oranı ile A'nın B'ye oranı",
+              "C'nin X'e oranı ile B'nin Y'ye oranı",
+              "B'nin X'e oranı ile A'nın Y'ye oranı"
+            ],
+            "correct_index": 2,
+            "explanation": "İç açıortay teoremi, bir üçgende C'nin X'e oranının B'nin Y'ye oranına eşit olduğunu belirtir.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit, yani sol bölü sol parça gibi düşünebilirsin.",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Bir üçgende A açısının açıortayı, B ve C kenarlarını X ve Y parçalarına ayırıyor. Eğer A açısının kolu B kenarını 12 birim, C kenarını ise 8 birim ayırıyorsa, X ve Y parçalarının oranı nedir?",
+            "options": [
+              "4/3",
+              "2/3",
+              "3/2",
+              "3/4"
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap 3/2'dir çünkü açıortay teoremi gereği, A açısının kolu B ve C kenarlarını ayırdığı parçaların oranı, kenar uzunluklarının oranına eşittir.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit,",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "İç açıortay teoremi ile ilgili olarak, C'nin X'e oranı ile B'nin Y'ye oranı arasındaki ilişkiyi değerlendirdiğimizde hangi ifade doğrudur?",
+            "options": [
+              "C'nin X'e oranı B'nin Y'ye oranından büyüktür.",
+              "C'nin X'e oranı B'nin Y'ye oranı ile ilgisizdir.",
+              "C'nin X'e oranı B'nin Y'ye oranından küçüktür.",
+              "C'nin X'e oranı B'nin Y'ye oranına eşittir."
+            ],
+            "correct_index": 3,
+            "explanation": "İç açıortay teoremi, C'nin X'e oranının B'nin Y'ye oranına eşit olduğunu belirtir.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit, yani sol bölü sol parça gibi düşünebilirsin.",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Dik açıortay ve kenarortay özelliği taşıyan bir üçgenin hangi tür üçgen olduğu söylenmektedir?",
+            "options": [
+              "İkizkenar Üçgen",
+              "Dar Açılı Üçgen",
+              "Dik Üçgen",
+              "Eşkenar Üçgen"
+            ],
+            "correct_index": 0,
+            "explanation": "Dik açıortay ve kenarortay özelliği taşıyan bir üçgenin ikizkenar üçgen olduğu belirtilmiştir.",
+            "source_quote": "Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar nasıl belirlenir?",
+            "options": [
+              "Üçgenin iç açıları toplamı 180 derecedir.",
+              "Birinci kolun uzunluğu, ikinci kolun uzunluğuna eşittir.",
+              "Birinci kolun birinci parçaya oranı, ikinci kolun ikinci parçaya oranına eşittir.",
+              "Açıortay, üçgenin alanını iki eşit parçaya böler."
+            ],
+            "correct_index": 2,
+            "explanation": "Açıortay teoremi, bir açının kollarının ayırdığı parçaların oranlarının birbirine eşit olduğunu belirtir.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit,",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+          "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+          "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+          "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+          "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+          "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "context_words": 765,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.739865
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.71735
+              },
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 68.24,
+                "score": 0.681719
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 313.16,
+                "end_seconds": 393.2,
+                "score": 0.679286
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 101.36,
+                "end_seconds": 167.04,
+                "score": 0.67895
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "context_words": 767,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.666776
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 477.36,
+                "end_seconds": 560.56,
+                "score": 0.638859
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.635227
+              },
+              {
+                "chunk_index": 24,
+                "start_seconds": 1355.36,
+                "end_seconds": 1430.76,
+                "score": 0.63401
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 598.12,
+                "end_seconds": 677.64,
+                "score": 0.629655
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "context_words": 763,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.818278
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 101.36,
+                "end_seconds": 167.04,
+                "score": 0.664081
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 313.16,
+                "end_seconds": 393.2,
+                "score": 0.644505
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.62756
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 598.12,
+                "end_seconds": 677.64,
+                "score": 0.625384
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "context_words": 762,
+            "produced": false,
+            "retrieved": [
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.700994
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 313.16,
+                "end_seconds": 393.2,
+                "score": 0.694577
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.675645
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 659.52,
+                "end_seconds": 727.72,
+                "score": 0.668688
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 427.4,
+                "end_seconds": 495.8,
+                "score": 0.657632
+              }
+            ],
+            "outcome": "empty",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "context_words": 765,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 10,
+                "start_seconds": 543.64,
+                "end_seconds": 618.6,
+                "score": 0.696365
+              },
+              {
+                "chunk_index": 24,
+                "start_seconds": 1355.36,
+                "end_seconds": 1430.76,
+                "score": 0.670833
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 659.52,
+                "end_seconds": 727.72,
+                "score": 0.659707
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 598.12,
+                "end_seconds": 677.64,
+                "score": 0.657634
+              },
+              {
+                "chunk_index": 21,
+                "start_seconds": 1165.08,
+                "end_seconds": 1240.72,
+                "score": 0.650192
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "context_words": 767,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.704861
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.688903
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 313.16,
+                "end_seconds": 393.2,
+                "score": 0.664365
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 659.52,
+                "end_seconds": 727.72,
+                "score": 0.664343
+              },
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 68.24,
+                "score": 0.652861
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 1,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [
+          "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır."
+        ],
+        "bloom_mapping": [
+          {
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olduğu, açıortay teoremi ile ilgili temel bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay tanımını ve oranlarını kullanarak bir durumu çözmeyi gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, iç açıortay teoreminin ispatı ile ilgili verilen bilgileri değerlendirerek doğru bir yargıya ulaşmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgiyi anlamaya yönelik bir açıklama yapmayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay teoreminin parçalarını (kenar uzunlukları ve oranlar) analiz ederek, bu parçaların birbirleriyle nasıl ilişkili olduğunu belirlemeyi gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": [
+          {
+            "a": 1,
+            "b": 3,
+            "score": 0.923882,
+            "question_a": "İç açıortay teoremi, hangi oranların eşit olduğunu belirtir?",
+            "question_b": "İç açıortay teoremi ile ilgili olarak, C'nin X'e oranı ile B'nin Y'ye oranı arasındaki ilişkiyi değerlendirdiğimizde hangi ifade doğrudur?"
+          }
+        ]
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            3
+          ]
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            1
+          ]
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4
+          ],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 1,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 5,
+        "verified": 4,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 1,
+        "similar_pairs": 1,
+        "seconds": 20.9
+      },
+      "stages": {
+        "transcript_fetch_ms": 4.1,
+        "clean_ms": 6.1,
+        "index_ms": 5.3,
+        "retrieval_ms": 1792.5,
+        "llm_questions_ms": 17509.7,
+        "quote_verify_ms": 56.0,
+        "writing_check_ms": 4.4,
+        "similarity_check_ms": 1556.7,
+        "total_ms": 20935.3
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3552.9,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3026,
+          "completion_tokens": 229,
+          "total_tokens": 3255
+        },
+        {
+          "purpose": "questions",
+          "ms": 3240.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3038,
+          "completion_tokens": 242,
+          "total_tokens": 3280
+        },
+        {
+          "purpose": "questions",
+          "ms": 3725.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3095,
+          "completion_tokens": 273,
+          "total_tokens": 3368
+        },
+        {
+          "purpose": "questions",
+          "ms": 1264.9,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3135,
+          "completion_tokens": 5,
+          "total_tokens": 3140
+        },
+        {
+          "purpose": "questions",
+          "ms": 2528.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3073,
+          "completion_tokens": 193,
+          "total_tokens": 3266
+        },
+        {
+          "purpose": "questions",
+          "ms": 3198.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3124,
+          "completion_tokens": 258,
+          "total_tokens": 3382
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 18491,
+        "completion_tokens": 1200,
+        "total_tokens": 19691,
+        "cost_usd": 0.003494
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v4-full": {
+      "label": "v4-full",
+      "prompt_version": "questions-v4",
+      "mode": "full",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "edSvMQ77TmU",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v4",
+        "requested_count": 6,
+        "returned_count": 5,
+        "verified_count": 3,
+        "questions": [
+          {
+            "question": "İç açıortay teoremi, bir üçgende hangi oranların eşit olduğunu belirtir?",
+            "options": [
+              "Üçgenin çevresinin yarısı, üçgenin alanına eşittir.",
+              "Birinci kolun birinci parçaya oranı, ikinci kolun ikinci parçaya oranına eşittir.",
+              "Bir kenarın uzunluğu, diğer kenarların toplamına eşittir.",
+              "Üçgenin iç açılarının toplamı 180 derecedir."
+            ],
+            "correct_index": 1,
+            "explanation": "İç açıortay teoremi, bir üçgende bir açıortayın oluşturduğu parçaların oranlarının eşit olduğunu belirtir.",
+            "source_quote": "Dolayısıyla hadi gel iç açıortaylar için, yani üçgenin içerisinde bulunan açıortaylar için teoremimize hemen bir bakalım.",
+            "source_start_seconds": 68.24,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Bir üçgende açıortay çizildiğinde, bu açıortayın bir kolu 12 cm, ayırdığı parça ise 8 cm ise, diğer kolun uzunluğu nedir?",
+            "options": [
+              "16 cm",
+              "18 cm",
+              "20 cm",
+              "24 cm"
+            ],
+            "correct_index": 2,
+            "explanation": "Açıortay teoremi gereği, 12/8 = x/y oranı sağlanmalıdır. Buradan x = 20 cm bulunur.",
+            "source_quote": "Açıortayın işte sağ kolu bölü sağ parçası, sol kolu bölü sol parça gibi düşünebilirsin.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "İki öğrenci tartışıyor. Ali: \"İç açıortay teoremi, açıortayın ayırdığı parçaların oranlarının eşit olduğunu söyler.\" Ayşe: \"İç açıortay teoremi, yalnızca açıların eşitliğini ifade eder.\" Anlatılanlara göre hangi değerlendirme doğrudur?",
+            "options": [
+              "İki iddia da desteklenir.",
+              "İki iddia da anlatılanlarla çelişir.",
+              "Ayşe'nin iddiası desteklenir, Ali'ninki desteklenmez.",
+              "Ali'nin iddiası desteklenir, Ayşe'ninki desteklenmez."
+            ],
+            "correct_index": 3,
+            "explanation": "Ali'nin iddiası doğrudur çünkü iç açıortay teoremi, açıortayın ayırdığı parçaların oranlarının eşit olduğunu belirtir.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit, yani sol bölü sol parça gibi düşünebilirsin.",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Dik açıortay özelliği taşıyan bir üçgenin kenar uzunlukları arasında hangi ilişki vardır?",
+            "options": [
+              "Kenar uzunlukları toplamı her zaman 90'dır.",
+              "Kenar uzunlukları her zaman farklıdır.",
+              "Kenar uzunlukları eşit olmalıdır.",
+              "Kenar uzunlukları birbirine orantılıdır."
+            ],
+            "correct_index": 3,
+            "explanation": "Dik açıortay, aynı zamanda kenarortay özelliği taşıdığı için kenar uzunlukları arasında orantı vardır.",
+            "source_quote": "Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Açıortay teoremi ile ilgili verilen bilgilere göre, C'nin X'e oranı ile B'nin Y'ye oranı arasındaki ilişki nedir?",
+            "options": [
+              "C/X = B/Y",
+              "C/Y = X/B",
+              "C/X = Y/B",
+              "C/Y = B/X"
+            ],
+            "correct_index": 0,
+            "explanation": "Açıortay teoremi, bir açının kollarının ayırdığı parçaların oranlarının birbirine eşit olduğunu belirtir.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit, yani sol bölü sol parça gibi düşünebilirsin.",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v4",
+        "max_tokens": 1000,
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+          "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+          "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+          "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+          "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+          "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "context_words": 3271,
+            "produced": false,
+            "retrieved": null,
+            "outcome": "empty",
+            "bloom_level": "Yaratma",
+            "skip_reason": "Açıortay Teoremi bağlamda geçiyor ancak yaratma düzeyinde bir soru oluşturmak için yeterli bilgi yok.",
+            "truncated": false
+          },
+          {
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "context_words": 3271,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null,
+            "truncated": false
+          }
+        ],
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 1,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [
+          "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır."
+        ],
+        "bloom_mapping": [
+          {
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay teoremi ile ilgili temel bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay teoremini verilen bir durumda uygulamayı gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgileri değerlendirerek yargıda bulunmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama",
+            "reasoning": "Bu soru, verilen bilgiyi anlamayı ve açıklamayı gerektiriyor. Öğrencinin, açıortay ve kenarortay özelliklerini anlaması bekleniyor."
+          },
+          {
+            "index": 5,
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay teoremi ile ilgili bilgileri analiz etme ve bu bilgilerin birbirleriyle ilişkisini belirleme gerekliliğindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [
+            "Ali",
+            "Ayşe",
+            "iki öğrenci"
+          ],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            11
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 5,
+          "empty": 1,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 5,
+        "verified": 3,
+        "answer_in_stem": 0,
+        "example_leak": 1,
+        "writing_flags": 2,
+        "similar_pairs": 0,
+        "seconds": 26.6
+      },
+      "stages": {
+        "transcript_fetch_ms": 5.0,
+        "clean_ms": 8.1,
+        "llm_questions_ms": 19102.7,
+        "quote_verify_ms": 97.6,
+        "writing_check_ms": 8.7,
+        "similarity_check_ms": 7385.7,
+        "total_ms": 26608.4
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3747.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8817,
+          "completion_tokens": 239,
+          "total_tokens": 9056
+        },
+        {
+          "purpose": "questions",
+          "ms": 4468.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8835,
+          "completion_tokens": 195,
+          "total_tokens": 9030
+        },
+        {
+          "purpose": "questions",
+          "ms": 3833.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8898,
+          "completion_tokens": 279,
+          "total_tokens": 9177
+        },
+        {
+          "purpose": "questions",
+          "ms": 1527.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8948,
+          "completion_tokens": 38,
+          "total_tokens": 8986
+        },
+        {
+          "purpose": "questions",
+          "ms": 2586.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8857,
+          "completion_tokens": 223,
+          "total_tokens": 9080
+        },
+        {
+          "purpose": "questions",
+          "ms": 2939.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8906,
+          "completion_tokens": 218,
+          "total_tokens": 9124
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 53261,
+        "completion_tokens": 1192,
+        "total_tokens": 54453,
+        "cost_usd": 0.008704
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v4-rag": {
+      "label": "v4-rag",
+      "prompt_version": "questions-v4",
+      "mode": "rag",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "edSvMQ77TmU",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v4",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları nasıl belirler?",
+            "options": [
+              "Kenar uzunlukları toplamı, açıortay ile ilgili değildir.",
+              "Açıortay, yalnızca açının büyüklüğüne bağlıdır.",
+              "Birinci kolun birinci parçaya oranı, ikinci kolun ikinci parçaya oranına eşittir.",
+              "Üçgenin tüm kenar uzunlukları eşit olmalıdır."
+            ],
+            "correct_index": 2,
+            "explanation": "İç açıortay teoremi, birinci kolun birinci parçaya oranının, ikinci kolun ikinci parçaya oranına eşit olduğunu belirtir.",
+            "source_quote": "İşte burada C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit, yani sol bölü sol parça gibi düşünebilirsin.",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "question": "Bir üçgende açıortay çizildiğinde, bir kolun uzunluğu 10 cm ve bu kolun ayırdığı parça 5 cm ise, diğer kolun uzunluğu 15 cm olan bir açının ayırdığı parçanın uzunluğu nedir?",
+            "options": [
+              "5 cm",
+              "7.5 cm",
+              "10 cm",
+              "12 cm"
+            ],
+            "correct_index": 1,
+            "explanation": "Açıortay teoremi gereği, 15 cm olan kolun ayırdığı parça, 10 cm olan kolun ayırdığı parçanın oranına eşit olmalıdır. Bu durumda 15/x = 10/5 denkleminden x = 7.5 cm bulunur.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit,",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "İki öğrenci tartışıyor. Ali: \"Açıortay teoremi, bir kenarın uzunluğunun, o kenarı ayıran parçaların oranına eşit olduğunu söyler.\" Ayşe: \"Açıortay teoremi, sadece açıların oranları ile ilgilidir.\" Anlatılanlara göre hangi değerlendirme doğrudur?",
+            "options": [
+              "Ayşe'nin iddiası desteklenir, Ali'ninki desteklenmez.",
+              "Ali'nin iddiası desteklenir, Ayşe'ninki desteklenmez.",
+              "İki iddia da anlatılanlarla çelişir.",
+              "İki iddia da desteklenir."
+            ],
+            "correct_index": 1,
+            "explanation": "Ali'nin iddiası açıortay teoreminin tanımına uygunken, Ayşe'nin iddiası yanlıştır çünkü teorem kenar uzunlukları ile ilgilidir.",
+            "source_quote": "C'nin X'e oranı B'nin Y'ye oranına eşittir.",
+            "source_start_seconds": 317.44,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Bir öğrenci, açıortay teoremini kullanarak bir üçgenin kenar uzunluklarını oranlamak istiyor. Aşağıdaki düzeneklerden hangisi bu amaca en uygundur?",
+            "options": [
+              "Üçgenin iç açılarının toplamını hesaplamak.",
+              "Açıortay çizimi yaparak kenar uzunluklarını ölçmek.",
+              "Üçgenin çevresini hesaplamak için kenar uzunluklarını toplamak.",
+              "Açıortayı kullanarak kenar uzunluklarının oranını belirlemek."
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, açıortay teoremini kullanarak kenar uzunluklarının oranını belirlemeyi ifade eder.",
+            "source_quote": "Yani benzerlik üzerinden eee bunları ispatlayabiliyoruz.",
+            "source_start_seconds": 326.88,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Dik açıortay özelliği taşımak, aynı zamanda hangi özelliği de taşır?",
+            "options": [
+              "İkizkenar üçgen",
+              "Kenarortay",
+              "Dik kenar",
+              "Açıortay"
+            ],
+            "correct_index": 0,
+            "explanation": "Dik açıortay, aynı zamanda kenarortay özelliği taşır ve bu da ikizkenar üçgen oluşturur.",
+            "source_quote": "Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar nasıl belirlenir?",
+            "options": [
+              "Birinci kolun birinci parçaya oranı, ikinci kolun birinci parçaya oranına eşittir.",
+              "Birinci kolun ikinci parçaya oranı, ikinci kolun birinci parçaya oranına eşittir.",
+              "Birinci kolun birinci parçaya oranı, ikinci kolun ikinci parçaya oranına eşittir.",
+              "Birinci kolun ikinci parçaya oranı, ikinci kolun ikinci parçaya oranına eşittir."
+            ],
+            "correct_index": 2,
+            "explanation": "Açıortay teoremi, birinci kolun birinci parçaya oranının, ikinci kolun ikinci parçaya oranına eşit olduğunu belirtir.",
+            "source_quote": "C'nin X'e oranı, yani sağ bölü sağ parça B'nin Y'ye oranına eşit,",
+            "source_start_seconds": 107.68,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v4",
+        "max_tokens": 1000,
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+          "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+          "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+          "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+          "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+          "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "context_words": 765,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.739865
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.71735
+              },
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 68.24,
+                "score": 0.681719
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 313.16,
+                "end_seconds": 393.2,
+                "score": 0.679286
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 101.36,
+                "end_seconds": 167.04,
+                "score": 0.67895
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "context_words": 767,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.666776
+              },
+              {
+                "chunk_index": 9,
+                "start_seconds": 477.36,
+                "end_seconds": 560.56,
+                "score": 0.638859
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.635227
+              },
+              {
+                "chunk_index": 24,
+                "start_seconds": 1355.36,
+                "end_seconds": 1430.76,
+                "score": 0.63401
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 598.12,
+                "end_seconds": 677.64,
+                "score": 0.629655
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "context_words": 763,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.818278
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 101.36,
+                "end_seconds": 167.04,
+                "score": 0.664081
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 313.16,
+                "end_seconds": 393.2,
+                "score": 0.644505
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.62756
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 598.12,
+                "end_seconds": 677.64,
+                "score": 0.625384
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "context_words": 762,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.700994
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 313.16,
+                "end_seconds": 393.2,
+                "score": 0.694577
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.675645
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 659.52,
+                "end_seconds": 727.72,
+                "score": 0.668688
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 427.4,
+                "end_seconds": 495.8,
+                "score": 0.657632
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "context_words": 765,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 10,
+                "start_seconds": 543.64,
+                "end_seconds": 618.6,
+                "score": 0.696365
+              },
+              {
+                "chunk_index": 24,
+                "start_seconds": 1355.36,
+                "end_seconds": 1430.76,
+                "score": 0.670833
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 659.52,
+                "end_seconds": 727.72,
+                "score": 0.659707
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 598.12,
+                "end_seconds": 677.64,
+                "score": 0.657634
+              },
+              {
+                "chunk_index": 21,
+                "start_seconds": 1165.08,
+                "end_seconds": 1240.72,
+                "score": 0.650192
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null,
+            "truncated": false
+          },
+          {
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "context_words": 767,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 50.4,
+                "end_seconds": 119.8,
+                "score": 0.704861
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 152.08,
+                "end_seconds": 224.24,
+                "score": 0.688903
+              },
+              {
+                "chunk_index": 6,
+                "start_seconds": 313.16,
+                "end_seconds": 393.2,
+                "score": 0.664365
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 659.52,
+                "end_seconds": 727.72,
+                "score": 0.664343
+              },
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 68.24,
+                "score": 0.652861
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null,
+            "truncated": false
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama"
+          },
+          {
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Açıortay Teoremi: İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları belirler.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda açıkça geçen bir bilgiyi hatırlamayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Açıortayın Tanımı: Açıortay, bir açıyı iki eşit parçaya bölen doğru parçasıdır.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olduğu, açıortay teoremini kullanarak verilen bir durumda oranları hesaplamayı gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "İç Açıortay Teoremi İspatı: İç açıortay teoreminin ispatı, benzerlik ve paralellik kullanılarak yapılır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, verilen teoremin ispatına dayalı olarak yargıda bulunmayı gerektirir. Öğrencinin, açıortay teoremi ile ilgili verilen oranları değerlendirerek doğru sonucu bulması beklenmektedir."
+          },
+          {
+            "index": 4,
+            "topic": "Açıortay Teoremi Uygulamaları: Açıortay teoremi, verilen kenar uzunlukları ile oranlama yaparak kullanılır.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, verilen bilgilerle bir düzenek oluşturmayı gerektirmesiyle ilgilidir."
+          },
+          {
+            "index": 5,
+            "topic": "Dik Açıortay ve Kenarortay: Dik açıortay, aynı zamanda kenarortay özelliği taşır ve ikizkenar üçgen oluşturur.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgiyi anlamaya yönelik bir açıklama yapmayı gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Açıortay Teoremi ile Oranlama: Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar hesaplanır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, açıortay teoreminin parçalarını (kenar uzunlukları ve oranlar) analiz etmeyi ve bunlar arasındaki ilişkiyi belirlemeyi gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": [
+          {
+            "a": 1,
+            "b": 6,
+            "score": 0.932132,
+            "question_a": "İç açıortay teoremi, üçgenin kenar uzunlukları arasındaki oranları nasıl belirler?",
+            "question_b": "Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar nasıl belirlenir?"
+          },
+          {
+            "a": 4,
+            "b": 6,
+            "score": 0.812953,
+            "question_a": "Bir öğrenci, açıortay teoremini kullanarak bir üçgenin kenar uzunluklarını oranlamak istiyor. Aşağıdaki düzeneklerden hangisi bu amaca en uygundur?",
+            "question_b": "Açıortay teoremi kullanılarak, üçgenin kenar uzunlukları arasındaki oranlar nasıl belirlenir?"
+          }
+        ]
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4
+          ],
+          "similar_to": [
+            6
+          ]
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [
+            "Ali",
+            "Ayşe",
+            "iki öğrenci"
+          ],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": [
+            6
+          ]
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": [
+            1,
+            4
+          ]
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 5,
+        "answer_in_stem": 0,
+        "example_leak": 1,
+        "writing_flags": 3,
+        "similar_pairs": 2,
+        "seconds": 31.8
+      },
+      "stages": {
+        "transcript_fetch_ms": 3.3,
+        "clean_ms": 6.3,
+        "index_ms": 267.1,
+        "retrieval_ms": 1815.2,
+        "llm_questions_ms": 27353.5,
+        "quote_verify_ms": 55.8,
+        "writing_check_ms": 11.3,
+        "similarity_check_ms": 2081.7,
+        "total_ms": 31761.3
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 10833.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3304,
+          "completion_tokens": 252,
+          "total_tokens": 3556
+        },
+        {
+          "purpose": "questions",
+          "ms": 2916.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3316,
+          "completion_tokens": 238,
+          "total_tokens": 3554
+        },
+        {
+          "purpose": "questions",
+          "ms": 3656.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3373,
+          "completion_tokens": 299,
+          "total_tokens": 3672
+        },
+        {
+          "purpose": "questions",
+          "ms": 3074.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3413,
+          "completion_tokens": 232,
+          "total_tokens": 3645
+        },
+        {
+          "purpose": "questions",
+          "ms": 3202.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3351,
+          "completion_tokens": 179,
+          "total_tokens": 3530
+        },
+        {
+          "purpose": "questions",
+          "ms": 3670.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3402,
+          "completion_tokens": 284,
+          "total_tokens": 3686
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 20159,
+        "completion_tokens": 1484,
+        "total_tokens": 21643,
+        "cost_usd": 0.003914
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    }
+  },
+  "failed_runs": [
+    {
+      "label": "v4-full",
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 4267.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8817,
+          "completion_tokens": 208,
+          "total_tokens": 9025
+        },
+        {
+          "purpose": "questions",
+          "ms": 3030.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8835,
+          "completion_tokens": 236,
+          "total_tokens": 9071
+        },
+        {
+          "purpose": "questions",
+          "ms": 3913.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8898,
+          "completion_tokens": 284,
+          "total_tokens": 9182
+        },
+        {
+          "purpose": "questions",
+          "ms": 3642.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8948,
+          "completion_tokens": 283,
+          "total_tokens": 9231
+        },
+        {
+          "purpose": "questions",
+          "ms": 167233.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 8857,
+          "completion_tokens": 16384,
+          "total_tokens": 25241
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 44355,
+        "completion_tokens": 17395,
+        "total_tokens": 61750,
+        "cost_usd": 0.01709
+      },
+      "type": "PilotError",
+      "detail": "/api/questions: 502 LLM yanıtı geçerli JSON değil."
+    }
+  ],
+  "completed_at": "2026-11-04T23:48:13+03:00"
+}

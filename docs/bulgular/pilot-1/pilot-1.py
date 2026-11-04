@@ -10,6 +10,10 @@ bloom_levels ile önce full, sonra rag (k=5). Bir video hata verirse hata video
 dosyasına yazılır ve sonrakine geçilir; yeniden deneme yapılmaz. Video dosyası
 varsa o video atlanır (üzerine yazılmaz).
 
+Ek çalıştırma (edebiyat ve Python): tamamlanan videoların dosyaları durduğu için
+yalnızca bu ikisi işlenir; özet pilot-1-ek-ozet.json dosyasına yazılır. Transkript
+önbellek üzerinden alınır, böylece video başına tek YouTube isteği yapılır.
+
 Maliyet yalnızca bu betikte, sabit liste fiyatıyla hesaplanır; kod ve kayıt
 biçimi değişmez. Tam transkriptler depoya girmez: argümanla verilen klasöre
 yazılır (altyazı hatası adaylarını okumak için).
@@ -42,6 +46,7 @@ from app.services.embeddings import get_embedder  # noqa: E402
 from app.services.metrics import scrub_secrets  # noqa: E402
 from app.services.text_clean import clean_transcript  # noqa: E402
 from app.services.transcript import fetch_transcript  # noqa: E402
+from app.services.transcript_cache import load_transcript  # noqa: E402
 
 VIDEOS = [
     ("biyoloji", "109kCbVtU1U"),
@@ -189,7 +194,8 @@ def process(name: str, video_id: str, transcript_dir: Path) -> dict | None:
         data["video"] = oembed(url)
         print(f"  video: {data['video']['title']} · kanal: {data['video']['channel']}")
 
-        clean = clean_transcript(fetch_transcript(video_id, get_settings().transcript_language_list))
+        raw, _ = load_transcript(video_id, get_settings().transcript_language_list, fetch_transcript)
+        clean = clean_transcript(raw)
         words = sum(len(s.text.split()) for s in clean.segments)
         chunks = len(fixed_size_chunks(clean.segments, video_id))
         data["transcript"] = {"language": clean.language, "is_generated": clean.is_generated,
@@ -278,7 +284,7 @@ def main() -> None:
           f"{sum(d['totals']['total_tokens'] for d in done)} | {sum(d['totals']['cost_usd'] for d in done):.6f} |")
     summary = {"experiment": "pilot-1", "bge_m3_load_seconds": round(load_seconds, 1),
                "price_usd_per_1m": {"input": PRICE_IN, "output": PRICE_OUT}}
-    with (HERE / "pilot-1-ozet.json").open("x", encoding="utf-8") as f:
+    with (HERE / "pilot-1-ek-ozet.json").open("x", encoding="utf-8") as f:
         f.write(json.dumps(summary, ensure_ascii=False, indent=2))
 
 

@@ -1,0 +1,2080 @@
+{
+  "experiment": "pilot-2",
+  "name": "edebiyat",
+  "video_id": "fgOxbhEMnQQ",
+  "url": "https://youtu.be/fgOxbhEMnQQ",
+  "run_at": "2026-11-04T23:29:49+03:00",
+  "topics": [
+    {
+      "title": "Milli Edebiyat Dönemi Tanımı",
+      "description": "Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+      "text": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır."
+    },
+    {
+      "title": "Yeni Lisan Hareketi",
+      "description": "Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+      "text": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar."
+    },
+    {
+      "title": "Edebiyatın Temaları",
+      "description": "Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+      "text": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır."
+    },
+    {
+      "title": "Osmanlıcılık Akımı",
+      "description": "Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+      "text": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar."
+    },
+    {
+      "title": "Olay ve Durum Hikayeleri",
+      "description": "Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+      "text": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır."
+    },
+    {
+      "title": "Milli Edebiyat Dönemi Yazarları",
+      "description": "Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+      "text": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir."
+    }
+  ],
+  "bloom_levels": [
+    "Yaratma",
+    "Anlama",
+    "Değerlendirme",
+    "Uygulama",
+    "Çözümleme",
+    "Hatırlama"
+  ],
+  "skipped": null,
+  "error": null,
+  "runs": {
+    "v3-full": {
+      "label": "v3-full",
+      "prompt_version": "questions-v3",
+      "mode": "full",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "fgOxbhEMnQQ",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 3,
+        "questions": [
+          {
+            "question": "Milli Edebiyat Dönemi'nde eserlerin konuları ve temaları arasında hangisi en belirgin olanıdır?",
+            "options": [
+              "Süslü dil kullanımı",
+              "Anadolu insanının yaşamı",
+              "Batı edebiyatı etkileri",
+              "Arap ve Fars edebiyatı"
+            ],
+            "correct_index": 1,
+            "explanation": "Doğru cevap Anadolu insanının yaşamıdır çünkü Milli Edebiyat Dönemi, Anadolu'yu ve Anadolu insanını eserlerine taşımayı amaçlamıştır.",
+            "source_quote": "Edebiyatçılar Anadolu'yu ve Anadolu insanını eserlerine taşımıştır.",
+            "source_start_seconds": 74.08,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Yeni Lisan Hareketi'nin amacı nedir?",
+            "options": [
+              "Sadece İstanbul Türkçesini kullanmak",
+              "Halk edebiyatına dönüş yapmak",
+              "Batı edebiyatını benimsemek",
+              "Arapça ve Farsça kelimeleri artırmak"
+            ],
+            "correct_index": 1,
+            "explanation": "Yeni Lisan Hareketi, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlamaktadır.",
+            "source_quote": "Yeni Lisan yani yeni dil hareketini başlatacaklar ve dilimizdeki Arapça, Farsça, işte farklı dillerden gelmiş Fransızca sözcükleri atıp pırıl pırıl ta Halk Edebiyatı Dönemindeki öz Türkçeye dönecekler.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Milli Edebiyat Dönemi'nde vatan sevgisi, bağımsızlık ve kahramanlık temalarının ön plana çıkmasının sebebi nedir?",
+            "options": [
+              "Bu temalar, yalnızca bireysel duyguları ifade etmek için önemlidir.",
+              "Bu temalar yalnızca edebi eserlerde yer alır.",
+              "Bu temalar, sadece tarihsel olayları anlatmak için kullanılır.",
+              "Bu temalar, toplumun bilinçlenmesi ve milli kimliğin güçlenmesi için önemlidir."
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, milli kimlik ve bağımsızlık bilincini güçlendirmek amacıyla bu temaların ön plana çıkması gerektiğini belirtir.",
+            "source_quote": "Vatan sevgisi, bağımsızlık, aynı zamanda kahramanlık, doğa ve tarih önemli konular, temalar olacak.",
+            "source_start_seconds": 121.48,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Osmanlıcılık akımının temel amacı nedir?",
+            "options": [
+              "Sadece Türklerin haklarını savunmak",
+              "Balkan uluslarını Osmanlı Devleti'nden ayırmak",
+              "Batı kültürünü benimsemek",
+              "Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumak"
+            ],
+            "correct_index": 3,
+            "explanation": "Osmanlıcılık akımı, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "source_quote": "Osmanlıcılık akımı Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumaya çalışıyor.",
+            "source_start_seconds": 315.76,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Olay hikayeleri ile durum hikayeleri arasındaki temel fark nedir?",
+            "options": [
+              "Olay hikayeleri beklenmedik sonlarla biterken, durum hikayeleri hayatın kesitlerini anlatır.",
+              "Olay hikayeleri yalnızca Anadolu insanını anlatır, durum hikayeleri ise her türlü karakteri.",
+              "Durum hikayeleri genellikle kısa ve özken, olay hikayeleri uzun ve detaylıdır.",
+              "Durum hikayeleri her zaman bir olay içerirken, olay hikayeleri içermez."
+            ],
+            "correct_index": 0,
+            "explanation": "Olay hikayeleri, beklenmedik sonlarla biterken, durum hikayeleri hayatın kesitlerini anlatır.",
+            "source_quote": "Olay hikayesi şu: Hikayede eğer bir olay varsa, giriş, sonuçta acaba ne oldu, eyvah ne olacak diyorsanız bu olay hikayesidir... Durum hikayelerinde ise hayatın bir kesiti, yani kesit hikayeleri de denir buna, bir durum anlatılır.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "question": "Milli Edebiyat Dönemi'nin önde gelen yazarlarından biri kimdir?",
+            "options": [
+              "Ziya Gökalp",
+              "Ahmet Mithat Efendi",
+              "Halit Ziya Uşaklıgil",
+              "Tevfik Fikret"
+            ],
+            "correct_index": 0,
+            "explanation": "Ziya Gökalp, Milli Edebiyat Dönemi'nin önde gelen yazarlarından biridir.",
+            "source_quote": "Milli Edebiyat Dönemi yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+          "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+          "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+          "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+          "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+          "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun yaratma düzeyinde olması, verilen bilgileri bir araya getirerek yeni bir yapı oluşturmayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama",
+            "reasoning": "Bu soru, verilen bağlamda yer alan bilgileri anlama ve açıklama yeteneğini ölçmektedir."
+          },
+          {
+            "index": 3,
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen bilgileri değerlendirerek bir yargıya varmayı gerektirmesindendir."
+          },
+          {
+            "index": 4,
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, Osmanlıcılık akımının uygulanabilirliğini bir duruma yerleştirmesiyle ilgilidir. Verilen bilgiye dayanarak, Osmanlıcılık akımının nasıl bir yaklaşım benimsediğini anlamak ve bunu bir senaryoya uygulamak gerekmektedir."
+          },
+          {
+            "index": 5,
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, olay ve durum hikayelerinin tanımlarını ve özelliklerini analiz etmeyi gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, Milli Edebiyat Dönemi yazarlarını hatırlamayı gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            11,
+            17
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 3,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 4,
+        "similar_pairs": 0,
+        "seconds": 21.5
+      },
+      "stages": {
+        "transcript_fetch_ms": 2.1,
+        "clean_ms": 3.9,
+        "llm_questions_ms": 20203.3,
+        "quote_verify_ms": 34.7,
+        "writing_check_ms": 6.7,
+        "similarity_check_ms": 1216.9,
+        "total_ms": 21467.9
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3414.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 5955,
+          "completion_tokens": 193,
+          "total_tokens": 6148
+        },
+        {
+          "purpose": "questions",
+          "ms": 3673.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 5863,
+          "completion_tokens": 221,
+          "total_tokens": 6084
+        },
+        {
+          "purpose": "questions",
+          "ms": 3592.5,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 5903,
+          "completion_tokens": 250,
+          "total_tokens": 6153
+        },
+        {
+          "purpose": "questions",
+          "ms": 3123.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 5851,
+          "completion_tokens": 233,
+          "total_tokens": 6084
+        },
+        {
+          "purpose": "questions",
+          "ms": 3534.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 5918,
+          "completion_tokens": 293,
+          "total_tokens": 6211
+        },
+        {
+          "purpose": "questions",
+          "ms": 2864.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 5846,
+          "completion_tokens": 196,
+          "total_tokens": 6042
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 35336,
+        "completion_tokens": 1386,
+        "total_tokens": 36722,
+        "cost_usd": 0.006132
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v3-rag": {
+      "label": "v3-rag",
+      "prompt_version": "questions-v3",
+      "mode": "rag",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "fgOxbhEMnQQ",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v3",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 4,
+        "questions": [
+          {
+            "question": "Milli Edebiyat Dönemi'nde hangi özellikler bir araya getirilerek edebi eserler oluşturulmuştur?",
+            "options": [
+              "Toplum için sanat anlayışı ve Anadolu insanının hayatı",
+              "Sadece bireysel duyguların ön planda tutulması",
+              "Sadece Batı edebiyatından esinlenme",
+              "Arapça ve Farsça kelimelerin yoğun kullanımı"
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, Milli Edebiyat Dönemi'nde toplum için sanat anlayışının ve Anadolu insanının hayatının ön planda tutulduğunu belirtir.",
+            "source_quote": "Milli Edebiyat Döneminde 1911 yılında Selanik'te Genç Kalemler dergisi etrafında toplanan... Anadolu coğrafyası, Anadolu insanı edebiyata taşınmıştır.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Yeni Lisan Hareketi'nin amacı nedir?",
+            "options": [
+              "Sadece İstanbul Türkçesini kullanmak",
+              "Halk edebiyatına dönüş yapmak",
+              "Arapça ve Farsça kelimeleri artırmak",
+              "Edebiyatı Batı'ya yönlendirmek"
+            ],
+            "correct_index": 1,
+            "explanation": "Yeni Lisan Hareketi, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlamaktadır.",
+            "source_quote": "Yeni Lisan yani yeni dil hareketini başlatacaklar ve dilimizdeki Arapça, Farsça, işte farklı farklı dillerden gelmiş Fransızca sözcükleri atıp pırıl pırıl ta Halk Edebiyatı Dönemindeki öz Türkçeye dönecekler",
+            "source_start_seconds": 54.28,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Aşağıdaki ifadelerden hangisi vatan sevgisi, bağımsızlık ve kahramanlık temalarının edebiyat üzerindeki etkisini en iyi şekilde yansıtır?",
+            "options": [
+              "Bu temalar, edebiyat eserlerinde sadece bireysel duyguları ifade etmek için yer alır.",
+              "Bu temalar, edebiyat eserlerinde yalnızca tarihi olayları anlatmak için kullanılır.",
+              "Vatan sevgisi, bağımsızlık ve kahramanlık, edebiyatın milli kimliği güçlendirmede önemli rol oynar.",
+              "Kahramanlık teması, edebiyatın yalnızca savaş hikayelerinde geçerli bir konusudur."
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap, bu temaların edebiyatın milli kimliği güçlendirmedeki önemini vurgulamasıdır. Bağlamda bu temaların edebiyat üzerindeki etkisi açıkça belirtilmiştir.",
+            "source_quote": "Vatan sevgisi, bağımsızlık, aynı zamanda kahramanlık, doğa ve tarih önemli konular, temalar olacak.",
+            "source_start_seconds": 121.48,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Osmanlıcılık akımının uygulanması durumunda, Osmanlı Devleti'nde farklı etnik grupların bir arada nasıl yaşaması bekleniyordu?",
+            "options": [
+              "Herkes kendi etnik kimliğini ön plana çıkaracak.",
+              "Tüm etnik gruplar Osmanlı vatandaşlığı altında birleşecek.",
+              "Farklı etnik gruplar birbirleriyle çatışacak.",
+              "Her etnik grup kendi bağımsız devletini kuracak."
+            ],
+            "correct_index": 1,
+            "explanation": "Osmanlıcılık akımı, farklı etnik grupların Osmanlı vatandaşlığı temelinde bir arada yaşamalarını amaçlıyordu.",
+            "source_quote": "Osmanlıcılık akımı Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumaya çalışıyor.",
+            "source_start_seconds": 315.76,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Aşağıdakilerden hangisi durum hikayelerinin özelliklerinden biri değildir?",
+            "options": [
+              "Beklenmedik bir sonla biter.",
+              "Kesit hikayeleri olarak da bilinir.",
+              "Hayatın belli bir kesitini anlatır.",
+              "Giriş, gelişme ve sonuç bölümleri yoktur."
+            ],
+            "correct_index": 0,
+            "explanation": "Durum hikayeleri beklenmedik bir sonla bitmez, aksine hayatın kesitlerini anlatır.",
+            "source_quote": "Durum hikayelerinde ise hayatın bir kesiti, yani kesit hikayeleri de denir buna, bir durum anlatılır.",
+            "source_start_seconds": 645.92,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "question": "Milli Edebiyat Dönemi'nin önde gelen yazarlarından biri kimdir?",
+            "options": [
+              "Ziya Gökalp",
+              "Ahmet Hamdi Tanpınar",
+              "Cevat Şakir Kabaağaçlı",
+              "Orhan Kemal"
+            ],
+            "correct_index": 0,
+            "explanation": "Ziya Gökalp, Milli Edebiyat Dönemi'nin önemli yazarlarından biridir.",
+            "source_quote": "Milli Edebiyat Dönemi yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v3",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+          "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+          "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+          "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+          "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+          "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 72.6,
+                "score": 0.679896
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 489.32,
+                "end_seconds": 551.0,
+                "score": 0.64476
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.608707
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 535.8,
+                "end_seconds": 601.68,
+                "score": 0.595599
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 102.44,
+                "end_seconds": 173.08,
+                "score": 0.57239
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "context_words": 759,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 51.8,
+                "end_seconds": 119.16,
+                "score": 0.646826
+              },
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 72.6,
+                "score": 0.582199
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 489.32,
+                "end_seconds": 551.0,
+                "score": 0.528165
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 535.8,
+                "end_seconds": 601.68,
+                "score": 0.522629
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.510459
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "context_words": 760,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 102.44,
+                "end_seconds": 173.08,
+                "score": 0.576933
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 489.32,
+                "end_seconds": 551.0,
+                "score": 0.56651
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 535.8,
+                "end_seconds": 601.68,
+                "score": 0.558814
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.517119
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 677.56,
+                "end_seconds": 736.92,
+                "score": 0.494767
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 6,
+                "start_seconds": 299.72,
+                "end_seconds": 361.52,
+                "score": 0.717875
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 252.8,
+                "end_seconds": 312.68,
+                "score": 0.690329
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.646359
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 347.64,
+                "end_seconds": 412.6,
+                "score": 0.601706
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 395.919,
+                "end_seconds": 459.16,
+                "score": 0.594071
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "context_words": 700,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 13,
+                "start_seconds": 631.36,
+                "end_seconds": 692.36,
+                "score": 0.732789
+              },
+              {
+                "chunk_index": 15,
+                "start_seconds": 723.08,
+                "end_seconds": 755.96,
+                "score": 0.613749
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 586.44,
+                "end_seconds": 645.92,
+                "score": 0.571082
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 677.56,
+                "end_seconds": 736.92,
+                "score": 0.514104
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 156.2,
+                "end_seconds": 220.2,
+                "score": 0.427117
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "context_words": 759,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 72.6,
+                "score": 0.611439
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 51.8,
+                "end_seconds": 119.16,
+                "score": 0.587015
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 489.32,
+                "end_seconds": 551.0,
+                "score": 0.573508
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 535.8,
+                "end_seconds": 601.68,
+                "score": 0.57118
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.515117
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun hedef düzeyde olması, Milli Edebiyat Dönemi'nin özelliklerini ve etkilerini bir araya getirerek yeni bir yapı oluşturmayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda geçen bilgiyi anlamaya yönelik bir soru sormasından kaynaklanmaktadır."
+          },
+          {
+            "index": 3,
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun hedef düzeyde olması, verilen temalar üzerinden bir değerlendirme yapmayı gerektirmesindendir. Öğrencilerin vatan sevgisi, bağımsızlık ve kahramanlık temalarını ele alarak bu temaların edebiyat üzerindeki etkilerini yargılamaları beklenmektedir."
+          },
+          {
+            "index": 4,
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, Osmanlıcılık akımının uygulanabilirliğini ve bağlamda geçen bilgiyi bir senaryoya uyarlamayı gerektirmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Soruda olay hikayeleri ve durum hikayeleri arasındaki farkları analiz etme yeteneği ölçülmektedir."
+          },
+          {
+            "index": 6,
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, Milli Edebiyat Dönemi yazarlarını hatırlamayı gerektirmesindendir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            19
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 4,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 3,
+        "similar_pairs": 0,
+        "seconds": 21.4
+      },
+      "stages": {
+        "transcript_fetch_ms": 2.4,
+        "clean_ms": 3.9,
+        "index_ms": 4.0,
+        "retrieval_ms": 1285.1,
+        "llm_questions_ms": 18704.0,
+        "quote_verify_ms": 30.9,
+        "writing_check_ms": 8.6,
+        "similarity_check_ms": 1369.0,
+        "total_ms": 21408.3
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3464.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3311,
+          "completion_tokens": 254,
+          "total_tokens": 3565
+        },
+        {
+          "purpose": "questions",
+          "ms": 2794.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3225,
+          "completion_tokens": 229,
+          "total_tokens": 3454
+        },
+        {
+          "purpose": "questions",
+          "ms": 3985.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3266,
+          "completion_tokens": 339,
+          "total_tokens": 3605
+        },
+        {
+          "purpose": "questions",
+          "ms": 3049.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3220,
+          "completion_tokens": 242,
+          "total_tokens": 3462
+        },
+        {
+          "purpose": "questions",
+          "ms": 2936.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3103,
+          "completion_tokens": 193,
+          "total_tokens": 3296
+        },
+        {
+          "purpose": "questions",
+          "ms": 2473.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3208,
+          "completion_tokens": 195,
+          "total_tokens": 3403
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 19333,
+        "completion_tokens": 1452,
+        "total_tokens": 20785,
+        "cost_usd": 0.003771
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v4-full": {
+      "label": "v4-full",
+      "prompt_version": "questions-v4",
+      "mode": "full",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "fgOxbhEMnQQ",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v4",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 5,
+        "questions": [
+          {
+            "question": "Milli Edebiyat Dönemi'nde eserlerin hangi unsurları bir araya getirerek yazılması amaçlanmıştır?",
+            "options": [
+              "Sadece bireysel duygular ve soyut temalar",
+              "Arapça ve Farsça tamlamalar",
+              "Batı edebiyatı ve Fransızca kelimeler",
+              "Halkın günlük yaşamı ve Anadolu insanının hikayeleri"
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, Milli Edebiyat Dönemi'nde eserlerin Anadolu insanını ve halkın yaşamını yansıttığına dayanır.",
+            "source_quote": "Milli Edebiyat Döneminde de yine eserlerin konusu olacak. Sade Türkçe, ağır ve süslü dilden kaçınılmış, halka yakın, anlaşılır bir dil kullanılacak.",
+            "source_start_seconds": 81.6,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Yeni Lisan Hareketi'nin amacı nedir?",
+            "options": [
+              "Sadece İstanbul Türkçesini kullanmak",
+              "Halk edebiyatına dönüş yapmak",
+              "Arapça ve Farsça kelimeleri artırmak",
+              "Batı edebiyatını taklit etmek"
+            ],
+            "correct_index": 1,
+            "explanation": "Yeni Lisan Hareketi, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlamaktadır.",
+            "source_quote": "'Yeni Lisan yani yeni dil hareketini başlatacaklar ve dilimizdeki Arapça, Farsça, işte farklı dillerden gelmiş Fransızca sözcükleri atıp pırıl pırıl ta Halk Edebiyatı Dönemindeki öz Türkçeye dönecekler.'",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Milli Edebiyat Dönemi'nde vatan sevgisi, bağımsızlık ve kahramanlık temalarının önemi nedir?",
+            "options": [
+              "Bu temalar, milli kimliği ve bağımsızlık bilincini güçlendirmek amacıyla önemlidir.",
+              "Bu temalar yalnızca edebi eserlerde yer alır, toplumsal bir etkisi yoktur.",
+              "Bu temalar, yalnızca halk edebiyatı ile sınırlıdır.",
+              "Bu temalar, sadece tarihsel olayları anlatmak için kullanılır."
+            ],
+            "correct_index": 0,
+            "explanation": "Doğru cevap, bu temaların milli kimlik ve bağımsızlık bilincini güçlendirmek amacıyla önemli olduğunu belirtmektedir.",
+            "source_quote": "Vatan sevgisi, bağımsızlık, aynı zamanda kahramanlık, doğa ve tarih önemli konular, temalar olacak.",
+            "source_start_seconds": 121.48,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Osmanlıcılık akımının uygulanması durumunda, Osmanlı Devleti'nde farklı etnik grupların bir arada yaşaması için hangi yaklaşım benimsenmiştir?",
+            "options": [
+              "Osmanlı vatandaşlığı temelinde bir arada yaşama",
+              "Halkın farklılıklarını vurgulamak",
+              "Her etnik grubun bağımsızlık talep etmesi",
+              "Sadece Türk kimliğini ön plana çıkarmak"
+            ],
+            "correct_index": 0,
+            "explanation": "Osmanlıcılık akımı, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçladığı için farklı etnik grupların bir arada yaşamasını savunur.",
+            "source_quote": "Osmanlıcılık akımı Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumaya çalışıyor.",
+            "source_start_seconds": 315.76,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Olay hikayesi ile durum hikayesinin temel farkı nedir?",
+            "options": [
+              "Olay hikayesi, beklenmedik sonlarla biterken durum hikayesi her zaman sürpriz bir sonla biter.",
+              "Olay hikayesi, yalnızca Anadolu insanını anlatırken durum hikayesi evrensel temalar içerir.",
+              "Olay hikayesi, hayatın kesitlerini anlatırken durum hikayesi belirli bir olay içerir.",
+              "Olay hikayesi, giriş, gelişme ve sonuç bölümlerine sahiptir; durum hikayesi ise bu bölümleri içermez."
+            ],
+            "correct_index": 3,
+            "explanation": "Olay hikayesi, belirli bir olayın gelişimini içerirken, durum hikayesi hayatın bir kesitini aktarır ve genellikle giriş, gelişme ve sonuç bölümleri yoktur.",
+            "source_quote": "Olay hikayesi şu: Hikayede eğer bir olay varsa, giriş, sonuçta acaba ne oldu, eyvah ne olacak diyorsanız bu olay hikayesidir,",
+            "source_start_seconds": 631.36,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "question": "Milli Edebiyat Dönemi'nin önde gelen yazarlarından biri kimdir?",
+            "options": [
+              "Ziya Gökalp",
+              "Ahmet Mithat Efendi",
+              "Halit Ziya Uşaklıgil",
+              "Tevfik Fikret"
+            ],
+            "correct_index": 0,
+            "explanation": "Ziya Gökalp, Milli Edebiyat Dönemi'nin önde gelen yazarlarından biridir ve bu dönemde önemli eserler vermiştir.",
+            "source_quote": "Ziya Gökalp, Ömer Seyfettin, Ali Canip Yöntem, Mehmet Emin Yurdakul, bak Yurdakul olmuş. Sonradan alıyorlar bunlar soyismini.",
+            "source_start_seconds": 564.92,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama"
+          }
+        ],
+        "context_mode": "full"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v4",
+        "context_mode": "full",
+        "k": null,
+        "topics": [
+          "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+          "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+          "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+          "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+          "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+          "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": null,
+        "embedding_model": null,
+        "per_topic": [
+          {
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "context_words": 1881,
+            "produced": true,
+            "retrieved": null,
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, Milli Edebiyat Dönemi'nin unsurlarını bir araya getirerek bir bütün oluşturmayı gerektirmesidir."
+          },
+          {
+            "index": 2,
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda geçen bilgiyi anlamaya yönelik bir ifade aramasıyla ilgilidir."
+          },
+          {
+            "index": 3,
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Bu soru, verilen bağlamda edebiyatın temaları hakkında yapılan açıklamalara dayanarak, bu temaların önemini değerlendirmeyi gerektiriyor."
+          },
+          {
+            "index": 4,
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun hedef düzeyde olması, Osmanlıcılık akımının uygulanabilirliğini bir duruma entegre etme yeteneğini ölçmesindendir."
+          },
+          {
+            "index": 5,
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, olay ve durum hikayelerinin tanımını ve özelliklerini analiz etmeyi gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun hedef düzeyde olması, Milli Edebiyat Dönemi yazarları hakkında bilginin hatırlanmasını istemesidir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": true,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            11
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 5,
+        "answer_in_stem": 1,
+        "example_leak": 0,
+        "writing_flags": 3,
+        "similar_pairs": 0,
+        "seconds": 22.2
+      },
+      "stages": {
+        "transcript_fetch_ms": 3.4,
+        "clean_ms": 3.5,
+        "llm_questions_ms": 20988.2,
+        "quote_verify_ms": 28.2,
+        "writing_check_ms": 6.2,
+        "similarity_check_ms": 1153.9,
+        "total_ms": 22183.7
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3599.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 6233,
+          "completion_tokens": 247,
+          "total_tokens": 6480
+        },
+        {
+          "purpose": "questions",
+          "ms": 3052.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 6141,
+          "completion_tokens": 227,
+          "total_tokens": 6368
+        },
+        {
+          "purpose": "questions",
+          "ms": 3590.8,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 6181,
+          "completion_tokens": 256,
+          "total_tokens": 6437
+        },
+        {
+          "purpose": "questions",
+          "ms": 3494.3,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 6129,
+          "completion_tokens": 242,
+          "total_tokens": 6371
+        },
+        {
+          "purpose": "questions",
+          "ms": 4430.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 6196,
+          "completion_tokens": 296,
+          "total_tokens": 6492
+        },
+        {
+          "purpose": "questions",
+          "ms": 2821.4,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 6124,
+          "completion_tokens": 208,
+          "total_tokens": 6332
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 37004,
+        "completion_tokens": 1476,
+        "total_tokens": 38480,
+        "cost_usd": 0.006436
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    },
+    "v4-rag": {
+      "label": "v4-rag",
+      "prompt_version": "questions-v4",
+      "mode": "rag",
+      "model": "gpt-4o-mini",
+      "transcript_source": "cache",
+      "response": {
+        "video_id": "fgOxbhEMnQQ",
+        "transcript_mode": "clean",
+        "model": "gpt-4o-mini",
+        "prompt_version": "questions-v4",
+        "requested_count": 6,
+        "returned_count": 6,
+        "verified_count": 4,
+        "questions": [
+          {
+            "question": "Bir grup öğrenci, Milli Edebiyat Dönemi'nin etkilerini anlamak için bir proje hazırlamaktadır. Aşağıdaki projelerden hangisi, bu dönemin milliyetçi ve yerel unsurlarını en iyi şekilde yansıtır?",
+            "options": [
+              "D) Farklı milletlerin edebiyatlarını karşılaştırmak.",
+              "A) Yabancı edebiyat eserlerini inceleyip sunmak.",
+              "B) Anadolu insanının günlük yaşamını ve kültürel değerlerini belgelemek.",
+              "C) Batı edebiyatındaki akımları analiz etmek."
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap, Milli Edebiyat Dönemi'nin Anadolu insanı ve yerel unsurlara odaklandığını yansıtan projedir.",
+            "source_quote": "Milli Edebiyat Döneminde... Anadolu coğrafyası, Anadolu insanı edebiyata taşınmıştır.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "question": "Yeni Lisan hareketinin amacı nedir?",
+            "options": [
+              "Sanat için sanat anlayışını benimsemek",
+              "Halk edebiyatına dönüş yapmak",
+              "Arapça ve Farsça kelimeleri artırmak",
+              "Sadece İstanbul Türkçesini kullanmak"
+            ],
+            "correct_index": 1,
+            "explanation": "Yeni Lisan hareketi, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlamaktadır.",
+            "source_quote": "Yeni Lisan yani yeni dil hareketini başlatacaklar ve dilimizdeki Arapça, Farsça, işte farklı farklı dillerden gelmiş Fransızca sözcükleri atıp pırıl pırıl ta Halk Edebiyatı Dönemindeki öz Türkçeye dönecekler",
+            "source_start_seconds": 54.28,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "question": "Milli Edebiyat Dönemi'nde vatan sevgisi, bağımsızlık ve kahramanlık temalarının önemi nedir? Aşağıdaki değerlendirmelerden hangisi doğrudur?",
+            "options": [
+              "Bu temalar, edebiyatın sadece estetik yönünü güçlendirir.",
+              "Bu temalar, edebiyatın evrensel değerlerini göz ardı eder.",
+              "Bu temalar, milli kimliği ve bağımsızlık bilincini güçlendirmek için önemlidir.",
+              "Bu temalar, yalnızca tarihsel olayları anlatmak için kullanılır."
+            ],
+            "correct_index": 2,
+            "explanation": "Doğru cevap, milli edebiyatın amacının milli kimlik ve bağımsızlık bilincini güçlendirmek olduğunu belirtir.",
+            "source_quote": "Vatan sevgisi, bağımsızlık, aynı zamanda kahramanlık, doğa ve tarih önemli konular, temalar olacak.",
+            "source_start_seconds": 121.48,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "question": "Osmanlıcılık akımının başarılı olabilmesi için hangi stratejinin uygulanması gerekiyordu?",
+            "options": [
+              "Batı ile tamamen entegre olmak",
+              "Balkan uluslarının bağımsızlık taleplerini desteklemek",
+              "Farklı din ve kültürleri yok saymak",
+              "Osmanlı vatandaşlığı temelinde bir birlik oluşturmak"
+            ],
+            "correct_index": 3,
+            "explanation": "Osmanlıcılık akımı, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumaya çalışıyordu; bu nedenle birlik oluşturmak doğru bir stratejiydi.",
+            "source_quote": "Osmanlıcılık akımı Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumaya çalışıyor.",
+            "source_start_seconds": 315.76,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "question": "Olay hikayeleri ile durum hikayeleri arasındaki temel fark nedir?",
+            "options": [
+              "Olay hikayeleri, hayatın kesitlerini anlatırken durum hikayeleri beklenmedik sonlarla biter.",
+              "Durum hikayeleri, klasik hikaye tarzında yazılırken olay hikayeleri modern tarzda yazılır.",
+              "Olay hikayeleri, sadece Türk tarihinden alınan konuları işlerken durum hikayeleri evrensel temalar içerir.",
+              "Olay hikayeleri, giriş, gelişme ve sonuç bölümlerine sahipken durum hikayeleri bu bölümlere sahip değildir."
+            ],
+            "correct_index": 3,
+            "explanation": "Doğru cevap, olay hikayelerinin yapı olarak giriş, gelişme ve sonuç bölümlerine sahip olduğunu belirtirken, durum hikayelerinin bu bölümlere sahip olmadığını ifade eder.",
+            "source_quote": "bir durum hikayesini gördüğünüzde giriş, gelişme, sonuç bölümü olmadığını, hayatın belli bir kesitini, belli bir bölümünü aktarıldığını anlatırsınız.",
+            "source_start_seconds": 728.36,
+            "verified": true,
+            "quote_match": "exact",
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "question": "Milli Edebiyat Dönemi'nin önde gelen yazarlarından biri kimdir?",
+            "options": [
+              "Ziya Gökalp",
+              "Ahmet Hamdi Tanpınar",
+              "Halit Ziya Uşaklıgil",
+              "Orhan Kemal"
+            ],
+            "correct_index": 0,
+            "explanation": "Ziya Gökalp, Milli Edebiyat Dönemi'nin önemli yazarlarından biridir ve bağlamda açıkça belirtilmiştir.",
+            "source_quote": "Milli Edebiyat Dönemi yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "source_start_seconds": null,
+            "verified": false,
+            "quote_match": null,
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama"
+          }
+        ],
+        "context_mode": "rag"
+      },
+      "topic_generation": {
+        "prompt_version": "questions-v4",
+        "context_mode": "rag",
+        "k": 5,
+        "topics": [
+          "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+          "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+          "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+          "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+          "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+          "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir."
+        ],
+        "topics_source": "request",
+        "topic_extraction": null,
+        "chunking": "fixed-150-30",
+        "embedding_model": "BAAI/bge-m3",
+        "per_topic": [
+          {
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 72.6,
+                "score": 0.679896
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 489.32,
+                "end_seconds": 551.0,
+                "score": 0.64476
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.608707
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 535.8,
+                "end_seconds": 601.68,
+                "score": 0.595599
+              },
+              {
+                "chunk_index": 2,
+                "start_seconds": 102.44,
+                "end_seconds": 173.08,
+                "score": 0.57239
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Yaratma",
+            "skip_reason": null
+          },
+          {
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "context_words": 759,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 1,
+                "start_seconds": 51.8,
+                "end_seconds": 119.16,
+                "score": 0.646826
+              },
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 72.6,
+                "score": 0.582199
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 489.32,
+                "end_seconds": 551.0,
+                "score": 0.528165
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 535.8,
+                "end_seconds": 601.68,
+                "score": 0.522629
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.510459
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Anlama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "context_words": 760,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 2,
+                "start_seconds": 102.44,
+                "end_seconds": 173.08,
+                "score": 0.576933
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 489.32,
+                "end_seconds": 551.0,
+                "score": 0.56651
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 535.8,
+                "end_seconds": 601.68,
+                "score": 0.558814
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.517119
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 677.56,
+                "end_seconds": 736.92,
+                "score": 0.494767
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Değerlendirme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "context_words": 757,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 6,
+                "start_seconds": 299.72,
+                "end_seconds": 361.52,
+                "score": 0.717875
+              },
+              {
+                "chunk_index": 5,
+                "start_seconds": 252.8,
+                "end_seconds": 312.68,
+                "score": 0.690329
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.646359
+              },
+              {
+                "chunk_index": 7,
+                "start_seconds": 347.64,
+                "end_seconds": 412.6,
+                "score": 0.601706
+              },
+              {
+                "chunk_index": 8,
+                "start_seconds": 395.919,
+                "end_seconds": 459.16,
+                "score": 0.594071
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Uygulama",
+            "skip_reason": null
+          },
+          {
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "context_words": 700,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 13,
+                "start_seconds": 631.36,
+                "end_seconds": 692.36,
+                "score": 0.732789
+              },
+              {
+                "chunk_index": 15,
+                "start_seconds": 723.08,
+                "end_seconds": 755.96,
+                "score": 0.613749
+              },
+              {
+                "chunk_index": 12,
+                "start_seconds": 586.44,
+                "end_seconds": 645.92,
+                "score": 0.571082
+              },
+              {
+                "chunk_index": 14,
+                "start_seconds": 677.56,
+                "end_seconds": 736.92,
+                "score": 0.514104
+              },
+              {
+                "chunk_index": 3,
+                "start_seconds": 156.2,
+                "end_seconds": 220.2,
+                "score": 0.427117
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Çözümleme",
+            "skip_reason": null
+          },
+          {
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "context_words": 759,
+            "produced": true,
+            "retrieved": [
+              {
+                "chunk_index": 0,
+                "start_seconds": 0.0,
+                "end_seconds": 72.6,
+                "score": 0.611439
+              },
+              {
+                "chunk_index": 1,
+                "start_seconds": 51.8,
+                "end_seconds": 119.16,
+                "score": 0.587015
+              },
+              {
+                "chunk_index": 10,
+                "start_seconds": 489.32,
+                "end_seconds": 551.0,
+                "score": 0.573508
+              },
+              {
+                "chunk_index": 11,
+                "start_seconds": 535.8,
+                "end_seconds": 601.68,
+                "score": 0.57118
+              },
+              {
+                "chunk_index": 4,
+                "start_seconds": 206.32,
+                "end_seconds": 269.04,
+                "score": 0.515117
+              }
+            ],
+            "outcome": "ok",
+            "bloom_level": "Hatırlama",
+            "skip_reason": null
+          }
+        ],
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "no_question_topics": [],
+        "bloom_mapping": [
+          {
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma"
+          },
+          {
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama"
+          },
+          {
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme"
+          },
+          {
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama"
+          },
+          {
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme"
+          },
+          {
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama"
+          }
+        ],
+        "bloom_mapping_source": "request",
+        "questions_reasoning": [
+          {
+            "index": 1,
+            "topic": "Milli Edebiyat Dönemi Tanımı: Milli Edebiyat, milliyetçi bir edebiyat anlayışıdır.",
+            "bloom_level": "Yaratma",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, Milli Edebiyat Dönemi'nin özelliklerini ve etkilerini bir araya getirerek bir plan oluşturmayı gerektirmesindendir."
+          },
+          {
+            "index": 2,
+            "topic": "Yeni Lisan Hareketi: Yeni Lisan, dilde sadeleşmeyi ve halk edebiyatına dönüşü amaçlar.",
+            "bloom_level": "Anlama",
+            "reasoning": "Sorunun hedef düzeyde olması, bağlamda geçen bilgiyi anlamayı ve açıklamayı gerektirmesindendir."
+          },
+          {
+            "index": 3,
+            "topic": "Edebiyatın Temaları: Vatan sevgisi, bağımsızlık ve kahramanlık önemli temalardır.",
+            "bloom_level": "Değerlendirme",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, milli edebiyatın temalarını değerlendirerek yargıda bulunmayı gerektirmesidir."
+          },
+          {
+            "index": 4,
+            "topic": "Osmanlıcılık Akımı: Osmanlıcılık, Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumayı amaçlar.",
+            "bloom_level": "Uygulama",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, Osmanlıcılık akımının uygulanabilirliğini değerlendirmeye yönelik bir durum sunmasıdır."
+          },
+          {
+            "index": 5,
+            "topic": "Olay ve Durum Hikayeleri: Olay hikayeleri, beklenmedik sonlarla biterken durum hikayeleri hayatın kesitlerini anlatır.",
+            "bloom_level": "Çözümleme",
+            "reasoning": "Sorunun hedef düzeyde olması, olay hikayeleri ile durum hikayeleri arasındaki farkları analiz etmeyi gerektirmesindendir."
+          },
+          {
+            "index": 6,
+            "topic": "Milli Edebiyat Dönemi Yazarları: Ziya Gökalp, Ömer Seyfettin ve Halide Edip Adıvar gibi yazarlar bu dönemin önde gelen isimleridir.",
+            "bloom_level": "Hatırlama",
+            "reasoning": "Sorunun neden hedef düzeyde olduğu, Milli Edebiyat Dönemi yazarlarını hatırlamayı ölçer ve doğrudan bağlamda geçen bilgiyi tanımayı gerektirir."
+          }
+        ]
+      },
+      "similarity_check": {
+        "rules_version": "similarity-v1",
+        "threshold": 0.8,
+        "text": "soru metni + doğru cevap",
+        "flagged_pairs": []
+      },
+      "question_flags": [
+        {
+          "index": 1,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            4
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 2,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 3,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 4,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [
+            12
+          ],
+          "similar_to": []
+        },
+        {
+          "index": 5,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        },
+        {
+          "index": 6,
+          "answer_in_stem": false,
+          "example_leak": [],
+          "writing_rules": [],
+          "similar_to": []
+        }
+      ],
+      "summary": {
+        "outcome_counts": {
+          "ok": 6,
+          "empty": 0,
+          "invalid": 0,
+          "duplicate": 0
+        },
+        "returned": 6,
+        "verified": 4,
+        "answer_in_stem": 0,
+        "example_leak": 0,
+        "writing_flags": 3,
+        "similar_pairs": 0,
+        "seconds": 23.8
+      },
+      "stages": {
+        "transcript_fetch_ms": 2.4,
+        "clean_ms": 3.9,
+        "index_ms": 3.7,
+        "retrieval_ms": 1275.3,
+        "llm_questions_ms": 20951.5,
+        "quote_verify_ms": 44.6,
+        "writing_check_ms": 8.9,
+        "similarity_check_ms": 1482.3,
+        "total_ms": 23773.1
+      },
+      "llm_calls": [
+        {
+          "purpose": "questions",
+          "ms": 3447.6,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3589,
+          "completion_tokens": 270,
+          "total_tokens": 3859
+        },
+        {
+          "purpose": "questions",
+          "ms": 3316.9,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3503,
+          "completion_tokens": 225,
+          "total_tokens": 3728
+        },
+        {
+          "purpose": "questions",
+          "ms": 3967.2,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3544,
+          "completion_tokens": 267,
+          "total_tokens": 3811
+        },
+        {
+          "purpose": "questions",
+          "ms": 3005.7,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3498,
+          "completion_tokens": 215,
+          "total_tokens": 3713
+        },
+        {
+          "purpose": "questions",
+          "ms": 3820.0,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3381,
+          "completion_tokens": 296,
+          "total_tokens": 3677
+        },
+        {
+          "purpose": "questions",
+          "ms": 3394.1,
+          "model": "gpt-4o-mini",
+          "ok": true,
+          "prompt_tokens": 3486,
+          "completion_tokens": 215,
+          "total_tokens": 3701
+        }
+      ],
+      "tokens": {
+        "prompt_tokens": 21001,
+        "completion_tokens": 1488,
+        "total_tokens": 22489,
+        "cost_usd": 0.004043
+      },
+      "dropped": {
+        "structure_invalid": 0,
+        "duplicate": 0,
+        "extra_ignored": 0
+      }
+    }
+  }
+}

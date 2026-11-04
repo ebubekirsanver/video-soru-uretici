@@ -516,3 +516,208 @@ BGE-M3 ilk yüklenme süresi: 64.8 sn (hiçbir videonun süresine dahil değil)
 - Maliyet liste fiyatıyla tahmindir.
 - Süre, transkriptin son segmentinin bitişinden hesaplanır; videonun gerçek süresinden biraz farklı olabilir.
 - Biyoloji videosu `backend/chroma` dizininde önceden var; onun dizinleme süresi önbellekten gelir, diğer videolarla karşılaştırılamaz.
+
+## Ek çalıştırma (4 Kasım 2026)
+
+- **Neden:** Edebiyatın `rag` koşulu ve Python, YouTube IP engeli yüzünden tamamlanamamıştı. Bilgisayar telefonun internetine bağlanarak aynı betik yalnızca bu iki video için çalıştırıldı; engel çıkmadı.
+- **Ayarlar:** Pilot 1 ile aynı (`questions-v3`, `topics-v1`, `k=5`, gpt-4o-mini, `fixed-150-30`, `BAAI/bge-m3`, `similarity-v1`).
+- **Edebiyat konuları:** Konular yeniden çıkarıldı; `pilot-1-edebiyat-yarim.json` dosyasındakilerden farklıdır.
+- **Eski dosyalar:** `pilot-1-edebiyat-yarim.json` ve `pilot-1-python-yarim.json` olarak yeniden adlandırıldı. `pilot-1-ozet.json` değişmedi; bu çalıştırmanın özeti `pilot-1-ek-ozet.json` dosyasında.
+- **Betik değişikliği:** `pilot-1.py` transkripti artık önbellek üzerinden alıyor (video başına tek YouTube isteği) ve özeti ek dosyaya yazıyor.
+- **OpenAI çağrısı:** 26 (video başına 13).
+- **BGE-M3 ilk yüklenme süresi:** 21,9 sn; hiçbir videonun süresine dahil değil.
+- **Altyazı adayları:** Yeniden seçilmedi.
+- **Gizli bilgi:** İki video dosyası, `pilot-1-ek-ozet.json` ve ham çıktı tarandı (API anahtarı, yetki başlığı, parola/token, `.env`, e-posta, yerel yol, paylaşım kodu); eşleşme yok.
+
+### Altı video için özet tablo
+
+| Video | Süre | Toplam süre (sn) | Toplam token | Maliyet (USD) |
+|---|---|---|---|---|
+| biyoloji | 25:13 | 75,0 | 81374 | 0,013658 |
+| tarih | 32:59 | 109,7 | 99995 | 0,016141 |
+| matematik | 25:50 | 86,2 | 80382 | 0,013300 |
+| ingilizce | 13:56 | 56,5 | 46316 | 0,008234 |
+| edebiyat | 12:35 | 85,7 | 62583 | 0,010776 |
+| python | 9:25 | 56,5 | 45572 | 0,008078 |
+| **Altı video** | — | 469,6 | 416222 | 0,070187 |
+
+Edebiyatın yarım kalan ilk çalıştırmasının harcaması (41718 token, 0,006969 USD) tabloya girmedi. Maliyet liste fiyatıyla tahmindir.
+
+### Edebiyat
+
+- **Video:** Milli Edebiyat Dönemi Hikâyesi  | 10. Sınıf Edebiyat #2026
+- **Kanal:** tonguç 10. SINIF
+- **Süre:** 12:35 · **Transkript:** 1881 kelime · **Parça:** 16
+
+**Konular ve hedef düzeyler**
+
+| # | Hedef düzey | Konu | full sonucu | rag sonucu |
+|---|---|---|---|---|
+| 1 | Yaratma | Milli Edebiyat Dönemi Tanımı | ok | ok |
+| 2 | Anlama | Yeni Lisan Hareketi | ok | ok |
+| 3 | Değerlendirme | Edebiyatın Temaları | ok | ok |
+| 4 | Uygulama | Osmanlıcılık Akımı | ok | ok |
+| 5 | Çözümleme | Olay ve Durum Hikayeleri | ok | ok |
+| 6 | Hatırlama | Milli Edebiyat Dönemi Yazarları | ok | ok |
+
+**Koşullar**
+
+| | full | rag |
+|---|---|---|
+| Dönen soru | 6 / 6 | 6 / 6 |
+| Alıntısı bulunan | 3 | 4 |
+| Benzerlik işaretli çift | 0 | 0 |
+| Yazım kuralı işareti | 3 | 3 |
+
+**Süre ve token**
+
+| Aşama | Süre (sn) | Girdi token | Çıktı token | Maliyet (USD) |
+|---|---|---|---|---|
+| Konu çıkarma | 6,2 | 4829 | 261 | 0,000881 |
+| full | 32,5 | 35336 | 1493 | 0,006196 |
+| rag | 46,9 | 19333 | 1331 | 0,003699 |
+| **Toplam** | 85,7 | 59498 | 3085 | 0,010776 |
+
+rag içinde dizinleme 22,1 sn, erişim 1,5 sn.
+
+**Seçilen 3 örnek soru** (yorum yok)
+
+1. **rag-1** · koşul rag · hedef düzey Yaratma
+   - **Soru:** Milli Edebiyat Dönemi'nde hangi özellikler bir araya getirilerek edebi eserler oluşturulmuştur?
+   - **Seçenekler:** Halk Edebiyatı geleneğinden esinlenme / Sanat için sanat anlayışı / Arapça ve Farsça kelimelerin yoğun kullanımı / Batı edebiyatına yönelme
+   - **Doğru cevap:** Halk Edebiyatı geleneğinden esinlenme
+   - **Kaynak alıntısı:** Milli Edebiyat Dönemi'nde... Halk Edebiyatına yöneliş olacak.
+   - **Kaynak zamanı:** yok · alıntı transkriptte bulundu: hayır
+2. **full-4** · koşul full · hedef düzey Uygulama
+   - **Soru:** Osmanlıcılık akımının uygulanması gerektiği bir durumda, Osmanlı Devleti'nde farklı etnik grupların bir arada yaşaması için hangi yaklaşım benimsenmelidir?
+   - **Seçenekler:** Herkesin kendi kimliğini ön plana çıkarması / Farklı dillerin resmi dil olarak kabul edilmesi / Osmanlı vatandaşlığı temelinde bir arada yaşama vurgusu / Sadece Türk kimliğinin öne çıkarılması
+   - **Doğru cevap:** Osmanlı vatandaşlığı temelinde bir arada yaşama vurgusu
+   - **Kaynak alıntısı:** Osmanlıcılık akımı Osmanlı vatandaşlığı temelinde devletin bütünlüğünü korumaya çalışıyor.
+   - **Kaynak zamanı:** 5:15 · alıntı transkriptte bulundu: evet
+3. **rag-2** · koşul rag · hedef düzey Anlama
+   - **Soru:** Yeni Lisan Hareketi'nin temel amacı nedir?
+   - **Seçenekler:** Edebiyatı Batı'ya yönlendirmek / Halk edebiyatına dönüş yapmak / Arapça ve Farsça kelimeleri artırmak / Sadece İstanbul Türkçesini kullanmak
+   - **Doğru cevap:** Halk edebiyatına dönüş yapmak
+   - **Kaynak alıntısı:** Yeni Lisan yani yeni dil hareketini başlatacaklar ve dilimizdeki Arapça, Farsça, işte farklı farklı dillerden gelmiş Fransızca sözcükleri atıp pırıl pırıl ta Halk Edebiyatı Dönemindeki öz Türkçeye dönecekler
+   - **Kaynak zamanı:** 0:54 · alıntı transkriptte bulundu: evet
+
+### Python
+
+- **Video:** Ders 1 Python Programlamaya Giriş
+- **Kanal:** Fehmi UYAR
+- **Süre:** 9:25 · **Transkript:** 1239 kelime · **Parça:** 11
+
+**Konular ve hedef düzeyler**
+
+| # | Hedef düzey | Konu | full sonucu | rag sonucu |
+|---|---|---|---|---|
+| 1 | Değerlendirme | Python Nedir? | ok | ok |
+| 2 | Uygulama | Python'un Kullanım Alanları | ok | ok |
+| 3 | Yaratma | Python Söz Dizimi | ok | ok |
+| 4 | Hatırlama | Python 2 ve 3 Arasındaki Farklar | ok | ok |
+| 5 | Çözümleme | Python Kütüphaneleri | ok | ok |
+| 6 | Anlama | Python ile Oyun Geliştirme | ok | ok |
+
+**Koşullar**
+
+| | full | rag |
+|---|---|---|
+| Dönen soru | 6 / 6 | 6 / 6 |
+| Alıntısı bulunan | 5 | 6 |
+| Benzerlik işaretli çift | 0 | 0 |
+| Yazım kuralı işareti | 4 | 1 |
+
+**Süre ve token**
+
+| Aşama | Süre (sn) | Girdi token | Çıktı token | Maliyet (USD) |
+|---|---|---|---|---|
+| Konu çıkarma | 4,3 | 2757 | 239 | 0,000557 |
+| full | 20,0 | 22884 | 1294 | 0,004209 |
+| rag | 32,3 | 17171 | 1227 | 0,003312 |
+| **Toplam** | 56,5 | 42812 | 2760 | 0,008078 |
+
+rag içinde dizinleme 12,0 sn, erişim 1,6 sn.
+
+**Seçilen 3 örnek soru** (yorum yok)
+
+1. **full-5** · koşul full · hedef düzey Çözümleme
+   - **Soru:** Python'un hangi alanda kullanımı, diğer alanlarla ilişkili olarak en doğru şekilde açıklanmıştır?
+   - **Seçenekler:** Python, sadece oyun geliştirme için uygundur. / Python, makine öğrenimi için kullanılabilir ve bu alan, veri analizi ile ilişkilidir. / Python, yalnızca web geliştirme için kullanılır. / Python, veri analizi için kullanılmaz.
+   - **Doğru cevap:** Python, makine öğrenimi için kullanılabilir ve bu alan, veri analizi ile ilişkilidir.
+   - **Kaynak alıntısı:** python makine öğreniminde kullanılıyor python bakın tensor Flow caros gibi kütüphaneler makine öğrenimi modelleri geliştirmek için kullanılıyor veri analizi yapılabiliyor ki veri analizleri python' kullanır
+   - **Kaynak zamanı:** yok · alıntı transkriptte bulundu: hayır
+2. **full-3** · koşul full · hedef düzey Yaratma
+   - **Soru:** Python programlama dilinin söz dizimi ile ilgili aşağıdaki ifadelerden hangisi doğrudur?
+   - **Seçenekler:** Python, sadece web geliştirme için uygun bir dildir. / Python, her programlama dilinde olduğu gibi noktalı virgül kullanır. / Python, İngilizceye benzer bir söz dizimine sahiptir. / Python, yalnızca matematiksel hesaplamalar için kullanılır.
+   - **Doğru cevap:** Python, İngilizceye benzer bir söz dizimine sahiptir.
+   - **Kaynak alıntısı:** python' İngilizceye benzer basit bir söz dizimi vardır
+   - **Kaynak zamanı:** 2:12 · alıntı transkriptte bulundu: evet
+3. **rag-4** · koşul rag · hedef düzey Hatırlama
+   - **Soru:** Python 2 ve Python 3 arasında önemli bir uyumsuzluk bulunmaktadır. Bu uyumsuzluk neyi ifade etmektedir?
+   - **Seçenekler:** Python 2 ve Python 3 arasında tam uyum yoktur. / Python 3, Python 2'nin tüm özelliklerini destekler. / Python 3, Python 2'den daha az güncellenmiştir. / Python 2 kodları Python 3'te çalışabilir.
+   - **Doğru cevap:** Python 2 ve Python 3 arasında tam uyum yoktur.
+   - **Kaynak alıntısı:** python 3 dikkatli dinleyin önceki python sürümlerine tam uyumlu değil maalesef yani python 2 kodları python 3'te çalışmayabilir
+   - **Kaynak zamanı:** 4:39 · alıntı transkriptte bulundu: evet
+
+### Ek çalıştırmanın ham çıktısı (olduğu gibi)
+
+```
+BGE-M3 ilk yüklenme süresi: 21.9 sn (hiçbir videonun süresine dahil değil)
+
+=== biyoloji (109kCbVtU1U) ===
+  dosya var, atlandı
+
+=== tarih (aaCHLYO3Fzg) ===
+  dosya var, atlandı
+
+=== matematik (edSvMQ77TmU) ===
+  dosya var, atlandı
+
+=== ingilizce (FetnCoTS9qY) ===
+  dosya var, atlandı
+
+=== edebiyat (fgOxbhEMnQQ) ===
+  video: Milli Edebiyat Dönemi Hikâyesi  | 10. Sınıf Edebiyat #2026 · kanal: tonguç 10. SINIF
+  süre 12:35 · dil tr · otomatik altyazı True · kelime 1881 · parça 16
+  [konu] 6 konu · süre 6.2 sn · token 4829 girdi + 261 çıktı · maliyet 0.000881 USD
+    1. [Yaratma] Milli Edebiyat Dönemi Tanımı
+    2. [Anlama] Yeni Lisan Hareketi
+    3. [Değerlendirme] Edebiyatın Temaları
+    4. [Uygulama] Osmanlıcılık Akımı
+    5. [Çözümleme] Olay ve Durum Hikayeleri
+    6. [Hatırlama] Milli Edebiyat Dönemi Yazarları
+  [full] sonuçlar: ok, ok, ok, ok, ok, ok · {'ok': 6, 'empty': 0, 'invalid': 0, 'duplicate': 0}
+  [full] dönen 6/6 · alıntısı bulunan 3 · benzer çift 0 · yazım işareti 3 (4, 12, 12)
+  [full] süre 32.5 sn · çağrı 6 · token 35336 girdi + 1493 çıktı · maliyet 0.006196 USD
+  [rag] sonuçlar: ok, ok, ok, ok, ok, ok · {'ok': 6, 'empty': 0, 'invalid': 0, 'duplicate': 0}
+  [rag] dönen 6/6 · alıntısı bulunan 4 · benzer çift 0 · yazım işareti 3 (4, 12, 19)
+  [rag] süre 46.9 sn (dizinleme 22.1 sn, erişim 1.5 sn) · çağrı 6 · token 19333 girdi + 1331 çıktı · maliyet 0.003699 USD
+  toplam 85.7 sn · 62583 token · 0.010776 USD
+  seçilen örnekler: rag-1, full-4, rag-2
+
+=== python (CEr_UiR4Gvk) ===
+  video: Ders 1 Python Programlamaya Giriş · kanal: Fehmi UYAR
+  süre 9:25 · dil tr · otomatik altyazı True · kelime 1239 · parça 11
+  [konu] 6 konu · süre 4.3 sn · token 2757 girdi + 239 çıktı · maliyet 0.000557 USD
+    1. [Değerlendirme] Python Nedir?
+    2. [Uygulama] Python'un Kullanım Alanları
+    3. [Yaratma] Python Söz Dizimi
+    4. [Hatırlama] Python 2 ve 3 Arasındaki Farklar
+    5. [Çözümleme] Python Kütüphaneleri
+    6. [Anlama] Python ile Oyun Geliştirme
+  [full] sonuçlar: ok, ok, ok, ok, ok, ok · {'ok': 6, 'empty': 0, 'invalid': 0, 'duplicate': 0}
+  [full] dönen 6/6 · alıntısı bulunan 5 · benzer çift 0 · yazım işareti 4 (12, 4, 12, 4)
+  [full] süre 20.0 sn · çağrı 6 · token 22884 girdi + 1294 çıktı · maliyet 0.004209 USD
+  [rag] sonuçlar: ok, ok, ok, ok, ok, ok · {'ok': 6, 'empty': 0, 'invalid': 0, 'duplicate': 0}
+  [rag] dönen 6/6 · alıntısı bulunan 6 · benzer çift 0 · yazım işareti 1 (12)
+  [rag] süre 32.3 sn (dizinleme 12.0 sn, erişim 1.6 sn) · çağrı 6 · token 17171 girdi + 1227 çıktı · maliyet 0.003312 USD
+  toplam 56.5 sn · 45572 token · 0.008078 USD
+  seçilen örnekler: full-5, full-3, rag-4
+
+=== Özet ===
+| Video | Süre | Toplam süre (sn) | Toplam token | Maliyet (USD) |
+|---|---|---|---|---|
+| edebiyat | 12:35 | 85.7 | 62583 | 0.010776 |
+| python | 9:25 | 56.5 | 45572 | 0.008078 |
+| TOPLAM | — | 142.2 | 108155 | 0.018854 |
+```

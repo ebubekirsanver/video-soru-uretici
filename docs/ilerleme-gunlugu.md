@@ -807,3 +807,54 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Frontend her 503'ü "Sunucuda OpenAI API anahtarı tanımlı değil" diye gösteriyor; YouTube engelinde arayüzde bu yanlış başlık çıkar (`frontend/lib/api.ts`, bu işte frontend'e dokunulmadı).
   - Pilot 1 betiği transkripti bu önbellek üzerinden değil, bir kez doğrudan da çekiyor.
 
+## questions-v4 ve Pilot 2 hazırlığı (2026-11-04)
+
+- **Neden:** Pilot 1'de dört sorun görüldü: Yaratma düzeyinde boş liste (tarih, matematik), örnek sorunun "iki öğrenci, Ali/Ayşe" kalıbının kopyalanması, cevabın soru kökünde geçmesi, verilen değerlerle cevaplanamayabilen soru. Ana deney tek istem sürümüyle yapılacağı için istem şimdi düzeltilip dondurulacak.
+- **Ne yapıldı:**
+  - **İstem:** `questions_v4_system.txt` v3'ten türetildi: kural 4 değişti, kural 13 ve 14'e ekleme yapıldı, kural 16 ve 17 eklendi, boş liste örneği `skip_reason` içeriyor. Kural numaraları 1-15 korundu. `questions_v4_user.txt` v3 ile aynı.
+  - **Seçim:** `/api/questions` isteğinde `prompt_version` (`questions-v3` / `questions-v4`, varsayılan v3). Yalnızca `context_mode` ile; aksi hâlde 422.
+  - **skip_reason:** v4'te model boş liste döndürürse gerekçe `topic_generation.per_topic[].skip_reason` alanına yazılıyor. v3'te ve soru dönen konularda null. API yanıtında yok.
+  - **Kayıt:** İstem sürümü yanıtta ve `topic_generation` içinde sabit v3 yazılıyordu; artık istekteki sürüm yazılıyor. Kayıt sürümü 9.
+  - **Pilot 2:** Plan ve betik yazıldı (`docs/bulgular/pilot-2/`), çalıştırılmadı.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 434 test geçti (önceki 409 ve 25 yeni test, `tests/test_questions_v4.py`). Sürümü denetleyen testler 8'den 9'a güncellendi.
+  - Sahte LLM kullanıldı; testlerde OpenAI'a ve YouTube'a gerçek istek atılmadı.
+  - Pilot 2 betiği geçici klasörde sahte LLM, gömme ve transkriptle uçtan uca denendi (bir video engelli senaryosuyla). İşaret fonksiyonları pilot 1'in gerçek sorularında denendi: tarih rag-2 ve matematik rag-2 "olası cevap kökte", üç soru "örnek sızıntısı" olarak işaretlendi. Bu deneme isabet ölçümü değildir.
+- **YouTube engeli:** 4 Kasım 2026'da tek transkript isteğiyle (Python videosu, `CEr_UiR4Gvk`) denendi, engel sürüyor. Plana göre yeniden denenmedi; pilot 1 eki yapılmadı, edebiyat ve Python pilot 2'ye girmedi.
+- **Bilinen sınırlar:**
+  - v4 gerçek modelle hiç denenmedi; dört soruna etkisi bilinmiyor.
+  - `backend/transcripts/` boş; dört pilot videonun transkripti önbellekte değil. Engel sürerken Pilot 2 çalıştırılamaz.
+  - Boş liste örneğinin giriş cümlesindeki "açıkça geçmiyorsa" da "hiç geçmiyorsa" yapıldı; görevdeki listede yazmıyordu, kural 4 ile çelişmesin diye değiştirildi.
+  - Frontend'deki `QuestionsRequest` türünde `prompt_version` yok; arayüz v3 ile çalışır.
+
+## Pilot 1 eki ve Pilot 2 çalıştırması (2026-11-04)
+
+- **Ne yapıldı:**
+  - Bilgisayar telefonun internetine bağlandı; altı videonun transkripti de alındı, engel çıkmadı. Dört videonun transkripti Pilot 2 başında YouTube'dan alınıp önbelleğe yazıldı.
+  - **Pilot 1 eki:** Edebiyat ve Python tamamlandı (`questions-v3`, 26 çağrı, 0,018854 USD). `pilot-1.md` sonuna "Ek çalıştırma" bölümü eklendi; var olan metin değişmedi. Yarım dosyalar `-yarim` adıyla duruyor, özet `pilot-1-ek-ozet.json` dosyasında. `pilot-1.py` transkripti artık önbellek üzerinden alıyor.
+  - **Pilot 2:** Altı video, planlanan 144 çağrının 137'si yapıldı, 0,135504 USD. Sonuçlar `docs/bulgular/pilot-2/pilot-2.md` dosyasında.
+- **Matematik v4 eksik:** `v4-full` çalıştırmasının 5. konusunda model 16384 çıktı token üretti (167,2 sn) ve yanıt geçerli JSON olmadı; istek 502 verdi. Plan gereği yeniden denenmedi; `v4-rag` de çalıştırılmadı. Bu çalıştırmanın ham model yanıtı kayıtta yok.
+- **Rapor düzeltmesi:** Çalıştırmadan sonra `pilot-2.py` değişti: toplam satırları yalnızca dört çalıştırması da tamam olan videolardan hesaplanıyor, hatalı çalıştırmanın harcaması rapora giriyor. Matematik JSON'una kayıttan `error.failed_run` eklendi; rapor yeniden üretildi, yeni model çağrısı yapılmadı.
+- **Nasıl doğrulandı:** `pytest` sonucu: 434 test geçti. Gizli bilgi taraması: pilot 2 JSON dosyaları ve rapor, pilot 1 eki dosyaları ve ham çıktı tarandı; eşleşme yok.
+- **Bilinen sınırlar:**
+  - Her çalıştırma bir kez yapıldı; kalite ve Bloom uyumu ölçülmedi.
+  - "Olası cevap kökte" ve "örnek sızıntısı" kaba işaretlerdir.
+  - Kodda model çıktısı için ayrı bir token sınırı yok; yanıt modelin kendi sınırına kadar uzayabiliyor.
+  - İstem sürümü henüz dondurulmadı; varsayılan v3.
+
+## Soru üretiminde çıktı token sınırı ve matematik v4 (2026-11-04)
+
+- **Neden:** Pilot 2'de matematik `v4-full`, bir konuda 16384 çıktı token üretip isteğin tamamını düşürmüştü.
+- **Ne yapıldı:**
+  - **Token sınırı:** `config.py` içinde `question_max_tokens` (varsayılan 1000, ortam değişkeni `QUESTION_MAX_TOKENS`). Yalnızca konu tabanlı soru üretiminde (v3 ve v4) gönderiliyor; konu çıkarma, özet, destek kontrolü ve `questions-v1` çağrılarında sınır yok.
+  - **Kesilme:** `finish_reason = "length"` olursa `LLMTruncated` fırlatılıyor; konu `invalid` sayılıyor, kayda `per_topic[].truncated: true` yazılıyor, diğer konular sürüyor. Kesilen çağrının token sayıları kayda giriyor. Kayıt sürümü 10; `topic_generation.max_tokens` da yazılıyor.
+  - **`LLMClient.complete`:** `max_tokens` parametresi aldı; testlerdeki sahte istemcilerin imzası güncellendi.
+  - **Pilot 2:** `pilot-2.py --eksik <alan>` eklendi. `pilot-2-matematik.json` içinde `error` temizlendi, hatalı ilk çalıştırma `failed_runs` alanına taşındı. Matematik `v4-full` ve `v4-rag` birer kez çalıştırıldı (12 çağrı, 0,012618 USD); rapor altı videoyla yeniden üretildi. Plan güncellemesi çalıştırmadan önce `pilot-2.md`'ye yazıldı.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 441 test geçti (önceki 434 ve 7 yeni test). Sahte LLM kullanıldı.
+  - Matematik JSON'unda v3 sonuçlarının ve hatalı çalıştırma harcamasının değişmediği önceki kopyayla karşılaştırıldı.
+  - Gerçek çalıştırmada hiçbir yanıt sınıra takılmadı (en uzun 299 çıktı token); kesilme davranışı yalnızca sahte yanıtla sınandı.
+- **Bilinen sınırlar:**
+  - Matematiğin v4 çalıştırmaları sınırla, Pilot 2'nin diğer çalıştırmaları sınırsız yapıldı. Sınırsız çalıştırmalarda tamamlanan en uzun yanıt 339 çıktı token idi.
+  - 16384 token üreten çağrının nedeni bilinmiyor; ham yanıt kayıtta yok, kesilen yanıtlarda da yazılmıyor.
+  - Pilot 2'nin toplam harcaması 149 çağrı, 0,148122 USD (hatalı çalıştırma dahil).

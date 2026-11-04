@@ -1,0 +1,15 @@
+{
+  "experiment": "pilot-1",
+  "name": "python",
+  "video_id": "CEr_UiR4Gvk",
+  "url": "https://youtu.be/CEr_UiR4Gvk",
+  "run_at": "2026-11-04T20:17:14+03:00",
+  "error": {
+    "type": "TranscriptUnavailable",
+    "detail": "Transkript YouTube'dan alınamadı."
+  },
+  "video": {
+    "title": "Ders 1 Python Programlamaya Giriş",
+    "channel": "Fehmi UYAR"
+  }
+}
