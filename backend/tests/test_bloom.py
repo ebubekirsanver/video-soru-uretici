@@ -63,7 +63,7 @@ class BloomLLM:
         self.extracted = extracted
         self.calls = []
 
-    def complete(self, system, user, json_mode=False):
+    def complete(self, system, user, json_mode=False, max_tokens=None):
         if "konu çıkaran" in system:  # topics_v1_system.txt
             return json.dumps({"topics": [{"title": t, "description": f"{t} anlatılıyor."} for t in self.extracted]},
                               ensure_ascii=False)
@@ -258,7 +258,7 @@ def test_v1_unchanged(setup):
         def __init__(self):
             self.systems = []
 
-        def complete(self, system, user, json_mode=False):
+        def complete(self, system, user, json_mode=False, max_tokens=None):
             self.systems.append(system)
             return json.dumps({"questions": [{"question": "Mitoz nedir?", "options": ["a", "b", "c", "d"],
                                               "correct_index": 0, "explanation": "x",

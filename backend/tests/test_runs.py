@@ -27,7 +27,7 @@ class FakeLLM:
     def __init__(self, response):
         self.response = response
 
-    def complete(self, system, user, json_mode=False):
+    def complete(self, system, user, json_mode=False, max_tokens=None):
         return self.response
 
 
@@ -136,7 +136,7 @@ def test_quote_audit_in_record(runs_enabled, use_llm, fake_transcript):
 
     (path,) = saved_files(runs_enabled)
     record = json.loads(path.read_text(encoding="utf-8"))
-    assert record["record_version"] == 8  # transkript kaynağı eklendiği için sürüm 8
+    assert record["record_version"] == 10  # token sınırı eklendiği için sürüm 10
     assert record["response"] == r.json()  # yanıt kayıtta değiştirilmeden durur
 
     exact, trimmed, unverified = record["quote_audit"]
@@ -173,7 +173,7 @@ def test_summary_record_has_no_quote_audit(runs_enabled, use_llm, fake_transcrip
     (path,) = saved_files(runs_enabled)
     record = json.loads(path.read_text(encoding="utf-8"))
     # transkript kaynağı eklendiği için sürüm 8
-    assert record["record_version"] == 8 and "quote_audit" not in record and "support_check" not in record
+    assert record["record_version"] == 10 and "quote_audit" not in record and "support_check" not in record
 
 
 def test_load_run_reads_old_format_record():
@@ -192,7 +192,7 @@ def test_load_run_reads_new_format_record(runs_enabled, use_llm, fake_transcript
     (path,) = saved_files(runs_enabled)
     record = runs.load_run(path)
     # transkript kaynağı eklendiği için sürüm 8
-    assert record["record_version"] == 8 and len(record["quote_audit"]) == 3 and record["support_check"] is None
+    assert record["record_version"] == 10 and len(record["quote_audit"]) == 3 and record["support_check"] is None
 
 
 def test_saved_run_contains_no_api_key(runs_enabled, use_llm, fake_transcript):

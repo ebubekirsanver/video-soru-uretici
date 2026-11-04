@@ -99,6 +99,10 @@ class QuestionsRequest(BaseModel):
         description="topics ile aynı sırada ve uzunlukta hedef Bloom düzeyleri. Yalnızca topics ile verilebilir. "
         "Verilmezse 6 konuya 6 düzey, video_id'den türetilen sabit tohumla eşlenir; konu sayısı 6 değilse verilmesi gerekir.",
     )
+    # --- Pilot 2: istem sürümü seçimi; varsayılan v3, karar Pilot 2'den sonra ---
+    prompt_version: Literal["questions-v3", "questions-v4"] = Field(
+        default="questions-v3", description="Konu tabanlı üretimin istem sürümü. Yalnızca context_mode ile."
+    )
 
     @field_validator("topics")
     @classmethod
@@ -112,8 +116,8 @@ class QuestionsRequest(BaseModel):
 
     @model_validator(mode="after")
     def _check_condition_fields(self) -> "QuestionsRequest":
-        if self.context_mode is None and {"topics", "k", "bloom_levels"} & self.model_fields_set:
-            raise ValueError("topics, k ve bloom_levels yalnızca context_mode ile kullanılabilir")
+        if self.context_mode is None and {"topics", "k", "bloom_levels", "prompt_version"} & self.model_fields_set:
+            raise ValueError("topics, k, bloom_levels ve prompt_version yalnızca context_mode ile kullanılabilir")
         if self.bloom_levels is not None:
             if self.topics is None:
                 raise ValueError("bloom_levels yalnızca topics ile birlikte verilebilir")
@@ -137,7 +141,7 @@ class QuestionsRequest(BaseModel):
         # Eski biçimli (context_mode'suz) isteklerin çalıştırma kaydındaki gövdesi değişmesin
         data = handler(self)
         if self.context_mode is None and isinstance(data, dict):
-            for key in ("context_mode", "topics", "k", "bloom_levels"):
+            for key in ("context_mode", "topics", "k", "bloom_levels", "prompt_version"):
                 data.pop(key, None)
         return data
 

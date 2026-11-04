@@ -21,6 +21,10 @@ class LLMNotConfigured(LLMError):
     """LLM için gerekli ayar (örneğin API anahtarı) tanımlı değil."""
 
 
+class LLMTruncated(LLMError):
+    """Yanıt `max_tokens` sınırına takılıp kesildi (finish_reason = "length")."""
+
+
 # Son model çağrısının token bilgisi (Aşama 14). İstemcide değil, isteğin
 # bağlamında tutulur: istemci istekler arasında paylaşılsa bile aynı anda gelen
 # iki istek birbirinin bilgisini görmez. Okuyan: services/metrics.py
@@ -44,8 +48,11 @@ def _record_usage(usage) -> None:
 class LLMClient(Protocol):
     model: str
 
-    def complete(self, system: str, user: str, json_mode: bool = False) -> str:
-        """Sistem ve kullanıcı mesajını gönderir, modelin metin yanıtını döndürür."""
+    def complete(self, system: str, user: str, json_mode: bool = False, max_tokens: int | None = None) -> str:
+        """Sistem ve kullanıcı mesajını gönderir, modelin metin yanıtını döndürür.
+
+        `max_tokens` verilirse yanıt bu sınırda kesilir ve LLMTruncated fırlatılır.
+        """
         ...
 
 
@@ -66,11 +73,13 @@ class OpenAIClient:
             self._client = OpenAI(api_key=self._api_key)
         return self._client
 
-    def complete(self, system: str, user: str, json_mode: bool = False) -> str:
+    def complete(self, system: str, user: str, json_mode: bool = False, max_tokens: int | None = None) -> str:
         client = self._get_client()
         kwargs = {}
         if json_mode:
             kwargs["response_format"] = {"type": "json_object"}
+        if max_tokens is not None:
+            kwargs["max_tokens"] = max_tokens
         try:
             response = client.chat.completions.create(
                 model=self.model,
@@ -86,6 +95,9 @@ class OpenAIClient:
 
         # Token sayıları yalnızca ölçüm için saklanır; dönüş değeri yine metindir
         _record_usage(getattr(response, "usage", None))
+        # Sınır isteyen çağrılar kesilmeyi ayırt eder; diğer çağrıların davranışı değişmez
+        if max_tokens is not None and getattr(response.choices[0], "finish_reason", None) == "length":
+            raise LLMTruncated(f"LLM yanıtı {max_tokens} token sınırında kesildi.")
         content = response.choices[0].message.content
         if not content:
             raise LLMError("LLM boş yanıt döndürdü.")

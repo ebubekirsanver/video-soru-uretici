@@ -18,7 +18,7 @@ class FakeLLM:
     def __init__(self, response="", error=None):
         self.response, self.error, self.calls = response, error, []
 
-    def complete(self, system, user, json_mode=False):
+    def complete(self, system, user, json_mode=False, max_tokens=None):
         self.calls.append({"system": system, "user": user, "json_mode": json_mode})
         if self.error:
             raise self.error

@@ -29,7 +29,7 @@ class RoutingLLM:
         self.questions_json, self.verdicts = questions_json, list(verdicts)
         self.question_calls, self.support_calls = [], []
 
-    def complete(self, system, user, json_mode=False):
+    def complete(self, system, user, json_mode=False, max_tokens=None):
         if "değerlendiricisin" in system:  # support_v1_system.txt
             self.support_calls.append(user)
             return self.verdicts.pop(0)
@@ -150,7 +150,7 @@ def test_on_record_has_support_check(setup, runs_dir):
     r = client.post("/api/questions", json={"url": VID, "check_support": True})
     (path,) = runs_dir.glob("*.json")
     record = runs.load_run(path)
-    assert record["record_version"] == 8  # transkript kaynağı eklendiği için sürüm 8
+    assert record["record_version"] == 10  # token sınırı eklendiği için sürüm 10
     assert record["request"]["check_support"] is True
     assert record["response"] == r.json()
     sc = record["support_check"]

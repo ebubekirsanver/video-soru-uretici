@@ -102,7 +102,7 @@ QUESTIONS = {
 class TopicLLM:
     model = "fake-model"
 
-    def complete(self, system, user, json_mode=False):
+    def complete(self, system, user, json_mode=False, max_tokens=None):
         topic = re.search(r"^Konu: (.+)$", user, re.MULTILINE).group(1)
         question, answer, quote = QUESTIONS[topic]
         item = {"question": question, "options": [answer, "Işık enerjisi", "Isı", "Ses"],
@@ -113,7 +113,7 @@ class TopicLLM:
 class V1LLM:
     model = "fake-model"
 
-    def complete(self, system, user, json_mode=False):
+    def complete(self, system, user, json_mode=False, max_tokens=None):
         items = [
             {"question": question, "options": [answer, "Işık enerjisi", "Isı", "Ses"], "correct_index": 0,
              "explanation": "açıklama", "source_quote": quote}
@@ -182,7 +182,7 @@ def test_api_similar_pair_flagged_questions_not_dropped(setup):
     assert "similarity" not in r.text  # API yanıtı değişmedi
 
     record = last_record(setup.runs_dir)
-    assert record["record_version"] == 8
+    assert record["record_version"] == 10
     sc = record["similarity_check"]
     assert sc["rules_version"] == "similarity-v1"
     assert sc["threshold"] == SIMILARITY_THRESHOLD == 0.80 and "threshold_provisional" not in sc

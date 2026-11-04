@@ -62,7 +62,13 @@ RunKind = Literal["summary", "questions", "topics"]
 # 8 (transkript önbelleği): + metrics.transcript_source ("cache" / "youtube");
 #    hata kayıtlarında error.kind "youtube_blocked" olabilir. backend/runs'ta
 #    sürüm 7 kayıtları bulunduğu için sürüm arttı.
-RECORD_VERSION = 8
+# 9 (questions-v4): + topic_generation.per_topic[].skip_reason (v4'te modelin boş
+#    liste gerekçesi; v3'te ve soru dönen konularda null). request içinde
+#    prompt_version (context_mode verilmiş isteklerde).
+# 10 (çıktı token sınırı): + topic_generation.max_tokens ve
+#    topic_generation.per_topic[].truncated (yanıt sınırda kesildiyse true; konunun
+#    sonucu "invalid"). backend/runs'ta sürüm 9 kayıtları bulunduğu için sürüm arttı.
+RECORD_VERSION = 10
 
 
 def _now() -> datetime:

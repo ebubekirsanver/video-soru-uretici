@@ -63,7 +63,7 @@ def test_rule_16_not_flagged_on_final_questions():
     class FakeLLM:
         model = "fake"
 
-        def complete(self, system, user, json_mode=False):
+        def complete(self, system, user, json_mode=False, max_tokens=None):
             return json.dumps(
                 {
                     "questions": [

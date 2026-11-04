@@ -30,7 +30,7 @@ from app.services.summary import summarize
 from app.services.support_check import SUPPORT_PROMPT_VERSION, check_support
 from app.services.text_clean import clean_transcript, prepare_transcript
 from app.services.bloom import seeded_mapping
-from app.services.topic_questions import PROMPT_VERSION_V3, generate_topic_questions
+from app.services.topic_questions import generate_topic_questions
 from app.services.topics import PROMPT_VERSION as TOPICS_PROMPT_VERSION
 from app.services.topics import TopicExtraction, extract_topics
 from app.services.transcript import Transcript, TranscriptBlocked, TranscriptUnavailable, fetch_transcript
@@ -265,16 +265,19 @@ def get_questions(
                 rag = body.context_mode == "rag"
                 # Dizin yalnızca RAG isteğinde açılır
                 index = index_provider() if rag else None
+                max_tokens = get_settings().question_max_tokens
                 # Dizinleme (index_ms) ve erişim (retrieval_ms) ayrı ölçülür, quote_verify_ms'ten düşülür
                 with m.model_step("llm_questions", "quote_verify", "questions", exclude=("index", "retrieval")):
                     generation = generate_topic_questions(
                         topics, body.context_mode, context, reference, m.track(llm, "questions"),
                         bloom_levels=bloom_levels, index=index, k=body.k, timer=m.accumulate,
+                        prompt_version=body.prompt_version, max_tokens=max_tokens,
                     )
                 questions = generation.questions
                 m.dropped = generation.dropped
                 topic_generation = {
-                    "prompt_version": PROMPT_VERSION_V3,
+                    "prompt_version": body.prompt_version,
+                    "max_tokens": max_tokens,
                     "context_mode": body.context_mode,
                     "k": body.k if rag else None,
                     "topics": topics,
@@ -348,7 +351,7 @@ def get_questions(
         video_id=raw.video_id,
         transcript_mode=body.transcript_mode,
         model=llm.model,
-        prompt_version=PROMPT_VERSION_V3 if body.context_mode else PROMPT_VERSION,
+        prompt_version=body.prompt_version if body.context_mode else PROMPT_VERSION,
         # Konu tabanlı üretimde istenen soru sayısı kullanılan konu sayısıdır
         requested_count=len(topics) if body.context_mode else body.count,
         returned_count=len(questions),

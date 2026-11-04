@@ -123,12 +123,12 @@ class TrackedLLM:
         self.inner, self.metrics, self.purpose = inner, metrics, purpose
         self.model = inner.model
 
-    def complete(self, system: str, user: str, json_mode: bool = False) -> str:
+    def complete(self, system: str, user: str, json_mode: bool = False, max_tokens: int | None = None) -> str:
         reset_usage()
         start = clock()
         ok = False
         try:
-            result = self.inner.complete(system=system, user=user, json_mode=json_mode)
+            result = self.inner.complete(system=system, user=user, json_mode=json_mode, max_tokens=max_tokens)
             ok = True
             return result
         except LLMNotConfigured:

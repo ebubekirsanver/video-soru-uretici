@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     app_name: str = "Video Soru Üretici"
     openai_api_key: str = ""
     openai_model: str = "gpt-4o-mini"
+    # Konu tabanlı soru üretiminde (questions-v3/v4) bir yanıtın en çok çıktı token sayısı
+    question_max_tokens: int = 1000
     # Virgülle ayrılmış dil kodları, sırayla denenir
     transcript_languages: str = "tr,en"
     # Başarılı özet/soru yanıtları yerelde dosyaya kaydedilsin mi

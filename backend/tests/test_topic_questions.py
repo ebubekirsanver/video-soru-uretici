@@ -95,7 +95,7 @@ class TopicLLM:
         self.summary_topics = summary_topics or [t for t, _, _ in TOPIC_SEGMENTS]
         self.question_calls, self.summary_calls, self.topic_calls = [], [], []
 
-    def complete(self, system, user, json_mode=False):
+    def complete(self, system, user, json_mode=False, max_tokens=None):
         if "özetleyen" in system:  # summary_system.txt
             self.summary_calls.append(user)
             topics = [{"title": t, "start_seconds": 0} for t in self.summary_topics]
@@ -191,7 +191,7 @@ def test_without_context_mode_old_behavior(setup):
     class V1LLM:
         model = "fake-model"
 
-        def complete(self, system, user, json_mode=False):
+        def complete(self, system, user, json_mode=False, max_tokens=None):
             return json.dumps({"questions": [question_for("mitoz bölünme")]}, ensure_ascii=False)
 
     setup(V1LLM())
@@ -436,7 +436,7 @@ def test_record_v6_rag_fields(setup):
     assert body["context_mode"] == "rag" and body["prompt_version"] == "questions-v3"  # Aşama 8: v2 yerine v3
 
     record = last_record(setup.runs_dir)
-    assert record["record_version"] == 8  # transkript kaynağı eklendiği için sürüm 8
+    assert record["record_version"] == 10  # token sınırı eklendiği için sürüm 10
     assert record["response"] == body
     assert record["request"]["context_mode"] == "rag" and record["request"]["k"] == 2
     tg = record["topic_generation"]

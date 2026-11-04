@@ -157,7 +157,7 @@ client = TestClient(app)
 class SummaryLLM:
     model = "fake-model"
 
-    def complete(self, system, user, json_mode=False):
+    def complete(self, system, user, json_mode=False, max_tokens=None):
         return json.dumps({"summary": "Özet.", "topics": [{"title": "Giriş", "start_seconds": 0}]}, ensure_ascii=False)
 
 
@@ -189,7 +189,7 @@ def test_api_second_request_uses_cache_and_records_source(api):
     assert len(yt.calls) == 1
     sources = sorted(r["metrics"]["transcript_source"] for r in records(api.runs_dir))
     assert sources == ["cache", "youtube"]
-    assert all(r["record_version"] == 8 for r in records(api.runs_dir))
+    assert all(r["record_version"] == 10 for r in records(api.runs_dir))
 
 
 def test_api_transcript_endpoint_also_uses_cache(api):
