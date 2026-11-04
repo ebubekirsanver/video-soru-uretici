@@ -40,6 +40,7 @@ class RunMetrics:
         self.llm_calls: list[dict] = []
         self.dropped: dict[str, int] | None = None
         self.failed_stage: str | None = None
+        self.transcript_source: str | None = None  # "cache" ya da "youtube"
 
     @contextmanager
     def stage(self, name: str):
@@ -107,6 +108,8 @@ class RunMetrics:
         }
         if self.dropped is not None:
             data["dropped"] = self.dropped
+        if self.transcript_source is not None:
+            data["transcript_source"] = self.transcript_source
         return data
 
 
@@ -173,7 +176,7 @@ def scrub_secrets(text: str, known_secrets: tuple[str, ...] = ()) -> str:
 
 ErrorKind = Literal[
     "invalid_url", "transcript_unavailable", "llm_not_configured", "llm_failed", "invalid_json",
-    "embedding_unavailable", "bloom_mapping",
+    "embedding_unavailable", "bloom_mapping", "youtube_blocked",
 ]
 
 

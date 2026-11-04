@@ -1,6 +1,6 @@
 # Mimari ile kodun karşılaştırması
 
-> **Not (2026-10-31):** Bu karşılaştırma eski mimari görseline göredir; yeni görsel 31 Ekim'de eklendi; karşılaştırma RAG hattından sonra yenilenecek.
+> **Not (2026-10-31):** Bu karşılaştırma eski mimari görseline göredir; yeni görsel 31 Ekim'de eklendi; karşılaştırma RAG hattından sonra yenilenecek. Görsel 4 Kasım 2026'da Hafta-2 geri bildirimine göre güncellendi (bölütleme: sabit boyutlu ana deney, anlamsal ikincil deney; soru üretimine 6 konu × 6 Bloom düzeyi eklendi).
 
 **Tarih:** 19 Ekim 2026 · **Kod durumu:** commit `b6431b7`
 

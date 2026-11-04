@@ -141,7 +141,7 @@ def test_api_topics_success_and_record(setup):
 
     path, record = only_record(setup.runs_dir)
     assert path.name.endswith("-topics.json")
-    assert record["record_version"] == 7 and record["endpoint"] == "/api/topics"
+    assert record["record_version"] == 8 and record["endpoint"] == "/api/topics"
     assert record["response"] == body
     te = record["topic_extraction"]
     assert te["requested_count"] == 6 and te["returned_count"] == 6 and te["dropped"]["extra"] == 1

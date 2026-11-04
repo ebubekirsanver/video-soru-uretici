@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from youtube_transcript_api import (
     CouldNotRetrieveTranscript,
     NoTranscriptFound,
+    RequestBlocked,
     TranscriptsDisabled,
     VideoUnavailable,
     YouTubeTranscriptApi,
@@ -11,6 +12,14 @@ from youtube_transcript_api import (
 
 class TranscriptUnavailable(Exception):
     """Videonun transkripti alınamadı (altyazı yok, kapalı, video erişilemez)."""
+
+
+class TranscriptBlocked(Exception):
+    """YouTube bu ağdan gelen istekleri engelledi (IP engeli ya da istek sınırı).
+
+    Video ya da altyazı sorunu değil, erişim sorunudur; bu yüzden
+    `TranscriptUnavailable` değildir ve HTTP 503'e çevrilir.
+    """
 
 
 @dataclass
@@ -43,6 +52,11 @@ def fetch_transcript(video_id: str, languages: list[str], api: YouTubeTranscript
     api = api or YouTubeTranscriptApi()
     try:
         fetched = api.fetch(video_id, languages=languages)
+    except RequestBlocked as exc:
+        # IpBlocked da RequestBlocked'tır; kütüphane HTTP 429'u da IpBlocked olarak fırlatır
+        raise TranscriptBlocked(
+            "YouTube bu ağdan gelen istekleri geçici olarak engelledi; bir süre sonra ya da başka bir ağdan deneyin."
+        ) from exc
     except NoTranscriptFound as exc:
         raise TranscriptUnavailable(
             f"İstenen dillerde ({', '.join(languages)}) altyazı bulunamadı."

@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     save_runs: bool = True
     # Kayıt klasörü; varsayılan backend/runs (sunucunun başlatıldığı klasörden bağımsız)
     runs_dir: Path = BACKEND_DIR / "runs"
+    # Başarılı transkriptler yerelde saklansın mı (varsayılan backend/transcripts, git dışında)
+    transcript_cache: bool = True
+    transcript_cache_dir: Path = BACKEND_DIR / "transcripts"
     # RAG (Aşama 7a): gömme modeli ve kalıcı ChromaDB dizini (varsayılan backend/chroma, git dışında)
     embedding_model: str = "BAAI/bge-m3"
     chroma_dir: Path = BACKEND_DIR / "chroma"

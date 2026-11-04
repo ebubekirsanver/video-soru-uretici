@@ -16,7 +16,7 @@ YouTube ders videosu bağlantısından zaman damgalı transkript çıkaran, tran
 - **Değerlendirme:** iki kör değerlendirici, Cohen's kappa; 10 öğrenciyle SUS. Ayrıntı: `docs/yol-haritasi.md` (Plan güncellemesi, 2026-10-31).
 
 ## Önce oku
-- `docs/02-teknik-mimari.png`: dört katmanlı mimari (Sunum, Uygulama ve Orkestrasyon, Veri ve İndeksleme, Yapay Zekâ ve Bilişsel Doğrulama)
+- `docs/02-teknik-mimari.png`: veri akışı (video → transkript → sabit boyutlu bölütleme → dizin → konu ve Bloom düzeyine göre soru üretimi → otomatik denetim → öğretmen onayı), AS1 karşılaştırma koşulu ve sunum, uygulama, değerlendirme katmanları
 - `docs/01-literatur-degerlendirmesi.docx`: her tasarım kararının literatür gerekçesi
 - `docs/yol-haritasi.md`: aşamalar
 - `docs/ilerleme-gunlugu.md`: biten aşamaların kaydı
@@ -57,7 +57,7 @@ npm run typecheck
 ```
 
 ## Şu anki durum
-**Backend (Aşama 0, 1, 2, 5, 6 tamamlandı):** iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma; seçeneklerin tamamı aynı birimle sayı ya da yılsa karıştırılmaz, küçükten büyüğe sıralanır). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Özet konu zamanlarında blok etiketi kontrolü var (`start_verified`: modelin verdiği değer isteme verilen blok etiketlerinden biri mi; değer değiştirilmez); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Testler: `pytest` → 390 test.
+**Backend (Aşama 0, 1, 2, 5, 6 tamamlandı):** iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma; seçeneklerin tamamı aynı birimle sayı ya da yılsa karıştırılmaz, küçükten büyüğe sıralanır). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Özet konu zamanlarında blok etiketi kontrolü var (`start_verified`: modelin verdiği değer isteme verilen blok etiketlerinden biri mi; değer değiştirilmez); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Testler: `pytest` → 409 test.
 
 **Aşama 7a (RAG altyapısı): kısmen.** Sabit boyutlu parçalar (`services/chunking.py`, `fixed-150-30`), BGE-M3 gömme katmanı (`services/embeddings.py`), ChromaDB dizini ve erişim (`services/retrieval.py`); soru üretimine 7b'de bağlandı.
 
@@ -66,6 +66,8 @@ npm run typecheck
 **Konu çıkarma (topics-v1):** `POST /api/topics` videodan birbirinden farklı, videonun farklı bölümlerini kapsayan konular çıkarır (`services/topics.py`, varsayılan 6); `context_mode` verilip `topics` verilmezse `/api/questions` konuları buradan alır. Konu metni "Başlık: açıklama"; kayıt sürümü 7. Gerçek videoda denenmedi.
 
 **Aşama 8 (Bloom yönlendirmeli istem): kısmen.** `context_mode` verilmiş isteklerde istem `questions-v3`: her konuya bir hedef Bloom düzeyi eşlenir ve isteme yalnızca o düzeyin tanımı ile örnek sorusu konur (`services/bloom.py`, `app/prompts/bloom_levels.json` = `docs/bloom-istem-protokolu.md`). Eşleme istekte `bloom_levels` ile ya da 6 konuda video_id tohumuyla; 6 dışı konuda `bloom_levels` zorunlu. Modelin `reasoning` metni yalnızca kayıtta. Gerçek videoda denenmedi, düzey uyumu ölçülmedi.
+
+**Transkript önbelleği:** Başarıyla çekilen transkript `backend/transcripts/` altında saklanır (`services/transcript_cache.py`, git dışında; ayar `TRANSCRIPT_CACHE`); aynı video ve dil listesi için YouTube'a gidilmez. YouTube engeli (`IpBlocked` / `RequestBlocked`) 503 ve ayrı mesaj verir; kayıtta `metrics.transcript_source` ve hata türü `youtube_blocked`, kayıt sürümü 8.
 
 **Aşama 14 (izleme ve günlükleme): kısmen, kayıt tarafı tamam.** Özet ve soru istekleri `backend/runs/` altına kaydediliyor (`services/runs.py`, git dışında; `services/metrics.py`). Kayıtta aşama bazlı süre (`metrics.stages`), her model çağrısının süresi, model adı ve token sayıları (`metrics.llm_calls`), atılan soru sayıları (`metrics.dropped`) var; hatalı istekler `-error` kaydı olarak yazılıyor (`error`: status_code, kind, detail, stage; gizli bilgi ve `si=` temizlenir). `record_version` 4. API yanıtı değişmedi. Gerçek çalıştırmada elle doğrulandı (2026-10-20, `docs/bulgular/asama-14-gercek-calistirma-1.md`; tek çalıştırma). Yok: maliyet hesabı (fiyat kullanıcıdan gelecek, kayda yazılmıyor), kayıtları görme/özetleme aracı; günlük (logging) yapılandırması bakılmadı.
 

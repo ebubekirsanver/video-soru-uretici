@@ -436,7 +436,7 @@ def test_record_v6_rag_fields(setup):
     assert body["context_mode"] == "rag" and body["prompt_version"] == "questions-v3"  # Aşama 8: v2 yerine v3
 
     record = last_record(setup.runs_dir)
-    assert record["record_version"] == 7  # konu çıkarma (topics-v1) kayıtları eklendiği için sürüm 7
+    assert record["record_version"] == 8  # transkript kaynağı eklendiği için sürüm 8
     assert record["response"] == body
     assert record["request"]["context_mode"] == "rag" and record["request"]["k"] == 2
     tg = record["topic_generation"]

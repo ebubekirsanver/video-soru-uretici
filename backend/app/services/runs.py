@@ -59,7 +59,10 @@ RunKind = Literal["summary", "questions", "topics"]
 #    hedef düzey), bloom_mapping_source ("request" / "seeded") ve
 #    questions_reasoning (her sorunun reasoning metni); per_topic[].bloom_level.
 #    Sürüm 7 henüz hiçbir gerçek kayıtta kullanılmamışken eklendi; sürüm 7'de kaldı.
-RECORD_VERSION = 7
+# 8 (transkript önbelleği): + metrics.transcript_source ("cache" / "youtube");
+#    hata kayıtlarında error.kind "youtube_blocked" olabilir. backend/runs'ta
+#    sürüm 7 kayıtları bulunduğu için sürüm arttı.
+RECORD_VERSION = 8
 
 
 def _now() -> datetime:

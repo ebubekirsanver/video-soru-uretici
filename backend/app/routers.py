@@ -33,7 +33,8 @@ from app.services.bloom import seeded_mapping
 from app.services.topic_questions import PROMPT_VERSION_V3, generate_topic_questions
 from app.services.topics import PROMPT_VERSION as TOPICS_PROMPT_VERSION
 from app.services.topics import TopicExtraction, extract_topics
-from app.services.transcript import Transcript, TranscriptUnavailable, fetch_transcript
+from app.services.transcript import Transcript, TranscriptBlocked, TranscriptUnavailable, fetch_transcript
+from app.services.transcript_cache import load_transcript
 from app.services.writing_check import check_questions as check_writing
 from app.services.youtube import InvalidYouTubeUrl, extract_video_id
 
@@ -103,17 +104,28 @@ def _resolve_bloom_levels(body: QuestionsRequest, topics: list[str], video_id: s
         raise error from exc
 
 
-def _load_transcript(url: str) -> Transcript:
-    """Bağlantıdan video kimliğini çıkarır ve transkripti getirir; hataları HTTP hatasına çevirir."""
+def _load_transcript(url: str, m: RunMetrics | None = None) -> Transcript:
+    """Bağlantıdan video kimliğini çıkarır ve transkripti getirir; hataları HTTP hatasına çevirir.
+
+    Transkript önce önbellekten aranır; kaynağı (`cache` / `youtube`) kayda yazılır.
+    YouTube engeli video sorunu değil erişim sorunu olduğu için 404 değil 503 döner.
+    """
     try:
         video_id = extract_video_id(url)
     except InvalidYouTubeUrl as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     try:
-        return fetch_transcript(video_id, get_settings().transcript_language_list)
+        transcript, source = load_transcript(video_id, get_settings().transcript_language_list, fetch_transcript)
+    except TranscriptBlocked as exc:
+        error = HTTPException(status_code=503, detail=str(exc))
+        error.run_kind = "youtube_blocked"
+        raise error from exc
     except TranscriptUnavailable as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
+    if m is not None:
+        m.transcript_source = source
+    return transcript
 
 
 @router.post("/transcript", response_model=TranscriptResponse)
@@ -141,7 +153,7 @@ def get_topics(body: TopicsRequest, llm: LLMClient = Depends(get_llm)) -> Topics
     m = RunMetrics()
     try:
         with m.stage("transcript_fetch"):
-            raw = _load_transcript(body.url)
+            raw = _load_transcript(body.url, m)
         with m.stage("clean"):
             # Konular her zaman temiz transkriptin tamamından çıkarılır
             transcript = clean_transcript(raw)
@@ -174,7 +186,7 @@ def get_summary(body: SummaryRequest, llm: LLMClient = Depends(get_llm)) -> Summ
     m = RunMetrics()
     try:
         with m.stage("transcript_fetch"):
-            raw = _load_transcript(body.url)
+            raw = _load_transcript(body.url, m)
         with m.stage("clean"):
             transcript = prepare_transcript(raw, body.transcript_mode)
             if not transcript.segments:
@@ -229,7 +241,7 @@ def get_questions(
     m = RunMetrics()
     try:
         with m.stage("transcript_fetch"):
-            raw = _load_transcript(body.url)
+            raw = _load_transcript(body.url, m)
         with m.stage("clean"):
             context = prepare_transcript(raw, body.transcript_mode)
             if not context.segments:

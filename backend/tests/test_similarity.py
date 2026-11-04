@@ -182,7 +182,7 @@ def test_api_similar_pair_flagged_questions_not_dropped(setup):
     assert "similarity" not in r.text  # API yanıtı değişmedi
 
     record = last_record(setup.runs_dir)
-    assert record["record_version"] == 7
+    assert record["record_version"] == 8
     sc = record["similarity_check"]
     assert sc["rules_version"] == "similarity-v1"
     assert sc["threshold"] == SIMILARITY_THRESHOLD == 0.80 and "threshold_provisional" not in sc

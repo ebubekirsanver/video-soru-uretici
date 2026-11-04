@@ -288,7 +288,7 @@ def test_flags_only_in_record_not_in_response(setup):
 
     (path,) = setup.glob("*.json")
     record = runs.load_run(path)
-    assert record["record_version"] == 7  # konu çıkarma (topics-v1) kayıtları eklendiği için sürüm 7
+    assert record["record_version"] == 8  # transkript kaynağı eklendiği için sürüm 8
     assert record["response"] == body  # yanıt kayıtta değiştirilmeden durur
     wc = record["writing_check"]
     assert wc["rules_version"] == RULES_VERSION == "writing-rules-v1"

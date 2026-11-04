@@ -783,3 +783,27 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Her video tek çalıştırma; kalite, kaynağa dayalılık ve Bloom uyumu ölçülmedi.
   - Betik hata anında edebiyatın `full` verisini video dosyasına yazmadı; kayıt `backend/runs` altında, sayılar ham çıktıda.
 
+## Transkript önbelleği ve YouTube engeli için anlaşılır hata (2026-11-04)
+
+- **Neden:** Pilot 1'de her video için transkript defalarca çekildi ve YouTube bu bilgisayarın IP'sini engelledi (`IpBlocked`). Hata, genel "Transkript YouTube'dan alınamadı" mesajına ve 404'e düşüyordu.
+- **Ne yapıldı:**
+  - **Önbellek** (`services/transcript_cache.py`):
+    - Başarıyla çekilen transkript, video_id ve dil listesine göre `backend/transcripts/` altına JSON olarak yazılıyor: segmentler, dil, otomatik altyazı mı, çekilme zamanı.
+    - Sonraki istekler önce önbelleğe bakıyor. Ayarlar `TRANSCRIPT_CACHE` (varsayılan açık) ve `TRANSCRIPT_CACHE_DIR`; klasör git dışında.
+    - Önbellek ham transkripti tutuyor, temizleme her istekte yapılıyor.
+    - Bozuk ya da okunamayan dosya yok sayılıyor, uyarı günlüğe düşüyor ve transkript yeniden çekiliyor. Yazma hatası isteği bozmuyor. Hatalı çekimler yazılmıyor.
+    - Gerekçe kod yorumunda: tekrarlanabilirlik ve YouTube istek sınırı.
+  - **Engel hatası:** Kütüphanenin `RequestBlocked` sınıfı (alt sınıfı `IpBlocked`; kütüphane HTTP 429'u da `IpBlocked` olarak fırlatıyor) artık `TranscriptBlocked` oluyor. Uç noktalar 503 ve "YouTube bu ağdan gelen istekleri geçici olarak engelledi; bir süre sonra ya da başka bir ağdan deneyin." mesajını döndürüyor. Kayıtta hata türü `youtube_blocked`.
+  - **Kayıt:** `metrics.transcript_source` (`cache` / `youtube`). `backend/runs`'ta sürüm 7 kayıtları bulunduğu için kayıt sürümü 8 oldu.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 409 test geçti (önceki 390 ve 19 yeni test, `tests/test_transcript_cache.py`).
+  - Sahte YouTube kullanıldı; YouTube'a ve OpenAI'a gerçek istek atılmadı.
+  - Mevcut testlerdeki değişiklikler:
+    - `tests/conftest.py` testlerde önbelleği kapatıyor; böylece testler birbirini etkilemiyor ve `backend/transcripts/` klasörüne dosya bırakmıyor.
+    - Sürümü denetleyen testler 7'den 8'e güncellendi.
+- **Bilinen sınırlar:**
+  - Gerçek YouTube engeliyle denenmedi; davranış kütüphanenin hata sınıflarıyla sınandı.
+  - Önbelleğin süresi yok: altyazı YouTube'da değişirse yerel dosya silinene kadar eski metin kullanılır.
+  - Frontend her 503'ü "Sunucuda OpenAI API anahtarı tanımlı değil" diye gösteriyor; YouTube engelinde arayüzde bu yanlış başlık çıkar (`frontend/lib/api.ts`, bu işte frontend'e dokunulmadı).
+  - Pilot 1 betiği transkripti bu önbellek üzerinden değil, bir kez doğrudan da çekiyor.
+

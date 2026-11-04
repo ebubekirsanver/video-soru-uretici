@@ -163,4 +163,4 @@ Bunlar yalnızca ana deneyler bittikten sonra, zaman kalırsa yapılır. AS1–A
 
 ### Not
 
-Yeni mimari görseli 31 Ekim'de eklendi; docs/mimari-kod-karsilastirmasi.md 19 Ekim'deki eski görsele göredir.
+Yeni mimari görseli 31 Ekim'de eklendi; docs/mimari-kod-karsilastirmasi.md 19 Ekim'deki eski görsele göredir. Görsel 4 Kasım 2026'da Hafta-2 geri bildirimine göre güncellendi (bölütleme: sabit boyutlu ana deney, anlamsal ikincil deney; soru üretimine 6 konu × 6 Bloom düzeyi eklendi).
