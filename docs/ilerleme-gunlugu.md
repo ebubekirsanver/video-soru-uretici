@@ -858,3 +858,34 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Matematiğin v4 çalıştırmaları sınırla, Pilot 2'nin diğer çalıştırmaları sınırsız yapıldı. Sınırsız çalıştırmalarda tamamlanan en uzun yanıt 339 çıktı token idi.
   - 16384 token üreten çağrının nedeni bilinmiyor; ham yanıt kayıtta yok, kesilen yanıtlarda da yazılmıyor.
   - Pilot 2'nin toplam harcaması 149 çağrı, 0,148122 USD (hatalı çalıştırma dahil).
+
+## Değerlendirme paketi (2026-11-05)
+
+- **Neden:** Güz 13-14'teki pilot etiketlemeden önce kör puanlama dosyalarının ve uyum, AS1, AS2 analizlerinin kodda hazır olması gerekiyor.
+- **Ne yapıldı:** `backend/evaluation/` eklendi; soru üretim koduna ve istemlere dokunulmadı.
+  - `export.py`: Çalıştırma kaydı ya da pilot JSON'undan değerlendirici xlsx dosyaları ve anahtar. Koşul, istem sürümü, hedef düzey, reasoning, alıntı ve otomatik işaretler değerlendirici dosyasına girmiyor.
+  - `labels.py`: Doldurulmuş dosyaları okur; eksik ve geçersiz hücreleri kimlik ve sütunla raporlar.
+  - `agreement.py`: Kappa değerleri ve aralıkları, anlaşmazlık listesi, ortak etiket şablonu.
+  - `analysis.py`: AS1 (kesin McNemar, oran farkı, Wilcoxon, r), AS2 (Wilson, keşfedici düzey sonuçları, karışıklık matrisi), betimsel tablolar. Rapor md ve JSON.
+  - `stats.py`: İstatistikler ve yöntem notları. `README.md`: Kullanım adımları.
+  - `requirements.txt`: `openpyxl==3.1.5`, `scipy==1.18.1`, `statsmodels==0.15.0`.
+- **Deneme:** Pilot 2'nin v3 sonuçlarından `docs/bulgular/degerlendirme-denemesi-1/` altına dosyalar üretildi (tohum 20261105). 69 soru, 3 üretilemeyen konu. Anahtar `anahtar/` alt klasöründe. Etiket uydurulmadı; analiz yalnızca testlerdeki sentetik veriyle çalıştı.
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 526 test geçti (önceki 441 ve 85 yeni test: `tests/test_evaluation_stats.py`, `tests/test_evaluation_flow.py`).
+  - Kappa, Wilson, McNemar ve Wilcoxon elle hesaplanmış örneklerle ve statsmodels ya da scipy ile karşılaştırıldı. Ağırlıklı kappanın değeri statsmodels ile, standart hatası formülün açık yazımıyla karşılaştırıldı; statsmodels ağırlıklı kappada varyans vermiyor.
+  - Deneme dosyasında A ve B'nin aynı olduğu, gizlenen alanların dosyanın ham XML'inde de geçmediği denetlendi.
+- **Bilinen sınırlar:**
+  - Dosyalar Excel'de açılarak denenmedi; openpyxl ile yazılıp okundu. Bu bilgisayarda LibreOffice da yok.
+  - Newcombe oran farkı aralığı yayımlanmış bir sayısal örnekle değil, formülün açık yazımıyla sınandı.
+  - Kappa aralığı büyük örneklem yaklaşımıdır; az soruda güvenilir olmayabilir.
+  - Hafta-2 belgesi depoda yok; uyum, görevdeki metne göre kuruldu.
+  - AS2'de üretilemeyen konunun paydaya girip girmeyeceği karara bağlanmadı; rapor iki sonucu da veriyor.
+  - Deneme dosyaları altı videonun tam temiz transkriptini içeriyor; pilot 1 planında tam transkriptler depoya girmiyordu.
+
+## AS2 birincil sonucu ve değerlendirme dosyalarının depo dışına alınması (2026-11-05)
+
+- **Ne yapıldı:**
+  - **AS2:** Birincil sonuç "bütün konular" oldu: üretilemeyen konu hedef düzeye uyumsuz sayılıyor. "Yalnızca üretilen sorular" ikincil olarak raporda kalıyor; raporda ve JSON'da (`as2.primary`) hangisinin birincil olduğu yazıyor.
+  - **Depo:** `.gitignore`'a `degerlendirici-*.xlsx`, `anahtar.*`, `ortak-etiket*.xlsx`, `ortak.xlsx`, `anlasmazliklar.xlsx` eklendi. Not `CLAUDE.md` kural 5'e ve `backend/evaluation/README.md` dosyasına yazıldı. Deneme klasöründe depoya girecek tek dosya `README.md`.
+- **Hafta-2 belgesiyle karşılaştırma:** Belgede soru üretilemezse "kabul edilemez soru olarak sayılacak ve ayrıca raporlanacak" deniyor. AS1 kuralı bununla çelişmiyor. İki yerde belgeden geniş: parantezdeki "model boş yanıt döndürürse" yalnızca `empty` sonucunu anlatıyor, kod `invalid` ve `duplicate` sonuçlarını da sayıyor; kaynağa dayalı değil sayma belgede yazmıyor. İkisi görev metnindeki kuraldır.
+- **Nasıl doğrulandı:** `pytest` sonucu: 527 test geçti. `git status` ve `git check-ignore` ile xlsx ve anahtar dosyalarının izlenmediği denetlendi.

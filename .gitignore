@@ -22,6 +22,12 @@ backend/transcripts/
 *.db
 # Yerel çalıştırma kayıtları (seçilenler elle docs/bulgular'a kopyalanır)
 backend/runs/
+# Değerlendirme dosyaları: puanlama bitene kadar depoya girmez (körleme bozulur)
+degerlendirici-*.xlsx
+anahtar.*
+ortak-etiket*.xlsx
+ortak.xlsx
+anlasmazliklar.xlsx
 
 # Node
 node_modules/
