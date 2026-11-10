@@ -71,6 +71,24 @@ Plan güncellemesi (betik çalıştırılmadan önce, kullanıcı kararı): İlk
 - **Çıktılar:** Video başına `pilot-2-<alan>.json`. Dosya varsa o video atlanır, üzerine yazılmaz. Atlanan videonun dosyası da yazılır; o video sonra çalıştırılacaksa dosyası elle kaldırılmalıdır.
 - **Gizli bilgi:** Video dosyaları ve rapor CLAUDE.md kural 5'teki kalemler için taranır.
 
+## Karar (2026-11-04, kullanıcı)
+
+Ana deneyde `questions-v3` kullanılacak; `questions-v4` dondurulmuyor. Sayılar `pilot-2-*.json` dosyalarından yeniden sayıldı (6 video × 2 koşul).
+
+**Gerekçeler**
+
+- **Yaratma düzeyinde boş, geçersiz ya da tekrar sonucu:** v3'te 12'de 3 (matematik full ve rag, tarih rag: üçü de `empty`); v4'te 12'de 4 (matematik full `empty`, tarih rag `empty`, ingilizce full `duplicate`, python rag `invalid`).
+  - v4'ün iki boş yanıtının gerekçesi (`skip_reason`), yeni kural 4'ün yasakladığı gerekçe: "… bağlamda geçiyor ancak yaratma düzeyinde bir soru oluşturmak için yeterli bilgi yok."
+- **Örnek kalıbı:** v3'te 2, v4'te 5.
+  - v3: tarih rag Değerlendirme (Ali ve Ayşe adları); biyoloji rag Yaratma ("Bir öğrenci … tasarlamak istiyor … en uygun olur?").
+  - v4: matematik full ve rag Değerlendirme ("İki öğrenci tartışıyor. Ali … Ayşe …"); biyoloji rag ve matematik rag Yaratma ("Bir öğrenci … Aşağıdaki düzeneklerden hangisi bu amaca en uygundur?"); edebiyat rag Yaratma ("Bir grup öğrenci … proje … hangisi … en iyi şekilde yansıtır?").
+  - Sayım, iki kalıba göre soru metinleri okunarak yapıldı: "iki öğrenci" ya da Ali/Ayşe tartışması; bir öğrenci ya da öğrenci grubunun bir amaç için en uygun seçeneği seçmesi.
+- **Seçenek başında harf ("A)", "B)" …):** v3'te 0, v4'te 4 soru (biyoloji full ve rag, edebiyat rag Yaratma; ingilizce rag Çözümleme).
+- **Olası cevap kökte (kaba işaret):** v3'te 1, v4'te 5.
+- **v3'ün kendi değişkenliği:** Pilot 1'de tarih `full` Yaratma konusu `empty` idi; pilot 2'de aynı konu ve aynı istemle `ok`.
+
+**Sonuç:** Ana deney istemi `questions-v3` olarak donduruldu (git etiketi `istem-v3-ana-deney`, c0c68cd). Ana deney videoları pilot videolarından farklı seçilecek.
+
 <!-- RAPOR_ISARETI: bu satırın altını pilot-2.py yazar -->
 
 ## Çalıştırma

@@ -889,3 +889,7 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - **Depo:** `.gitignore`'a `degerlendirici-*.xlsx`, `anahtar.*`, `ortak-etiket*.xlsx`, `ortak.xlsx`, `anlasmazliklar.xlsx` eklendi. Not `CLAUDE.md` kural 5'e ve `backend/evaluation/README.md` dosyasına yazıldı. Deneme klasöründe depoya girecek tek dosya `README.md`.
 - **Hafta-2 belgesiyle karşılaştırma:** Belgede soru üretilemezse "kabul edilemez soru olarak sayılacak ve ayrıca raporlanacak" deniyor. AS1 kuralı bununla çelişmiyor. İki yerde belgeden geniş: parantezdeki "model boş yanıt döndürürse" yalnızca `empty` sonucunu anlatıyor, kod `invalid` ve `duplicate` sonuçlarını da sayıyor; kaynağa dayalı değil sayma belgede yazmıyor. İkisi görev metnindeki kuraldır.
 - **Nasıl doğrulandı:** `pytest` sonucu: 527 test geçti. `git status` ve `git check-ignore` ile xlsx ve anahtar dosyalarının izlenmediği denetlendi.
+
+## Pilot 2 kararı (2026-11-04, kullanıcı)
+
+- Ana deney istemi `questions-v3` olarak donduruldu (git etiketi `istem-v3-ana-deney`, c0c68cd); `questions-v4` dondurulmadı, kod değişmedi. Gerekçeler ve JSON'dan yeniden sayılan sayılar `docs/bulgular/pilot-2/pilot-2.md` "Karar" bölümünde; testler: 527 geçti.
