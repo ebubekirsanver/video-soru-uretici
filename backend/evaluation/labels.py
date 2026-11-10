@@ -14,12 +14,14 @@ from evaluation.common import (
     ACCEPTABLE_MAX_ERRORS,
     BLOOM_LEVELS,
     COL_ANSWERABLE,
+    COL_ASR,
     COL_BLOOM,
     COL_ERRORS,
     COL_FLAWS,
     COL_GROUNDED,
     COL_ID,
     COL_NOTE,
+    DESCRIPTION_LABEL,
     FILL_COLUMNS,
     MAX_FLAWS,
     SHEET_QUESTIONS,
@@ -37,6 +39,7 @@ class Label:
     flaws: tuple[int, ...] | None = None
     grounded: bool | None = None
     answerable: int | None = None
+    asr_error: bool | None = None  # sorunun hatası konuşma tanıma hatasından mı
     note: str = ""
 
     @property
@@ -107,7 +110,7 @@ def read_labels(path: Path, expected_ids: list[str]) -> tuple[dict[str, Label], 
 
     for row in rows:
         item_id = row[columns[COL_ID]]
-        if item_id is None:
+        if item_id is None or item_id == DESCRIPTION_LABEL:
             continue
         if item_id not in expected:
             report(item_id, COL_ID, item_id, "kimlik anahtarda yok")
@@ -132,6 +135,7 @@ def read_labels(path: Path, expected_ids: list[str]) -> tuple[dict[str, Label], 
         label.errors = parse(COL_ERRORS, lambda v: _integer(v, 0, MAX_FLAWS), f"0-{MAX_FLAWS} arası tam sayı değil")
         label.grounded = parse(COL_GROUNDED, _grounded, "evet ya da hayır değil")
         label.answerable = parse(COL_ANSWERABLE, lambda v: _integer(v, 1, 5), "1-5 arası tam sayı değil")
+        label.asr_error = parse(COL_ASR, _grounded, "evet ya da hayır değil")
 
         label.flaws = _flaws(cell[COL_FLAWS])
         if label.flaws is None:

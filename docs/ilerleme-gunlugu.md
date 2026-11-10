@@ -893,3 +893,28 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
 ## Pilot 2 kararı (2026-11-04, kullanıcı)
 
 - Ana deney istemi `questions-v3` olarak donduruldu (git etiketi `istem-v3-ana-deney`, c0c68cd); `questions-v4` dondurulmadı, kod değişmedi. Gerekçeler ve JSON'dan yeniden sayılan sayılar `docs/bulgular/pilot-2/pilot-2.md` "Karar" bölümünde; testler: 527 geçti.
+
+## Hafta-3 geri bildirimi: seçim kuralı, istem dondurma, seçim betiği, değerlendirme değişkenleri (2026-11-10)
+
+- **Ne yapıldı:**
+  - **Seçim kuralı:** `docs/video-secim-kurali.md`, kullanıcının verdiği metinle. Kural commit'lenmeden önce kullanıcı kararıyla üç ekleme yapıldı ve metin Markdown biçimine getirildi (kelimeler değişmedi):
+    - Alan kodları (biyoloji, tarih, matematik, ingilizce, edebiyat, python); tohum `random.Random("20261110-<alan kodu>")`.
+    - Süre ölçütü YouTube'da görünen süre (`adaylar.csv`'deki `sure_dk_sn`).
+    - Aynı kanal sınırı bütün listede; kanal 1. bölümdeki alan sırasına göre ilk alana aday olur. Arama da bu alan sırasıyla yapılır.
+  - **Dondurma:** `backend/tests/test_ana_deney_dondurma.py`.
+    - `questions_v3_*`, `bloom_levels.json` ve `topics_v1_*` için sha256 özetleri; satır sonları LF'ye çevrilerek hesaplanıyor.
+    - Varsayılan ayarlar: `prompt_version`, model, sıcaklık, `k`, `CHUNKING_VERSION`, gömme modeli, `question_max_tokens`, `SIMILARITY_THRESHOLD`.
+    - `CLAUDE.md`'ye kural 9 eklendi.
+  - **Seçim betiği:** `docs/bulgular/video-secimi/secim.py` (kural, 5. bölüm) hazırlandı, çalıştırılmadı. `adaylar.csv` yalnızca başlık satırı. Betik yalnızca alan kodlarını kabul ediyor; süre dışı adayı csv'deki süreyle ve YouTube'a gitmeden eliyor (transkriptten ölçülen süre yalnızca bilgi); aynı kanaldan sonraki adayı, kanalın ilk aday olduğu alanı ve sırayı yazarak reddediyor.
+  - **Değerlendirme paketi:**
+    - Değerlendirici dosyasına "Tanıma hatası kaynaklı mı" sütunu ve açıklama satırı eklendi; sorular artık 3. satırdan başlıyor.
+    - Bu işaret için kappa hesaplanıyor.
+    - Dışa aktarma video bilgi dosyası istiyor (`--video-bilgisi`); bilgiler anahtara yazılıyor.
+    - Analize eklenenler: koşula göre tanıma hatası sayısı, tanıma hatası kaynaklı sorular hariç ve iki dilli videolar hariç AS1/AS2, altyazı türüne göre betimsel oranlar. Birincil sonuç değişmedi.
+  - **Deneme:** `docs/bulgular/degerlendirme-denemesi-1/video-bilgisi.json` pilot videolar için elle oluşturuldu (alan değerleri alan kodlarıyla); xlsx yeni sütunla yeniden üretildi (69 soru, depo dışında).
+- **Nasıl doğrulandı:**
+  - `pytest` sonucu: 595 test geçti (önceki 527 ve 68 yeni test: dondurma 10, seçim betiği 44, değerlendirme 14). Bir test, betikteki alan kodlarının ve tohum ifadesinin kural metnindekiyle aynı olduğunu denetliyor. Seçim betiği sahte transkript servisiyle sınandı; YouTube'a ve OpenAI'a istek atılmadı.
+  - Git: c0c68cd'den bu yana `questions_v3_*`, `bloom_levels.json` ve `topics_v1_*` dosyalarında commit ya da çalışma ağacı değişikliği yok. Normalleştirilmiş özetler c0c68cd'deki git kayıtlarıyla aynı.
+- **Bilinen sınırlar:**
+  - Seçim betiği gerçek YouTube ile çalıştırılmadı.
+  - Deneme klasöründeki anahtar dosyası (depo dışında) alan kodları değiştirilmeden önce üretildi; içinde eski alan adları (İngilizce, Python programlama) duruyor. Yeniden üretilmedi.

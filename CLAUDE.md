@@ -43,6 +43,7 @@ YouTube ders videosu bağlantısından zaman damgalı transkript çıkaran, tran
 6. **Literatürle uyumlu kal:** her teknolojiyi bir sorunu çözdüğü ve etkisi ölçülebildiği için ekle. Ana karşılaştırma RAG / tam transkripttir (AS1); ikisi de kodda seçilebilir olmalı. Sabit / anlamsal bölütleme, ham / temiz transkript, gömme modeli ve yeniden sıralama ikincil deneylerdir: kodda seçilebilir kalabilirler, ama varsayılan sabit boyutlu bölütleme ve temiz transkripttir. İkincil deneyler ana deneylerden önce yapılmaz.
 7. **Anlaşılır ol:** kullanıcı öğrencidir. Yaptığın değişikliği kısa ve sade Türkçeyle açıkla, kod yorumlarını Türkçe yaz.
 8. **Kendi başlatmadığın süreçleri asla kapatma** (uvicorn, `npm run dev` vb.). Port doluysa oradaki süreci durdurma: kullanıcıya söyle ya da başka bir port kullan. Yalnızca kendi başlattığın süreci, komut satırını kontrol ederek kapat.
+9. **Ana deney istemi (questions-v3, topics-v1, bloom_levels.json) ve ayarları donduruldu; git etiketi istem-v3-ana-deney. Bu dosyalar değiştirilmez.** `backend/tests/test_ana_deney_dondurma.py` bunu denetler.
 
 ## Sık kullanılan komutlar
 ```
@@ -58,13 +59,15 @@ npm run typecheck
 ```
 
 ## Şu anki durum
-**Backend (Aşama 0, 1, 2, 5, 6 tamamlandı):** iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma; seçeneklerin tamamı aynı birimle sayı ya da yılsa karıştırılmaz, küçükten büyüğe sıralanır). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Özet konu zamanlarında blok etiketi kontrolü var (`start_verified`: modelin verdiği değer isteme verilen blok etiketlerinden biri mi; değer değiştirilmez); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Testler: `pytest` → 527 test.
+**Backend (Aşama 0, 1, 2, 5, 6 tamamlandı):** iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma; seçeneklerin tamamı aynı birimle sayı ya da yılsa karıştırılmaz, küçükten büyüğe sıralanır). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Özet konu zamanlarında blok etiketi kontrolü var (`start_verified`: modelin verdiği değer isteme verilen blok etiketlerinden biri mi; değer değiştirilmez); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Testler: `pytest` → 595 test.
 
 **Aşama 7a (RAG altyapısı): kısmen.** Sabit boyutlu parçalar (`services/chunking.py`, `fixed-150-30`), BGE-M3 gömme katmanı (`services/embeddings.py`), ChromaDB dizini ve erişim (`services/retrieval.py`); soru üretimine 7b'de bağlandı.
 
 **Aşama 7b (RAG soru üretimine bağlandı): kısmen.** `POST /api/questions` isteğinde `context_mode` (`full` / `rag`) verilirse konu başına bir soru `questions-v2` ile üretilir (Aşama 8'den beri `questions-v3`; `services/topic_questions.py`); iki koşulda aynı istem, tek fark bağlam. Verilmezse eski `questions-v1` davranışı. Kayıt sürümü 6 (`topic_generation`). İki koşulun ilk işlerlik denemesi yapıldı (docs/bulgular/asama-7b-kosul-denemesi-1.md); kalite ölçülmedi.
 
 **questions-v4 (2026-11-04):** Pilot 1 bulgularına göre açıldı; `/api/questions` isteğinde `prompt_version` ile seçilir (yalnızca `context_mode` ile), varsayılan `questions-v3`, kayıt sürümü 10 (`per_topic[].skip_reason`, `per_topic[].truncated`). Konu tabanlı soru üretiminde yanıt `QUESTION_MAX_TOKENS` (1000) ile sınırlı; kesilen konu `invalid`. Pilot 1 eki ve Pilot 2 altı videoyla tamamlandı (2026-11-04, `docs/bulgular/pilot-2/`). Ana deney istemi `questions-v3` olarak donduruldu (git etiketi `istem-v3-ana-deney`, c0c68cd); `questions-v4` kullanılmayacak.
+
+**Hafta-3 (2026-11-10):** Video seçim kuralı `docs/video-secim-kurali.md`; seçim betiği `docs/bulgular/video-secimi/secim.py` hazır, çalıştırılmadı (`adaylar.csv` yalnızca başlık satırı). Ana deney istemi ve ayarları `test_ana_deney_dondurma.py` ile korunuyor. Değerlendirme paketinde "Tanıma hatası kaynaklı mı" işareti, video bilgi dosyası (altyazı türü, iki dilli) ve bunlara göre duyarlılık / alt grup analizleri var.
 
 **Değerlendirme paketi (2026-11-05):** `backend/evaluation/` kör değerlendirme dosyalarını hazırlar, uyumu ve AS1/AS2 analizini hesaplar (kullanım: `backend/evaluation/README.md`). Gerçek etiketle çalıştırılmadı; yönerge metni kullanıcıdan gelecek.
 

@@ -12,12 +12,16 @@ from evaluation import agreement, analysis
 from evaluation.common import (
     BLOOM_LEVELS,
     COL_ANSWERABLE,
+    COL_ASR,
     COL_BLOOM,
     COL_ERRORS,
     COL_FLAWS,
     COL_GROUNDED,
     COL_ID,
     COL_NOTE,
+    COLUMN_DESCRIPTIONS,
+    DATA_START_ROW,
+    DESCRIPTION_LABEL,
     FILL_COLUMNS,
     GUIDE_PLACEHOLDER,
     SHEET_FLAWS,
@@ -26,12 +30,23 @@ from evaluation.common import (
     VISIBLE_COLUMNS,
     load_key,
 )
-from evaluation.export import ExportError, collect, export, find_secrets, read_flaws, read_runs
+from evaluation.export import ExportError, collect, export, find_secrets, read_flaws, read_runs, read_video_info
 from evaluation.labels import Label, LabelError, read_labels
 
 VIDEOS = ["aaaaaaaaaaa", "bbbbbbbbbbb"]
 QUOTE = "gizli alıntı metni transkriptte olmayan cümle"
 SECRET_REASONING = "gizli gerekçe metni"
+VIDEO_INFO = {
+    VIDEOS[0]: {"alan": "biyoloji", "altyazi_turu": "elle", "iki_dilli": False},
+    VIDEOS[1]: {"alan": "ingilizce", "altyazi_turu": "otomatik", "iki_dilli": True},
+    "ccccccccccc": {"alan": "tarih", "altyazi_turu": "otomatik", "iki_dilli": False},
+}
+
+
+def info_file(tmp_path, videos=None):
+    path = tmp_path / "video-bilgisi.json"
+    path.write_text(json.dumps({"videos": videos or VIDEO_INFO}, ensure_ascii=False), encoding="utf-8")
+    return path
 
 
 def trace(topic, level, outcome="ok"):
@@ -83,7 +98,7 @@ def workspace(tmp_path, monkeypatch):
 def do_export(workspace, seed=42, outcomes=None, name="cikti"):
     paths = [pilot_file(workspace, VIDEOS[0], outcomes), pilot_file(workspace, VIDEOS[1])]
     out, key_dir = workspace / name, workspace / f"{name}-anahtar"
-    export(paths, seed, out, key_dir, "questions-v3")
+    export(paths, seed, out, key_dir, info_file(workspace), "questions-v3")
     return out / "degerlendirici-A.xlsx", out / "degerlendirici-B.xlsx", key_dir / "anahtar.json"
 
 
@@ -92,7 +107,7 @@ def sheet_rows(path, sheet=SHEET_QUESTIONS):
 
 
 def ids_of(path):
-    return [r[0] for r in sheet_rows(path)[1:]]
+    return [r[0] for r in sheet_rows(path)[DATA_START_ROW - 1:]]
 
 
 def fill(path, target, values, skip=()):
@@ -100,7 +115,7 @@ def fill(path, target, values, skip=()):
     wb = load_workbook(path)
     sheet = wb[SHEET_QUESTIONS]
     header = [c.value for c in sheet[1]]
-    for row in range(2, sheet.max_row + 1):
+    for row in range(DATA_START_ROW, sheet.max_row + 1):
         item_id = sheet.cell(row, 1).value
         for column, value in values(item_id).items():
             if (item_id, column) not in skip:
@@ -110,7 +125,7 @@ def fill(path, target, values, skip=()):
 
 
 def perfect(item_id):
-    return {COL_BLOOM: "Anlama", COL_ERRORS: 1, COL_FLAWS: "4", COL_GROUNDED: "evet", COL_ANSWERABLE: 4}
+    return {COL_BLOOM: "Anlama", COL_ERRORS: 1, COL_FLAWS: "4", COL_GROUNDED: "evet", COL_ANSWERABLE: 4, COL_ASR: "hayır"}
 
 
 # --- Dışa aktarma -------------------------------------------------------------------
@@ -151,9 +166,18 @@ def test_rater_files_identical_and_columns(workspace):
     a, b, _ = do_export(workspace)
     assert sheet_rows(a)[0] == VISIBLE_COLUMNS + FILL_COLUMNS
     assert sheet_rows(a) == sheet_rows(b)
-    assert len(sheet_rows(a)) == 1 + 24  # 2 video × 2 koşul × 6 konu
+    assert len(sheet_rows(a)) == 2 + 24  # başlık + açıklama + 2 video × 2 koşul × 6 konu
     assert ids_of(a)[:2] == ["S001", "S002"]
-    assert all(v is None for row in sheet_rows(a)[1:] for v in row[len(VISIBLE_COLUMNS):])
+    assert all(v is None for row in sheet_rows(a)[DATA_START_ROW - 1:] for v in row[len(VISIBLE_COLUMNS):])
+
+
+def test_description_row_explains_asr_column(workspace):
+    a, _, _ = do_export(workspace)
+    header, description = sheet_rows(a)[:2]
+    assert description[0] == DESCRIPTION_LABEL
+    assert description[header.index(COL_ASR)] == COLUMN_DESCRIPTIONS[COL_ASR]
+    assert COLUMN_DESCRIPTIONS[COL_ASR].startswith("Sorudaki hata (yanlış bilgi, anlamsız ifade, yanlış doğru cevap)")
+    assert load_workbook(a)[SHEET_QUESTIONS].freeze_panes == f"A{DATA_START_ROW}"
 
 
 def test_hidden_fields_not_in_any_cell(workspace):
@@ -179,6 +203,7 @@ def test_condition_and_level_only_in_key(workspace):
     assert set(info) == {"video_id", "topic_index", "topic", "condition", "prompt_version", "bloom_target", "pair_id", "source"}
     assert info["bloom_target"] in BLOOM_LEVELS and info["condition"] in ("full", "rag")
     assert "#v3-" in info["source"] and key["seed"] == 42 and key["question_count"] == 24
+    assert key["videos"] == {v: VIDEO_INFO[v] for v in VIDEOS}  # yalnızca kullanılan videolar
     assert "tmp" not in key_path.read_text(encoding="utf-8").lower().replace("_tmp", "")
 
 
@@ -226,24 +251,44 @@ def test_sheets_transcript_guide_and_flaws(workspace):
 def test_dropdowns_present(workspace):
     a, _, _ = do_export(workspace)
     rules = {str(r.sqref): r.formula1 for r in load_workbook(a)[SHEET_QUESTIONS].data_validations.dataValidation}
-    assert rules["J2:J25"] == '"' + ",".join(BLOOM_LEVELS) + '"'
-    assert rules["K2:K25"].startswith('"0,1,2') and rules["K2:K25"].endswith('19"')
-    assert rules["M2:M25"] == '"evet,hayır"'
-    assert rules["N2:N25"] == '"1,2,3,4,5"'
-    assert len(rules) == 4  # hatalı maddeler ve not serbest
+    assert rules["J3:J26"] == '"' + ",".join(BLOOM_LEVELS) + '"'
+    assert rules["K3:K26"].startswith('"0,1,2') and rules["K3:K26"].endswith('19"')
+    assert rules["M3:M26"] == '"evet,hayır"'
+    assert rules["N3:N26"] == '"1,2,3,4,5"'
+    assert rules["O3:O26"] == '"evet,hayır"'  # tanıma hatası kaynaklı mı
+    assert len(rules) == 5  # hatalı maddeler ve not serbest
 
 
 def test_option_starting_with_equals_stays_text(workspace):
     a, _, _ = do_export(workspace)
     wb = load_workbook(a)
-    cell = wb[SHEET_QUESTIONS]["H2"]  # Seçenek D
+    cell = wb[SHEET_QUESTIONS][f"H{DATA_START_ROW}"]  # Seçenek D
     assert cell.value == "= 10" and cell.data_type == "s"
 
 
 def test_missing_transcript_stops_without_youtube(workspace):
     path = pilot_file(workspace, "ccccccccccc")
     with pytest.raises(ExportError, match="önbellekte yok"):
-        export([path], 1, workspace / "o", workspace / "k", "questions-v3")
+        export([path], 1, workspace / "o", workspace / "k", info_file(workspace), "questions-v3")
+
+
+def test_video_missing_from_info_file_stops(workspace):
+    path = pilot_file(workspace, VIDEOS[0])
+    with pytest.raises(ExportError, match="Video bilgi dosyasında olmayan video"):
+        export([path], 1, workspace / "o", workspace / "k", info_file(workspace, {VIDEOS[1]: VIDEO_INFO[VIDEOS[1]]}), "questions-v3")
+
+
+@pytest.mark.parametrize(
+    "item,message",
+    [
+        ({"altyazi_turu": "otomatik", "iki_dilli": False}, "alan yok"),
+        ({"alan": "tarih", "altyazi_turu": "yarı", "iki_dilli": False}, "elle ya da otomatik"),
+        ({"alan": "tarih", "altyazi_turu": "elle", "iki_dilli": "evet"}, "true ya da false"),
+    ],
+)
+def test_invalid_video_info_rejected(tmp_path, item, message):
+    with pytest.raises(ExportError, match=message):
+        read_video_info(info_file(tmp_path, {"x": item}))
 
 
 def test_secret_in_output_removes_files(workspace):
@@ -253,7 +298,7 @@ def test_secret_in_output_removes_files(workspace):
         run["response"]["questions"][0]["question"] = "Adres https://youtu.be/x?si=abc nedir?"
     path.write_text(json.dumps(data), encoding="utf-8")
     with pytest.raises(ExportError, match="paylaşım kodu"):
-        export([path], 1, workspace / "o", workspace / "k", "questions-v3")
+        export([path], 1, workspace / "o", workspace / "k", info_file(workspace), "questions-v3")
     assert not (workspace / "o" / "degerlendirici-A.xlsx").exists()
     assert not (workspace / "k" / "anahtar.json").exists()
 
@@ -302,6 +347,7 @@ def test_empty_cell_reported_with_id_and_column(workspace):
         (COL_FLAWS, "4, 4", "tekrarsız"),
         (COL_FLAWS, "dört", "tekrarsız"),
         (COL_FLAWS, "4, 12", "uyuşmuyor"),
+        (COL_ASR, "belki", "evet ya da hayır"),
     ],
 )
 def test_invalid_cell_reported(workspace, column, value, reason):
@@ -320,11 +366,12 @@ def test_values_as_text_accepted(workspace):
     ids = sorted(load_key(key_path)["questions"])
 
     def values(item_id):
-        return {COL_BLOOM: " Anlama ", COL_ERRORS: "2", COL_FLAWS: "4; 12", COL_GROUNDED: "HAYIR", COL_ANSWERABLE: 3.0}
+        return {COL_BLOOM: " Anlama ", COL_ERRORS: "2", COL_FLAWS: "4; 12", COL_GROUNDED: "HAYIR", COL_ANSWERABLE: 3.0, COL_ASR: "Evet"}
 
     labels, problems = read_labels(fill(a, workspace / "dolu.xlsx", values), ids)
     assert problems == []
     assert labels["S001"].flaws == (4, 12) and labels["S001"].grounded is False and labels["S001"].answerable == 3
+    assert labels["S001"].asr_error is True
 
 
 def test_id_problems_reported(workspace):
@@ -332,8 +379,8 @@ def test_id_problems_reported(workspace):
     ids = sorted(load_key(key_path)["questions"])
     wb = load_workbook(fill(a, workspace / "dolu.xlsx", perfect))
     sheet = wb[SHEET_QUESTIONS]
-    sheet["A2"] = "S999"
-    sheet["A3"] = sheet["A4"].value
+    sheet[f"A{DATA_START_ROW}"] = "S999"
+    sheet[f"A{DATA_START_ROW + 1}"] = sheet[f"A{DATA_START_ROW + 2}"].value
     wb.save(workspace / "bozuk.xlsx")
     _, problems = read_labels(workspace / "bozuk.xlsx", ids)
     reasons = {p.reason for p in problems}
@@ -401,8 +448,21 @@ def test_joint_template_same_format_and_blank(workspace):
     rows = sheet_rows(template)
     assert rows[0] == VISIBLE_COLUMNS + FILL_COLUMNS
     assert [r[:len(VISIBLE_COLUMNS)] for r in rows] == [r[:len(VISIBLE_COLUMNS)] for r in sheet_rows(a)]
-    assert all(v is None for r in rows[1:] for v in r[len(VISIBLE_COLUMNS):])
-    assert len(load_workbook(template)[SHEET_QUESTIONS].data_validations.dataValidation) == 4
+    assert all(v is None for r in rows[DATA_START_ROW - 1:] for v in r[len(VISIBLE_COLUMNS):])
+    assert rows[1] == sheet_rows(a)[1]  # açıklama satırı korunur
+    assert len(load_workbook(template)[SHEET_QUESTIONS].data_validations.dataValidation) == 5
+
+
+def test_agreement_has_asr_kappa_and_disagreement(workspace):
+    a, b, key_path = do_export(workspace)
+    filled_a = fill(a, workspace / "A.xlsx", lambda i: {**perfect(i), COL_ASR: "evet" if i in ("S001", "S002") else "hayır"})
+    filled_b = fill(b, workspace / "B.xlsx", lambda i: {**perfect(i), COL_ASR: "evet" if i == "S001" else "hayır"})
+    result = agreement.run(filled_a, filled_b, key_path, workspace / "uyum")
+    asr = next(k for k in result["kappas"] if k["field"] == "asr_error")
+    assert asr["name"] == "Tanıma hatası kaynaklı" and asr["n"] == 24
+    # 24 sorunun 23'ünde uyum; A 2 evet, B 1 evet
+    assert asr["agreement"] == pytest.approx(23 / 24)
+    assert [(r["id"], r["field"], r["a"], r["b"]) for r in result["disagreements"]] == [("S002", COL_ASR, "evet", "hayır")]
 
 
 # --- Analiz -------------------------------------------------------------------------
@@ -419,11 +479,12 @@ def make_key():
                 unproduced.append({**info, "outcome": "empty"})
             else:
                 questions[f"S{i}{j}"] = info
-    return {"questions": questions, "unproduced": unproduced, "incomplete_pairs": []}
+    return {"questions": questions, "unproduced": unproduced, "incomplete_pairs": [],
+            "videos": {"v": {"alan": "biyoloji", "altyazi_turu": "otomatik", "iki_dilli": False}}}
 
 
-def lab(errors=0, grounded=True, answerable=4, bloom="Hatırlama"):
-    return Label(bloom=bloom, errors=errors, flaws=(), grounded=grounded, answerable=answerable)
+def lab(errors=0, grounded=True, answerable=4, bloom="Hatırlama", asr_error=False):
+    return Label(bloom=bloom, errors=errors, flaws=(), grounded=grounded, answerable=answerable, asr_error=asr_error)
 
 
 def base_labels():
@@ -538,5 +599,92 @@ def test_full_flow_report_and_json(workspace):
     saved = json.loads((out / "analiz.json").read_text(encoding="utf-8"))
     assert saved["as1"]["answerable"]["excluded_unproduced"] == 1
     report = (out / "analiz-raporu.md").read_text(encoding="utf-8")
-    for text in ("Kesin McNemar", "Newcombe", "keşfedici", "Wilson", "karışıklık matrisi", "Üretilemeyen konu: 1", "%99"):
+    for text in ("Kesin McNemar", "Newcombe", "keşfedici", "Wilson", "karışıklık matrisi", "Üretilemeyen konu: 1", "%99",
+                 "Tanıma hatası kaynaklı sorular hariç", "İki dilli videolar hariç", "Altyazı türüne göre (betimsel; test yok)",
+                 "Bu bölümdekiler birincil sonuç değildir"):
         assert text in report
+
+
+# --- Hafta-3: tanıma hatası, iki dilli videolar, altyazı türü ---------------------------
+
+
+def two_video_key():
+    """make_key'deki 4 çift "v" videosunda; aynı yapı "w" videosu için P5-P8 olarak eklenir."""
+    key = make_key()
+    for item_id, info in list(key["questions"].items()):
+        key["questions"]["W" + item_id[1:]] = {**info, "video_id": "w", "pair_id": "Q" + info["pair_id"][1:]}
+    for info in list(key["unproduced"]):
+        key["unproduced"].append({**info, "video_id": "w", "pair_id": "Q" + info["pair_id"][1:]})
+    key["videos"] = {"v": {"alan": "biyoloji", "altyazi_turu": "elle", "iki_dilli": False},
+                     "w": {"alan": "ingilizce", "altyazi_turu": "otomatik", "iki_dilli": True}}
+    return key
+
+
+def two_video_labels():
+    labels = base_labels()
+    labels.update({"W" + item_id[1:]: lab(errors=label.errors, grounded=label.grounded, answerable=label.answerable, bloom=label.bloom)
+                   for item_id, label in base_labels().items()})
+    return labels
+
+
+def test_asr_count_by_condition():
+    labels = base_labels()
+    labels["S11"].asr_error = True  # P1 rag
+    labels["S20"].asr_error = True  # P2 full
+    labels["S30"].asr_error = None  # işaret eksik
+    result = analysis.analyze(make_key(), labels)
+    assert result["asr_by_condition"] == {"flagged": {"full": 1, "rag": 1}, "missing": 1, "questions": {"full": 4, "rag": 3}}
+
+
+def test_without_asr_drops_pair_and_keeps_primary():
+    labels = base_labels()
+    primary = analysis.analyze(make_key(), labels)
+    labels["S11"].asr_error = True  # P1'in rag sorusu işaretli: P1 çifti AS1'den çıkar
+    result = analysis.analyze(make_key(), labels)
+    assert result["as1"] == primary["as1"] and result["as2"] == primary["as2"]  # birincil sonuç değişmez
+    s = result["sensitivity"]["without_asr"]
+    assert s["excluded_pairs"] == 1 and s["excluded_pairs_missing_flag"] == 0
+    assert s["as1"]["acceptable"]["pairs"] == 3  # P2, P3, P4
+    # AS2'de yalnızca işaretli soru çıkar; P1'in full sorusu kalır
+    assert s["excluded_questions"] == 1
+    assert s["as2"]["total"]["all_topics"]["n"] == primary["as2"]["total"]["all_topics"]["n"] - 1
+
+
+def test_without_asr_missing_flag_counted_separately():
+    labels = base_labels()
+    labels["S20"].asr_error = None
+    s = analysis.analyze(make_key(), labels)["sensitivity"]["without_asr"]
+    assert s["excluded_pairs"] == 0 and s["excluded_pairs_missing_flag"] == 1
+    assert s["excluded_questions"] == 0 and s["excluded_questions_missing_flag"] == 1
+
+
+def test_unproduced_topic_is_not_an_asr_flag():
+    # P4'te rag üretilemedi; işaret olmadığı için çift duyarlılık analizinde kalır
+    s = analysis.analyze(make_key(), base_labels())["sensitivity"]["without_asr"]
+    assert s["as1"]["acceptable"]["pairs"] == 4 and s["excluded_pairs"] == 0
+
+
+def test_without_bilingual_videos():
+    key, labels = two_video_key(), two_video_labels()
+    result = analysis.analyze(key, labels)
+    b = result["sensitivity"]["without_bilingual"]
+    assert b["excluded_videos"] == ["w"] and b["excluded_pairs"] == 4
+    assert result["as1"]["acceptable"]["pairs"] == 8 and b["as1"]["acceptable"]["pairs"] == 4
+    assert b["as1"]["acceptable"] == analysis.analyze(make_key() | {"videos": key["videos"]}, base_labels())["as1"]["acceptable"]
+    assert b["as2"]["total"]["all_topics"]["n"] == 8
+
+
+def test_by_subtitle_type_descriptive():
+    sub = analysis.analyze(two_video_key(), two_video_labels())["by_subtitle_type"]
+    assert sub["elle"]["videos"] == ["v"] and sub["otomatik"]["videos"] == ["w"]
+    # Her videoda 8 yuva, kabul edilebilir: S11, S20, S21, S30, S40 = 5 (rag P4 üretilemedi)
+    assert (sub["elle"]["acceptable"]["k"], sub["elle"]["acceptable"]["n"]) == (5, 8)
+    assert sub["elle"]["as2"]["all_topics"]["n"] == 8 and sub["elle"]["as2"]["all_topics"]["k"] == 6
+    assert "p_value" not in json.dumps(sub)  # test yok
+
+
+def test_analysis_requires_video_info():
+    key = make_key()
+    del key["videos"]
+    with pytest.raises(ValueError, match="video bilgisi"):
+        analysis.analyze(key, base_labels())

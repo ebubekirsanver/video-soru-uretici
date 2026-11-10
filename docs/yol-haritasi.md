@@ -150,6 +150,7 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
 - **AS1:** RAG / tam transkript karşılaştırması. 12 video × 2 koşul × 6 Bloom düzeyi = 144 soru, iki kör değerlendirici.
 - **AS2:** Bloom yönlendirmeli istemin hedef düzeye uyumu, Cohen's kappa.
 - **AS3:** 10 öğrenciyle SUS; açıklık ve yararlılık puanları.
+- **Hafta-3 geri bildirimi (2026-11-10):** Pilot videolar ana deneyde kullanılmayacak; 12 videonun seçim kuralı ve altı videoluk yedek plan seçimden önce `docs/video-secim-kurali.md` dosyasına yazıldı. Değerlendirmede "tanıma hatası kaynaklı mı" işareti var; altyazı türü (elle / otomatik) değişken olarak kaydedilir; iki dilli videoların sonuçları hem dâhil hem hariç hesaplanır.
 - **İstem (2026-11-04):** Pilot 2'den sonra ana deney istemi `questions-v3` olarak donduruldu (git etiketi `istem-v3-ana-deney`); `questions-v4` kullanılmayacak. Gerekçe: docs/bulgular/pilot-2/pilot-2.md, "Karar".
 
 ### İkincil deneyler

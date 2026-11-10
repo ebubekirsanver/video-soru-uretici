@@ -1,0 +1,11 @@
+{
+  "not": "Pilot videolar için elle oluşturuldu (Hafta-3). Altısı da otomatik altyazı; İngilizce videosu iki dilli. Ana deneyde bu dosyanın yerine secim.json kullanılır.",
+  "videos": {
+    "109kCbVtU1U": {"alan": "biyoloji", "altyazi_turu": "otomatik", "iki_dilli": false},
+    "aaCHLYO3Fzg": {"alan": "tarih", "altyazi_turu": "otomatik", "iki_dilli": false},
+    "edSvMQ77TmU": {"alan": "matematik", "altyazi_turu": "otomatik", "iki_dilli": false},
+    "FetnCoTS9qY": {"alan": "ingilizce", "altyazi_turu": "otomatik", "iki_dilli": true},
+    "fgOxbhEMnQQ": {"alan": "edebiyat", "altyazi_turu": "otomatik", "iki_dilli": false},
+    "CEr_UiR4Gvk": {"alan": "python", "altyazi_turu": "otomatik", "iki_dilli": false}
+  }
+}

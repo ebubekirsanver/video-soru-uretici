@@ -8,6 +8,14 @@ Koşullar "rag" ve "full"; farklar her yerde rag - full yönündedir.
 - AS2'de birincil sonuç "bütün konular"dır: üretilemeyen konu hedef düzeye uyumsuz
   sayılır (kullanıcı kararı). "Yalnızca üretilen sorular" ikincil olarak verilir.
 
+Duyarlılık ve alt grup analizleri (Hafta-3; birincil sonuç bütün videolarla ve bütün
+sorularla kalır):
+- Tanıma hatası kaynaklı sorular hariç: AS1'de iki sorudan biri işaretli olan çift
+  çıkarılır; AS2'de işaretli soru çıkarılır. İşareti eksik olan çift ya da soru da
+  çıkarılır ve ayrı sayılır.
+- İki dilli videolar hariç AS1 ve AS2.
+- Altyazı türüne göre kabul edilebilir oranı ve hedef düzeye uyum; betimsel, test yok.
+
 Yöntemler `evaluation/stats.py` başındadır. Eksik ya da geçersiz ortak etiket
 sessizce geçilmez: raporda listelenir ve o ölçütün hesabından çıkar.
 
@@ -23,6 +31,7 @@ from evaluation.common import (
     BLOOM_LEVELS,
     CONDITIONS,
     DEFAULT_ALPHA,
+    SUBTITLE_TYPES,
     interval,
     load_key,
     num,
@@ -101,9 +110,12 @@ def _slots(pairs: dict) -> list[dict]:
     return [slot for pair in pairs.values() if len(pair) == 2 for slot in pair.values()]
 
 
-def as2(pairs: dict, labels: dict[str, Label], alpha: float) -> dict:
-    """Hedef düzeye uyum. `all_topics` (birincil): üretilemeyenler uyumsuz sayılarak; `produced` (ikincil): üretilen sorular."""
-    slots = _slots(pairs)
+def as2(pairs: dict, labels: dict[str, Label], alpha: float, exclude: frozenset = frozenset()) -> dict:
+    """Hedef düzeye uyum. `all_topics` (birincil): üretilemeyenler uyumsuz sayılarak; `produced` (ikincil): üretilen sorular.
+
+    `exclude`: hesaba hiç girmeyecek soru kimlikleri (duyarlılık analizi).
+    """
+    slots = [s for s in _slots(pairs) if s["id"] not in exclude]
     labelled = [s for s in slots if s["id"] is not None and s["id"] in labels and labels[s["id"]].bloom is not None]
     missing = sum(1 for s in slots if s["id"] is not None) - len(labelled)
     unproduced = [s for s in slots if s["id"] is None]
@@ -155,19 +167,103 @@ def descriptive(pairs: dict, labels: dict[str, Label], alpha: float) -> dict:
     }
 
 
+def as1(pairs: dict, labels: dict[str, Label], alpha: float) -> dict:
+    return {
+        "acceptable": as1_binary(pairs, labels, "acceptable", alpha),
+        "grounded": as1_binary(pairs, labels, "grounded", alpha),
+        "answerable": as1_answerable(pairs, labels),
+    }
+
+
+def _complete(pairs: dict) -> dict:
+    return {pid: pair for pid, pair in pairs.items() if len(pair) == 2}
+
+
+def _asr_flag(slot: dict, labels: dict[str, Label]) -> bool | None:
+    """Üretilemeyen konunun sorusu yok: işaretli değil. Etiketi ya da işareti eksik soru None."""
+    if slot["id"] is None:
+        return False
+    label = labels.get(slot["id"])
+    return None if label is None else label.asr_error
+
+
+def asr_by_condition(pairs: dict, labels: dict[str, Label]) -> dict:
+    flags = [(s["condition"], _asr_flag(s, labels)) for s in _slots(pairs) if s["id"] is not None]
+    return {
+        "flagged": {c: sum(1 for cond, f in flags if cond == c and f is True) for c in CONDITIONS},
+        "missing": sum(1 for _, f in flags if f is None),
+        "questions": {c: sum(1 for cond, _ in flags if cond == c) for c in CONDITIONS},
+    }
+
+
+def without_asr(pairs: dict, labels: dict[str, Label], alpha: float) -> dict:
+    """Duyarlılık: tanıma hatası kaynaklı sorular hariç AS1 ve AS2."""
+    kept, flagged_pairs, missing_pairs = {}, 0, 0
+    for pid, pair in _complete(pairs).items():
+        flags = [_asr_flag(s, labels) for s in pair.values()]
+        if any(f is True for f in flags):
+            flagged_pairs += 1
+        elif any(f is None for f in flags):
+            missing_pairs += 1
+        else:
+            kept[pid] = pair
+    flagged = frozenset(s["id"] for s in _slots(pairs) if _asr_flag(s, labels) is True)
+    missing = frozenset(s["id"] for s in _slots(pairs) if s["id"] is not None and _asr_flag(s, labels) is None)
+    return {
+        "excluded_pairs": flagged_pairs, "excluded_pairs_missing_flag": missing_pairs,
+        "excluded_questions": len(flagged), "excluded_questions_missing_flag": len(missing),
+        "as1": as1(kept, labels, alpha), "as2": as2(pairs, labels, alpha, flagged | missing),
+    }
+
+
+def _video_pairs(pairs: dict, videos: dict, keep) -> dict:
+    return {pid: pair for pid, pair in _complete(pairs).items() if keep(videos[next(iter(pair.values()))["video_id"]])}
+
+
+def without_bilingual(pairs: dict, labels: dict[str, Label], videos: dict, alpha: float) -> dict:
+    """Alt grup: iki dilli videolar hariç AS1 ve AS2."""
+    kept = _video_pairs(pairs, videos, lambda v: not v["iki_dilli"])
+    return {
+        "excluded_videos": sorted(v for v, info in videos.items() if info["iki_dilli"]),
+        "excluded_pairs": len(_complete(pairs)) - len(kept),
+        "as1": as1(kept, labels, alpha), "as2": as2(kept, labels, alpha),
+    }
+
+
+def by_subtitle_type(pairs: dict, labels: dict[str, Label], videos: dict, alpha: float) -> dict:
+    """Betimsel: altyazı türüne göre kabul edilebilir oranı (üretilemeyen konu paydada) ve hedef düzeye uyum."""
+    result = {}
+    for kind in SUBTITLE_TYPES:
+        subset = _video_pairs(pairs, videos, lambda v, kind=kind: v["altyazi_turu"] == kind)
+        values = [_binary(s, labels, "acceptable") for s in _slots(subset)]
+        known = [v for v in values if v is not None]
+        result[kind] = {
+            "videos": sorted(v for v, info in videos.items() if info["altyazi_turu"] == kind),
+            "acceptable": wilson(sum(known), len(known), alpha),
+            "acceptable_missing_label": len(values) - len(known),
+            "as2": as2(subset, labels, alpha)["total"],
+        }
+    return result
+
+
 def analyze(key: dict, labels: dict[str, Label], alpha: float = DEFAULT_ALPHA) -> dict:
+    if "videos" not in key:
+        raise ValueError("Anahtarda video bilgisi yok; dışa aktarma --video-bilgisi ile yeniden yapılmalı.")
     pairs = build_pairs(key)
+    videos = key["videos"]
     return {
         "alpha": alpha,
         "pair_count": sum(1 for p in pairs.values() if len(p) == 2),
         "incomplete_pairs": sorted(p for p, slots in pairs.items() if len(slots) < 2),
-        "as1": {
-            "acceptable": as1_binary(pairs, labels, "acceptable", alpha),
-            "grounded": as1_binary(pairs, labels, "grounded", alpha),
-            "answerable": as1_answerable(pairs, labels),
-        },
+        "as1": as1(pairs, labels, alpha),
         "as2": as2(pairs, labels, alpha),
         "descriptive": descriptive(pairs, labels, alpha),
+        "asr_by_condition": asr_by_condition(pairs, labels),
+        "sensitivity": {
+            "without_asr": without_asr(pairs, labels, alpha),
+            "without_bilingual": without_bilingual(pairs, labels, videos, alpha),
+        },
+        "by_subtitle_type": by_subtitle_type(pairs, labels, videos, alpha),
     }
 
 
@@ -232,12 +328,63 @@ def render_report(result: dict, problems: list[dict]) -> str:
         lines += table(["Video", "Konu", "Koşul", "Hedef düzey", "Sonuç"],
                        [[u["video_id"], u["topic_index"], u["condition"], u["bloom_target"], u["outcome"]] for u in desc["unproduced"]])
         lines.append("")
+    lines += render_subgroups(result, level)
     lines += ["## Eksik ya da geçersiz hücreler", ""]
     if problems:
         lines += table(["Dosya", "Kimlik", "Sütun", "Değer", "Sorun"], [[p["file"], p["id"], p["column"], p["value"], p["reason"]] for p in problems])
     else:
         lines.append("Yok.")
     return "\n".join(lines) + "\n"
+
+
+def _brief(block: dict, alpha: float, level: int) -> list[str]:
+    """Bir alt kümenin AS1 ve AS2 özeti."""
+    rows = []
+    for name, field in (("Kabul edilebilir (0-1 hata)", "acceptable"), ("Kaynağa dayalı", "grounded")):
+        r = block["as1"][field]
+        d, m = r["difference"], r["mcnemar"]
+        rows.append([name, r["pairs"], _rate(r["rag"]), num(r["rag"]["rate"]), _rate(r["full"]), num(r["full"]["rate"]),
+                     r["rag_only"], r["full_only"], num(d["difference"]), interval(d["ci_low"], d["ci_high"]),
+                     num(m["p_value"], 4), _significant(m["p_value"], alpha)])
+    lines = table(["AS1", "Çift", "rag", "rag oranı", "full", "full oranı", "Yalnız rag", "Yalnız full", "Fark",
+                   f"Fark %{level} GA", "McNemar p", f"p < {num(alpha, 2)}"], rows)
+    w = block["as1"]["answerable"]
+    lines += ["", f"Cevaplanabilirlik (Wilcoxon): test edilen çift {w['n']}, sıfır fark {w['zero_differences']}, "
+              f"Z {num(w['z'])}, p {num(w['p_value'], 4)}, r {num(w['r'])}" + (f" ({w['note']})" if w["note"] else "") + ".", ""]
+    total = block["as2"]["total"]
+    a, p = total["all_topics"], total["produced"]
+    lines += table(["AS2", "Bütün konular (birincil)", "Oran", f"%{level} Wilson GA", "Yalnızca üretilen sorular (ikincil)", "Oran", f"%{level} Wilson GA"],
+                   [["Toplam", _rate(a), num(a["rate"]), interval(a["ci_low"], a["ci_high"]), _rate(p), num(p["rate"]), interval(p["ci_low"], p["ci_high"])]])
+    return lines + [""]
+
+
+def render_subgroups(result: dict, level: int) -> list[str]:
+    alpha = result["alpha"]
+    asr, sens, subtitle = result["asr_by_condition"], result["sensitivity"], result["by_subtitle_type"]
+    lines = ["## Tanıma hatası kaynaklı sorular", ""]
+    lines += table(["Koşul", "Soru", "Tanıma hatası kaynaklı"], [[c, asr["questions"][c], asr["flagged"][c]] for c in CONDITIONS])
+    lines += ["", f"İşareti eksik soru: {asr['missing']}.", "",
+              "## Duyarlılık ve alt grup analizleri", "", "Birincil sonuç yukarıdaki bütün videolu ve bütün sorulu sonuçtur. Bu bölümdekiler birincil sonuç değildir.", "",
+              "### Tanıma hatası kaynaklı sorular hariç", ""]
+    s = sens["without_asr"]
+    lines += [f"AS1'den çıkarılan çift: {s['excluded_pairs']} (iki sorudan biri işaretli), işareti eksik olduğu için çıkarılan çift: "
+              f"{s['excluded_pairs_missing_flag']}. AS2'den çıkarılan soru: {s['excluded_questions']}, işareti eksik olduğu için çıkarılan soru: "
+              f"{s['excluded_questions_missing_flag']}.", ""]
+    lines += _brief(s, alpha, level)
+    b = sens["without_bilingual"]
+    lines += ["### İki dilli videolar hariç", "",
+              f"Çıkarılan video: {', '.join(b['excluded_videos']) or 'yok'}; çıkarılan çift: {b['excluded_pairs']}.", ""]
+    lines += _brief(b, alpha, level)
+    lines += ["### Altyazı türüne göre (betimsel; test yok)", "", "Kabul edilebilir oranında üretilemeyen konu paydadadır.", ""]
+    rows = []
+    for kind in SUBTITLE_TYPES:
+        t = subtitle[kind]
+        acc, a2, p2 = t["acceptable"], t["as2"]["all_topics"], t["as2"]["produced"]
+        rows.append([kind, len(t["videos"]), _rate(acc), num(acc["rate"]), interval(acc["ci_low"], acc["ci_high"]),
+                     _rate(a2), num(a2["rate"]), interval(a2["ci_low"], a2["ci_high"]), _rate(p2), num(p2["rate"])])
+    lines += table(["Altyazı türü", "Video", "Kabul edilebilir", "Oran", f"%{level} Wilson GA", "Uyum, bütün konular (birincil)",
+                    "Oran", f"%{level} Wilson GA", "Uyum, yalnızca üretilen", "Oran"], rows)
+    return lines + [""]
 
 
 def run(joint_path: Path, key_path: Path, out_dir: Path, alpha: float = DEFAULT_ALPHA) -> dict:

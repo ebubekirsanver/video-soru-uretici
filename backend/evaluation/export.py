@@ -8,8 +8,14 @@ yalnızca değerlendiricilere verilmeyen anahtar dosyasındadır.
 
 Transkriptler yalnızca yerel önbellekten okunur; bu betik YouTube'a gitmez.
 
+Video bilgi dosyası (JSON) her video için alanı, altyazı türünü (elle / otomatik)
+ve iki dilli olup olmadığını verir; bu bilgiler anahtara yazılır ve analizde
+değişken olarak kullanılır. Biçim: {"videos": {"<video_id>": {"alan": ...,
+"altyazi_turu": "elle" | "otomatik", "iki_dilli": true | false}}}. Seçim betiğinin
+secim.json dosyası bu biçimdedir.
+
 Çalıştırma (backend klasöründen):
-    python -m evaluation.export --girdi <dosya...> --tohum 42 --cikti <klasör> --anahtar-cikti <klasör>
+    python -m evaluation.export --girdi <dosya...> --video-bilgisi <json> --tohum 42 --cikti <klasör> --anahtar-cikti <klasör>
 """
 
 import argparse
@@ -33,6 +39,12 @@ from app.services.transcript_cache import read_cached
 from evaluation.common import (
     BLOOM_LEVELS,
     COL_ANSWERABLE,
+    COL_ASR,
+    COL_ID,
+    COLUMN_DESCRIPTIONS,
+    DATA_START_ROW,
+    DESCRIPTION_LABEL,
+    SUBTITLE_TYPES,
     COL_BLOOM,
     COL_ERRORS,
     COL_FLAWS,
@@ -154,15 +166,39 @@ def assign_ids(questions: list[dict], seed: int) -> list[dict]:
     return [{**q, "id": f"S{i:0{width}d}"} for i, q in enumerate(ordered, 1)]
 
 
-def build_key(questions: list[dict], unproduced: list[dict], seed: int, version: str, inputs: list[str]) -> dict:
+def read_video_info(path: Path) -> dict[str, dict]:
+    """Video bilgi dosyası: video_id -> {alan, altyazi_turu, iki_dilli}. Eksik ya da geçersiz alan hata verir."""
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    videos = data.get("videos") if isinstance(data, dict) else None
+    if not isinstance(videos, dict) or not videos:
+        raise ExportError(f"{Path(path).name}: 'videos' sözlüğü yok.")
+    info = {}
+    for video_id, item in videos.items():
+        if not isinstance(item, dict) or not isinstance(item.get("alan"), str) or not item["alan"].strip():
+            raise ExportError(f"{Path(path).name}: {video_id} için alan yok.")
+        if item.get("altyazi_turu") not in SUBTITLE_TYPES:
+            raise ExportError(f"{Path(path).name}: {video_id} için altyazi_turu elle ya da otomatik olmalı.")
+        if not isinstance(item.get("iki_dilli"), bool):
+            raise ExportError(f"{Path(path).name}: {video_id} için iki_dilli true ya da false olmalı.")
+        info[video_id] = {"alan": item["alan"], "altyazi_turu": item["altyazi_turu"], "iki_dilli": item["iki_dilli"]}
+    return info
+
+
+def build_key(questions: list[dict], unproduced: list[dict], seed: int, version: str, inputs: list[str],
+              video_info: dict[str, dict]) -> dict:
     fields = ("video_id", "topic_index", "topic", "condition", "prompt_version", "bloom_target", "pair_id", "source")
     slots = {}
     for item in questions + unproduced:
         slots.setdefault(item["pair_id"], set()).add(item["condition"])
+    video_ids = sorted({item["video_id"] for item in questions + unproduced})
+    missing = [v for v in video_ids if v not in video_info]
+    if missing:
+        raise ExportError(f"Video bilgi dosyasında olmayan video: {', '.join(missing)}.")
     return {
         "seed": seed,
         "prompt_version": version,
         "inputs": inputs,
+        "videos": {v: video_info[v] for v in video_ids},
         "question_count": len(questions),
         "questions": {q["id"]: {f: q[f] for f in fields} for q in questions},
         "unproduced": [{**{f: u[f] for f in fields}, "outcome": u["outcome"]} for u in unproduced],
@@ -216,7 +252,7 @@ def _validation(sheet, column: int, last_row: int, values: list[str], title: str
     rule = DataValidation(type="list", formula1='"' + ",".join(values) + '"', allow_blank=True,
                           showErrorMessage=True, errorTitle=title, error="Listeden bir değer seçin.")
     letter = get_column_letter(column)
-    rule.add(f"{letter}2:{letter}{last_row}")
+    rule.add(f"{letter}{DATA_START_ROW}:{letter}{last_row}")
     sheet.add_data_validation(rule)
 
 
@@ -228,7 +264,14 @@ def write_rater_workbook(path: Path, questions: list[dict], transcripts: dict[st
     sheet.title = SHEET_QUESTIONS
     columns = VISIBLE_COLUMNS + FILL_COLUMNS
     _header(sheet, columns, tuple(FILL_COLUMNS))
-    for row, item in enumerate(questions, 2):
+    sheet.cell(2, columns.index(COL_ID) + 1, DESCRIPTION_LABEL).font = Font(italic=True)
+    for column, text in COLUMN_DESCRIPTIONS.items():
+        cell = sheet.cell(2, columns.index(column) + 1)
+        _text(cell, text)
+        cell.font = Font(italic=True)
+        cell.alignment = Alignment(wrap_text=True, vertical="top")
+    sheet.freeze_panes = f"A{DATA_START_ROW}"
+    for row, item in enumerate(questions, DATA_START_ROW):
         q = item["question"]
         letter = "ABCD"[q["correct_index"]]
         values = [item["id"], f"https://youtu.be/{item['video_id']}", f"{TRANSCRIPT_PREFIX}{item['video_id']}", q["question"],
@@ -238,13 +281,14 @@ def write_rater_workbook(path: Path, questions: list[dict], transcripts: dict[st
             sheet.cell(row, column).alignment = Alignment(wrap_text=True, vertical="top")
         # Metin biçimi: "4,12" gibi bir giriş Excel'de sayıya dönüşmesin
         sheet.cell(row, columns.index(COL_FLAWS) + 1).number_format = "@"
-    for column, width in enumerate([8, 28, 18, 60, 30, 30, 30, 30, 30, 15, 10, 14, 11, 15, 30], 1):
+    for column, width in enumerate([10, 28, 18, 60, 30, 30, 30, 30, 30, 15, 10, 14, 11, 15, 30, 30], 1):
         sheet.column_dimensions[get_column_letter(column)].width = width
-    last = len(questions) + 1
+    last = len(questions) + DATA_START_ROW - 1
     _validation(sheet, columns.index(COL_BLOOM) + 1, last, BLOOM_LEVELS, COL_BLOOM)
     _validation(sheet, columns.index(COL_ERRORS) + 1, last, [str(i) for i in range(MAX_FLAWS + 1)], COL_ERRORS)
     _validation(sheet, columns.index(COL_GROUNDED) + 1, last, ["evet", "hayır"], COL_GROUNDED)
     _validation(sheet, columns.index(COL_ANSWERABLE) + 1, last, ["1", "2", "3", "4", "5"], COL_ANSWERABLE)
+    _validation(sheet, columns.index(COL_ASR) + 1, last, ["evet", "hayır"], COL_ASR)
 
     wb.create_sheet(SHEET_GUIDE).cell(1, 1, GUIDE_PLACEHOLDER)
 
@@ -282,12 +326,14 @@ def find_secrets(texts: list[str]) -> list[str]:
     return [kind for kind, pattern in SECRET_PATTERNS.items() if re.search(pattern, joined)]
 
 
-def export(paths: list[Path], seed: int, out_dir: Path, key_dir: Path, prompt_version: str | None = None) -> dict:
+def export(paths: list[Path], seed: int, out_dir: Path, key_dir: Path, video_info_path: Path,
+           prompt_version: str | None = None) -> dict:
     """Dosyaları yazar ve anahtarı döndürür. Gizli bilgi bulunursa dosyalar silinir, hata verilir."""
     runs = [run for path in paths for run in read_runs(path)]
     produced, unproduced, version = collect(runs, prompt_version)
     questions = assign_ids(produced, seed)
-    key = build_key(questions, unproduced, seed, version, sorted({Path(p).name for p in paths}))
+    key = build_key(questions, unproduced, seed, version, sorted({Path(p).name for p in paths}),
+                    read_video_info(video_info_path))
     transcripts = load_transcripts(sorted({q["video_id"] for q in questions}))
     flaws = read_flaws()
 
@@ -307,6 +353,8 @@ def export(paths: list[Path], seed: int, out_dir: Path, key_dir: Path, prompt_ve
 def main() -> None:
     parser = argparse.ArgumentParser(description="Kör değerlendirme dosyalarını hazırlar.")
     parser.add_argument("--girdi", nargs="+", required=True, help="Çalıştırma kaydı ya da pilot JSON'u (joker karakter olabilir)")
+    parser.add_argument("--video-bilgisi", type=Path, required=True,
+                        help="Video bilgi dosyası (alan, altyazı türü, iki dilli mi); ör. secim.json")
     parser.add_argument("--tohum", type=int, required=True, help="Sıralama tohumu; anahtara yazılır")
     parser.add_argument("--cikti", type=Path, required=True, help="Değerlendirici dosyalarının klasörü")
     parser.add_argument("--anahtar-cikti", type=Path, required=True, help="Anahtar dosyasının klasörü; değerlendiricilere verilmez")
@@ -315,7 +363,7 @@ def main() -> None:
     paths = [Path(p) for pattern in args.girdi for p in sorted(glob.glob(pattern))]
     if not paths:
         parser.error("Girdi dosyası bulunamadı.")
-    key = export(paths, args.tohum, args.cikti, args.anahtar_cikti, args.istem_surumu)
+    key = export(paths, args.tohum, args.cikti, args.anahtar_cikti, args.video_bilgisi, args.istem_surumu)
     print(f"{key['question_count']} soru, {len(key['unproduced'])} üretilemeyen konu, "
           f"{len(key['incomplete_pairs'])} eksik çift, tohum {key['seed']}, sürüm {key['prompt_version']}.")
 

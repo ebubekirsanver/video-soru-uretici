@@ -9,12 +9,13 @@ Komutlar `backend` klasöründen çalıştırılır. Windows'ta `python` yerine 
 ## 1. Dışa aktar
 
 ```
-python -m evaluation.export --girdi <dosyalar> --tohum 42 --cikti <klasör> --anahtar-cikti <gizli-klasör> --istem-surumu questions-v3
+python -m evaluation.export --girdi <dosyalar> --video-bilgisi <secim.json> --tohum 42 --cikti <klasör> --anahtar-cikti <gizli-klasör> --istem-surumu questions-v3
 ```
 
 - `--girdi`: çalıştırma kaydı (`backend/runs`) ya da pilot JSON'u. Joker karakter kullanılabilir (`"../docs/bulgular/pilot-2/pilot-2-*.json"`).
 - `--tohum`: soru sırasını belirler ve anahtara yazılır.
 - `--istem-surumu`: girdide birden çok sürüm varsa zorunludur.
+- `--video-bilgisi`: her video için alan, altyazı türü (elle / otomatik) ve iki dilli mi. Ana deneyde `docs/bulgular/video-secimi/secim.json`. Girdideki her video bu dosyada olmalıdır; bilgiler anahtara yazılır.
 - Videoların transkripti önbellekte (`backend/transcripts`) olmalıdır; yoksa betik durur.
 - Çıktıda gizli bilgi bulunursa dosyalar silinir ve betik hata verir.
 
@@ -27,7 +28,8 @@ python -m evaluation.export --girdi <dosyalar> --tohum 42 --cikti <klasör> --an
 
 - Her değerlendiriciye yalnızca kendi xlsx dosyasını gönder. **Anahtarı gönderme.**
 - Göndermeden önce "Yönerge" sayfasını doldur.
-- Değerlendiriciler birbirinden bağımsız çalışır, "Sorular" sayfasındaki sarı sütunları doldurur.
+- Değerlendiriciler birbirinden bağımsız çalışır, "Sorular" sayfasındaki sarı sütunları doldurur. Sorular 3. satırdan başlar; 2. satır açıklama satırıdır.
+- "Tanıma hatası kaynaklı mı": sorudaki hata (yanlış bilgi, anlamsız ifade, yanlış doğru cevap) transkriptteki konuşma tanıma hatasından kaynaklanıyorsa evet; sorunun hatası yoksa hayır.
 
 ## 3. İçe aktar ve uyumu hesapla
 
@@ -64,6 +66,10 @@ python -m evaluation.analysis --ortak <ortak.xlsx> --anahtar <anahtar.json> --ci
 - **Oran farkı aralığı:** Newcombe (1998) 10. yöntem.
 - **McNemar:** Uyumsuz çiftlerde iki yönlü kesin binom testi.
 - **Wilcoxon:** Sıfır farklar çıkarılır, bağ düzeltmeli normal yaklaşım. r = Z / √N; N sıfır olmayan fark sayısı.
+- **Tanıma hatası kaynaklı sorular (duyarlılık):** AS1'de iki sorudan biri işaretli olan çift, AS2'de işaretli soru çıkarılarak yeniden hesaplanır; çıkarılan sayılar raporda yazar. İşareti eksik olanlar ayrı sayılır.
+- **İki dilli videolar (alt grup):** AS1 ve AS2 iki dilli videolar hariç yeniden hesaplanır.
+- **Altyazı türü:** Kabul edilebilir oranı ve hedef düzeye uyum elle / otomatik altyazıya göre betimsel verilir; test yok.
+- **Birincil sonuç:** Bütün videolar ve bütün sorularla hesaplanan sonuçtur; duyarlılık ve alt grup sonuçları birincil değildir.
 - **Tanımsız değerler:** Kappa iki değerlendirici de tek kategori kullanırsa tanımsızdır; rapora "tanımsız" yazılır, oransal uyum yine verilir. Hiç uyumsuz çift yoksa McNemar p = 1. Bütün farklar sıfırsa Wilcoxon uygulanmaz.
 
 Formüller `stats.py` başındadır.

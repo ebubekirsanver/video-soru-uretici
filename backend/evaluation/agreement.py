@@ -17,6 +17,7 @@ from openpyxl.styles import Alignment, Font
 from evaluation.common import (
     BLOOM_LEVELS,
     COL_ANSWERABLE,
+    COL_ASR,
     COL_BLOOM,
     COL_ERRORS,
     COL_FLAWS,
@@ -24,7 +25,9 @@ from evaluation.common import (
     COL_ID,
     COL_QUESTION,
     COL_VIDEO,
+    DATA_START_ROW,
     DEFAULT_ALPHA,
+    DESCRIPTION_LABEL,
     FILL_COLUMNS,
     SHEET_QUESTIONS,
     interval,
@@ -45,6 +48,7 @@ KAPPAS = [
     ("Kabul edilebilirlik (0-1 hata)", "acceptable", [True, False], False),
     ("Kaynağa dayalılık", "grounded", [True, False], False),
     ("Cevaplanabilirlik (doğrusal ağırlıklı)", "answerable", [1, 2, 3, 4, 5], True),
+    ("Tanıma hatası kaynaklı", "asr_error", [True, False], False),
 ]
 # Anlaşmazlık listesindeki alanlar; kabul edilebilirlik hata sayısından türer
 DISAGREEMENT_FIELDS = [
@@ -54,6 +58,7 @@ DISAGREEMENT_FIELDS = [
     (COL_FLAWS, "flaws"),
     (COL_GROUNDED, "grounded"),
     (COL_ANSWERABLE, "answerable"),
+    (COL_ASR, "asr_error"),
 ]
 
 
@@ -94,7 +99,7 @@ def _questions_by_id(path: Path) -> dict[str, tuple[str, str]]:
     rows = load_workbook(path, data_only=True)[SHEET_QUESTIONS].iter_rows(values_only=True)
     header = list(next(rows))
     i, v, q = header.index(COL_ID), header.index(COL_VIDEO), header.index(COL_QUESTION)
-    return {r[i]: (r[v], r[q]) for r in rows if r[i]}
+    return {r[i]: (r[v], r[q]) for r in rows if r[i] and r[i] != DESCRIPTION_LABEL}
 
 
 def write_disagreements(path: Path, rows: list[dict], source: Path) -> None:
@@ -122,13 +127,13 @@ def write_disagreements(path: Path, rows: list[dict], source: Path) -> None:
 
 
 def write_joint_template(path: Path, source: Path) -> None:
-    """Değerlendirici dosyasının kopyası; doldurulan sütunlar boşaltılır, açılır listeler korunur."""
+    """Değerlendirici dosyasının kopyası; doldurulan sütunlar boşaltılır, açılır listeler ve açıklama satırı korunur."""
     wb = load_workbook(source)
     sheet = wb[SHEET_QUESTIONS]
     header = [c.value for c in sheet[1]]
     for column in FILL_COLUMNS:
         index = header.index(column) + 1
-        for row in range(2, sheet.max_row + 1):
+        for row in range(DATA_START_ROW, sheet.max_row + 1):
             sheet.cell(row, index).value = None
     wb.save(path)
 

@@ -26,9 +26,21 @@ COL_ERRORS = "Yazım hatası sayısı"
 COL_FLAWS = "Hatalı maddeler"
 COL_GROUNDED = "Kaynağa dayalı mı"
 COL_ANSWERABLE = "Cevaplanabilirlik"
+COL_ASR = "Tanıma hatası kaynaklı mı"
 COL_NOTE = "Not"
 VISIBLE_COLUMNS = [COL_ID, COL_VIDEO, COL_TRANSCRIPT, COL_QUESTION, *COL_OPTIONS, COL_ANSWER]
-FILL_COLUMNS = [COL_BLOOM, COL_ERRORS, COL_FLAWS, COL_GROUNDED, COL_ANSWERABLE, COL_NOTE]
+FILL_COLUMNS = [COL_BLOOM, COL_ERRORS, COL_FLAWS, COL_GROUNDED, COL_ANSWERABLE, COL_ASR, COL_NOTE]
+
+# Başlığın altındaki açıklama satırı; sorular bir alttaki satırdan başlar
+DESCRIPTION_LABEL = "Açıklama"
+DATA_START_ROW = 3
+COLUMN_DESCRIPTIONS = {
+    COL_ASR: "Sorudaki hata (yanlış bilgi, anlamsız ifade, yanlış doğru cevap) transkriptteki konuşma tanıma "
+             "hatasından kaynaklanıyorsa evet. Sorunun hatası yoksa hayır.",
+}
+
+# Video bilgi dosyası (Hafta-3): altyazı türü ve iki dilli olma analizde değişkendir
+SUBTITLE_TYPES = ("elle", "otomatik")
 
 
 def load_key(path: Path) -> dict:
