@@ -918,3 +918,9 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
 - **Bilinen sınırlar:**
   - Seçim betiği gerçek YouTube ile çalıştırılmadı.
   - Deneme klasöründeki anahtar dosyası (depo dışında) alan kodları değiştirilmeden önce üretildi; içinde eski alan adları (İngilizce, Python programlama) duruyor. Yeniden üretilmedi.
+
+## Seçim kuralına netleştirme: arama filtresi ve ilk 50 sonucun sayımı (2026-11-14)
+
+- **Ne yapıldı:** `docs/video-secim-kurali.md` dosyasının sonuna "Değişiklikler" bölümü eklendi (aday kaydı başlamadan önce). Arama sonrası YouTube'un "Filtreler → Tür: Video" seçeneği kullanılır, sıralama varsayılan kalır; "ilk 50 sonuç" yalnızca tekil videoları sayar, reklamlar ve Shorts sayılmaz. Önceki metin değişmedi.
+- **Nasıl doğrulandı:** `git diff` yalnızca eklenen satırları gösteriyor; `pytest` 595 test geçti.
+- **Bilinen sınırlar:** Seçim betiği bu değişiklikten etkilenmez (arama elle yapılıyor); betik hâlâ çalıştırılmadı.

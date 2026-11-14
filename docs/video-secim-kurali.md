@@ -70,3 +70,7 @@ Her video için: alan, başlık, kanal, bağlantı, süre, altyazı türü (elle
 1. Bu kural depoya eklenir.
 2. Arama yapılır ve adaylar.csv depoya eklenir.
 3. Seçim betiği çalıştırılır ve sonuç depoya eklenir.
+
+## Değişiklikler
+
+- 2026-11-14 (aday kaydı başlamadan önce): İlk aramada sonuçların üst kısmının oynatma listesi, kurs ve kanal sonuçlarından oluştuğu görüldü. Netleştirme: (1) Arama yapıldıktan sonra YouTube'un "Filtreler → Tür: Video" seçeneği kullanılır; sıralama varsayılan kalır. Bu, 2. bölümdeki "oynatma listeleri ve kanal sonuçları atlanır" kuralının uygulanma biçimidir. (2) "İlk 50 sonuç" yalnızca tekil videoları sayar; reklamlar ve Shorts sayılmaz.
