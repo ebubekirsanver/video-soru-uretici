@@ -924,3 +924,9 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
 - **Ne yapıldı:** `docs/video-secim-kurali.md` dosyasının sonuna "Değişiklikler" bölümü eklendi (aday kaydı başlamadan önce). Arama sonrası YouTube'un "Filtreler → Tür: Video" seçeneği kullanılır, sıralama varsayılan kalır; "ilk 50 sonuç" yalnızca tekil videoları sayar, reklamlar ve Shorts sayılmaz. Önceki metin değişmedi.
 - **Nasıl doğrulandı:** `git diff` yalnızca eklenen satırları gösteriyor; `pytest` 595 test geçti.
 - **Bilinen sınırlar:** Seçim betiği bu değişiklikten etkilenmez (arama elle yapılıyor); betik hâlâ çalıştırılmadı.
+
+## Seçim kuralına ikinci netleştirme: ekran görüntüsüyle sabitlenen arama sırası (2026-11-14)
+
+- **Ne yapıldı:** `docs/video-secim-kurali.md` "Değişiklikler" bölümüne ikinci madde eklendi: her alan için yeni gizli pencere ve "Tür: Video" filtresi; videolara tıklamadan ilk 50 tekil sonucun ekran görüntüsü ve arama saati; değerlendirme bu görüntülerdeki sıraya göre; görüntüler `docs/bulgular/video-secimi/ekran-goruntuleri/<alan kodu>/` altında, `adaylar.csv` ile birlikte depoya. Önceki metin değişmedi.
+- **Nasıl doğrulandı:** `git diff` yalnızca eklenen satırı gösteriyor; `pytest` çalıştırıldı.
+- **Bilinen sınırlar:** Seçim betiği ekran görüntülerini okumaz ve denetlemez; betik değişmedi, hâlâ çalıştırılmadı.
