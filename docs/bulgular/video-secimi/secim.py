@@ -26,10 +26,18 @@ Yalnızca adaylar.csv'deki `durum = aday` satırlarıyla çalışır. Sıra:
 
 OpenAI'a gidilmez. Kelime ve parça sayısı temiz transkriptten mevcut kodla hesaplanır.
 
+secim.md tablolarında hücre içindeki "|" karakteri "\\|" olarak kaçırılır (yoksa Markdown
+onu sütun ayracı sanar). secim-notlar.md varsa içeriği secim.md'nin sonuna olduğu gibi eklenir;
+seçimden sonra yazılan notlar bu dosyada tutulur, böylece secim.md yeniden üretilince kaybolmaz.
+
 Çalıştırma (depo kökünden):
     backend\\.venv\\Scripts\\python.exe docs\\bulgular\\video-secimi\\secim.py
+secim.md'yi ağa çıkmadan mevcut secim.json'dan yeniden üretmek (yalnızca secim.md'nin
+üzerine yazılır; secim.json ve adaylar.csv'ye dokunulmaz):
+    backend\\.venv\\Scripts\\python.exe docs\\bulgular\\video-secimi\\secim.py --md-yeniden
 """
 
+import argparse
 import csv
 import json
 import random
@@ -216,8 +224,17 @@ def select(candidates: list[dict], load=default_loader) -> dict:
     }
 
 
-def render(result: dict) -> str:
-    lines = ["# Ana deney video seçimi", "", "Kural: [docs/video-secim-kurali.md](../../video-secim-kurali.md). "
+NOTES_FILE = "secim-notlar.md"
+
+
+def cell(value) -> str:
+    """Tablo hücresi: "|" sütun ayracı sanılmasın diye kaçırılır, satır sonu boşluğa çevrilir."""
+    return " ".join(str(value).replace("|", "\\|").splitlines())
+
+
+def render(result: dict, notes: str | None = None) -> str:
+    """secim.md metni. `notes` verilirse (secim-notlar.md içeriği) sona olduğu gibi eklenir."""
+    lines =["# Ana deney video seçimi", "", "Kural: [docs/video-secim-kurali.md](../../video-secim-kurali.md). "
              "Eleme adaylar.csv'deki süreyle (YouTube'da görünen süre) yapıldı; transkriptin son satırından "
              "ölçülen süre yalnızca bilgi olarak yazıldı.", ""]
     for field, block in result["alanlar"].items():
@@ -225,8 +242,9 @@ def render(result: dict) -> str:
                   "| Sıra | Rol | Başlık | Kanal | Bağlantı | Süre (csv) | Süre (transkript) | Altyazı | İki dilli | Kelime | Parça |",
                   "|---|---|---|---|---|---|---|---|---|---|---|"]
         for r in block["siralama"]:
-            lines.append(f"| {r['sira_no']} | {r['rol']} | {r['baslik']} | {r['kanal']} | {r['url']} | {r['sure_dk_sn']} | "
-                         f"{r['sure_transkript']} | {r['altyazi_turu']} | {'evet' if r['iki_dilli'] else 'hayır'} | {r['kelime']} | {r['parca']} |")
+            values = [r["sira_no"], r["rol"], r["baslik"], r["kanal"], r["url"], r["sure_dk_sn"], r["sure_transkript"],
+                      r["altyazi_turu"], "evet" if r["iki_dilli"] else "hayır", r["kelime"], r["parca"]]
+            lines.append("| " + " | ".join(cell(v) for v in values) + " |")
         if len(block["siralama"]) < len(ROLES):
             lines.append(f"\nBu alanda {len(block['siralama'])} uygun video kaldı; {len(ROLES)} gerekli.")
         if block["elenen"]:
@@ -235,16 +253,49 @@ def render(result: dict) -> str:
     if result["reddedilen"]:
         lines += ["## Reddedilen adaylar", ""] + [f"- {r['alan']}, {r['baslik']} ({r['kanal']}): {r['gerekce']}" for r in result["reddedilen"]]
         lines.append("")
-    return "\n".join(lines)
+    text = "\n".join(lines)
+    if notes and notes.strip():
+        text = text.rstrip("\n") + "\n\n" + notes.strip("\n") + "\n"
+    return text
+
+
+def read_notes(out_dir: Path) -> str | None:
+    path = out_dir / NOTES_FILE
+    return path.read_text(encoding="utf-8") if path.exists() else None
 
 
 def write_outputs(result: dict, out_dir: Path) -> None:
-    for name, text in (("secim.json", json.dumps(result, ensure_ascii=False, indent=2)), ("secim.md", render(result))):
+    md = render(result, read_notes(out_dir))
+    for name, text in (("secim.json", json.dumps(result, ensure_ascii=False, indent=2)), ("secim.md", md)):
         with (out_dir / name).open("x", encoding="utf-8") as f:
             f.write(text)
 
 
-def main() -> int:
+def rebuild_md(out_dir: Path) -> Path:
+    """Ağa çıkmadan secim.json'dan secim.md'yi yeniden yazar; yalnızca secim.md değişir."""
+    source = out_dir / "secim.json"
+    if not source.exists():
+        raise SelectionError("secim.json yok; secim.md yeniden üretilemez.")
+    result = json.loads(source.read_text(encoding="utf-8"))
+    target = out_dir / "secim.md"
+    with target.open("w", encoding="utf-8") as f:
+        f.write(render(result, read_notes(out_dir)))
+    return target
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Ana deney video seçimi (docs/video-secim-kurali.md).")
+    parser.add_argument("--md-yeniden", action="store_true",
+                        help="secim.md'yi mevcut secim.json'dan yeniden üret (ağa çıkmaz, secim.json'a dokunmaz)")
+    args = parser.parse_args(argv)
+    if args.md_yeniden:
+        try:
+            path = rebuild_md(HERE)
+        except SelectionError as exc:
+            print(f"Çalışmayı reddetti: {exc}")
+            return 1
+        print(f"{path.name} secim.json'dan yeniden yazıldı.")
+        return 0
     try:
         check_committed(CANDIDATES)
         candidates = read_candidates(CANDIDATES)

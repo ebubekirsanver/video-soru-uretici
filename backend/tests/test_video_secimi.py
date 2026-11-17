@@ -2,6 +2,7 @@
 
 import csv
 import importlib.util
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -200,7 +201,7 @@ def test_main_does_not_write_output_on_block(tmp_path, monkeypatch):
     monkeypatch.setattr(secim, "check_committed", lambda p: None)
     monkeypatch.setattr(secim, "default_loader", FakeLoader(blocked={IDS[0]}))
     monkeypatch.setattr(secim.select, "__defaults__", (secim.default_loader,))
-    assert secim.main() == 2
+    assert secim.main([]) == 2
     assert not (tmp_path / "secim.json").exists()
 
 
@@ -231,6 +232,85 @@ def test_video_info_accepted_by_evaluation_export(tmp_path):
     secim.write_outputs(result, tmp_path)
     info = read_video_info(tmp_path / "secim.json")
     assert set(info) == set(result["videos"]) and all(v["altyazi_turu"] == "otomatik" for v in info.values())
+
+
+# --- secim.md: "|" kaçışı, notlar, --md-yeniden ----------------------------------------
+
+
+def table_rows(md):
+    import re
+
+    return [[c.strip() for c in re.split(r"(?<!\\)\|", line.strip())[1:-1]]
+            for line in md.splitlines() if line.startswith("| ") and not line.startswith("| Sıra")]
+
+
+def piped_result(tmp_path):
+    rows = five("biyoloji")
+    rows[0]["baslik"] = "Hücre | Konu Anlatımı | 9. Sınıf"
+    rows[1]["kanal"] = "Kanal | Ders"
+    return secim.select(candidates(tmp_path, rows), FakeLoader())
+
+
+def test_pipe_in_cells_escaped_and_columns_kept(tmp_path):
+    md = secim.render(piped_result(tmp_path))
+    rows = table_rows(md)
+    assert len(rows) == 5 and all(len(r) == 11 for r in rows)  # sütun kaymaz
+    assert any(r[2] == "Hücre \\| Konu Anlatımı \\| 9. Sınıf" for r in rows)
+    assert any(r[3] == "Kanal \\| Ders" for r in rows)
+
+
+def test_cell_escapes_pipe_and_newline():
+    assert secim.cell("a | b") == "a \\| b"
+    assert secim.cell("satır\nikinci") == "satır ikinci"
+    assert secim.cell(12) == "12"
+
+
+def test_notes_appended_at_end(tmp_path):
+    result = piped_result(tmp_path)
+    notes = "## Notlar\n\n- 2026-11-17: deneme notu.\n"
+    md = secim.render(result, notes)
+    assert md.endswith("\n\n## Notlar\n\n- 2026-11-17: deneme notu.\n")
+    assert md.startswith(secim.render(result).rstrip("\n"))
+    assert secim.render(result, "  \n") == secim.render(result)  # boş not eklenmez
+
+
+def test_md_rebuild_overwrites_only_md_and_keeps_notes(tmp_path, monkeypatch):
+    out = tmp_path / "out"
+    out.mkdir()
+    result = piped_result(tmp_path)
+    secim.write_outputs(result, out)
+    json_before = (out / "secim.json").read_bytes()
+    (out / "secim.md").write_text("bozuk eski içerik", encoding="utf-8")
+    (out / secim.NOTES_FILE).write_text("## Notlar\n\n- not\n", encoding="utf-8")
+    loader = FakeLoader()
+    monkeypatch.setattr(secim, "HERE", out)
+    monkeypatch.setattr(secim, "default_loader", loader)
+    monkeypatch.setattr(secim, "check_committed", lambda p: pytest.fail("seçim yolu çalışmamalı"))
+    assert secim.main(["--md-yeniden"]) == 0
+    md = (out / "secim.md").read_text(encoding="utf-8")
+    assert md == secim.render(result, "## Notlar\n\n- not\n")
+    assert (out / "secim.json").read_bytes() == json_before  # secim.json değişmez
+    assert loader.calls == []  # ağa çıkılmaz
+    assert secim.main(["--md-yeniden"]) == 0  # tekrar çalıştırılınca not kaybolmaz
+    assert (out / "secim.md").read_text(encoding="utf-8").endswith("## Notlar\n\n- not\n")
+    assert sorted(p.name for p in out.iterdir()) == sorted(["secim.json", "secim.md", secim.NOTES_FILE])
+
+
+def test_md_rebuild_refuses_without_json(tmp_path, monkeypatch):
+    monkeypatch.setattr(secim, "HERE", tmp_path)
+    assert secim.main(["--md-yeniden"]) == 1
+    assert not (tmp_path / "secim.md").exists()
+
+
+def test_real_secim_md_matches_json_and_notes():
+    # Depodaki secim.md, secim.json ve secim-notlar.md'den yeniden üretilenle aynı olmalı
+    here = secim.HERE
+    if not (here / "secim.json").exists():
+        pytest.skip("secim.json yok")
+    result = json.loads((here / "secim.json").read_text(encoding="utf-8"))
+    expected = secim.render(result, secim.read_notes(here))
+    assert (here / "secim.md").read_text(encoding="utf-8") == expected
+    assert all(len(r) == 11 for r in table_rows(expected))
 
 
 # --- Girdi denetimi --------------------------------------------------------------------

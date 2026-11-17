@@ -945,3 +945,17 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - `sira` her aramanın kendi sırası; iki aramadan aday çıkan alanlarda (biyoloji, tarih, matematik, edebiyat) karıştırma öncesi diziliş iki aramanın sıra numaralarını birlikte kullanıyor. Şu an aynı alanda aynı sıra numaralı iki aday yok, sonuç belirli.
   - Biyoloji ana aramasının 46 elenen satırında bağlantı yok (ekran görüntüsünden yazıldı); betik elenen satırları denetlemediği için hata vermiyor.
   - `adaylar.csv` commit'lenmeden betik çalışmayı reddeder.
+
+## secim.md tablo düzeltmesi ve edebiyat yedeği notu (2026-11-17)
+
+- **Ne yapıldı:**
+  - `secim.py`: tablo hücrelerindeki "|" karakteri `\|` olarak kaçırılıyor (başlıklarda "|" olan 14 satırda sütunlar kayıyordu).
+  - `--md-yeniden` seçeneği: ağa çıkmadan `secim.json`'dan yalnızca `secim.md` yeniden yazılıyor.
+  - Seçimden sonraki notlar `secim-notlar.md` dosyasında tutuluyor ve md üretilirken sona olduğu gibi ekleniyor. İlk not: edebiyatta 4. sıradaki yedek (Emek TAŞTAN) ölçüt 4'e göre aday olmamalıydı ve kullanılmayacak.
+  - `secim.md` bu seçenekle yeniden üretildi. `secim.json` ve `adaylar.csv` değişmedi.
+- **Nasıl doğrulandı:**
+  - Yeni md'de kaçışlar geri alınıp Notlar bölümü çıkarılınca eski md ile birebir aynı.
+  - 27 tablo satırının hepsi 11 hücreli ve hücreler `secim.json` ile aynı (sıra, rol, başlık, kanal, bağlantı, süreler, altyazı, iki dilli, kelime, parça).
+  - `secim.json` ve `adaylar.csv` özetleri öncesi ve sonrasında aynı.
+  - `pytest` 601 test geçti (6 yeni test; depodaki `secim.md`'nin `secim.json` ve notlardan yeniden üretilenle aynı olduğunu da denetliyor).
+- **Bilinen sınırlar:** "Elenen" ve "Reddedilen" listeleri tablo olmadığı için kaçırılmıyor; bu seçimde ikisi de boş.
