@@ -6,6 +6,13 @@ import { formatTimestamp, youtubeTimeUrl } from "@/lib/format";
 
 const LETTERS = ["A", "B", "C", "D"];
 
+/** "Başlık: açıklama" biçimindeki konudan yalnızca başlığı alır; iki nokta yoksa metnin tamamı. */
+export function topicTitle(topic: string): string {
+  const cut = topic.indexOf(":");
+  const title = cut > 0 ? topic.slice(0, cut) : topic;
+  return title.trim() || topic.trim();
+}
+
 interface ViewProps {
   question: QuestionOut;
   index: number; // 1'den başlayan soru sırası
@@ -18,14 +25,29 @@ interface ViewProps {
 export function QuestionView({ question: q, index, videoId, selected, onSelect }: ViewProps) {
   const answered = selected !== null;
   const correct = answered && selected === q.correct_index;
+  // Yalnızca Konu + Bloom yolunda dolu gelir; taban çizgisinde ikisi de görünmez
+  const topic = q.topic?.trim() ? topicTitle(q.topic) : null;
+  const bloom = q.bloom_level?.trim() || null;
 
   return (
     <article className={`question-card${q.verified ? "" : " unverified"}`} aria-labelledby={`q${index}`}>
       <header className="question-head">
         <span className="question-no">Soru {index}</span>
+        {bloom && (
+          // Renk tek başına anlam taşımaz: düzey her zaman metinle yazılır. Altı düzey aynı
+          // renktedir; renk iyi/kötü çağrışımı yapmasın diye.
+          <span className="badge-bloom" title="Sorunun istemde hedeflendiği Bloom düzeyi">
+            Bloom: {bloom}
+          </span>
+        )}
         {!q.verified && <span className="badge-unverified">Kaynak doğrulanamadı</span>}
       </header>
-      <p id={`q${index}`} className="question-text">
+      {topic && (
+        <p className="question-topic" title={q.topic ?? undefined}>
+          Konu: {topic}
+        </p>
+      )}
+      <p id={`q${index}`} className={`question-text${topic ? " after-topic" : ""}`}>
         {q.question}
       </p>
 

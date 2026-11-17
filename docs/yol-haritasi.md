@@ -69,6 +69,7 @@ Aşama sırası ve içeriği ilerledikçe güncellenebilir.
   - 19 Ekim tarayıcı denemesinde ayrıca doğrulandı ([gözlem](bulgular/asama-12e-tarayici-gozlemi-1.md)): onay kutusu ve açıklama metni; kutunun istek sırasında kilitlenmesi; sayfa altındaki not; "desteklemiyor" ve "destekliyor" etiketlerinin gerçek yanıtta görünüşü.
   - Doğrulanmadı: "kısmen" hâli; "kontrol edilemedi" hâli; dar ekran; karanlık tema dışındaki görünümler.
   - Gözlem: aynı videoda üç ayrı çalıştırmada sorular farklı çıktı, birinde 5 yerine 4 soru döndü (3'ü doğrulanmış). Doğrulanamayan bir soruda alıntı "350-400 S D", soru ve cevap "350-400 °C" yazıyor (kayıttaki asıl neden henüz incelenmedi).
+- **12f · Arayüzde Konu + Bloom yolu: yapıldı, tarayıcıda denenmedi** (2026-11-17). "Soruları üret" yanında üç seçenek: Konu + Bloom, RAG (varsayılan; `context_mode: "rag"`, `count: 6`); Konu + Bloom, tam transkript (`context_mode: "full"`, `count: 6`); taban çizgisi (bugünkü istek). `prompt_version` gönderilmez, backend varsayılanı `questions-v3` kullanılır. Kartta hedef Bloom düzeyi etiketi ve konu başlığı; sonuçta koşul, istem sürümü ve "6 konudan N'i için soru üretildi"; soru üretilmeyen konu varsa not. Bu istekte zaman aşımı 300 sn. Yalnızca frontend değişti; `npm run typecheck` geçti. Gerçek istekle ve tarayıcıda gözle doğrulanmadı.
 - Aşama 7, 8, 10 ve 11 yapılmadı; Aşama 3 ve 4 ertelenmiş durumda.
 
 ## Plan güncellemesi (2026-10-31): Hafta-1 geri bildirimi sonrası
@@ -140,7 +141,7 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
 | 9 · Otomatik doğrulama | ana (kalan kısımlar); RAGAs ve otomatik yazım denetimi değerlendirmede yalnızca yardımcı ölçüt | kalan kısımlar Güz 11–12 | kısmen (alıntı-cevap destek kontrolü, kodla yazım kuralları `writing-rules-v1`) |
 | 10 · Yeniden üretim döngüsü | belirtilmedi (en çok 1–2 tur) | planda haftası yok | yapılmadı |
 | 11 · Asenkron görev kuyruğu | belirtilmedi | planda haftası yok | yapılmadı |
-| 12 · Web arayüzü | belirtilmedi | planda haftası yok | prototip tamamlandı (12a-12e) |
+| 12 · Web arayüzü | belirtilmedi | planda haftası yok | prototip tamamlandı (12a-12e); 12f yapıldı, tarayıcıda denenmedi |
 | 13 · Öğretmen onay ekranı | belirtilmedi | Bahar 1–2 | yapılmadı |
 | 14 · İzleme ve günlükleme | belirtilmedi | planda haftası yok | kısmen (kayıt tarafı tamam) |
 | 15 · Değerlendirme | ana | Bahar 3–10 | yapılmadı |

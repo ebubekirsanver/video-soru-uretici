@@ -959,3 +959,22 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - `secim.json` ve `adaylar.csv` özetleri öncesi ve sonrasında aynı.
   - `pytest` 601 test geçti (6 yeni test; depodaki `secim.md`'nin `secim.json` ve notlardan yeniden üretilenle aynı olduğunu da denetliyor).
 - **Bilinen sınırlar:** "Elenen" ve "Reddedilen" listeleri tablo olmadığı için kaçırılmıyor; bu seçimde ikisi de boş.
+
+## Aşama 12f: arayüzde Konu + Bloom yolu (RAG / tam transkript) (2026-11-17)
+
+- **Ne yapıldı:** Yalnızca frontend değişti; backend, istem dosyaları ve ana deney ayarlarına dokunulmadı.
+  - `frontend/app/questions-section.tsx`: "Soruları üret" yanında üç seçenek ve seçilenin bir satırlık açıklaması:
+    - Konu + Bloom, RAG (varsayılan; `context_mode: "rag"`, `count: 6`);
+    - Konu + Bloom, tam transkript (`context_mode: "full"`, `count: 6`);
+    - taban çizgisi (12d isteği, değişmedi).
+  - `prompt_version` gönderilmiyor; backend varsayılanı `questions-v3` kullanılıyor. Destek kontrolü üç seçenekte de çalışıyor.
+  - Sonuç özeti: koşul ve istem sürümü ("RAG · questions-v3"), "6 konudan N'i için soru üretildi"; soru üretilmeyen konu varsa not.
+  - Bekleme metni: uzun sürebileceği ve ilk istekte BGE-M3'ün yüklendiği söyleniyor. Zaman aşımı yalnızca bu istekte 300 sn, diğer istekler 180 sn.
+  - `frontend/app/question-card.tsx`: yanıtta varsa "Bloom: <düzey>" etiketi ve konunun "Başlık" kısmı. Taban çizgisinde bu alanlar gelmediği için görünüm değişmedi.
+  - `frontend/lib/api.ts`: `QuestionsRequest.context_mode`, `QuestionOut.topic` / `bloom_level`, `QuestionsResponse.context_mode`. Alan adları `backend/app/schemas.py` ile karşılaştırıldı; `count` ve `prompt_version` zaten vardı.
+  - `frontend/app/globals.css`: seçim, etiket ve not stilleri.
+- **Nasıl doğrulandı:** `npm run typecheck` geçti; backend `pytest` değişmeden 601 test geçti. Sayıya Türkçe ek veren ve konudan başlığı ayıran yardımcılar node ile elle denendi.
+- **Bilinen sınırlar:**
+  - Gerçek istekle ve tarayıcıda gözle denenmedi.
+  - Frontend için otomatik test yok.
+  - "N konudan" sayısı yanıttaki `requested_count`, soru üretilen konu sayısı `returned_count` (konu başına en çok bir soru varsayımıyla).

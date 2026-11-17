@@ -12,6 +12,8 @@
   --checking-bg: #f6f8fa;
   --warn: #9a6700;
   --warn-bg: #fff8c5;
+  --info: #0969da;
+  --info-bg: #ddf4ff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,6 +30,8 @@
     --checking-bg: #151b23;
     --warn: #d29922;
     --warn-bg: #2b2111;
+    --info: #4493f8;
+    --info-bg: #121d2f;
   }
 }
 
@@ -519,4 +523,83 @@ button.primary:disabled {
 .support-none {
   border-style: dashed;
   color: var(--muted);
+}
+
+/* 12f: soru üretim biçimi seçimi (Konu + Bloom RAG / tam transkript / taban çizgisi) */
+.mode-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 4px 10px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.mode-select legend {
+  padding: 0 4px;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.mode-option {
+  display: inline-flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.mode-select:disabled {
+  opacity: 0.6;
+}
+
+.mode-select:disabled .mode-option {
+  cursor: progress;
+}
+
+.mode-help {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Sonuç özeti: koşul ve istem sürümü satırı (yalnızca Konu + Bloom yolunda) */
+.question-list .condition-line {
+  color: var(--fg);
+}
+
+.question-list .meta.meta-follow {
+  margin-top: 4px;
+}
+
+.topic-gap-note {
+  margin: 8px 0 0;
+  padding: 6px 10px;
+  border-left: 3px solid var(--warn);
+  border-radius: 4px;
+  background: var(--warn-bg);
+  font-size: 0.85rem;
+}
+
+/* Soru kartında hedef Bloom düzeyi ve konu (yalnızca Konu + Bloom yolunda) */
+.badge-bloom {
+  padding: 1px 8px;
+  border: 1px solid var(--info);
+  border-radius: 999px;
+  background: var(--info-bg);
+  color: var(--info);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.question-topic {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.question-text.after-topic {
+  margin-top: 2px;
 }

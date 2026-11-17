@@ -28,13 +28,21 @@ export interface SummaryResponse {
   topics: SummaryTopic[];
 }
 
+/** AS1 koşulu. rag: konu için erişilen transkript parçaları; full: transkriptin tamamı. */
+export type ContextMode = "full" | "rag";
+
 export interface QuestionsRequest {
   url: string;
-  count?: number; // 1-20, backend varsayılanı 5
-  transcript_mode?: TranscriptMode; // backend varsayılanı "clean"
+  // 1-20, backend varsayılanı 5. context_mode ile konu sayısıdır; Bloom eşlemesi
+  // otomatik yapılacaksa 6 olmalı (backend bloom_levels verilmezse 6 konu ister)
+  count?: number;
+  transcript_mode?: TranscriptMode; // backend varsayılanı "clean"; rag yalnızca "clean" ile
   // true ise her doğrulanmış soru için ayrı bir (ücretli) model çağrısıyla alıntının
   // doğru cevabı destekleyip desteklemediği sorulur; backend varsayılanı false
   check_support?: boolean;
+  // Verilirse konu çıkarma + konu başına bir soru (Bloom yönlendirmeli istem, backend
+  // varsayılanı questions-v3). Verilmezse taban çizgisi (questions-v1).
+  context_mode?: ContextMode;
 }
 
 /** destekliyor / kısmen / desteklemiyor: modelin değerlendirmesi.
@@ -61,17 +69,26 @@ export interface QuestionOut {
   quote_match: "exact" | "trimmed" | null;
   // Yalnızca check_support=true iken gelir; kapalıyken anahtar yanıtta hiç yoktur
   support?: SupportOut;
+  // Yalnızca context_mode ile gelir (taban çizgisinde anahtar yoktur).
+  // topic: sorunun üretildiği konu, çoğunlukla "Başlık: açıklama" biçiminde.
+  topic?: string | null;
+  // Hedef Bloom düzeyi: sorunun istemde hedeflendiği düzeydir; sorunun gerçekten
+  // bu düzeyde olduğu iddia edilmez.
+  bloom_level?: string | null;
 }
 
 export interface QuestionsResponse {
   video_id: string;
   transcript_mode: TranscriptMode;
   model: string;
-  prompt_version: string;
+  prompt_version: string; // taban çizgisinde questions-v1, context_mode ile questions-v3 (varsayılan)
+  // context_mode ile istenen konu sayısı; taban çizgisinde istenen soru sayısı
   requested_count: number;
   returned_count: number;
   verified_count: number;
   questions: QuestionOut[];
+  // Yalnızca context_mode verildiyse gelir (AS1 koşulu)
+  context_mode?: ContextMode;
   // Yalnızca check_support=true iken gelir: destek kontrolünde kullanılan istem sürümü
   support_prompt_version?: string;
 }
@@ -104,6 +121,9 @@ export class ApiError extends Error {
 
 // Özet ve soru üretimi, uzun videolarda LLM yüzünden onlarca saniye sürebilir
 const DEFAULT_TIMEOUT_MS = 180_000;
+// Konu + Bloom soru üretimi: konu çıkarma, konu başına bir model çağrısı ve ilk istekte
+// BGE-M3 gömme modelinin yüklenmesi (yaklaşık 1 dakika) nedeniyle daha uzun sürer
+export const TOPIC_QUESTIONS_TIMEOUT_MS = 300_000;
 
 interface RequestOptions {
   signal?: AbortSignal; // bileşen kapanınca isteği iptal etmek için
