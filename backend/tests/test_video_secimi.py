@@ -251,10 +251,12 @@ def test_refuses_missing_untracked_or_modified_csv(tmp_path):
     secim.check_committed(path, run=lambda *a, **k: git_result(0, ""))
 
 
-def test_real_template_is_header_only():
+def test_real_candidates_file_readable():
+    # Gerçek aday listesi (2026-11-17): başlık kuraldaki sütunlar, adaylar biçim hatası olmadan okunur.
     with secim.CANDIDATES.open(encoding="utf-8", newline="") as f:
-        rows = list(csv.reader(f))
-    assert rows == [secim.CSV_COLUMNS]
+        assert next(csv.reader(f)) == secim.CSV_COLUMNS
+    rows = secim.read_candidates(secim.CANDIDATES)
+    assert {r["alan"] for r in rows} <= set(secim.FIELDS)
 
 
 @pytest.mark.parametrize(

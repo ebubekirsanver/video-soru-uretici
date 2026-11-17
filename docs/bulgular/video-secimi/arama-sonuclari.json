@@ -1,0 +1,3228 @@
+{
+ "aciklama": "Ana deney video aramasi ham sonuclari (kural: docs/video-secim-kurali.md). Biyoloji ana aramasi kullanicinin ekran goruntuleriyle kaydedildi; digerleri Claude tarafindan Claude in Chrome uzerinden, cerez gonderilmeden (oturumsuz) YouTube arama sayfasindan ve /youtubei/v1/search devamindan alindi. Tur: Video filtresi (sp=EgIQAQ==), varsayilan siralama, hl=tr, gl=TR.",
+ "olusturma": "2026-11-17T07:35:49.230Z",
+ "aramalar": {
+  "biyoloji-yedek": {
+   "q": "lise biyoloji ders",
+   "time": "2026-11-14T13:51:59.636Z",
+   "loggedOut": true,
+   "ver": "2.20261112.10.00",
+   "results": [
+    {
+     "title": "Açık Lise Biyoloji 1 - 1. Tema: Yaşam - Biyolojinin Tanımı ve Önemi",
+     "channel": "Açık Lise TV",
+     "len": "19:14",
+     "id": "SggDGq1AZIo",
+     "live": false
+    },
+    {
+     "title": "Biyolojinin Önemi | 9. Sınıf Biyoloji Konu Anlatımı | Dosia Materyalleri | Biosem",
+     "channel": "Biosem Biyoloji",
+     "len": "27:30",
+     "id": "WDWC3qzN_hI",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Biyoloji 1.Dönem 1.Yazılıya Hazırlık | Maarif Model Full Tekrar",
+     "channel": "BETÜL BİYOLOJİ",
+     "len": "53:08",
+     "id": "BYa7ShvMDkw",
+     "live": false
+    },
+    {
+     "title": "1) Biyolojinin Önemi ve Dönüm Noktaları | 9. Sınıf Biyoloji (Maarif Modeli, Yeni Müfredat)",
+     "channel": "BETÜL BİYOLOJİ",
+     "len": "23:11",
+     "id": "4GnEUuJZNFw",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 1 Konu Anlatımlı Ders Notları",
+     "channel": "Çalışkan Öğrencİ",
+     "len": "33:23",
+     "id": "m_I8pvp_hv4",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Biyoloji 1.Dönem 1.Yazılıya Hazırlık 📑 #10BIYO1D1Y #2027",
+     "channel": "tonguç 10. SINIF",
+     "len": "35:03",
+     "id": "_LEtqeqHPpo",
+     "live": false
+    },
+    {
+     "title": "9. SINIF BİYOLOJİ YENİ MÜFREDAT | BİYOLOJİNİN ÖNEMİ VE DÖNÜM NOKTALARI | MAARİF MODELİ 1. DERS",
+     "channel": "Biosem Biyoloji",
+     "len": "22:35",
+     "id": "84J7RbQH-fU",
+     "live": false
+    },
+    {
+     "title": "9.sınıf Biyoloji 1.dönem 1.yazılı Maarif Model | GENEL TEKRAR | Dosia Materyalleri | Biosem",
+     "channel": "Biosem Biyoloji",
+     "len": "1:02:38",
+     "id": "Gezsr1bV8uE",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Biyoloji 1. Dönem 1. Yazılı Son TEKRAR, Konu Anlatımı",
+     "channel": "Mutlu Akademi",
+     "len": "16:16",
+     "id": "0DVTd--y0Cs",
+     "live": false
+    },
+    {
+     "title": "Canlıların Ortak Özellikleri | 9. Sınıf Biyoloji Konu Anlatımı | Dosia Materyalleri | Biosem",
+     "channel": "Biosem Biyoloji",
+     "len": "38:37",
+     "id": "Ny4f5dIDat8",
+     "live": false
+    },
+    {
+     "title": "11.sınıf Biyoloji 1.dönem 1.yazılı Full Tekrar | Maarif Model | Dosia Materyalleri | Biosem",
+     "channel": "Biosem Biyoloji",
+     "len": "1:36:47",
+     "id": "qsES0yYmA3s",
+     "live": false
+    },
+    {
+     "title": "10.sınıf Biyoloji 1.dönem 1.yazılı Maarif Model | GENEL TEKRAR | Dosia Materyalleri | Biosem",
+     "channel": "Biosem Biyoloji",
+     "len": "1:17:45",
+     "id": "qFQ7IHAbw8E",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Biyoloji 1. Ünite: Yaşam | Tek Videoda Konu Anlatımı | Maarif Modeli",
+     "channel": "e akademi tv",
+     "len": "47:23",
+     "id": "aJ1yFAteZig",
+     "live": false
+    },
+    {
+     "title": "9. SINIF BİYOLOJİ YENİ MÜFREDAT | CANLILARIN ORTAK ÖZELLİKLERİ | MAARİF MODELİ | 4. DERS",
+     "channel": "Biosem Biyoloji",
+     "len": "28:43",
+     "id": "nn2uXdrHDMo",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 3 - Mart 2025 Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "12:29",
+     "id": "mGMBcUMoCLA",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 1 - Mart 2025 Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "7:20",
+     "id": "R1faeb9Rmww",
+     "live": false
+    },
+    {
+     "title": "1-Canlıların Ortak Özellikleri Konu Anlatımı 9.sınıf biyoloji Tyt Biyoloji Konu anlatımı Yks 2023",
+     "channel": "Biosem Biyoloji",
+     "len": "33:38",
+     "id": "WmkFuLiA19c",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 1 - Aralıkkk 2025 - Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "9:15",
+     "id": "7RX867jJ2R4",
+     "live": false
+    },
+    {
+     "title": "4) Canlıların Ortak Özellikleri | 9. Sınıf Biyoloji (Maarif Modeli, Yeni Müfredat)",
+     "channel": "BETÜL BİYOLOJİ",
+     "len": "28:56",
+     "id": "rF-uFwzp3nQ",
+     "live": false
+    },
+    {
+     "title": "Biyoloji 9-10-11 1. Dönem 1. Yazılı | Hızlı Tekrar ve Sınav Provası | Biosem",
+     "channel": "Biosem Biyoloji",
+     "len": "3:08:48",
+     "id": "YuPdVQknf1o",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Biyoloji 1.Dönem 1.Yazılı Provası | SENARYO 3",
+     "channel": "BETÜL BİYOLOJİ",
+     "len": "18:40",
+     "id": "a5wi-GXLJ54",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Biyoloji 1.Dönem 1.Yazılıya Hazırlık | Maarif Model Full Tekrar",
+     "channel": "BETÜL BİYOLOJİ",
+     "len": "1:11:18",
+     "id": "0xBJ7cqajw8",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 2 - 2. Tema : Organizasyon - İnorganik Moleküller 1. Bölüm",
+     "channel": "Açık Lise TV",
+     "len": "14:44",
+     "id": "GDFWZBzEJMc",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Biyoloji 1.Dönem 1.Yazılı Provası | SENARYO 1",
+     "channel": "BETÜL BİYOLOJİ",
+     "len": "19:55",
+     "id": "TXiU8h7DNBQ",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 2 - Aralık 2025 - Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "12:24",
+     "id": "wpCrAnwyMd0",
+     "live": false
+    },
+    {
+     "title": "1) Canlıların Ortak Özellikleri | 2027 TYT Biyoloji Kampı 1. Gün",
+     "channel": "BETÜL BİYOLOJİ",
+     "len": "43:12",
+     "id": "wecoNsYW9gE",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 4 - Mart 2025 Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "12:21",
+     "id": "o4rj-2fQyKc",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Biyoloji 1.Dönem 1.Yazılı Provası | SENARYO 2",
+     "channel": "BETÜL BİYOLOJİ",
+     "len": "23:51",
+     "id": "2IYxIXl6Qmo",
+     "live": false
+    },
+    {
+     "title": "\"BİYOLOJİ 1\" 1. TEMA 1. Bölüm Konu Anlatımı ve Özeti. Açık Öğretim Liseleri Biyoloji 1 Dersi",
+     "channel": "Açık Lise Öğrencileri",
+     "len": "15:00",
+     "id": "CGlI9jkyAoA",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Biyoloji 1. Dönem 1. Yazılı Genel Tekrar | 42 Dakikada",
+     "channel": "Cici Biyoloji",
+     "len": "42:29",
+     "id": "n0452UF-mwU",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 2 - Mart 2025 Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "11:11",
+     "id": "6vbiOaZwz8o",
+     "live": false
+    },
+    {
+     "title": "İnorganik Bileşikler - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT BİYOLOJİ KAMPI 2026-27 | 2",
+     "channel": "Biosem Biyoloji",
+     "len": "31:56",
+     "id": "n6ctBdXpHio",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf 1. Dönem 1. Yazılı Provaları | Tüm Senaryolar",
+     "channel": "Biosem Biyoloji",
+     "len": "46:47",
+     "id": "UUsD9WLOk0w",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Biyoloji 1. Tema Konu Anlatımı | Maarif Modeli · Enerji",
+     "channel": "e akademi tv",
+     "len": "25:10",
+     "id": "fNumkUb57Kg",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Biyoloji 1. Dönem Full Tekrar 🔃 #2026",
+     "channel": "tonguç 9. SINIF",
+     "len": "48:21",
+     "id": "vkifIL3iA78",
+     "live": false
+    },
+    {
+     "title": "Canlıların Genel Özellikleri - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT BİYOLOJİ KAMPI 2026-27 | 1",
+     "channel": "Biosem Biyoloji",
+     "len": "34:36",
+     "id": "c_hxtT8aAME",
+     "live": false
+    },
+    {
+     "title": "Canlıların Ortak Özellikleri | 9. Sınıf Biyoloji 2026-2027",
+     "channel": "Cici Biyoloji",
+     "len": "16:00",
+     "id": "O-KT5YaG_gI",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Biyoloji 3 Konu Anlatımlı Ders Notları",
+     "channel": "Çalışkan Öğrencİ",
+     "len": "20:51",
+     "id": "LfwwPz8iF8A",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Biyoloji 1.Dönem 1.Yazılı Canlı  Genel Tekrar",
+     "channel": "Cici Biyoloji",
+     "len": "24:06",
+     "id": "wO6vEvpHCJk",
+     "live": false
+    },
+    {
+     "title": "9.sınıf biyoloji 1.dönem 1.yazılı | Genel tekrar",
+     "channel": "Biosem Biyoloji",
+     "len": "1:00:29",
+     "id": "JSid5gV2IRc",
+     "live": false
+    },
+    {
+     "title": "\"BİYOLOJİ 1 \" SORU ÇÖZÜMÜ. Açık Öğretim Lisesi Soru Çözümü, Deneme Sınavı",
+     "channel": "Açık Lise Öğrencileri",
+     "len": "14:48",
+     "id": "LZ-trGfg6VQ",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Biyoloji 1. Dönem 1. Yazılı Soruları | 4.Senaryo",
+     "channel": "Cici Biyoloji",
+     "len": "7:40",
+     "id": "TCmp-Fmm7Mw",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Biyoloji 1. Dönem 1. Yazılı MEB Örnek Sorular 2026-2027",
+     "channel": "Mutlu Akademi",
+     "len": "12:39",
+     "id": "pS6UFrSOCSk",
+     "live": false
+    },
+    {
+     "title": "1) TYT Biyoloji - Canlıların Karakteristik Özellikleri - Zeliha YÜCEL - 2027",
+     "channel": "Benim Hocam",
+     "len": "1:33:52",
+     "id": "qvbMhmE2OEM",
+     "live": false
+    },
+    {
+     "title": "2026 TYT BİYOLOJİ FULLETEN SON TEKRAR! 🔥 | Garanti Gelecek Konular",
+     "channel": "Yusuf Mert Arslan",
+     "len": "1:23:13",
+     "id": "nSjznSFDMQs",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Biyoloji 1. Dönem 1. Yazılı MEB Örnek Sorular 2026-2027",
+     "channel": "Mutlu Akademi",
+     "len": "8:45",
+     "id": "IhHAwGwPANk",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Biyoloji 1.Dönem 1.Yazılı | Canlı Yazılı Çözümleri ",
+     "channel": "Merve Hoca",
+     "len": "16:32",
+     "id": "8WvkCZ5desc",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Biyoloji 1. Ünite Yaşam Bilimi Biyoloji Konu Anlatımı | Tam Anlatım",
+     "channel": "e akademi tv",
+     "len": "20:34",
+     "id": "dacy3SEQPI8",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Maarif Biyoloji Bilim, Bilimsel Yöntem Canlı Ders 3",
+     "channel": "Cici Biyoloji",
+     "len": "48:36",
+     "id": "gkEfiPLoJgE",
+     "live": false
+    },
+    {
+     "title": "3) TYT Biyoloji - Karbohidratlar - Zeliha YÜCEL - 2026",
+     "channel": "Benim Hocam",
+     "len": "45:28",
+     "id": "ezafHupbHjI",
+     "live": false
+    }
+   ]
+  },
+  "tarih": {
+   "q": "tarih konu anlatımı",
+   "time": "2026-11-14T14:23:13.285Z",
+   "loggedOut": true,
+   "ver": "2.20261112.10.00",
+   "results": [
+    {
+     "title": "10 GÜNDE TYT TARİH FULLEME KAMPI 🔥 | 1. GÜN",
+     "channel": "Nova Zeka Ders",
+     "len": "34:06",
+     "id": "veToYPwX0Zk",
+     "live": false
+    },
+    {
+     "title": "GÜN 2- Türk İslam Devletleri",
+     "channel": "Zeki Hoca Tarih",
+     "len": "2:22:38",
+     "id": "aP2gua3KATo",
+     "live": false
+    },
+    {
+     "title": "TYT TARİH FULL TEKRAR🔥 | KESİN GELECEK KONULAR",
+     "channel": "Yusuf Mert Arslan",
+     "len": "1:01:33",
+     "id": "zolKYFIoERc",
+     "live": false
+    },
+    {
+     "title": "2026  -  TARİH Genel Tekrar / TEK VİDEO ~ Mehmet Celal ÖZYILDIZ",
+     "channel": "Retro Yayıncılık",
+     "len": "5:51:08",
+     "id": "rE4iH5ErEao",
+     "live": false
+    },
+    {
+     "title": "Kavramlarla Tarih Özeti Kampı / Tek Video / KPSS - TYT - AYT - MSÜ",
+     "channel": "Ardıç Tarih",
+     "len": "5:19:28",
+     "id": "MMv0jV09dPs",
+     "live": false
+    },
+    {
+     "title": "2) KPSS  / AGS Tarih - İslamiyet Öncesi Türk Tarihi (II) - Ramazan YETGİN - 2026",
+     "channel": "Benim Hocam",
+     "len": "2:04:38",
+     "id": "6YZLGNmqvQY",
+     "live": false
+    },
+    {
+     "title": "2) KPSS / AGS Tarih - İlk Türk İslam Devletleri - Anadolu Türkiye Selçuklu Devleti - Gökhan ÖZ -2026",
+     "channel": "Benim Hocam",
+     "len": "2:14:46",
+     "id": "ZyobW1jSvR8",
+     "live": false
+    },
+    {
+     "title": "1) KPSS  / AGS Tarih - İslamiyet Öncesi Türk Tarihi (I) - Ramazan YETGİN - 2026",
+     "channel": "Benim Hocam",
+     "len": "3:07:47",
+     "id": "l51qG1kx9cY",
+     "live": false
+    },
+    {
+     "title": "1) Geçmişin İnşa Sürecinde Tarih | YKS-Tarih | Mehmet Celal ÖZYILDIZ - 2027",
+     "channel": "Retro Yayıncılık",
+     "len": "30:22",
+     "id": "5QxOpTALmEE",
+     "live": false
+    },
+    {
+     "title": "1 - 2027 AGS/KPSS - Tarih - İslamiyet Öncesi Türk Tarihi Siyasi Tarih - I - Aydın YÜCE",
+     "channel": "İndeks Akademi",
+     "len": "1:00:50",
+     "id": "ftvub-TjpSY",
+     "live": false
+    },
+    {
+     "title": "GÜN 1- İslamiyet Öncesi Türk Tarihi",
+     "channel": "Zeki Hoca Tarih",
+     "len": "3:12:35",
+     "id": "wDfgTc-37wU",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Tarih 1. Dönem 1. Yazılı Son Tekrar Konu Anlatımı",
+     "channel": "Mutlu Akademi",
+     "len": "7:28",
+     "id": "CVD9VG82s-g",
+     "live": false
+    },
+    {
+     "title": "6) KPSS / AGS Tarih - İnkılap Tarihi I - Gökhan ÖZ - 2026",
+     "channel": "Benim Hocam",
+     "len": "3:45:24",
+     "id": "rVU4hpMup9o",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Tarih 1. Dönem 1. Yazılıya Hazırlık 📑 #9TAR1D1Y #2027",
+     "channel": "tonguç 9. SINIF",
+     "len": "22:38",
+     "id": "WipDSiUXlCY",
+     "live": false
+    },
+    {
+     "title": "12) KPSS  / AGS Tarih - Osmanlı Devleti Kültür ve Medeniyeti 2 - Ramazan YETGİN - 2026",
+     "channel": "Benim Hocam",
+     "len": "2:13:43",
+     "id": "8yzG121TtqY",
+     "live": false
+    },
+    {
+     "title": "5) KPSS  / AGS Tarih - İlk Türk İslam Devletleri (I) - Ramazan Yetgin - 2026",
+     "channel": "Benim Hocam",
+     "len": "2:30:11",
+     "id": "EfNsV4SFc-w",
+     "live": false
+    },
+    {
+     "title": "5) KPSS / AGS Tarih - XIX.Yüzyılda Osmanlı Devleti - Dağılma Dönemi - Gökhan ÖZ - 2026",
+     "channel": "Benim Hocam",
+     "len": "1:40:12",
+     "id": "Mj9IWkO6Jfc",
+     "live": false
+    },
+    {
+     "title": "3) KPSS  / AGS Tarih - İslamiyet Öncesi Türk Devletleri Kültür ve Medeniyeti - Ramazan YETGİN",
+     "channel": "Benim Hocam",
+     "len": "1:36:20",
+     "id": "zY2YTXNP0i4",
+     "live": false
+    },
+    {
+     "title": "11.Sınıf Tarih 1.Dönem 1.Yazılı FULL TEKRAR! | MEB ÖRNEK YAZILISI 🔥",
+     "channel": "Yusuf Mert 11. Sınıf - Maarif",
+     "len": "23:04",
+     "id": "x32Q03rMARk",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Tarih 1. Dönem 1. Yazılı Genel Tekrar | Kodlarla Konu Anlatımı | Maarif",
+     "channel": "Tarihin Kodları",
+     "len": "1:14:27",
+     "id": "-leAypBhf5A",
+     "live": false
+    },
+    {
+     "title": "4) KPSS  / AGS Tarih -İslamiyet Öncesi Türk Tarihi Kültür ve Medeniyeti II - Ramazan Yetgin -2026",
+     "channel": "Benim Hocam",
+     "len": "2:20:51",
+     "id": "h6NHmub39f4",
+     "live": false
+    },
+    {
+     "title": "Klasik Çağda Osmanlı Toplum Düzeni - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 17",
+     "channel": "Ardıç Tarih",
+     "len": "19:58",
+     "id": "qCwCwLQKVxE",
+     "live": false
+    },
+    {
+     "title": "Dünya Gücü Osmanlı - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 14",
+     "channel": "Ardıç Tarih",
+     "len": "30:09",
+     "id": "kx_xPwQkwzI",
+     "live": false
+    },
+    {
+     "title": "KPSS Tarih Full + Full Genel Tekrar (Tek Part)🔥 +24 Net ✅ Tek Videoda Tarih 🚀 Sedat TEKİN",
+     "channel": "Sedat Tekin Tarih",
+     "len": "4:16:11",
+     "id": "6FRww_wo0_U",
+     "live": false
+    },
+    {
+     "title": "4) KPSS / AGS Tarih - Osmanlı Devleti -Kuruluş -Yükselme -Duraklama -Gerileme Dönemleri - Gökhan ÖZ",
+     "channel": "Benim Hocam",
+     "len": "3:27:31",
+     "id": "3kBjRRuYTEA",
+     "live": false
+    },
+    {
+     "title": "İnsanlığın İlk Dönemleri - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 2",
+     "channel": "Ardıç Tarih",
+     "len": "56:03",
+     "id": "V3hnRqjQxP4",
+     "live": false
+    },
+    {
+     "title": "1) İslamiyet Öncesi Türk Tarihi Genel Tekrar - KPSS Tarih 2026",
+     "channel": "Tarihane",
+     "len": "1:11:24",
+     "id": "G9P6F8P-Rm8",
+     "live": false
+    },
+    {
+     "title": "KPSS Ortaöğretim İçin Son Bir Tekrar - 2026",
+     "channel": "Ali Hoca Tarih",
+     "len": "25:14",
+     "id": "y0c5O7kHMjs",
+     "live": false
+    },
+    {
+     "title": "KPSS Ortaöğretim Tarih Full+Son Tekrar 2026 +PDF",
+     "channel": "Ali Hoca Tarih",
+     "len": "50:15",
+     "id": "C0IlHvXlqUM",
+     "live": false
+    },
+    {
+     "title": "Sultan ve Osmanlı Merkez Teşkilatı - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 16",
+     "channel": "Ardıç Tarih",
+     "len": "20:07",
+     "id": "c3LQWChzPX4",
+     "live": false
+    },
+    {
+     "title": "11. Sınıf Tarih 1. Dönem 1.Yazılı Genel Tekrarı - Full Tekrar - OYSS/Maarif",
+     "channel": "Ardıç Tarih",
+     "len": "57:45",
+     "id": "hL-lbZ4679E",
+     "live": false
+    },
+    {
+     "title": "TYT - AYT Tarih Genel Tekrar Kampı - Gökhan ÖZ - 2026",
+     "channel": "Benim Hocam",
+     "len": "7:45:21",
+     "id": "ChdbSH51ImI",
+     "live": false
+    },
+    {
+     "title": "4. Gün / Osmanlı Devlet Kuruluş Dönemi - 15 Günde KPSS Tarih Full Tekrar",
+     "channel": "Ardıç Tarih",
+     "len": "53:13",
+     "id": "hDaG1KNYgi0",
+     "live": false
+    },
+    {
+     "title": "1) TYT Tarih - Tarih ve Zaman - Gökhan ÖZ - 2027",
+     "channel": "Benim Hocam",
+     "len": "52:52",
+     "id": "HxbcWLI4hlE",
+     "live": false
+    },
+    {
+     "title": "10 Günde KPSS Tarih - Genel Tekrar - Özet 1. Gün I İslamiyet Öncesi Türk Tarihi",
+     "channel": "Ardıç Tarih",
+     "len": "38:45",
+     "id": "-ZYYor7hIsk",
+     "live": false
+    },
+    {
+     "title": "21 - 2027 AGS/KPSS - Tarih - T.C  İnkılap Tarihi (Atatürk'ün Hayatı) - Aydın YÜCE",
+     "channel": "İndeks Akademi",
+     "len": "54:50",
+     "id": "CfKBcWhNKnw",
+     "live": false
+    },
+    {
+     "title": "1) MEB - AGS I KPSS Tarih Konu Anlatımı I İslamiyet Öncesi Türk Tarihi I Zeki Tuğa",
+     "channel": "Dizgi Akademi",
+     "len": "3:12:35",
+     "id": "mycFqUS2WUA",
+     "live": false
+    },
+    {
+     "title": "TEK VİDEODA KPSS TARİHİ BİTİRİYORUZ | KPSS TARİH GENEL TEKRAR",
+     "channel": "KPSS BANKASI",
+     "len": "1:08:30",
+     "id": "z1EBx3Bz5mE",
+     "live": false
+    },
+    {
+     "title": "7) KPSS  / AGS Tarih -  İlk Türk İslam Devletleri Kültür ve Medeniyeti - Ramazan YETGİN - 2026",
+     "channel": "Benim Hocam",
+     "len": "2:23:20",
+     "id": "Sas1RebtIGw",
+     "live": false
+    },
+    {
+     "title": "2) TYT Tarih - İnsanlığın İlk Dönemleri - Gökhan ÖZ - 2027",
+     "channel": "Benim Hocam",
+     "len": "1:05:34",
+     "id": "TsoJNeej7Jc",
+     "live": false
+    },
+    {
+     "title": "2. Gün - İnsanlığın İlk Dönemleri I 39 Günde AYT Tarih Konu Anlatımı - zeduva",
+     "channel": "Ardıç Tarih",
+     "len": "1:08:38",
+     "id": "KNlKx9D0ozA",
+     "live": false
+    },
+    {
+     "title": "11) KPSS  / AGS Tarih - Osmanlı Devleti Kültür ve Medeniyeti 1 - Ramazan YETGİN - 2026",
+     "channel": "Benim Hocam",
+     "len": "1:58:32",
+     "id": "WWDf3rpyppo",
+     "live": false
+    },
+    {
+     "title": "KPSS Ortaöğretim Tarih 60 Dakikada Fulleten Son Tekrar | #ortaöğretim  #kpss",
+     "channel": "Veysel Anlatıyo",
+     "len": "1:09:00",
+     "id": "Z7BSQYe-HM4",
+     "live": false
+    },
+    {
+     "title": "KPSS/AGS Tarih Ders 1: İslamiyet Öncesi Türk Tarihi (1/4) | Kodlarla Konu Anlatımı",
+     "channel": "Tarihin Kodları",
+     "len": "1:35:22",
+     "id": "rF6X9zC0_OI",
+     "live": false
+    },
+    {
+     "title": "10 Dk'da Osmanlı Devleti - Kuruluştan Yıkılışa...",
+     "channel": "Cavit Pancar",
+     "len": "10:13",
+     "id": "GePI7Sebfyc",
+     "live": false
+    },
+    {
+     "title": "9) KPSS / AGS Tarih - Soğuk Savaş Dönemi - Yumuşama Dönemi - Küreselleşen Dünya  - Gökhan ÖZ - 2026",
+     "channel": "Benim Hocam",
+     "len": "3:17:59",
+     "id": "gflxwIdCA9A",
+     "live": false
+    },
+    {
+     "title": "18. Osmanlı Devleti Dağılma Dönemi Konu Anlatımı | KPSS – TYT – AYT – MSÜ Tarih  2. Videosu",
+     "channel": "Kadir Koç Tarih",
+     "len": "26:04",
+     "id": "k4YEqjS39jU",
+     "live": false
+    },
+    {
+     "title": "3. Gün - Orta Çağda Dünya I 39 Günde AYT Tarih Konu Anlatımı - zeduva",
+     "channel": "Ardıç Tarih",
+     "len": "27:13",
+     "id": "trYWDW2dq4U",
+     "live": false
+    },
+    {
+     "title": "Beylikten Devlete Osmanlı Siyaseti - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 11",
+     "channel": "Ardıç Tarih",
+     "len": "29:10",
+     "id": "z7IDjimRWaw",
+     "live": false
+    },
+    {
+     "title": "KPSS - AGS - Tarih - 99 Soruda Genel Tekrar - Ramazan Yetgin - 2026",
+     "channel": "Benim Hocam",
+     "len": "3:25:38",
+     "id": "Amk26bASq2s",
+     "live": false
+    }
+   ]
+  },
+  "tarih-yedek": {
+   "q": "lise tarih ders",
+   "time": "2026-11-14T14:24:00.227Z",
+   "loggedOut": true,
+   "ver": "2.20261112.10.00",
+   "results": [
+    {
+     "title": "10 GÜNDE TYT TARİH FULLEME KAMPI 🔥 | 1. GÜN",
+     "channel": "Nova Zeka Ders",
+     "len": "34:06",
+     "id": "veToYPwX0Zk",
+     "live": false
+    },
+    {
+     "title": "1) İslamiyet Öncesi Türk Tarihi - 1 | Mehmet Celal ÖZYILDIZ - 2026",
+     "channel": "Retro Yayıncılık",
+     "len": "19:40",
+     "id": "T7YaD8EPM8o",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Tarih 1. Dönem 1. Yazılıya Hazırlık 📑 #9TAR1D1Y #2027",
+     "channel": "tonguç 9. SINIF",
+     "len": "22:38",
+     "id": "WipDSiUXlCY",
+     "live": false
+    },
+    {
+     "title": "1) KPSS  / AGS Tarih - İslamiyet Öncesi Türk Tarihi (I) - Ramazan YETGİN - 2026",
+     "channel": "Benim Hocam",
+     "len": "3:07:47",
+     "id": "l51qG1kx9cY",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Tarih 1 - Aralık 2024 Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "13:41",
+     "id": "L6LJUFV1JaM",
+     "live": false
+    },
+    {
+     "title": "2026  -  TARİH Genel Tekrar / TEK VİDEO ~ Mehmet Celal ÖZYILDIZ",
+     "channel": "Retro Yayıncılık",
+     "len": "5:51:08",
+     "id": "rE4iH5ErEao",
+     "live": false
+    },
+    {
+     "title": "\"TARİH 1\" SORU ÇÖZÜMÜ (Açık Öğretim Liseleri \"Tarih 1\") Soru Çözümü, Test Çöz",
+     "channel": "Açık Lise Öğrencileri",
+     "len": "12:39",
+     "id": "7Jg1cUeyb7Q",
+     "live": false
+    },
+    {
+     "title": "1) Geçmişin İnşa Sürecinde Tarih | YKS-Tarih | Mehmet Celal ÖZYILDIZ - 2027",
+     "channel": "Retro Yayıncılık",
+     "len": "30:22",
+     "id": "5QxOpTALmEE",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Tarih 1. Dönem 1. Yazılı Genel Tekrar - Full Tekrar OYSS/Maarif",
+     "channel": "Ardıç Tarih",
+     "len": "35:02",
+     "id": "5IP4fYrfJbw",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Tarih 1. Dönem 1. Yazılı Son Tekrar Konu anlatımı",
+     "channel": "Mutlu Akademi",
+     "len": "9:49",
+     "id": "wj1v79O2Yic",
+     "live": false
+    },
+    {
+     "title": "1 - 2027 AGS/KPSS - Tarih - İslamiyet Öncesi Türk Tarihi Siyasi Tarih - I - Aydın YÜCE",
+     "channel": "İndeks Akademi",
+     "len": "1:00:50",
+     "id": "ftvub-TjpSY",
+     "live": false
+    },
+    {
+     "title": "GÜN 1- İslamiyet Öncesi Türk Tarihi",
+     "channel": "Zeki Hoca Tarih",
+     "len": "3:12:35",
+     "id": "wDfgTc-37wU",
+     "live": false
+    },
+    {
+     "title": "1. Gün / İslamiyet Öncesi Türk Tarihi - 15 Günde KPSS Tarih Full Tekrar",
+     "channel": "Ardıç Tarih",
+     "len": "1:24:37",
+     "id": "p9fm-PZFyBM",
+     "live": false
+    },
+    {
+     "title": "2026 ~ Tarih Derse Giriş / Mehmet Celal ÖZYILDIZ",
+     "channel": "Retro Yayıncılık",
+     "len": "39:20",
+     "id": "rCF1jlILJhY",
+     "live": false
+    },
+    {
+     "title": "Tarih 1 - 1. Ünite: Geçmişin İnşa Sürecinde Tarih 1. Bölüm",
+     "channel": "Açık Lise TV",
+     "len": "13:27",
+     "id": "lM376oGYAC8",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Tarih 4 -1.Ünite: Beylikten Devlete Osmanlı - 1. 1. İskan ve İstimalet Politikası 1. Bölüm",
+     "channel": "Açık Lise TV",
+     "len": "12:34",
+     "id": "e2twDHuBSzI",
+     "live": false
+    },
+    {
+     "title": "5) KPSS  / AGS Tarih - İlk Türk İslam Devletleri (I) - Ramazan Yetgin - 2026",
+     "channel": "Benim Hocam",
+     "len": "2:30:11",
+     "id": "EfNsV4SFc-w",
+     "live": false
+    },
+    {
+     "title": "Dünya Gücü Osmanlı - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 14",
+     "channel": "Ardıç Tarih",
+     "len": "30:09",
+     "id": "kx_xPwQkwzI",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Tarih 1. Dönem 1. Yazılı Genel Tekrar | Kodlarla Konu Anlatımı | Maarif",
+     "channel": "Tarihin Kodları",
+     "len": "1:14:27",
+     "id": "-leAypBhf5A",
+     "live": false
+    },
+    {
+     "title": "2) KPSS  / AGS Tarih - İslamiyet Öncesi Türk Tarihi (II) - Ramazan YETGİN - 2026",
+     "channel": "Benim Hocam",
+     "len": "2:04:38",
+     "id": "6YZLGNmqvQY",
+     "live": false
+    },
+    {
+     "title": "27) Atatürk İlke ve İnkılapları - TARİH 2024",
+     "channel": "Tarihane",
+     "len": "43:59",
+     "id": "t2Xm1J-jUZA",
+     "live": false
+    },
+    {
+     "title": "1) AYT Tarih - Tarih ve Zaman - Gökhan ÖZ - 2027",
+     "channel": "Benim Hocam",
+     "len": "1:18:00",
+     "id": "shuZp0O2i9k",
+     "live": false
+    },
+    {
+     "title": "11. SINIF TARİH 1. ÜNİTE FULL TEKRAR - Değişen Dünya Dengeleri Karşısında Osmanlı Siyaseti -TYT AYT",
+     "channel": "Sosyal Kale",
+     "len": "52:32",
+     "id": "s8rxJVJowhM",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Tarih → 1.Dönem / 1. Yazılı Provası ~ Mehmet Celal Özyıldız",
+     "channel": "TARİHİN ABESİ MEHMET CELAL ve Retro Yayıncılık",
+     "len": "51:41",
+     "id": "m6N-Qw8ENio",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Tarih 3 - 1. Ünite: Türkistan'dan Türkiye'ye - 1. 1. Askeri Mücadelelerin Türk  Etkileri 1",
+     "channel": "Açık Lise TV",
+     "len": "14:31",
+     "id": "2hs0v95_OkY",
+     "live": false
+    },
+    {
+     "title": "Değişen Dünyada Osmanlı Devleti | 11. Sınıf Tarih Konu Anlatımı | Maarif Modeli",
+     "channel": "Bilal Hoca Tarih",
+     "len": "28:32",
+     "id": "e9lyioMl2IU",
+     "live": false
+    },
+    {
+     "title": "Osmanlı İmparatorluğu Tarihi - Kuruluşundan Yıkılışına",
+     "channel": "Nexus Tarih",
+     "len": "2:59:42",
+     "id": "czIS3zSrRao",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Tarih 2 - 1. Ünite: Eski Çağ Medeniyetleri - 1. 1. Eski Çağ'da İnanç, Bilim ve Sanat 1",
+     "channel": "Açık Lise TV",
+     "len": "10:26",
+     "id": "okKsC0cFmsU",
+     "live": false
+    },
+    {
+     "title": "44) Beylikten Devlete Osmanlı (Kuruluş) | Osman Gazi - Orhan Gazi | Mehmet Celal ÖZYILDIZ - 2026",
+     "channel": "Retro Yayıncılık",
+     "len": "23:26",
+     "id": "K25zGospEm8",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Tarih 2. Ünite Konu Anlatımı | Eski Çağ Medeniyetleri Tam Ders",
+     "channel": "e akademi tv",
+     "len": "17:21",
+     "id": "J0WX5CFtwOU",
+     "live": false
+    },
+    {
+     "title": "AÇIK LİSE  TARİH 3  - 1. ÜNİTE : TÜRKİSTAN'DAN TÜRKİYE'YE - HAÇLI SEFERLERİ",
+     "channel": "Açık Lise TV",
+     "len": "20:16",
+     "id": "v_QShxJIDYU",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART 2026 - Tarih 5",
+     "channel": "Açık Lise TV",
+     "len": "9:52",
+     "id": "BtnHqi4GUYc",
+     "live": false
+    },
+    {
+     "title": "1)11. Sınıf Tarih 1. Ünite Maarif Modeli | Değişen Dünyada Osmanlı Devleti (1683-1789)",
+     "channel": "İbrahim Bildişli",
+     "len": "28:45",
+     "id": "I7ABqheS5QE",
+     "live": false
+    },
+    {
+     "title": "11. Sınıf Tarih 1. Dönem 1.Yazılı Genel Tekrarı - Full Tekrar - OYSS/Maarif",
+     "channel": "Ardıç Tarih",
+     "len": "57:45",
+     "id": "hL-lbZ4679E",
+     "live": false
+    },
+    {
+     "title": "85) Mustafa Kemal'in Hayatı | Mehmet Celal ÖZYILDIZ - 2026",
+     "channel": "Retro Yayıncılık",
+     "len": "25:47",
+     "id": "s9R5ACQ36U0",
+     "live": false
+    },
+    {
+     "title": "11.Sınıf - Tarih - 1.Dönem - 1.Yazılıya Hazırlık - Maarif Model - Gökhan ÖZ - 2027 (Ücretsiz PDF)",
+     "channel": "Benim Hocam Lise",
+     "len": "50:42",
+     "id": "KeaggETOcjM",
+     "live": false
+    },
+    {
+     "title": "4)11.Sınıf Tarih 1.Ünite Lizbon ve İstanbul Depremleri | Değişen Dünyada Osmanlı Devleti (1683-1789)",
+     "channel": "İbrahim Bildişli",
+     "len": "21:47",
+     "id": "RpiUuykDCIA",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART 2026 - Tarih 1",
+     "channel": "Açık Lise TV",
+     "len": "7:42",
+     "id": "r6qFTqedCd4",
+     "live": false
+    },
+    {
+     "title": "11. Sınıf Tarih 1. Dönem 1. Yazılı Genel Tekrar | Kodlarla Konu Anlatımı | Maarif",
+     "channel": "Tarihin Kodları",
+     "len": "1:30:11",
+     "id": "wcosxYeZW5o",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  ARALIK 2025 - Tarih 2",
+     "channel": "Açık Lise TV",
+     "len": "8:44",
+     "id": "v1c0dMPuowM",
+     "live": false
+    },
+    {
+     "title": "1) KPSS / AGS Tarih - İslamiyet Öncesi Türk Tarihi - Gökhan ÖZ - 2026",
+     "channel": "Benim Hocam",
+     "len": "2:02:11",
+     "id": "bjwnbSC-KH0",
+     "live": false
+    },
+    {
+     "title": "KPSS Ortaöğretim İçin Son Bir Tekrar - 2026",
+     "channel": "Ali Hoca Tarih",
+     "len": "25:14",
+     "id": "y0c5O7kHMjs",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  ARALIK 2025 - Tarih 4",
+     "channel": "Açık Lise TV",
+     "len": "9:01",
+     "id": "BY02n6lE4HE",
+     "live": false
+    },
+    {
+     "title": "8 - Türk İslam Tarihi Talas Savaşı Türklerin İslamiyetin Kabulü - Ahmet Uğur KARAKUZA",
+     "channel": "Yediiklim Yayincilik",
+     "len": "37:53",
+     "id": "eUwJ6aouFPw",
+     "live": false
+    },
+    {
+     "title": "TEK VİDEODA KPSS TARİHİ BİTİRİYORUZ | KPSS TARİH GENEL TEKRAR",
+     "channel": "KPSS BANKASI",
+     "len": "1:08:30",
+     "id": "z1EBx3Bz5mE",
+     "live": false
+    },
+    {
+     "title": "4 - 2027 AGS/KPSS - Tarih - Türk - İslam Tarihi - (Siyasi Tarih) - I - Aydın YÜCE",
+     "channel": "İndeks Akademi",
+     "len": "1:23:15",
+     "id": "tpkT0-HMV0w",
+     "live": false
+    },
+    {
+     "title": "İnsanlığın İlk Dönemleri - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 2",
+     "channel": "Ardıç Tarih",
+     "len": "56:03",
+     "id": "V3hnRqjQxP4",
+     "live": false
+    },
+    {
+     "title": "5) Osmanlı Devleti Kuruluş Dönemi Genel Tekrar  - KPSS Tarih 2026",
+     "channel": "Tarihane",
+     "len": "38:14",
+     "id": "oWalowPdEPo",
+     "live": false
+    },
+    {
+     "title": "I. Dünya Savaşı - Haritalı Hızlı Anlatım - Tek Part",
+     "channel": "Yusuf Kayaalp",
+     "len": "12:09",
+     "id": "rqE7llEveW0",
+     "live": false
+    },
+    {
+     "title": "11. Sınıf Tarih 1.Dönem - 1.Yazılı Provası 6. SENARYO / OYSS",
+     "channel": "İbrahim Bildişli",
+     "len": "17:27",
+     "id": "DY3HdEfwMjg",
+     "live": false
+    }
+   ]
+  },
+  "matematik": {
+   "q": "matematik konu anlatımı",
+   "time": "2026-11-14T14:24:38.577Z",
+   "loggedOut": true,
+   "ver": "2.20261112.10.00",
+   "results": [
+    {
+     "title": "YARINKİ MATEMATİK YAZILISINDA ÇIKAR❗ ✍🏻5. SINIF #2027",
+     "channel": "tonguç 5. SINIF",
+     "len": "50:46",
+     "id": "P0rDBw4wAWE",
+     "live": false
+    },
+    {
+     "title": "8.Sınıf Matematik 1.Dönem 1.Yazılı | SON GECE ÇALIŞMASI",
+     "channel": "Partikül Matematik",
+     "len": "42:34",
+     "id": "VerdASvNze0",
+     "live": false
+    },
+    {
+     "title": "YARINKİ MATEMATİK YAZILISINDA ÇIKAR❗ ✍🏻7. SINIF #2027",
+     "channel": "tonguç 7. SINIF",
+     "len": "58:41",
+     "id": "H6xxa9EppFM",
+     "live": false
+    },
+    {
+     "title": "LGS 2026 1.Dönem Full Tekrar Matematik 🔹 Çarpanlar Katlar, Üslü İfadeler Konu Anlatımı - 1",
+     "channel": "tonguç 8. Sınıf | LGS ",
+     "len": "44:24",
+     "id": "60Fa3_W_tSI",
+     "live": false
+    },
+    {
+     "title": "42.Ders | 9. Sınıf Matematik Konu Anlatımı | Nicelikler ve Değişimler-14 | İlyas Güneş",
+     "channel": "İlyas Güneş",
+     "len": "18:41",
+     "id": "dTscAi0OV44",
+     "live": false
+    },
+    {
+     "title": "5. Sınıf Matematik 1. Dönem Full Tekrar 🔃 #2026",
+     "channel": "tonguç 5. SINIF",
+     "len": "39:20",
+     "id": "DN9i6h_atFQ",
+     "live": false
+    },
+    {
+     "title": "Olasılık 📘 6MAT15 #2026",
+     "channel": "tonguç 6. SINIF",
+     "len": "22:33",
+     "id": "o1A6iJuzJ48",
+     "live": false
+    },
+    {
+     "title": "Kesirler 📘 3. Sınıf Matematik #2026",
+     "channel": "tonguç 3. SINIF",
+     "len": "12:41",
+     "id": "UA84bqw2Z-U",
+     "live": false
+    },
+    {
+     "title": "7.Sınıf Matematik 1.Dönem 1.Yazılı | SON GECE ÇALIŞMASI",
+     "channel": "Partikül Matematik",
+     "len": "37:57",
+     "id": "CUOhQHdk0WU",
+     "live": false
+    },
+    {
+     "title": "1) Sıfırdan Alıştırmalarla Matematik Kampı - 1.Gün - Toplama - Çıkarma - Şenol Hoca - 2026",
+     "channel": "Benim Hocam",
+     "len": "51:31",
+     "id": "3OBQcP82LD8",
+     "live": false
+    },
+    {
+     "title": "7.Sınıf Matematik 1.Dönem 1.Yazılıya Hazırlık 📑 #7MAT1D1Y #2026",
+     "channel": "tonguç 7. SINIF",
+     "len": "1:31:55",
+     "id": "MltrnkWQNkk",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Matematik 1.Dönem 1.Yazılı 1.TEMA Özet Tekrar | OYSS",
+     "channel": "Partikül Matematik",
+     "len": "1:27:20",
+     "id": "df_GCYrXMpA",
+     "live": false
+    },
+    {
+     "title": "7.Sınıf Matematik 1.Dönem 1.Yazılı | Son Kontrol ‼️",
+     "channel": "Derslike",
+     "len": "33:33",
+     "id": "BAS5ce5thFM",
+     "live": false
+    },
+    {
+     "title": "7. Sınıf Matematik 1. Dönem Full Tekrar ♻ #2025",
+     "channel": "tonguç 7. SINIF",
+     "len": "40:56",
+     "id": "0zY9viIf1i8",
+     "live": false
+    },
+    {
+     "title": "5.Sınıf Matematik 1.Dönem 1.Yazılıya Hazırlık 📑 #5MAT1D1Y  #2027",
+     "channel": "tonguç 5. SINIF",
+     "len": "1:38:13",
+     "id": "8mhW5BR3Clo",
+     "live": false
+    },
+    {
+     "title": "6. Sınıf Matematik 1. Dönem Full Tekrar #2026",
+     "channel": "tonguç 6. SINIF",
+     "len": "1:01:37",
+     "id": "OSDTFXLl_HY",
+     "live": false
+    },
+    {
+     "title": "49 Günde TYT Matematik Kampı 1.Gün | Temel Kavramlar 1 | Rehber Matematik",
+     "channel": "Rehber Matematik",
+     "len": "1:32:48",
+     "id": "VTsU2nzwodo",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Matematik 1.Dönem 1.Yazılı Hazırlık",
+     "channel": "Matematiğin Güler Yüzü",
+     "len": "1:21:23",
+     "id": "6lYdWoUaxYk",
+     "live": false
+    },
+    {
+     "title": "Çarpanlar ve Katla - Konu Özeti 📘 6MAT1 #2026",
+     "channel": "tonguç 6. SINIF",
+     "len": "25:58",
+     "id": "-oPEzNMjdAU",
+     "live": false
+    },
+    {
+     "title": "8.Sınıf Matematik 1.Dönem 1.Yazılı | Son Kontrol ‼️",
+     "channel": "Derslike",
+     "len": "31:05",
+     "id": "s-iLk1EmZmM",
+     "live": false
+    },
+    {
+     "title": "Asal Sayılar ve Asal Çarpanlar - Konu Özeti 📘 6MAT3 #2026",
+     "channel": "tonguç 6. SINIF",
+     "len": "23:54",
+     "id": "G74dS4-n4lU",
+     "live": false
+    },
+    {
+     "title": "Tyt Matematik Fulleme Serisi-1 | Temel Kavramlar  #öğrenmegarantili",
+     "channel": "Matematiğin Güler Yüzü",
+     "len": "38:02",
+     "id": "lYi8W5ciePI",
+     "live": false
+    },
+    {
+     "title": "3. Sınıf Matematik 1. Dönem Full Tekrar ♻ #2023",
+     "channel": "tonguç 3. SINIF",
+     "len": "21:07",
+     "id": "02yYOR7Vgh4",
+     "live": false
+    },
+    {
+     "title": "6.Sınıf Matematik 1.Dönem 1.Yazılıya Hazırlık 📑 #6MAT1D1Y  #2027",
+     "channel": "tonguç 6. SINIF",
+     "len": "59:03",
+     "id": "L1aOMUNlejM",
+     "live": false
+    },
+    {
+     "title": "CANLI 🔴 Tam Sayılar ve Rasyonel Sayılar 📘 7MAT1 #2027",
+     "channel": "tonguç 7. SINIF",
+     "len": "25:36",
+     "id": "0iYZJ-WlCAU",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik 1.Dönem 1.Yazılı | SON GECE ÇALIŞMASI",
+     "channel": "Partikül Matematik",
+     "len": "48:14",
+     "id": "xNXNIX5MU-U",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf 1. Dönem 1. Yazılı Genel Tekrar | Matematik | Sayılar | OYSS",
+     "channel": "Rehber Matematik",
+     "len": "2:26:28",
+     "id": "unUlw5Nf5MA",
+     "live": false
+    },
+    {
+     "title": "Açılar 📘 5. Sınıf Matematik #2025",
+     "channel": "tonguç 5. SINIF",
+     "len": "23:38",
+     "id": "dxJ1iQlVuHI",
+     "live": false
+    },
+    {
+     "title": "TEK VİDEODA HALLET! 8.Sınıf Matematik 1.Ünite Full Tekrar - Çarpanlar Katlar ve Üslü Sayılar",
+     "channel": "Hız Yayınları Ortaokul",
+     "len": "21:55",
+     "id": "ioNg4mVhYl0",
+     "live": false
+    },
+    {
+     "title": "9. sınıf matematik | 1. dönem 1.yazılı | 9 dk'da | son tekrar",
+     "channel": "Oktay Hoca Matematik ",
+     "len": "9:49",
+     "id": "nm9yfnS9IG4",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik 1.Dönem 1.Yazılı Soruları | + Özet Tekrar | OYSS",
+     "channel": "Partikül Matematik",
+     "len": "49:52",
+     "id": "-P1mkkBr3lU",
+     "live": false
+    },
+    {
+     "title": "Olasılık 📘 6MAT5 #2027",
+     "channel": "tonguç 6. SINIF",
+     "len": "19:26",
+     "id": "W2h_V590LQs",
+     "live": false
+    },
+    {
+     "title": "10. sınıf matematik | 1. dönem 1.yazılı | 10 dk'da 100 al| son tekrar",
+     "channel": "Oktay Hoca Matematik ",
+     "len": "11:15",
+     "id": "hWy3znHDo78",
+     "live": false
+    },
+    {
+     "title": "8.SINIF MATEMATİK 1.DÖNEM 1.YAZILI | SON GÜN YAZILI ÇALIŞMASI | #yazılıhazırlık",
+     "channel": "Tunahan Hocam",
+     "len": "14:47",
+     "id": "sWlOSIro3jw",
+     "live": false
+    },
+    {
+     "title": "Temel Kavramlar 1 | 49 Günde TYT Matematik Kampı 1.Gün | 2027 | Rehber Matematik",
+     "channel": "Rehber Matematik",
+     "len": "1:23:23",
+     "id": "f6P_SLrivps",
+     "live": false
+    },
+    {
+     "title": "Kareköklü İfadeler 🖐🏻 5 Dakikada Öğrenme Garantili!",
+     "channel": "tonguç 8. Sınıf | LGS ",
+     "len": "5:10",
+     "id": "veZfSdfOh7I",
+     "live": false
+    },
+    {
+     "title": "7.Sınıf Matematik | Tam Sayılar ve Rasyonel Sayılar | 1.Ders",
+     "channel": "Partikül Matematik",
+     "len": "48:35",
+     "id": "rkpvLT2RfKg",
+     "live": false
+    },
+    {
+     "title": "5 Dakikada Ebob-Ekok Konusunu Garantile! 🖐🏻 #LGS2026",
+     "channel": "tonguç 8. Sınıf | LGS ",
+     "len": "4:30",
+     "id": "HIyU3M-OBRo",
+     "live": false
+    },
+    {
+     "title": "CANLI 🔴 Üslü İfadeler 📘 8MAT3 #2027LGS",
+     "channel": "tonguç 8. Sınıf | LGS ",
+     "len": "30:40",
+     "id": "YgUJPd5jeQk",
+     "live": false
+    },
+    {
+     "title": "Kesirler 📘 4. Sınıf Matematik #2026",
+     "channel": "tonguç 4. SINIF",
+     "len": "20:02",
+     "id": "ucZVHGeNV1k",
+     "live": false
+    },
+    {
+     "title": "Temel Kavramlar | 1. Video | KPSS - DGS - AGS -ALES Matematik | 2027 |",
+     "channel": "Gerçel Matematik",
+     "len": "48:53",
+     "id": "ZJlyyfVzYDM",
+     "live": false
+    },
+    {
+     "title": "11. Sınıf 1. Dönem 1. Yazılı Genel Tekrar | Matematik | İstatistik ve Dörtgenler | OYSS",
+     "channel": "Rehber Matematik",
+     "len": "3:21:02",
+     "id": "reA_tsyWTYE",
+     "live": false
+    },
+    {
+     "title": "#2026lgs Matematik Detaylı Genel Tekrar | Tüm Konular #öğrenmegarantili ",
+     "channel": "Matematiğin Güler Yüzü",
+     "len": "1:54:01",
+     "id": "pRsvn_gVvAg",
+     "live": false
+    },
+    {
+     "title": "LGS 2027 | Çarpanlar Katlar | 1.Ders",
+     "channel": "Partikül Matematik",
+     "len": "37:27",
+     "id": "Z7exqEHEqQA",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik 1.Dönem 1.Yazılı Hazırlık ",
+     "channel": "Matematiğin Güler Yüzü",
+     "len": "1:50:07",
+     "id": "Mh6XUVPdwHY",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik 1. Dönem 1. Yazılı Genel Tekrar",
+     "channel": "Bıyıklı Matematik",
+     "len": "57:01",
+     "id": "bTEkJ5QJ0u0",
+     "live": false
+    },
+    {
+     "title": "Çarpanlar ve Katlar | LGS 2026 | 1.Ders",
+     "channel": "Partikül Matematik",
+     "len": "46:29",
+     "id": "qDA8qz3E3TU",
+     "live": false
+    },
+    {
+     "title": "EBOB - EKOK ve Aralarında Asal Sayılar📘 8MAT2 #2027LGS",
+     "channel": "tonguç 8. Sınıf | LGS ",
+     "len": "33:51",
+     "id": "c9Z7tvgNXjI",
+     "live": false
+    },
+    {
+     "title": "EBOB EKOK | 22.BÖLÜM Konu Anlatımı | 0' DAN MATEMATİK",
+     "channel": "Rehber Matematik",
+     "len": "1:04:32",
+     "id": "UNxW8yPqRjM",
+     "live": false
+    },
+    {
+     "title": "7.Sınıf Matematik | Tam Sayılarla İşlemler - Toplama Çıkarma | 3.Ders 1.Bölüm",
+     "channel": "Partikül Matematik",
+     "len": "25:28",
+     "id": "K9CStuSt9Co",
+     "live": false
+    }
+   ]
+  },
+  "matematik-yedek": {
+   "q": "lise matematik ders",
+   "time": "2026-11-14T14:27:13.200Z",
+   "loggedOut": true,
+   "ver": "2.20261112.10.00",
+   "results": [
+    {
+     "title": "TEMEL MATEMATİK - Şenol Hoca",
+     "channel": "ŞENOL HOCA MATEMATİK",
+     "len": "15:17",
+     "id": "EbkZuUX8aMM",
+     "live": false
+    },
+    {
+     "title": "1) Sıfırdan Alıştırmalarla Matematik Kampı - 1.Gün - Toplama - Çıkarma - Şenol Hoca - 2026",
+     "channel": "Benim Hocam",
+     "len": "51:31",
+     "id": "3OBQcP82LD8",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik 1.Dönem 1.Yazılı Hazırlık ",
+     "channel": "Matematiğin Güler Yüzü",
+     "len": "1:50:07",
+     "id": "Mh6XUVPdwHY",
+     "live": false
+    },
+    {
+     "title": "1. Tema: Sayılar - Üslü sayılar 1. Bölüm",
+     "channel": "Açık Lise TV",
+     "len": "11:52",
+     "id": "ik_zkFQJL0A",
+     "live": false
+    },
+    {
+     "title": "Matematik Aslında Gerçekten Çok Kolay (Hiç Anlamasan bile!)",
+     "channel": "Tinko",
+     "len": "10:06",
+     "id": "-QYNX_4zn8M",
+     "live": false
+    },
+    {
+     "title": "En Çok Çıkan Sorular - Matematik 1 - Önermeler",
+     "channel": "Açık Lise TV",
+     "len": "11:52",
+     "id": "IvA5rdYMSxc",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Matematik 1 - Mart 2025 Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "22:11",
+     "id": "yap78d8LeaY",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART  2026 - Matematik 1",
+     "channel": "Açık Lise TV",
+     "len": "25:07",
+     "id": "2G59EZyQFRY",
+     "live": false
+    },
+    {
+     "title": "10 Dakika'da Temel Matematik | Sıfırdan Başlangıç",
+     "channel": "tonguç AKADEMİ",
+     "len": "10:54",
+     "id": "6K7SJHHDdpM",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik 1.Dönem 1.Yazılı | SON GECE ÇALIŞMASI",
+     "channel": "Partikül Matematik",
+     "len": "48:14",
+     "id": "xNXNIX5MU-U",
+     "live": false
+    },
+    {
+     "title": "Gerçek Sayıların Üslü Gösterimi 1 | 1.DERS 9.Sınıf Matematik | Yeni Müfredat 2025",
+     "channel": "Rehber Matematik",
+     "len": "28:39",
+     "id": "8yYTTcz4ABc",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Matematik 1.Dönem 1.Yazılı 1.TEMA Özet Tekrar | OYSS",
+     "channel": "Partikül Matematik",
+     "len": "1:27:20",
+     "id": "df_GCYrXMpA",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik | Üslü Gösterimler 1 | Maarif Model | 1.Ders 1.Bölüm",
+     "channel": "Partikül Matematik",
+     "len": "41:37",
+     "id": "kpuniGCIARI",
+     "live": false
+    },
+    {
+     "title": "Üslü Sayılar 1 | Sayılar | 9.Sınıf Matematik | 1.Ders | Yeni Maarif Modeli 2026",
+     "channel": "Rehber Matematik",
+     "len": "48:33",
+     "id": "FtJE835vtoM",
+     "live": false
+    },
+    {
+     "title": "Toplama ve Çıkarma İşlemi | 1.BÖLÜM Konu Anlatımı | 0' DAN MATEMATİK",
+     "channel": "Rehber Matematik",
+     "len": "1:22:10",
+     "id": "Y7poYpJdwQs",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik 1.Dönem 1.Yazılı Soruları | + Özet Tekrar | OYSS",
+     "channel": "Partikül Matematik",
+     "len": "49:52",
+     "id": "-P1mkkBr3lU",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Matematik 1. Dönem 1. Yazılı Provaları | Tüm Senaryolar Tam Çözüm | OYSS | Maarif Model",
+     "channel": "Rehber Matematik",
+     "len": "2:09:48",
+     "id": "4i8Bha1f27E",
+     "live": false
+    },
+    {
+     "title": "9. sınıf matematik | 1. dönem 1.yazılı | oyss | senaryo 1",
+     "channel": "Oktay Hoca Matematik ",
+     "len": "17:01",
+     "id": "iQRuIz53Qz8",
+     "live": false
+    },
+    {
+     "title": "Açıköğretim Matematik Konu Anlatımı | Soru Çözümü",
+     "channel": "Sevimli Derslik",
+     "len": "34:40",
+     "id": "2mLEJIoTpc0",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Matematik | Dik Üçgende Trigonometrik Oranlar | Maarif Model | 1.Ders",
+     "channel": "Partikül Matematik",
+     "len": "43:40",
+     "id": "BFY821M9WAM",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Matematik 4 - Mart 2025 Çıkmış Sınav Soruları",
+     "channel": "Açık Lise TV",
+     "len": "18:36",
+     "id": "l6DyI0Vk3w4",
+     "live": false
+    },
+    {
+     "title": "8.Sınıf Matematik 1.Dönem 1.Yazılı | SON GECE ÇALIŞMASI",
+     "channel": "Partikül Matematik",
+     "len": "42:34",
+     "id": "VerdASvNze0",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Matematik 1. Dönem Full Tekrar 🔃 #2026",
+     "channel": "tonguç 9. SINIF",
+     "len": "1:01:11",
+     "id": "QSXMBHDl_Bg",
+     "live": false
+    },
+    {
+     "title": "Gerçek Sayılarda Tanımlı Fonksiyonların Nitel Özellikleri 1 | 10.Sınıf Matematik | Maarif Modeli",
+     "channel": "Rehber Matematik",
+     "len": "48:34",
+     "id": "ShyolGGFqFs",
+     "live": false
+    },
+    {
+     "title": "Trigonometri | 1. Ders | 10. Sınıf Matematik Konu Anlatımı | 1. Tema | Maarif Model | TAF-10",
+     "channel": "Mert Hoca",
+     "len": "38:58",
+     "id": "wS56BXxV6uU",
+     "live": false
+    },
+    {
+     "title": "9. sınıf matematik | 1. dönem 1.yazılı | 9 dk'da | son tekrar",
+     "channel": "Oktay Hoca Matematik ",
+     "len": "9:49",
+     "id": "nm9yfnS9IG4",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik | Sayı Kümeleri | Maarif Model | 3.Ders 1.Bölüm",
+     "channel": "Partikül Matematik",
+     "len": "48:27",
+     "id": "oDFAGUijshM",
+     "live": false
+    },
+    {
+     "title": "1.Ders | 9. Sınıf Üslü Sayılar -1 | Maarif Modeli Matematik Konu Anlatımı | İlyas Güneş",
+     "channel": "İlyas Güneş",
+     "len": "21:25",
+     "id": "mHq3Dz1Kyw4",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik 4. Tema | Öklid Teoremi | 22.Ders",
+     "channel": "Partikül Matematik",
+     "len": "13:10",
+     "id": "NKiwH8qA3vE",
+     "live": false
+    },
+    {
+     "title": "Üslü Sayılar | 1. Ders | 9. Sınıf Matematik Konu Anlatımı | 1. Tema | Maarif Model | TAF-9",
+     "channel": "Mert Hoca",
+     "len": "48:33",
+     "id": "TNw7eEas9Oo",
+     "live": false
+    },
+    {
+     "title": "LGS 2027 | Çarpanlar Katlar | 1.Ders",
+     "channel": "Partikül Matematik",
+     "len": "37:27",
+     "id": "Z7exqEHEqQA",
+     "live": false
+    },
+    {
+     "title": "Üslü İfadeler 1 | 1.TEMA Sayılar 1 | 9.Sınıf Matematik | Matbook | Maarif Model 2027",
+     "channel": "Rehber Matematik",
+     "len": "42:14",
+     "id": "ZAqla3j4kLQ",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik | Köklü Gösterimler 1 | Maarif Model | 2.Ders 1.Bölüm",
+     "channel": "Partikül Matematik",
+     "len": "43:03",
+     "id": "BcCB7cVsedA",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf 1. Dönem 1. Yazılı Genel Tekrar | Matematik | Sayılar | OYSS",
+     "channel": "Rehber Matematik",
+     "len": "2:26:28",
+     "id": "unUlw5Nf5MA",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik | Fonksiyonlar - 1 | Yeni Müfredat",
+     "channel": "Partikül Matematik",
+     "len": "21:57",
+     "id": "gpDZakHgOaY",
+     "live": false
+    },
+    {
+     "title": "10.SINIF | MATEMATİK DERS KİTABI SAYFA 60-61-62-63-64",
+     "channel": "Lise Matematik Atölyesi",
+     "len": "23:05",
+     "id": "ubD3OhIeXUc",
+     "live": false
+    },
+    {
+     "title": "10.SINIF | MATEMATİK MEB SAYFA 41-42-43-44",
+     "channel": "Lise Matematik Atölyesi",
+     "len": "15:20",
+     "id": "NofWtkIb3Xs",
+     "live": false
+    },
+    {
+     "title": "10. sınıf matematik | 1. dönem 1.yazılı | 10 dk'da 100 al| son tekrar",
+     "channel": "Oktay Hoca Matematik ",
+     "len": "11:15",
+     "id": "hWy3znHDo78",
+     "live": false
+    },
+    {
+     "title": "ORTAÖĞRETİM KPSS MATEMATİK I HER KONUDAN ÇIKMIŞ SORU + PDF",
+     "channel": "Berkay Hoca Matematik",
+     "len": "47:37",
+     "id": "krrFsw-4LIY",
+     "live": false
+    },
+    {
+     "title": "📚 11. Sınıf MEB Matematik Sayfa 164 2. Tema Ölçme ve Değerlendirme Soruları Çözümleri",
+     "channel": "MBG Matematik | Mehmet Baki Gültekin",
+     "len": "27:46",
+     "id": "mWs5DRuVCLc",
+     "live": false
+    },
+    {
+     "title": "Matematik Canlı Yazılı Çözümleri I 11. Sınıf 1. Dönem 1. Yazılı #yazılıyahazırlık",
+     "channel": "Yaşar Hoca MathMan",
+     "len": "29:50",
+     "id": "BG7DNLPFW-A",
+     "live": false
+    },
+    {
+     "title": "TEKTE BİTİR MATEMATİK - LGS 2026: Kareköklü İfadeler",
+     "channel": "Hız Yayınları Ortaokul",
+     "len": "21:06",
+     "id": "JchTFYRbyCM",
+     "live": false
+    },
+    {
+     "title": "42.Ders | 9. Sınıf Matematik Konu Anlatımı | Nicelikler ve Değişimler-14 | İlyas Güneş",
+     "channel": "İlyas Güneş",
+     "len": "18:41",
+     "id": "dTscAi0OV44",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Matematik | Trigonometrik Özdeşlikler | Maarif Model | 2.Ders",
+     "channel": "Partikül Matematik",
+     "len": "30:56",
+     "id": "1O047bW6GVg",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Matematik 1. Dönem 1. Yazılı MEB OYSS Örnek sorular 2026 2027",
+     "channel": "Mutlu Akademi",
+     "len": "13:36",
+     "id": "goPNrY5nTGU",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Matematik - 2 Bunlar Çıkar  1",
+     "channel": "Açık Lise TV",
+     "len": "5:25",
+     "id": "6_FVA1n26C4",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Matematik | Üslü Gösterimler 2 | Maarif Model | 1.Ders 2.Bölüm",
+     "channel": "Partikül Matematik",
+     "len": "36:36",
+     "id": "1dsMWb3egnA",
+     "live": false
+    },
+    {
+     "title": "10.SINIF | MATEMATİK MEB SAYFA 45-46-47-48-49-50-51",
+     "channel": "Lise Matematik Atölyesi",
+     "len": "29:59",
+     "id": "3zQM5vv2vm8",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Matematik 1. Yazılı Son Gece Provası Canlı🔥 | Tüm Senaryolar | OYSS | Maarif Model",
+     "channel": "Rehber Matematik",
+     "len": "1:05:25",
+     "id": "FruvlSeLMIY",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf MEB Matematik kitabı sayfa 371 EK ALIŞTIRMALAR  ÇÖZÜMLERİ",
+     "channel": "MBG Matematik | Mehmet Baki Gültekin",
+     "len": "57:05",
+     "id": "DoC3bOBc0d4",
+     "live": false
+    }
+   ]
+  },
+  "ingilizce": {
+   "q": "ingilizce gramer konu anlatımı",
+   "time": "2026-11-14T14:28:30.859Z",
+   "loggedOut": true,
+   "ver": "2.20261112.10.00",
+   "results": [
+    {
+     "title": "TEK VİDEODA TÜM İNGİLİZCE ZAMANLAR! 📓✏️ | 12 English Tenses",
+     "channel": "Çilem Akar",
+     "len": "31:41",
+     "id": "nPoXZl29TwA",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf İngilizce 1. Dönem 1. Yazılı Son Tekrar Konu Anlatımı",
+     "channel": "Mutlu Akademi",
+     "len": "18:05",
+     "id": "Mb1LFu0eMJI",
+     "live": false
+    },
+    {
+     "title": "GRAMMAR ÇALIŞMAYIN! 🙅 | BUNU YAPIN 👉",
+     "channel": "Çilem Akar",
+     "len": "14:10",
+     "id": "ggVcBlJQMRQ",
+     "live": false
+    },
+    {
+     "title": "İngilizce Gramer Çalışmak Doğru mu?",
+     "channel": "İngilizce Konu Anlatımı - Özer Kiraz",
+     "len": "7:41",
+     "id": "B5gPrtVSEBo",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan İngilizce - İngilizce Present Simple Tense Detaylı Anlatım (Pdf konu anlatımı ile)",
+     "channel": "Ayse Eser",
+     "len": "24:55",
+     "id": "JLdIAa8jaZM",
+     "live": false
+    },
+    {
+     "title": "İngilizce Cümle Mantığını Bir Daha Unutmayacaksın! MASTERCLASS Cümle Analizi",
+     "channel": "Mete Tokoğlu",
+     "len": "27:04",
+     "id": "etx0hkEDDTM",
+     "live": false
+    },
+    {
+     "title": "İngilizceyi Nasıl Işık Hızında Öğrenirsin | GARANTİ Speaking & Gramer Söktüren Yöntemim",
+     "channel": "neslypizza",
+     "len": "12:52",
+     "id": "gfuPuT5d1Bk",
+     "live": false
+    },
+    {
+     "title": "İngilizce Zamanlar Konu Anlatımı",
+     "channel": "İngilizce Konu Anlatımı - Özer Kiraz",
+     "len": "12:16",
+     "id": "cskgYpPbgkw",
+     "live": false
+    },
+    {
+     "title": "Simple Present Tense ✍🏻 En Basit Haliyle Kolayca Öğren 💪🏻",
+     "channel": "tonguch ACADEMY  ",
+     "len": "14:15",
+     "id": "ZexYZLdpWSE",
+     "live": false
+    },
+    {
+     "title": "İngilizce 'To Be' (am, is, are) Konu Anlatımı + Pratik (Olmak Fiili) | English Hoca",
+     "channel": "Sümi Hoca ile İngilizce",
+     "len": "11:39",
+     "id": "wFW0sTUA0M8",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan İngilizce Nasıl Öğrenilir (Kaynak ve Metot Önerileri)",
+     "channel": "dilgua",
+     "len": "16:56",
+     "id": "r921TiGKggg",
+     "live": false
+    },
+    {
+     "title": "İNGİLİZCE TÜM ZAMANLAR ! Kısa ve öz konu anlatımı",
+     "channel": "ARDA EROL",
+     "len": "50:15",
+     "id": "4eizoQvGa38",
+     "live": false
+    },
+    {
+     "title": "TEK VİDEODA TÜM MODALLAR 📝 | can, could, should, would, will, may, might, must | İNGİLİZCE ✏️",
+     "channel": "Çilem Akar",
+     "len": "22:29",
+     "id": "hLDj3gfyr2U",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan İngilizce 3 - Past Simple Detaylı Konu Anlatımı (Pdf konu anlatımı ve alıştırmalar ile)",
+     "channel": "Ayse Eser",
+     "len": "16:47",
+     "id": "L8v05CfesIY",
+     "live": false
+    },
+    {
+     "title": "He, She, It, I, You, We, They Konu Anlatımı #1",
+     "channel": "İngilizce Konu Anlatımı - Özer Kiraz",
+     "len": "8:24",
+     "id": "056tP8bGMtg",
+     "live": false
+    },
+    {
+     "title": "İngilizce'de Gerund ve Infinitive Konusunu 20 Dakikada Öğrenin! 🎯",
+     "channel": "Ayse Eser",
+     "len": "22:05",
+     "id": "ixj1hZasgk8",
+     "live": false
+    },
+    {
+     "title": "İNGİLİZCE BÜTÜN TENSLER. (Tek Video) İNGİLİZCE TENSLER ve ZAMANLAR. TENSES IN ENGLISH.",
+     "channel": "Learn English With Me",
+     "len": "36:27",
+     "id": "cnr7nH_5Vn0",
+     "live": false
+    },
+    {
+     "title": "İNGİLİZCE'DE TÜM ZAMANLAR - (15 DAKİKA'DA)",
+     "channel": "FK LANGUAGE",
+     "len": "16:22",
+     "id": "Chny6bkmRWU",
+     "live": false
+    },
+    {
+     "title": "İNGİLİZCE TÜM ZAMANLAR KONU ANLATIMI (TENSES)",
+     "channel": "Orkun Londoner",
+     "len": "25:24",
+     "id": "bs8-I3yutF4",
+     "live": false
+    },
+    {
+     "title": "\"TENSES + MODALS\" KONU ANLATIMI - 2020 EYLÜL YDS ÖZEL",
+     "channel": "Akın Dil Eğitim",
+     "len": "1:20:10",
+     "id": "42zlf5iCRYI",
+     "live": false
+    },
+    {
+     "title": "23 DAKİKADA BÜTÜN İNGİLİZCE KONULARINI TEKRAR ET!",
+     "channel": "Full up English",
+     "len": "23:00",
+     "id": "GdZqA33S9FI",
+     "live": false
+    },
+    {
+     "title": "DERS:01 - Temel 3 Zamanlar -  ( Present - Past - Future )",
+     "channel": "Bahrom Hudayar",
+     "len": "1:00:44",
+     "id": "SrIg3MSCaoM",
+     "live": false
+    },
+    {
+     "title": "GRAMMAR KAMPI 1.GÜN - YDS TENSE-MODAL SORU ÇÖZÜMÜ | ECE HOCA",
+     "channel": "Sınav Kampı",
+     "len": "1:52:05",
+     "id": "gnEVgq9OnKo",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan İngilizce Ders 1 - Yeni başlayanlar için Kaliteli ve Tamamen Sıfırdan",
+     "channel": "Alp Hoca",
+     "len": "30:59",
+     "id": "UTznzOTSGoo",
+     "live": false
+    },
+    {
+     "title": "RELATIVE CLAUSE / NOUN CLAUSE KONU ANLATIMI VE SORU ÇÖZÜMÜ | ECE HOCA",
+     "channel": "Sınav Kampı",
+     "len": "1:53:07",
+     "id": "s7ZYaF4oLP8",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan İngilizce 2 - Present Continuous ÇOK DETAYLI anlatım",
+     "channel": "Ayse Eser",
+     "len": "18:12",
+     "id": "DPR3MFHpg6c",
+     "live": false
+    },
+    {
+     "title": "DERS 1 | TO BE (AM, IS ARE) Konu Anlatımı (Başlangıç)",
+     "channel": "İngilizce Dersler - Aksen KAHRAMAN",
+     "len": "14:54",
+     "id": "w30hcVy2JOA",
+     "live": false
+    },
+    {
+     "title": "İngilizce Genel Tekrar ( A1 Seviye ) | Sıfırdan İngilizce Öğren | İngilizce Dersleri",
+     "channel": "İngilizce Dersleri",
+     "len": "1:23:13",
+     "id": "AHzlQSUUvQY",
+     "live": false
+    },
+    {
+     "title": "PASSIVE VOICE  |  BU KONU BU KADAR KOLAY MIYDI DİYECEKSİNİZ!",
+     "channel": "FK LANGUAGE",
+     "len": "8:45",
+     "id": "Xcr3paf7FOg",
+     "live": false
+    },
+    {
+     "title": "YDT - YDS - YÖKDİL | 12 Günde Grammar Kampı | 1.Gün 1.Video | Present Tenses",
+     "channel": "Berk Hoca",
+     "len": "40:17",
+     "id": "MKNQRMa6oQk",
+     "live": false
+    },
+    {
+     "title": "TEMEL SEVİYE İNGİLİZCE / A1-A2 LEVEL / KONU ANLATIM + ALIŞTIRMA / DEV KURS",
+     "channel": "Emrah Hoca",
+     "len": "6:19:46",
+     "id": "mM7s9lHEfrg",
+     "live": false
+    },
+    {
+     "title": "B2-C1 Seviye İngilizce Konu Anlatım",
+     "channel": "Emrah Hoca",
+     "len": "1:17:50",
+     "id": "TcXxngng59Q",
+     "live": false
+    },
+    {
+     "title": "B1- B2 KONU ANLATIMI & ALIŞTIRMA /ÇEVİRİ / DENEME SINAVI",
+     "channel": "Emrah Hoca",
+     "len": "8:49:13",
+     "id": "GqEnXxmQ7zU",
+     "live": false
+    },
+    {
+     "title": "Simple Present Tense (Geniş Zaman) Örnek Cümleler ile Konu Anlatımı | 7 Dakikada Öğren!",
+     "channel": "English Everyday Words",
+     "len": "7:37",
+     "id": "BYnlEYOy2z0",
+     "live": false
+    },
+    {
+     "title": "İngilizce Genel Tekrar ( A2 Seviye ) | Sıfırdan İngilizce Öğren | İngilizce Dersleri",
+     "channel": "İngilizce Dersleri",
+     "len": "1:07:21",
+     "id": "beTJE-KEQVk",
+     "live": false
+    },
+    {
+     "title": "B-1 Seviye İngilizce Konu Anlatım (B-1 Level)",
+     "channel": "Emrah Hoca",
+     "len": "1:21:15",
+     "id": "T9OTHKr9woc",
+     "live": false
+    },
+    {
+     "title": "6.Sınıf İngilizce 1.Dönem 1.Yazılıya Hazırlık 📑 #6ING1D1Y #2027",
+     "channel": "tonguç 6. SINIF",
+     "len": "41:28",
+     "id": "_O-5oiKu8ms",
+     "live": false
+    },
+    {
+     "title": "Simple Present Tense Konu Anlatımı",
+     "channel": "Ms. Jasmin ELT",
+     "len": "9:45",
+     "id": "aU6DrkQdisM",
+     "live": false
+    },
+    {
+     "title": "İngilizcede Future Tense’i Detaylıca Öğren! (Be going to & Will)",
+     "channel": "Ayse Eser",
+     "len": "14:36",
+     "id": "uS4fClJEkF4",
+     "live": false
+    },
+    {
+     "title": "YDT GRAMMAR FULL TEKRAR | TEK VİDEO",
+     "channel": "Berk Hoca",
+     "len": "1:26:18",
+     "id": "Id7-rqY6HdM",
+     "live": false
+    },
+    {
+     "title": "Tense Konu Anlatımı | 1.Gün 2.Video | 12 Günde Grammar Kampı | 2026 | YDT",
+     "channel": "Berk Hoca",
+     "len": "33:40",
+     "id": "gVOaU8Lzmag",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan İngilizce 4 - Present Perfect Tense Konu Anlatımı | Benden dinleyip anlamayan yok! 🫡",
+     "channel": "Ayse Eser",
+     "len": "11:50",
+     "id": "cwoDqEcicTY",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan İngilizce Öğren | A1 Tüm Konular Tek Videoda (7 Saat)",
+     "channel": "İngilizce Dersleri",
+     "len": "7:18:33",
+     "id": "w-xzEuPjI-M",
+     "live": false
+    },
+    {
+     "title": "1) YDT - Pronouns in English - Part 1 - Murat GÜLTEKİN - 2027",
+     "channel": "Benim Hocam",
+     "len": "23:11",
+     "id": "dECVuiPnEWg",
+     "live": false
+    },
+    {
+     "title": "TEK VİDEODA TÜM İNGİLİZCE BAĞLAÇLAR! 📓✏️",
+     "channel": "Çilem Akar",
+     "len": "29:31",
+     "id": "lUAWUKo4iEw",
+     "live": false
+    },
+    {
+     "title": "TÜM ZAMANLAR KONU ANLATIMI 🎯 İNGİLİZCE  12 TENSES 📝 2023 YDS / YDT / YÖKDİL ✅ Tensler Özet 📝",
+     "channel": "Ozan Hoca",
+     "len": "46:40",
+     "id": "H9VX0L-r6IE",
+     "live": false
+    },
+    {
+     "title": "Gün 1 – Tenses Bölüm 1 | 18 Günde YDS–YDT–YÖKDİL Kampı",
+     "channel": "Dilci Burak Hoca",
+     "len": "43:22",
+     "id": "ce2zVJur69o",
+     "live": false
+    },
+    {
+     "title": "İngilizce konuşmak için bilmeniz gereken temel gramer konuları - PART 2",
+     "channel": "Gamel Hoca",
+     "len": "41:30",
+     "id": "lps9vNYvEKk",
+     "live": false
+    },
+    {
+     "title": "A, An, The Konu Anlatımı #5",
+     "channel": "İngilizce Konu Anlatımı - Özer Kiraz",
+     "len": "11:14",
+     "id": "BGdMetl7Tqs",
+     "live": false
+    },
+    {
+     "title": "İngilizce Tüm Zamanlar Part 1- İngilizcedeki 4 Temel Zaman (Tüm Simple Tense'ler)",
+     "channel": "hayat ingilizce",
+     "len": "38:45",
+     "id": "5EsGzi1Y7YE",
+     "live": false
+    }
+   ]
+  },
+  "edebiyat": {
+   "q": "edebiyat konu anlatımı",
+   "time": "2026-11-17T07:24:02.578Z",
+   "loggedOut": true,
+   "ver": "2.20261116.00.00",
+   "results": [
+    {
+     "title": "9. Sınıf Edebiyat 1. Dönem 1. Yazılıya Hazırlık 📑 #9EDB1D1Y #2027",
+     "channel": "tonguç 9. SINIF",
+     "len": "54:11",
+     "id": "NnvBErrY_hQ",
+     "live": false
+    },
+    {
+     "title": "10. SINIF EDEBİYAT 1. DÖNEM 1. YAZILI GENEL TEKRAR | OYSS | MAARİF MODEL 2026-2027",
+     "channel": "Türkçenin Matematiği",
+     "len": "1:06:03",
+     "id": "HJOEKDWJQ6I",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Edebiyat 1. Dönem Full Tekrar 🔃 #2026",
+     "channel": "tonguç 9. SINIF",
+     "len": "29:55",
+     "id": "C7vn6dP-X5o",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Edebiyat 1.Dönem 1.Yazılı FULL TEKRAR | Maarif Modeli Sınava Hazırlık",
+     "channel": "Deniz Hoca",
+     "len": "1:00:12",
+     "id": "UexT5bTZzm8",
+     "live": false
+    },
+    {
+     "title": "9.SINIF EDEBİYAT 1.DÖNEM 1.YAZILI GENEL TEKRAR MAARİF MODEL OYSS",
+     "channel": "Türkçenin Matematiği",
+     "len": "1:11:02",
+     "id": "-ceZn3RJNkY",
+     "live": false
+    },
+    {
+     "title": "MEB'DE EN ÇOK YER ALAN ESERLER / AYT EDEBİYAT",
+     "channel": "Deniz Hoca",
+     "len": "15:06",
+     "id": "JuXGramQF88",
+     "live": false
+    },
+    {
+     "title": "9 SAATTE TÜM AYT EDEBİYATI BAŞTAN SONA ÖĞREN!🔥AYT EDEBİYAT TEK VİDEODA FULL TEKRAR✅",
+     "channel": "Emek TAŞTAN",
+     "len": "9:08:33",
+     "id": "-h8WcXZCSyw",
+     "live": false
+    },
+    {
+     "title": "10.SINIF | Ülke Geneli | Edebiyat 1.Dönem 1.Yazılı | CANLI PROVA | Rüştü Hoca",
+     "channel": "Rüştü Hoca ile Türkçe",
+     "len": "50:37",
+     "id": "XJ1rCyN0NrM",
+     "live": false
+    },
+    {
+     "title": "Edebiyata Giriş | 10.Sınıf Edebiyat #2025",
+     "channel": "tonguç 10. SINIF",
+     "len": "29:01",
+     "id": "3G5zJIcJi5Q",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf 1. Dönem Edebiyat Full Tekrar 🔁 #2025",
+     "channel": "tonguç 10. SINIF",
+     "len": "58:59",
+     "id": "wHUcxbwVUOA",
+     "live": false
+    },
+    {
+     "title": "10.SINIF EDEBİYAT 1.DÖNEM 1.YAZILI SON GECE GENEL TEKRAR",
+     "channel": "Türkçenin Matematiği",
+     "len": "17:58",
+     "id": "Z-R-GWH0Zg8",
+     "live": false
+    },
+    {
+     "title": "9.SINIF | 1.Dönem - 1.Yazılı | Aker Kartal - Türk Dili ve Edebiyatı",
+     "channel": "Aker Kartal ve Retro Yayıncılık",
+     "len": "22:54",
+     "id": "fbYjayM-ZoM",
+     "live": false
+    },
+    {
+     "title": "Güzel Sanatlar ve Edebiyat | KODLAMALARLA 1. GÜN | 30 GÜNDE AYT EDEBİYAT KAMPI – 2026",
+     "channel": "Türkçenin Matematiği",
+     "len": "41:11",
+     "id": "NKe_CGV0N80",
+     "live": false
+    },
+    {
+     "title": "10.SINIF EDEBİYAT 1. YAZILI SINAV PROVASI / OYSS",
+     "channel": "Deniz Hoca",
+     "len": "1:42:43",
+     "id": "EkAbKi--yBk",
+     "live": false
+    },
+    {
+     "title": "Edebiyat Genel Tekrar | 150 Maddeyle",
+     "channel": "Rüştü Hoca ile Türkçe",
+     "len": "21:45",
+     "id": "pvJ0Iq9FESw",
+     "live": false
+    },
+    {
+     "title": "2027 AYT EDEBİYAT FULL TEKRAR I 90 dk'da +24 NET YAP I",
+     "channel": "AYARLI EDEBİYAT",
+     "len": "1:30:46",
+     "id": "03gvdkCW-zo",
+     "live": false
+    },
+    {
+     "title": "2026 AYT EDEBİYAT FULL TEKRAR - TEK VİDEO",
+     "channel": "Türkçenin Matematiği",
+     "len": "1:25:19",
+     "id": "ZY_phD0FQgY",
+     "live": false
+    },
+    {
+     "title": "1.GÜN | Şiir, Biçim Özellikleri | 65 Günde AYT Edebiyat Kampı",
+     "channel": "Rüştü Hoca ile Türkçe",
+     "len": "20:04",
+     "id": "oa5cnDZmbKg",
+     "live": false
+    },
+    {
+     "title": "EDEBİYATIN GÜZEL SANATLAR VE BİLİMLE İLİŞKİSİ / KONU ANLATIMI VE SORU ÇÖZÜMÜ🔥49 GÜNDE AYT EDEBİYAT",
+     "channel": "Emek TAŞTAN",
+     "len": "29:54",
+     "id": "R2-j3ZcV4_I",
+     "live": false
+    },
+    {
+     "title": "AYT Edebiyat | 4 dk'da 5 Hececiler | RÜŞTÜ HOCA",
+     "channel": "Rüştü Hoca ile Türkçe",
+     "len": "4:00",
+     "id": "BoN3tex0KLg",
+     "live": false
+    },
+    {
+     "title": "10. SINIF EDEBİYAT 1. DÖNEM 1. YAZILI | 10 DAKİKADA TEKRAR ET! 🔥 ORTAK YAZILI 2026-2027",
+     "channel": "Türkçenin Matematiği",
+     "len": "14:54",
+     "id": "ZMv1AtQpzJo",
+     "live": false
+    },
+    {
+     "title": "9.SINIF EDEBİYAT 1.DÖNEM 1.YAZILI TÜM SENARYOLAR '' MAARİF MODEL OYSS''",
+     "channel": "Türkçenin Matematiği",
+     "len": "53:44",
+     "id": "UG_TS-ZM96E",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Edebiyat | 1. Dönem 1. Yazılı Son Gece 100 al | canlı yayın",
+     "channel": "AYARLI EDEBİYAT",
+     "len": "3:33:25",
+     "id": "1rdmEJRQ-hU",
+     "live": false
+    },
+    {
+     "title": "2.YENİ ŞİİRİ VE 2.YENİ SANATÇILARI - KONU ANLATIMI VE SORU ÇÖZÜMÜ🔥49 GÜNDE AYT EDEBİYAT KAMPI 2026",
+     "channel": "Emek TAŞTAN",
+     "len": "24:58",
+     "id": "RSQ282_P3fc",
+     "live": false
+    },
+    {
+     "title": "10. SINIF EDEBİYAT 1. DÖNEM 1. YAZILI SORULARI | GERÇEK YAZILI SORULARI! | MAARİF MODEL 2026-2027",
+     "channel": "Türkçenin Matematiği",
+     "len": "19:28",
+     "id": "OqZISUlNE5c",
+     "live": false
+    },
+    {
+     "title": "11.Sınıf Edebiyat 1.Dönem 1.Yazılı FULL TEKRAR / Maarif Modeli",
+     "channel": "Deniz Hoca",
+     "len": "1:14:12",
+     "id": "VmmLkBbFX-M",
+     "live": false
+    },
+    {
+     "title": "1) AYT Türk Dili ve Edebiyatı -Türk Edebiyatının Dönemleri -Güzel Sanatlar ve Edebiyat - Kadir GÜMÜŞ",
+     "channel": "Benim Hocam",
+     "len": "46:36",
+     "id": "waAHaV7oL6g",
+     "live": false
+    },
+    {
+     "title": "11.Sınıf Edebiyat 1.Dönem 1.Yazılı | FULL TEKRAR + MEB YAZILI ÇÖZÜMÜ",
+     "channel": "Yusuf Mert 11. Sınıf - Maarif",
+     "len": "38:21",
+     "id": "LeqZ8T72eLo",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Edebiyat 1.Dönem 1.Yazılı  I 8 dk'da 100 al I son gece",
+     "channel": "AYARLI EDEBİYAT",
+     "len": "8:47",
+     "id": "uZysUHM5XDE",
+     "live": false
+    },
+    {
+     "title": "2026 AYT EDEBİYAT FULLETEN SON TEKRAR! 🔥 | Garanti Gelecek Konular",
+     "channel": "Nova Zeka ve Yusuf Mert Arslan",
+     "len": "3:04:17",
+     "id": "lgJ4PxNxCow",
+     "live": false
+    },
+    {
+     "title": "2) AYT Edebiyat -Genel Tekrar Kampı -Şiir Bilgisi -Edebi Sanatlar (Söz Sanatları) -Kadir GÜMÜŞ -2026",
+     "channel": "Benim Hocam",
+     "len": "52:52",
+     "id": "fdNysxbXZQU",
+     "live": false
+    },
+    {
+     "title": "9)AYT Edebiyat-Şiir Bilgisi 4(Şiirde İçerik-Batı Kaynaklı Nazım Şekilleri-Manzum Hikaye-Mensur Şiir)",
+     "channel": "Benim Hocam",
+     "len": "40:25",
+     "id": "SJXL7heEEAQ",
+     "live": false
+    },
+    {
+     "title": "SANAT VE EDEBİYAT | 1.Gün | 📌 2026 AYT Edebiyat Kampı",
+     "channel": "Deniz Hoca",
+     "len": "17:38",
+     "id": "y76XQCWECWk",
+     "live": false
+    },
+    {
+     "title": "3) AYT Edebiyat - Genel Tekrar Kampı - Halk Edebiyatı - Kadir GÜMÜŞ - 2026",
+     "channel": "Benim Hocam",
+     "len": "1:54:54",
+     "id": "k97mAKdTKTA",
+     "live": false
+    },
+    {
+     "title": "AYT EDEBİYAT DENEME ÇÖZÜMÜ  2026 SON PROVA",
+     "channel": "AYARLI EDEBİYAT",
+     "len": "52:31",
+     "id": "Shhvc954bJs",
+     "live": false
+    },
+    {
+     "title": "ŞİİR BİLGİSİ - 1 Nazım Biçimi, Nazım Birimi, Ölçü | 9.Gün | 📌 2026 AYT Edebiyat Kampı",
+     "channel": "Deniz Hoca",
+     "len": "34:32",
+     "id": "Hz-F5oipsvo",
+     "live": false
+    },
+    {
+     "title": "11. Sınıf Edebiyat 1.Dönem 1.Yazılı  I 9 dk'da 100 al I son akşam",
+     "channel": "AYARLI EDEBİYAT",
+     "len": "9:02",
+     "id": "FVyZdg_N5oU",
+     "live": false
+    },
+    {
+     "title": "10. Sınıf Edebiyat | 1.Tema FULL TEKRAR Konu Anlatımı | Maarif Modeli",
+     "channel": "AYARLI EDEBİYAT",
+     "len": "56:45",
+     "id": "Ksw3Ov_fqbo",
+     "live": false
+    },
+    {
+     "title": "2.GÜN | Şiirde Ahenk Unsurları | 65 Günde AYT Edebiyat Kampı",
+     "channel": "Rüştü Hoca ile Türkçe",
+     "len": "24:36",
+     "id": "39ORH39LLi4",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Türk Dili ve Edebiyatı 1. Dönem 1. Yazılıya Hazırlık | Sözün İnceliği",
+     "channel": "Seda İle Öğren",
+     "len": "26:18",
+     "id": "yL8bpJ9KOgo",
+     "live": false
+    },
+    {
+     "title": "Türk Dili ve Edebiyatı 5 | Kitabın Tamamı Özet Konu Anlatımı | Yeni Müfredat",
+     "channel": "Açık lise cepte",
+     "len": "34:21",
+     "id": "T85DyffNvCg",
+     "live": false
+    },
+    {
+     "title": "10. SINIF EDEBİYAT 2. DÖNEM 2. YAZILI GERÇEK SORULAR",
+     "channel": "Türkçenin Matematiği",
+     "len": "19:28",
+     "id": "mjOcAMXUl5I",
+     "live": false
+    },
+    {
+     "title": "Divan Edebiyatı | KODLAMALARLA 9. GÜN  30 GÜNDE AYT EDEBİYAT KAMPI – 2026",
+     "channel": "Türkçenin Matematiği",
+     "len": "48:38",
+     "id": "HoWktNcS354",
+     "live": false
+    },
+    {
+     "title": "7) AYT Edebiyat - Genel Tekrar Kampı - Servetifünun - Fecriati Dönemi Türk Edebiyatı - Kadir GÜMÜŞ",
+     "channel": "Benim Hocam",
+     "len": "53:21",
+     "id": "k4MfbFhCqeA",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Edebiyat 1.Dönem 1.Yazılı HIZLI TEKRAR !!!",
+     "channel": "Türkçenin Matematiği",
+     "len": "28:19",
+     "id": "k30gK5dY9iw",
+     "live": false
+    },
+    {
+     "title": "4) AYT Türk Dili ve Edebiyatı - Destanlar - Kadir GÜMÜŞ - 2027",
+     "channel": "Benim Hocam",
+     "len": "1:02:31",
+     "id": "hLsTFaiwotI",
+     "live": false
+    },
+    {
+     "title": "Milli Edebiyat Dönemi Türk Edebiyatı - KODLAMALARLA 20. GÜN  30 GÜNDE AYT EDEBİYAT KAMPI – 2026",
+     "channel": "Türkçenin Matematiği",
+     "len": "12:06",
+     "id": "muYhCx2X2U0",
+     "live": false
+    },
+    {
+     "title": "AYT EDEBİYAT FULL TEKRAR 2026 PDF / +18 NET 🚀 / Hedef 24 NET 🎯",
+     "channel": "Deniz Hoca",
+     "len": "4:19:34",
+     "id": "jS5PQ9Xf7FY",
+     "live": false
+    },
+    {
+     "title": "TÜRK EDEBİYATI DÖNEMLERİ / KONU ANLATIMI VE SORU ÇÖZÜMÜ🔥49 GÜNDE AYT EDEBİYAT KAMPI 2026",
+     "channel": "Emek TAŞTAN",
+     "len": "19:13",
+     "id": "jO8-fMf4lOY",
+     "live": false
+    },
+    {
+     "title": "9.SINIF 1.DÖNEM 1.YAZILI SORULARI / Maarif Modeli / 3.Prova",
+     "channel": "Deniz Hoca",
+     "len": "27:06",
+     "id": "aiRvtEqeNaI",
+     "live": false
+    }
+   ]
+  },
+  "edebiyat-yedek": {
+   "q": "lise edebiyat ders",
+   "time": "2026-11-17T07:24:58.779Z",
+   "loggedOut": true,
+   "ver": "2.20261116.00.00",
+   "results": [
+    {
+     "title": "Açık Lise Edebiyat 6 – Sınav Öncesi Son Tekrar | En Çok Çıkan Konular",
+     "channel": "Açık lise cepte",
+     "len": "4:28",
+     "id": "z3HcbP6OcXE",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART  2026 - Türk Dili ve Edebiyatı - 6",
+     "channel": "Açık Lise TV",
+     "len": "12:54",
+     "id": "pjYjXz3YSRc",
+     "live": false
+    },
+    {
+     "title": "1960’larda Edebiyat Nasıl Öğretiliyordu? | Lise Edebiyat Ders Kitabını İnceledim",
+     "channel": "Cenker Ekiztaş",
+     "len": "15:48",
+     "id": "29lbh7Im9Ck",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Aralık 2023 - Türk Dili ve Edebiyatı 6",
+     "channel": "Açık Lise TV",
+     "len": "8:04",
+     "id": "4oE3en7iwMU",
+     "live": false
+    },
+    {
+     "title": "(ESKİ)Açık Öğretim Lisesi Türk Dili ve Edebiyatı-1 FULL TEKRAR | Tüm Konular Özet #açıköğretimlise",
+     "channel": "Bekir Hoca | Türkçe - Edebiyat",
+     "len": "58:18",
+     "id": "99zcFZOiBZI",
+     "live": false
+    },
+    {
+     "title": "Edebiyat dersi nasıl mı işlenir ? - Erdem Bayazıt",
+     "channel": "Yedi Güzel Adam",
+     "len": "1:40",
+     "id": "cp2Kj47XEvA",
+     "live": false
+    },
+    {
+     "title": "1) Ses Bilgisi - 1 | Aker KARTAL - 2027",
+     "channel": "Retro Yayıncılık",
+     "len": "37:19",
+     "id": "juJFHVk7ieE",
+     "live": false
+    },
+    {
+     "title": "Edebiyat Dersi",
+     "channel": "İndola - Topic",
+     "len": "1:47",
+     "id": "R4OtBLJkyYA",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Türk Dili ve Edebiyat 4 - 3.Tema: Dünden Bugüne - İslamiyet -Tanzimat ve Cumhuriyet Dönemi",
+     "channel": "Açık Lise TV",
+     "len": "12:10",
+     "id": "9c_Z9Q4zdI0",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Aralık 2023 - Seçmeli Türk Dili ve Edebiyatı 1",
+     "channel": "Açık Lise TV",
+     "len": "8:09",
+     "id": "lOURXa2-Yfw",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Edebiyat 1. Dönem 1. Yazılıya Hazırlık 📑 #9EDB1D1Y #2027",
+     "channel": "tonguç 9. SINIF",
+     "len": "54:11",
+     "id": "NnvBErrY_hQ",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART  2026 - Türk Dili ve Edebiyatı - 1",
+     "channel": "Açık Lise TV",
+     "len": "20:27",
+     "id": "2fiYaQyjjzM",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf Edebiyat 1. Dönem Full Tekrar 🔃 #2026",
+     "channel": "tonguç 9. SINIF",
+     "len": "29:55",
+     "id": "C7vn6dP-X5o",
+     "live": false
+    },
+    {
+     "title": "\"TÜRK DİLİ VE EDEBİYATI 5\" 1. Ünite Giriş Konu Anlatımı ve Özeti. \"Seçmeli Türk Dili ve Edebiyatı 1\"",
+     "channel": "Açık Lise Öğrencileri",
+     "len": "11:08",
+     "id": "K1f1kW5tJKA",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Mart 2024 - Türk Dili ve Edebiyatı 1",
+     "channel": "Açık Lise TV",
+     "len": "11:31",
+     "id": "do_gWsVFwr0",
+     "live": false
+    },
+    {
+     "title": "1) AYT Türk Dili ve Edebiyatı -Türk Edebiyatının Dönemleri -Güzel Sanatlar ve Edebiyat - Kadir GÜMÜŞ",
+     "channel": "Benim Hocam",
+     "len": "46:36",
+     "id": "waAHaV7oL6g",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART  2026 - Türk Dili ve Edebiyatı - 7",
+     "channel": "Açık Lise TV",
+     "len": "8:21",
+     "id": "ii5HUdcukVQ",
+     "live": false
+    },
+    {
+     "title": "\"TÜRK DİLİ VE EDEBİYATI 6\" SORU ÇÖZÜMÜ (Türk Dili ve Edebiyatı Soru Çözümü) Test Çöz",
+     "channel": "Açık Lise Öğrencileri",
+     "len": "11:34",
+     "id": "jD2M53-vUmg",
+     "live": false
+    },
+    {
+     "title": "TÜRK EDEBİYATININ DÖNEMLERİ /10.Sınıf Edebiyat 1.TEMA: Sözün Ezgisi / 2025",
+     "channel": "Deniz Hoca",
+     "len": "8:46",
+     "id": "77uy2liSQLU",
+     "live": false
+    },
+    {
+     "title": "9. Sınıf EDEBİYAT 1.Dönem 1.Yazılı  I 9 dk'da 100 al I son gece",
+     "channel": "AYARLI EDEBİYAT",
+     "len": "9:06",
+     "id": "QJHnIFZ0_lg",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART  2026 - Türk Dili ve Edebiyatı - 4",
+     "channel": "Açık Lise TV",
+     "len": "11:42",
+     "id": "_99RM76aAGo",
+     "live": false
+    },
+    {
+     "title": "Ses Bilgisi | 9. Sınıf Edebiyat #2026",
+     "channel": "tonguç 9. SINIF",
+     "len": "14:27",
+     "id": "SsGhAZVczbE",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART  2026 - Türk Dili ve Edebiyatı - 3",
+     "channel": "Açık Lise TV",
+     "len": "12:39",
+     "id": "490Zn49Wzek",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Aralık 2023 - Seçmeli Türk Dili ve Edebiyatı 3",
+     "channel": "Açık Lise TV",
+     "len": "7:19",
+     "id": "a6SC5vy5WHI",
+     "live": false
+    },
+    {
+     "title": "NAZIM BİRİMİ / HECE ÖLÇÜSÜ / KAFİYE ŞEMASI / 9.Sınıf 3.Tema / Deniz Hoca +PDF📝",
+     "channel": "Deniz Hoca",
+     "len": "18:21",
+     "id": "a6vpDKTqDZk",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Aralık 2023 - Türk Dili ve Edebiyatı 7",
+     "channel": "Açık Lise TV",
+     "len": "6:47",
+     "id": "skPgbllVMR0",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART  2026 - Türk Dili ve Edebiyatı - 2",
+     "channel": "Açık Lise TV",
+     "len": "15:53",
+     "id": "MzSka9Bl9VM",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Temmuz Sınav Soru Çözümleri - Türk Dili ve Edebiyatı 3",
+     "channel": "Açık Lise TV",
+     "len": "11:25",
+     "id": "0__UM4aA5Hw",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular  -  MART  2026 - Türk Dili ve Edebiyatı - 8",
+     "channel": "Açık Lise TV",
+     "len": "9:17",
+     "id": "na-y9K0ws7w",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Aralık 2023 - Seçmeli Türk Dili ve Edebiyatı 4",
+     "channel": "Açık Lise TV",
+     "len": "7:35",
+     "id": "n1JivsPegw0",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Aralık 2023 - Seçmeli Türk Dili ve Edebiyatı 2",
+     "channel": "Açık Lise TV",
+     "len": "6:37",
+     "id": "P5WNEoUrorU",
+     "live": false
+    },
+    {
+     "title": "LİSE EDEBİYAT TANITIM DERSİ.",
+     "channel": "Özel Akdeniz Okulları - Adana",
+     "len": "6:05",
+     "id": "NhXzw3gDnYE",
+     "live": false
+    },
+    {
+     "title": "9.SINIF | 1.Dönem - 1.Yazılı | Aker Kartal - Türk Dili ve Edebiyatı",
+     "channel": "Aker Kartal ve Retro Yayıncılık",
+     "len": "22:54",
+     "id": "fbYjayM-ZoM",
+     "live": false
+    },
+    {
+     "title": "10.SINIF | Maarif Model | Koşuk, Koşma |1.Tema, Sözün Ezgisi",
+     "channel": "Rüştü Hoca ile Türkçe",
+     "len": "21:01",
+     "id": "0ol-c_x-bLs",
+     "live": false
+    },
+    {
+     "title": "1) Metin Türleri - 1 | AYT - Türk Dili Ve Edebiyatı | Aker KARTAL - 2027",
+     "channel": "Retro Yayıncılık",
+     "len": "33:29",
+     "id": "nzmHqy1jmAE",
+     "live": false
+    },
+    {
+     "title": "10.Sınıf Lise Edebiyat Ders Kitabı 2.Ünite Dilbilgisi Cevapları;İsim-Fiiller; Yazım Yanlışları",
+     "channel": "Teacher Metin Kürümoğlu Hocam",
+     "len": "12:48",
+     "id": "oJM1oGCxCSs",
+     "live": false
+    },
+    {
+     "title": "10.SINIF | Türk Edebiyatının Tarihî Dönemleri | Türk Dili ve Edebiyatı Dersi",
+     "channel": "Rüştü Hoca ile Türkçe",
+     "len": "27:22",
+     "id": "5fwEZSj0YZk",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Aralık 2023 - Türk Dili ve Edebiyatı 2",
+     "channel": "Açık Lise TV",
+     "len": "7:21",
+     "id": "KlKZYsheJyU",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Türk Dili ve Edebiyatı 2  - 1. Tema : Anlamın Yapı Taşları - Anlam Bakımından Sözcükler",
+     "channel": "Açık Lise TV",
+     "len": "8:33",
+     "id": "L_HYhqWjHjs",
+     "live": false
+    },
+    {
+     "title": "Açık Lise Çıkmış Sorular - Aralık 2023 - Türk Dili ve Edebiyatı 5",
+     "channel": "Açık Lise TV",
+     "len": "9:17",
+     "id": "6v4UDMhQKyU",
+     "live": false
+    },
+    {
+     "title": "EDEBİYATA GİRİŞ - 1 | 9. Sınıf Edebiyat Konu Anlatımı | 2025- 2026",
+     "channel": "Hocalara Geldik 9. Sınıf",
+     "len": "13:54",
+     "id": "MWsvrM_nxDc",
+     "live": false
+    },
+    {
+     "title": "CANLI 🔴 Edebiyatın Güzel Sanatlar İçindeki Yeri | 9EDB1 #2027",
+     "channel": "tonguç 9. SINIF",
+     "len": "25:21",
+     "id": "LjbgF8pd_8Q",
+     "live": false
+    },
+    {
+     "title": "11.Sınıf Edebiyat 1.Dönem 1.Yazılı | FULL TEKRAR + MEB YAZILI ÇÖZÜMÜ",
+     "channel": "Yusuf Mert 11. Sınıf - Maarif",
+     "len": "38:21",
+     "id": "LeqZ8T72eLo",
+     "live": false
+    },
+    {
+     "title": "9) Yazım Kuralları - 2 | Aker KARTAL - 2027",
+     "channel": "Retro Yayıncılık",
+     "len": "26:35",
+     "id": "SrjCETJKxPc",
+     "live": false
+    },
+    {
+     "title": "Youtube lise -orta okul dersler Edebiyat 10 sinif 1 donem 2 yazılı",
+     "channel": "Tüm dersler",
+     "len": "7:20",
+     "id": "XPIo6iLDUZg",
+     "live": false
+    },
+    {
+     "title": "Açık Lise  Türk Dili ve Edebiyatı 2 - Deneme Sınavı 1",
+     "channel": "Açık Lise TV",
+     "len": "7:29",
+     "id": "HxES-YNSkVE",
+     "live": false
+    },
+    {
+     "title": "11.Sınıf Edebiyat 1.Dönem 1.Yazılı FULL TEKRAR / Maarif Modeli",
+     "channel": "Deniz Hoca",
+     "len": "1:14:12",
+     "id": "VmmLkBbFX-M",
+     "live": false
+    },
+    {
+     "title": "10.SINIF | 1.Dönem - 1.Yazılı | Aker Kartal - Türk Dili ve Edebiyatı",
+     "channel": "Aker Kartal ve Retro Yayıncılık",
+     "len": "15:54",
+     "id": "64coQgirxtw",
+     "live": false
+    },
+    {
+     "title": "9.Sınıf Türk Dili ve Edebiyatı → 1.Dönem / 1. Yazılı Provası ~ Aker Kartal",
+     "channel": "Aker Kartal ve Retro Yayıncılık",
+     "len": "31:43",
+     "id": "DJl6Af0EVlw",
+     "live": false
+    },
+    {
+     "title": "EDEBİ SANATLAR (Söz Sanatları) Örnekler + Etkinlik I 9.Sınıf Sözün İnceliğİ / Deniz Hoca +PDF📝",
+     "channel": "Deniz Hoca",
+     "len": "32:51",
+     "id": "3bW8GrvE-fs",
+     "live": false
+    }
+   ]
+  },
+  "python": {
+   "q": "python dersleri",
+   "time": "2026-11-17T07:26:30.496Z",
+   "loggedOut": true,
+   "ver": "2.20261116.00.00",
+   "results": [
+    {
+     "title": "Python Dersleri - 1 Saatte Tamamen Python Öğren!",
+     "channel": "Kavax",
+     "len": "1:00:00",
+     "id": "_wZUNiGtkcw",
+     "live": false
+    },
+    {
+     "title": "Python Öğrenmek İçin Kurs Almayın (2026 Gerçekleri)",
+     "channel": "Teknoloji Pusulası",
+     "len": "11:12",
+     "id": "e2EvaPuMzSM",
+     "live": false
+    },
+    {
+     "title": "2 Dakikada Python | Python Nedir, Ne İşe Yarar, Nasıl Çalışır?",
+     "channel": "ByteBloodz",
+     "len": "2:04",
+     "id": "3-1MN1o1yp4",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri: 4.5 Saatte Programlama Öğrenin (Full Kurs)",
+     "channel": "Görkem HINÇER",
+     "len": "4:27:09",
+     "id": "mH0PXqdkeLE",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Öğreniyoruz | Yeni başlayanlar için Python Dersleri | 8 Saat Python Eğitimi",
+     "channel": "Mehmet TEK",
+     "len": "7:58:53",
+     "id": "0KQp2v5vrV8",
+     "live": false
+    },
+    {
+     "title": "YALNIZCA PYTHON - 1 VIDEODA",
+     "channel": "Yazılım Bilimi",
+     "len": "1:21:25",
+     "id": "tvvEqvyh_Vw",
+     "live": false
+    },
+    {
+     "title": "Python Full Course | Başlangıçtan Uzmanlığa Tek Videoda Python",
+     "channel": "Rehber Yazılım",
+     "len": "2:28:21",
+     "id": "zuNLeN-nta8",
+     "live": false
+    },
+    {
+     "title": "Python Eğitimi - Yeni Başlayanlar İçin [Tam Ders] - 2025",
+     "channel": "Kendi Çapında Mühendis",
+     "len": "9:36:00",
+     "id": "g4oIzj8fiCQ",
+     "live": false
+    },
+    {
+     "title": "PYTHON - Kullanım Alanları, Avantajları ve Felsefesi",
+     "channel": "Yakın Kampüs",
+     "len": "24:03",
+     "id": "EzHgbO1Cee4",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 1: Stringler",
+     "channel": "Python'a Giriş",
+     "len": "35:12",
+     "id": "t176iXgG5PI",
+     "live": false
+    },
+    {
+     "title": "20 Dakikada Kodlama Öğrenmek | Yazılım Size Göre mi? | Python Temel Mantığı",
+     "channel": "Dora Stratera Özsoy",
+     "len": "24:10",
+     "id": "-GzrTBLwCgk",
+     "live": false
+    },
+    {
+     "title": "Python Vizeye Hazırlık | Genel Tekrar",
+     "channel": "Ankara University Computer Society",
+     "len": "1:36:37",
+     "id": "yGHdSf3f0Io",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri #3 | Veri Tipleri ve Sayı Tipleri (Integer ve Float)",
+     "channel": "Yakın Kampüs",
+     "len": "23:18",
+     "id": "sJkyGixATl0",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri 2026 #1 | Visual Studio Code ve Python Kurulumu",
+     "channel": "Piton Aram",
+     "len": "3:24",
+     "id": "jP3WGkxgdHM",
+     "live": false
+    },
+    {
+     "title": "Kodlama Öğrenirken Kimsenin Söylemediği 7 GERÇEK! - Vaktinizi Boşa Harcamayın",
+     "channel": "YUSUF",
+     "len": "11:34",
+     "id": "Hl6brqRwOf8",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri 1 - JupyterLab ve Data Tipleri #python #jupyterlab",
+     "channel": "Furkan Öztürk",
+     "len": "27:32",
+     "id": "b127XFUZP84",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 15: Os Modülü",
+     "channel": "Python'a Giriş",
+     "len": "38:36",
+     "id": "FwpD9m9jWRo",
+     "live": false
+    },
+    {
+     "title": "1 VİDEODA PYTHON DERSLERİ 🔥 Komple Python Eğitimi",
+     "channel": "Tirendaz Academy | Evren Özkip",
+     "len": "2:40:48",
+     "id": "w6-tZA3MTco",
+     "live": false
+    },
+    {
+     "title": "Python Hesap Makinesi Yapma - Hesap Makinesi Uygulaması - Python Dersleri #13",
+     "channel": "Kavax",
+     "len": "4:34",
+     "id": "P_UOlbCcDNo",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri 2026 #12 / Switch (Match) Case",
+     "channel": "Piton Aram",
+     "len": "11:24",
+     "id": "DHL4n9myl4Y",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 2: Integer ve Float",
+     "channel": "Python'a Giriş",
+     "len": "30:51",
+     "id": "EabKlNAN3LQ",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 3: Listeler (Lists)",
+     "channel": "Python'a Giriş",
+     "len": "31:02",
+     "id": "pBMuc4cc_Ck",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 4: Demet ve Küme Kavramları (Tuples and Sets)",
+     "channel": "Python'a Giriş",
+     "len": "20:49",
+     "id": "OMwQ_i9GJbI",
+     "live": false
+    },
+    {
+     "title": "Ders 3 Python Programlamada Girinti ve Yorumlar",
+     "channel": "Fehmi UYAR",
+     "len": "14:22",
+     "id": "jLCHlysHPL0",
+     "live": false
+    },
+    {
+     "title": "Canlı - 6 Saatlik PYTHON Programlama Kampı / Dersleri",
+     "channel": "Engin Demiroğ",
+     "len": "5:53:19",
+     "id": "6IWpowC2ryc",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 9: Genel Tekrar ve Alıştırmalar",
+     "channel": "Python'a Giriş",
+     "len": "27:27",
+     "id": "K9YaA8VYYyo",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 6: If - elif - else",
+     "channel": "Python'a Giriş",
+     "len": "23:06",
+     "id": "R6DmpXky2WA",
+     "live": false
+    },
+    {
+     "title": "Python Koşullu İfadeler | if - elif - else Kullanımı",
+     "channel": "Furkan Morova",
+     "len": "9:06",
+     "id": "nzQJv_Tsbn0",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 7: Döngüler (For ve While)",
+     "channel": "Python'a Giriş",
+     "len": "27:37",
+     "id": "JUsemOXDvjY",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 19: Object Oriented Programming | Nesne Yönelimli Programlama | Class",
+     "channel": "Python'a Giriş",
+     "len": "30:51",
+     "id": "7XF4lnUHzc4",
+     "live": false
+    },
+    {
+     "title": "Ders 4 Python Programlamada Değişken Mantığı ve Değişken Oluşturma",
+     "channel": "Fehmi UYAR",
+     "len": "24:12",
+     "id": "AR_3XreA1co",
+     "live": false
+    },
+    {
+     "title": "Yarım Saatte Python Numpy Kütüphanesi Dersi | Tek bir videoda Numpy uzmanı olun",
+     "channel": "Mühendisin Blogu",
+     "len": "30:51",
+     "id": "63EHOcsYd5w",
+     "live": false
+    },
+    {
+     "title": "Python'da Asenkron Programlama: Asyncio",
+     "channel": "Abdulhamit Çelik",
+     "len": "16:13",
+     "id": "AgSLphDGPQI",
+     "live": false
+    },
+    {
+     "title": "Ders 2 Python Kurulumu ve İlk Kodlar",
+     "channel": "Fehmi UYAR",
+     "len": "6:15",
+     "id": "jyksswZyJCo",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri #4 | Yazı Veri Tipleri (String ve Char)",
+     "channel": "Yakın Kampüs",
+     "len": "26:14",
+     "id": "dpyWdDf0Js4",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri #6 | Koleksiyon Veri Tipleri (List ve Set)",
+     "channel": "Yakın Kampüs",
+     "len": "13:05",
+     "id": "OlSyO4O-GM8",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri 2026 #2 / Arayüz ve Değişken Tanıtma",
+     "channel": "Piton Aram",
+     "len": "6:04",
+     "id": "VA0kHYVFY8g",
+     "live": false
+    },
+    {
+     "title": "7 Python Listeler ve Metotları - Python Ders Videoları",
+     "channel": "Hasan Çağrı Güngör",
+     "len": "10:24",
+     "id": "XKszzitqzUA",
+     "live": false
+    },
+    {
+     "title": "Python ile Yapay Zeka Yapalım!",
+     "channel": "Dinçer Tekin",
+     "len": "27:00",
+     "id": "R8rrR2T9UX8",
+     "live": false
+    },
+    {
+     "title": "Ders 1 Python Programlamaya Giriş",
+     "channel": "Fehmi UYAR",
+     "len": "9:24",
+     "id": "CEr_UiR4Gvk",
+     "live": false
+    },
+    {
+     "title": "Python 2026: Herkes Yanlış Yerden Başlıyor (Doğru Yol)",
+     "channel": "Teknoloji Pusulası",
+     "len": "8:52",
+     "id": "ivQr8QtAzCw",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 22: OOP Inheritance | Kalıtım - 1",
+     "channel": "Python'a Giriş",
+     "len": "23:52",
+     "id": "yNMpXv-WuDc",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri #18 | Fonksiyonlar - 1",
+     "channel": "Yakın Kampüs",
+     "len": "16:22",
+     "id": "McUxTvOyZ1w",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri 2026 | Python Dosyamızı Bilgisayara Kaydediyoruz | Alıştırma - 5",
+     "channel": "Piton Aram",
+     "len": "8:12",
+     "id": "rTJIcJ4L4dY",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri: İlk Programlarımızı Yazıyoruz! input(), Oyuncu Kaydı ve Denklem Kökleri | Ders 5",
+     "channel": "Yarının Atlası",
+     "len": "28:16",
+     "id": "NZfMX9O0HYg",
+     "live": false
+    },
+    {
+     "title": "VSCODE & PYTHON NASIL KURULUR? 2026 | INSTALL VSCODE & PYTHON 2026",
+     "channel": "Yazılım Rotası",
+     "len": "5:32",
+     "id": "OxZzDi60j30",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders 40: Kendimize Iterator Yazalım | Custom Iterator",
+     "channel": "Python'a Giriş",
+     "len": "14:40",
+     "id": "yt2AYCKejdM",
+     "live": false
+    },
+    {
+     "title": "Sıfırdan Python Dersleri Ders: 26 if __name__ == \"__main__\" Kalıbı",
+     "channel": "Python'a Giriş",
+     "len": "9:55",
+     "id": "xRUkUQhCFDE",
+     "live": false
+    },
+    {
+     "title": "Python Ders 11: Listeler (Lists Veri Yapısı)",
+     "channel": "Umut Yiğit",
+     "len": "27:58",
+     "id": "auyzR38LXbc",
+     "live": false
+    },
+    {
+     "title": "Python Dersleri #3 | Veri Tipleri, Print, Değişkenler ve Input Fonksiyonu",
+     "channel": "Kod Bit",
+     "len": "8:22",
+     "id": "fJ0BE1rzEcs",
+     "live": false
+    }
+   ]
+  }
+ }
+}

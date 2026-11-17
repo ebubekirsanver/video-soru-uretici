@@ -930,3 +930,18 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
 - **Ne yapıldı:** `docs/video-secim-kurali.md` "Değişiklikler" bölümüne ikinci madde eklendi: her alan için yeni gizli pencere ve "Tür: Video" filtresi; videolara tıklamadan ilk 50 tekil sonucun ekran görüntüsü ve arama saati; değerlendirme bu görüntülerdeki sıraya göre; görüntüler `docs/bulgular/video-secimi/ekran-goruntuleri/<alan kodu>/` altında, `adaylar.csv` ile birlikte depoya. Önceki metin değişmedi.
 - **Nasıl doğrulandı:** `git diff` yalnızca eklenen satırı gösteriyor; `pytest` çalıştırıldı.
 - **Bilinen sınırlar:** Seçim betiği ekran görüntülerini okumaz ve denetlemez; betik değişmedi, hâlâ çalıştırılmadı.
+
+## Aday kaydı netleştirmeleri ve adaylar.csv denetimi (2026-11-17)
+
+- **Ne yapıldı:**
+  - `docs/video-secim-kurali.md` "Değişiklikler" bölümüne 2026-11-17 maddesi eklendi (ölçüt 4'ün yorumu, arama yöntemi, altyazı listesiyle ölçüt 1/2/5 kontrolü, matematikte iki aday, "tonguç 9. SINIF", csv'ye yazılan sonuç aralığı). Önceki metin değişmedi.
+  - `adaylar.csv` seçim betiğinin `read_candidates` ve `screen` işlevleriyle, YouTube'a ve OpenAI'a istek atmadan okundu; `secim.py` çalıştırılmadı.
+  - `test_real_template_is_header_only` testi, csv artık boş şablon olmadığı için `test_real_candidates_file_readable` olarak değiştirildi (başlık doğru, adaylar hatasız okunuyor).
+- **Nasıl doğrulandı:**
+  - Sütunlar kuraldakiyle aynı; 391 satır (27 aday, 364 elendi); biçim hatası yok.
+  - Alan başına aday: biyoloji 5, tarih 5, matematik 2, ingilizce 5, edebiyat 5, python 5.
+  - Adaylarda aynı kanal ya da pilot kanal yok; `pytest` 595 test geçti.
+- **Bilinen sınırlar:**
+  - `sira` her aramanın kendi sırası; iki aramadan aday çıkan alanlarda (biyoloji, tarih, matematik, edebiyat) karıştırma öncesi diziliş iki aramanın sıra numaralarını birlikte kullanıyor. Şu an aynı alanda aynı sıra numaralı iki aday yok, sonuç belirli.
+  - Biyoloji ana aramasının 46 elenen satırında bağlantı yok (ekran görüntüsünden yazıldı); betik elenen satırları denetlemediği için hata vermiyor.
+  - `adaylar.csv` commit'lenmeden betik çalışmayı reddeder.
