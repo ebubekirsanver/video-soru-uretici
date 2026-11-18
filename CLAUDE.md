@@ -59,7 +59,7 @@ npm run typecheck
 ```
 
 ## Şu anki durum
-**Backend (Aşama 0, 1, 2, 5, 6 tamamlandı):** iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma; seçeneklerin tamamı aynı birimle sayı ya da yılsa karıştırılmaz, küçükten büyüğe sıralanır). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Özet konu zamanlarında blok etiketi kontrolü var (`start_verified`: modelin verdiği değer isteme verilen blok etiketlerinden biri mi; değer değiştirilmez); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Testler: `pytest` → 601 test.
+**Backend (Aşama 0, 1, 2, 5, 6 tamamlandı):** iskelet, FastAPI, `POST /api/transcript`, LLM soyut katmanı (`services/llm.py`), ham/temiz transkript seçimi, `POST /api/summary` ve RAG'siz taban çizgisi olarak `POST /api/questions` (istem `questions-v1`; yapı denetimi, alıntı doğrulaması `services/quotes.py`, tekrar ayıklama, sabit tohumlu seçenek karıştırma; seçeneklerin tamamı aynı birimle sayı ya da yılsa karıştırılmaz, küçükten büyüğe sıralanır). Aşama 3 (Whisper yedeği, WER) ve Aşama 4 (bölümleme) ertelendi; ~30 sn'lik bloklama (`services/chunking.py`) Aşama 4'te yeniden kullanılacak. Özet konu zamanlarında blok etiketi kontrolü var (`start_verified`: modelin verdiği değer isteme verilen blok etiketlerinden biri mi; değer değiştirilmez); konunun videoda gerçekten o anda başladığı doğrulanmıyor. Testler: `pytest` → 621 test.
 
 **Aşama 7a (RAG altyapısı): kısmen.** Sabit boyutlu parçalar (`services/chunking.py`, `fixed-150-30`), BGE-M3 gömme katmanı (`services/embeddings.py`), ChromaDB dizini ve erişim (`services/retrieval.py`); soru üretimine 7b'de bağlandı.
 
@@ -69,7 +69,7 @@ npm run typecheck
 
 **Hafta-3 (2026-11-10):** Video seçim kuralı `docs/video-secim-kurali.md`; seçim betiği `docs/bulgular/video-secimi/secim.py` hazır, çalıştırılmadı (`adaylar.csv` yalnızca başlık satırı). Ana deney istemi ve ayarları `test_ana_deney_dondurma.py` ile korunuyor. Değerlendirme paketinde "Tanıma hatası kaynaklı mı" işareti, video bilgi dosyası (altyazı türü, iki dilli) ve bunlara göre duyarlılık / alt grup analizleri var.
 
-**Değerlendirme paketi (2026-11-05):** `backend/evaluation/` kör değerlendirme dosyalarını hazırlar, uyumu ve AS1/AS2 analizini hesaplar (kullanım: `backend/evaluation/README.md`). Gerçek etiketle çalıştırılmadı; yönerge metni kullanıcıdan gelecek.
+**Değerlendirme paketi (2026-11-05):** `backend/evaluation/` kör değerlendirme dosyalarını hazırlar, uyumu ve AS1/AS2 analizini hesaplar (kullanım: `backend/evaluation/README.md`). Gerçek etiketle çalıştırılmadı; yönerge metni kullanıcıdan gelecek. Alan öğretmeni alt kümesi (36 soru) için seçim kuralı docs/alt-kume-secim-kurali.md, betikler evaluation/subset.py ve evaluation/validity.py; gerçek anahtarla çalıştırılmadı.
 
 **Konu çıkarma (topics-v1):** `POST /api/topics` videodan birbirinden farklı, videonun farklı bölümlerini kapsayan konular çıkarır (`services/topics.py`, varsayılan 6); `context_mode` verilip `topics` verilmezse `/api/questions` konuları buradan alır. Konu metni "Başlık: açıklama"; kayıt sürümü 7. Gerçek videoda denenmedi.
 
