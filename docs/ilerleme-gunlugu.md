@@ -978,3 +978,32 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Gerçek istekle ve tarayıcıda gözle denenmedi.
   - Frontend için otomatik test yok.
   - "N konudan" sayısı yanıttaki `requested_count`, soru üretilen konu sayısı `returned_count` (konu başına en çok bir soru varsayımıyla).
+
+## Hafta-4 geri bildirimi: alan öğretmeni alt kümesi (2026-11-18)
+
+- **Ne yapıldı:**
+  - **Kural:** `docs/alt-kume-secim-kurali.md`, kullanıcının verdiği metinle; yalnızca başlık ve liste biçimi eklendi.
+  - **Seçim betiği:** `backend/evaluation/subset.py`. Anahtardan 36 soruluk alt küme seçiyor: alan × Bloom düzeyi × koşul × video dengeli; tek üreteç `random.Random("20261118-alt-kume")`, kuraldaki sırayla.
+    - Eksik soruda öbür videonun sorusu alınıyor; o da yoksa hücre boş kalıyor.
+    - Çıktı `alt-kume.json`: kural sürümü, tohum, anahtarın SHA-256 değeri, koşul tablosu, video ataması, 36 hücre.
+    - Ekrana kimlik ve koşul yazmıyor; seçilen soru sayısını, değiştirilen ve boş hücreleri ve dosyanın SHA-256 değerini yazıyor.
+    - Depo içindeki bir çıktı klasörünü reddediyor. Dosya varsa ve aynıysa dokunmuyor, farklıysa üzerine yazmıyor.
+    - `--ogretmen-dosyasi --tohum --girdi` ile alt kümedeki soruları export.py'nin yazma koduyla, değerlendirici dosyasıyla aynı biçimde ve tohumla karıştırılmış sırayla yazıyor. Soru metinleri anahtarda olmadığı için girdi dosyaları yeniden okunuyor ve kimliklerin anahtarla aynı olduğu denetleniyor (kullanıcı kararı).
+  - **Uyum analizi:** `backend/evaluation/validity.py`. Alan öğretmeni ile ortak etiketler arasında her ölçüt için ham uyum (Wilson), kappa, kategori dağılımı ve hesaba girmeyen soru sayısı; isteğe bağlı olarak tartışma öncesi A ve B ile kappa.
+    - Rapor `alan-ogretmeni-uyumu.md`, kimlik ve koşul listelemiyor.
+    - Ağırlıksız cevaplanabilirlik kappası `agreement.KAPPAS`'ta olmadığı için bu dosyada ekleniyor.
+  - export.py, labels.py, agreement.py ve analysis.py değişmedi.
+- **Nasıl doğrulandı:**
+  - `backend/tests/test_alt_kume.py`: 20 yeni test.
+    - 144 soruluk sahte anahtarla 36 soru, alan ve Bloom dengesi, koşul ve video dengesi.
+    - Aynı anahtarla birebir aynı bayt dizisi.
+    - Koşul tablosu ve video ataması: kuralın adımları testte ayrıca uygulanarak karşılaştırıldı.
+    - Eksik soru (öbür video, boş: 35); depo içi klasör reddi; ekranda kimlik ve koşul olmaması.
+    - Öğretmen dosyasının biçimi ve sırası; uyuşmayan girdinin reddi.
+    - Elle kurulmuş örnekte ham uyum, kappa (stats.kappa ile ayrıca hesaplanıp karşılaştırıldı) ve kategori dağılımları.
+  - `pytest`: 621 test geçti.
+  - Sahte anahtarla komut satırından çalıştırıldı: 36 / 36 soru, değiştirilen ve boş hücre yok.
+- **Bilinen sınırlar:**
+  - Gerçek anahtarla çalıştırılmadı (144 soru henüz üretilmedi).
+  - Alan öğretmeni henüz belirlenmedi.
+  - Kappa güven aralığı büyük örneklem yaklaşımı; 36 soruda betimsel yorumlanmalı.

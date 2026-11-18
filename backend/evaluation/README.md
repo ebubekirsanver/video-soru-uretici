@@ -73,3 +73,33 @@ python -m evaluation.analysis --ortak <ortak.xlsx> --anahtar <anahtar.json> --ci
 - **Tanımsız değerler:** Kappa iki değerlendirici de tek kategori kullanırsa tanımsızdır; rapora "tanımsız" yazılır, oransal uyum yine verilir. Hiç uyumsuz çift yoksa McNemar p = 1. Bütün farklar sıfırsa Wilcoxon uygulanmaz.
 
 Formüller `stats.py` başındadır.
+
+## Alan öğretmeni alt kümesi
+
+Kural: [docs/alt-kume-secim-kurali.md](../../docs/alt-kume-secim-kurali.md). İki değerlendiricinin ortak etiketlerinin geçerliliğini sınamak için bir alan öğretmeni 144 sorudan 36'sını da puanlar. Alan öğretmeninin etiketleri ana analize (AS1, AS2) katılmaz.
+
+Sıra: **export → subset → özet değerinin commit'lenmesi → dosyaların dağıtılması.**
+
+1. `export` ile değerlendirici dosyaları ve anahtar üretilir (yukarıdaki 1. adım).
+2. Alt küme seçilir. `--cikti` depo dışında olmalı; depo içindeki bir klasör verilirse betik hata verir:
+
+   ```
+   python -m evaluation.subset --anahtar <anahtar.json> --cikti <depo-dışı-klasör>
+   ```
+
+   Ekrana seçilen soru sayısı, öbür videodan alınan ve boş kalan hücreler (yalnızca alan ve Bloom düzeyi) ve `alt-kume.json` dosyasının SHA-256 değeri yazılır. Soru kimliği ve koşul yazılmaz. Dosya varsa ve aynıysa dokunulmaz; farklıysa üzerine yazılmaz.
+3. **`alt-kume.json` depoya konmaz** (koşul bilgisi taşır, körleme bozulur). Yalnızca ekrandaki SHA-256 değeri `docs/bulgular/alt-kume-ozet.txt` dosyasına yazılıp commit'lenir. Puanlama bittikten sonra seçim dosyası depoya eklenir; özet değeri listenin sonradan değişmediğini gösterir.
+4. Alan öğretmeni dosyası yazılır: alt kümedeki sorular, değerlendirici dosyasıyla aynı biçimde (aynı sütunlar, açılır listeler, Yönerge ve yazım maddeleri sayfaları) ve tohumla karıştırılmış sırayla. Soru metinleri anahtarda olmadığı için `export`'a verilen girdi dosyalarının aynısı `--girdi` ile verilir; kimliklerin anahtarla aynı olduğu denetlenir:
+
+   ```
+   python -m evaluation.subset --anahtar <anahtar.json> --cikti <depo-dışı-klasör> --ogretmen-dosyasi <ogretmen.xlsx> --tohum <sayı> --girdi <dosyalar>
+   ```
+
+5. Değerlendirici dosyaları ve alan öğretmeni dosyası dağıtılır. Alan öğretmenine koşul, hedef düzey ve alt kümenin nasıl seçildiği söylenmez.
+6. Puanlama ve tartışma bittikten sonra uyum hesaplanır (`--ortak`: tartışmadan sonraki ortak etiket dosyası; `--a` ve `--b` isteğe bağlı, tartışma öncesi dosyalar):
+
+   ```
+   python -m evaluation.validity --ogretmen <ogretmen.xlsx> --ortak <ortak.xlsx> --alt-kume <alt-kume.json> --anahtar <anahtar.json> --cikti <klasör> [--a <A.xlsx> --b <B.xlsx>]
+   ```
+
+   Çıktı `alan-ogretmeni-uyumu.md` ve `.json`. Her ölçüt için ham uyum (Wilson aralığı), kappa (aralığıyla), iki tarafın kategori dağılımı ve hesaba girmeyen soru sayısı verilir; Bloom düzeyi ve cevaplanabilirlik için doğrusal ağırlıklı kappa da var. Raporda soru kimlikleri ve koşullar listelenmez. Alt küme dosyası başka bir anahtarla üretildiyse (SHA-256 farklı) betik hata verir.

@@ -113,12 +113,13 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
 | Dönem | İş |
 |---|---|
 | Güz 7–8 | Video seçimi ve veri seti tablosu |
-| Güz 9–10 | Tam transkript koşulu ve RAG hattı (bölütleme, gömme, erişim) → prototip sürüm 1 |
+| Güz 9–10 (19 Kasım–6 Aralık) | Tam transkript koşulu ve RAG hattı (bölütleme, gömme, erişim) → prototip sürüm 1. Hafta-4 eki (danışman): beyan ve belge güncellemesi, değerlendirici planının onaylatılması, alan öğretmeninin belirlenmesi, alt küme kuralı, puanlama takvimi |
 | Güz 11–12 | Bloom yönlendirmeli istem, çeldirici adımı, tekrar eleme; pilot videolarda üretim |
 | Güz 13–14 | Değerlendirme yönergesi, iki değerlendiriciyle pilot etiketleme ve kappa |
+| Güz 11–14 | Hafta-4 eki (danışman): alan öğretmeniyle yönergenin kısa bir okuması |
 | Bahar 1–2 | Düzeltmeler ve öğretmen onay ekranı → prototip sürüm 2 |
 | Bahar 3–4 | 144 soru üretimi |
-| Bahar 5–6 | Kör uzman değerlendirmesi |
+| Bahar 5–6 | Kör uzman değerlendirmesi. Hafta-4 eki (danışman): alt kümede alan öğretmeni puanlaması |
 | Bahar 7–8 | Öğrenci değerlendirmesi (SUS) |
 | Bahar 9–10 | Analizler |
 | Bahar 11–14 | Rapor ve sunum |
@@ -141,7 +142,7 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
 | 9 · Otomatik doğrulama | ana (kalan kısımlar); RAGAs ve otomatik yazım denetimi değerlendirmede yalnızca yardımcı ölçüt | kalan kısımlar Güz 11–12 | kısmen (alıntı-cevap destek kontrolü, kodla yazım kuralları `writing-rules-v1`) |
 | 10 · Yeniden üretim döngüsü | belirtilmedi (en çok 1–2 tur) | planda haftası yok | yapılmadı |
 | 11 · Asenkron görev kuyruğu | belirtilmedi | planda haftası yok | yapılmadı |
-| 12 · Web arayüzü | belirtilmedi | planda haftası yok | prototip tamamlandı (12a-12e); 12f yapıldı, tarayıcıda denenmedi |
+| 12 · Web arayüzü | belirtilmedi | planda haftası yok | prototip tamamlandı (12a-12e); 12f yapıldı, tarayıcıda denendi (2026-11-17, kullanıcı) |
 | 13 · Öğretmen onay ekranı | belirtilmedi | Bahar 1–2 | yapılmadı |
 | 14 · İzleme ve günlükleme | belirtilmedi | planda haftası yok | kısmen (kayıt tarafı tamam) |
 | 15 · Değerlendirme | ana | Bahar 3–10 | yapılmadı |
@@ -152,6 +153,10 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
 - **AS2:** Bloom yönlendirmeli istemin hedef düzeye uyumu, Cohen's kappa.
 - **AS3:** 10 öğrenciyle SUS; açıklık ve yararlılık puanları.
 - **Hafta-3 geri bildirimi (2026-11-10):** Pilot videolar ana deneyde kullanılmayacak; 12 videonun seçim kuralı ve altı videoluk yedek plan seçimden önce `docs/video-secim-kurali.md` dosyasına yazıldı. Değerlendirmede "tanıma hatası kaynaklı mı" işareti var; altyazı türü (elle / otomatik) değişken olarak kaydedilir; iki dilli videoların sonuçları hem dâhil hem hariç hesaplanır.
+- **Hafta-4 geri bildirimi (2026-11-18):**
+  - **Değerlendiriciler:** aynı bölümden, projede yer almayan iki öğrenci; karşılıklı değerlendirme yapılmayacak.
+  - **Alan öğretmeni alt kümesi:** danışmanın "Bu etiketlerin doğru olduğunu nereden biliyorsunuz?" sorusu üzerine, iki değerlendiricinin ortak etiketlerinin geçerliliği bir alan öğretmeniyle sınanacak. Öğretmen 144 sorudan 36'sını puanlar; etiketleri ana analize katılmaz, geçerlilik göstergesi olarak raporlanır. Alt küme puanlamadan önce sabit tohumla, alan, koşul ve Bloom düzeyine göre dengeli seçilir. Kural `docs/alt-kume-secim-kurali.md`; betikler `backend/evaluation/subset.py` ve `validity.py`. Seçim dosyası puanlama bitene kadar depo dışında kalır, depoya yalnızca SHA-256 özet değeri girer.
+  - **Yapay zekâ beyanı:** video aramaları (Claude in Chrome ile yapılan aramalar) beyana eklenecek.
 - **İstem (2026-11-04):** Pilot 2'den sonra ana deney istemi `questions-v3` olarak donduruldu (git etiketi `istem-v3-ana-deney`); `questions-v4` kullanılmayacak. Gerekçe: docs/bulgular/pilot-2/pilot-2.md, "Karar".
 
 ### İkincil deneyler
