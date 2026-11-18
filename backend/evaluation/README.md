@@ -9,7 +9,7 @@ Komutlar `backend` klasöründen çalıştırılır. Windows'ta `python` yerine 
 ## 1. Dışa aktar
 
 ```
-python -m evaluation.export --girdi <dosyalar> --video-bilgisi <secim.json> --tohum 42 --cikti <klasör> --anahtar-cikti <gizli-klasör> --istem-surumu questions-v3
+python -m evaluation.export --girdi <dosyalar> --video-bilgisi <secim.json> --tohum 42 --cikti <depo-dışı-klasör> --anahtar-cikti <depo-dışı-gizli-klasör> --istem-surumu questions-v3
 ```
 
 - `--girdi`: çalıştırma kaydı (`backend/runs`) ya da pilot JSON'u. Joker karakter kullanılabilir (`"../docs/bulgular/pilot-2/pilot-2-*.json"`).
@@ -18,6 +18,7 @@ python -m evaluation.export --girdi <dosyalar> --video-bilgisi <secim.json> --to
 - `--video-bilgisi`: her video için alan, altyazı türü (elle / otomatik) ve iki dilli mi. Ana deneyde `docs/bulgular/video-secimi/secim.json`. Girdideki her video bu dosyada olmalıdır; bilgiler anahtara yazılır.
 - Videoların transkripti önbellekte (`backend/transcripts`) olmalıdır; yoksa betik durur.
 - Çıktıda gizli bilgi bulunursa dosyalar silinir ve betik hata verir.
+- `--cikti` ve `--anahtar-cikti` depo dışında olmalıdır: anahtar dosyası koşul bilgisi taşır, değerlendirici dosyaları tam transkript içerir. Depo içindeki bir klasör verilirse betik hiçbir dosya oluşturmadan hata verir (çıkış kodu 1).
 
 Çıktılar:
 
@@ -89,17 +90,17 @@ Sıra: **export → subset → özet değerinin commit'lenmesi → dosyaların d
 
    Ekrana seçilen soru sayısı, öbür videodan alınan ve boş kalan hücreler (yalnızca alan ve Bloom düzeyi) ve `alt-kume.json` dosyasının SHA-256 değeri yazılır. Soru kimliği ve koşul yazılmaz. Dosya varsa ve aynıysa dokunulmaz; farklıysa üzerine yazılmaz.
 3. **`alt-kume.json` depoya konmaz** (koşul bilgisi taşır, körleme bozulur). Yalnızca ekrandaki SHA-256 değeri `docs/bulgular/alt-kume-ozet.txt` dosyasına yazılıp commit'lenir. Puanlama bittikten sonra seçim dosyası depoya eklenir; özet değeri listenin sonradan değişmediğini gösterir.
-4. Alan öğretmeni dosyası yazılır: alt kümedeki sorular, değerlendirici dosyasıyla aynı biçimde (aynı sütunlar, açılır listeler, Yönerge ve yazım maddeleri sayfaları) ve tohumla karıştırılmış sırayla. Soru metinleri anahtarda olmadığı için `export`'a verilen girdi dosyalarının aynısı `--girdi` ile verilir; kimliklerin anahtarla aynı olduğu denetlenir:
+4. Alan öğretmeni dosyası yazılır (önerilen ad `alan-ogretmeni.xlsx`; tam transkript içerdiği için depo dışında olmalı, depo içindeki bir yol verilirse betik `alt-kume.json` dahil hiçbir dosya yazmadan hata verir): alt kümedeki sorular, değerlendirici dosyasıyla aynı biçimde (aynı sütunlar, açılır listeler, Yönerge ve yazım maddeleri sayfaları) ve tohumla karıştırılmış sırayla. Soru metinleri anahtarda olmadığı için `export`'a verilen girdi dosyalarının aynısı `--girdi` ile verilir; kimliklerin anahtarla aynı olduğu denetlenir:
 
    ```
-   python -m evaluation.subset --anahtar <anahtar.json> --cikti <depo-dışı-klasör> --ogretmen-dosyasi <ogretmen.xlsx> --tohum <sayı> --girdi <dosyalar>
+   python -m evaluation.subset --anahtar <anahtar.json> --cikti <depo-dışı-klasör> --ogretmen-dosyasi <depo-dışı-klasör>/alan-ogretmeni.xlsx --tohum <sayı> --girdi <dosyalar>
    ```
 
 5. Değerlendirici dosyaları ve alan öğretmeni dosyası dağıtılır. Alan öğretmenine koşul, hedef düzey ve alt kümenin nasıl seçildiği söylenmez.
 6. Puanlama ve tartışma bittikten sonra uyum hesaplanır (`--ortak`: tartışmadan sonraki ortak etiket dosyası; `--a` ve `--b` isteğe bağlı, tartışma öncesi dosyalar):
 
    ```
-   python -m evaluation.validity --ogretmen <ogretmen.xlsx> --ortak <ortak.xlsx> --alt-kume <alt-kume.json> --anahtar <anahtar.json> --cikti <klasör> [--a <A.xlsx> --b <B.xlsx>]
+   python -m evaluation.validity --ogretmen <depo-dışı-klasör>/alan-ogretmeni.xlsx --ortak <ortak.xlsx> --alt-kume <alt-kume.json> --anahtar <anahtar.json> --cikti <klasör> [--a <A.xlsx> --b <B.xlsx>]
    ```
 
    Çıktı `alan-ogretmeni-uyumu.md` ve `.json`. Her ölçüt için ham uyum (Wilson aralığı), kappa (aralığıyla), iki tarafın kategori dağılımı ve hesaba girmeyen soru sayısı verilir; Bloom düzeyi ve cevaplanabilirlik için doğrusal ağırlıklı kappa da var. Raporda soru kimlikleri ve koşullar listelenmez. Alt küme dosyası başka bir anahtarla üretildiyse (SHA-256 farklı) betik hata verir.

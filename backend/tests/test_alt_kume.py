@@ -5,7 +5,9 @@ Sahte anahtar ve sahte etiketler; YouTube'a ve OpenAI'a gidilmez.
 
 import json
 import random
+import sys
 from collections import Counter
+from pathlib import Path
 
 import pytest
 from openpyxl import Workbook, load_workbook
@@ -13,7 +15,8 @@ from openpyxl import Workbook, load_workbook
 from app.config import get_settings
 from app.services.transcript import Segment, Transcript
 from app.services.transcript_cache import write_cached
-from evaluation import subset, validity
+from evaluation import common, subset, validity
+from evaluation import export as export_module
 from evaluation.common import (
     BLOOM_LEVELS,
     COL_ANSWERABLE,
@@ -231,7 +234,8 @@ def run_file(tmp_path, video):
 
 
 @pytest.fixture
-def exported(tmp_path, monkeypatch):
+def prepared(tmp_path, monkeypatch):
+    """Önbellekte transkriptler, 12 girdi dosyası ve video bilgi dosyası (hepsi tmp_path içinde)."""
     monkeypatch.setenv("TRANSCRIPT_CACHE_DIR", str(tmp_path / "transcripts"))
     get_settings.cache_clear()
     languages = get_settings().transcript_language_list
@@ -242,9 +246,15 @@ def exported(tmp_path, monkeypatch):
             inputs.append(run_file(tmp_path, video))
     info = tmp_path / "video-bilgisi.json"
     info.write_text(json.dumps({"videos": make_key()["videos"]}, ensure_ascii=False), encoding="utf-8")
-    export(inputs, 11, tmp_path / "dagitim", tmp_path / "gizli", info, "questions-v3")
-    yield tmp_path, inputs
+    yield tmp_path, inputs, info
     get_settings.cache_clear()
+
+
+@pytest.fixture
+def exported(prepared):
+    tmp_path, inputs, info = prepared
+    export(inputs, 11, tmp_path / "dagitim", tmp_path / "gizli", info, "questions-v3")
+    return tmp_path, inputs
 
 
 def test_teacher_file_same_format_only_subset_shuffled(exported):
@@ -399,3 +409,85 @@ def test_validity_refuses_other_key(validity_files):
     other = key_file(tmp_path, {"questions": {i: {} for i in IDS}, "x": 1}, "baska.json")
     with pytest.raises(validity.ValidityError, match="SHA-256"):
         validity.run(teacher, joint, alt, other, tmp_path / "rapor")
+
+
+# --- Depo içine yazma denetimi (anahtar, değerlendirici ve alan öğretmeni dosyaları) ----------------
+
+
+def repo_target(*parts):
+    """Depo içinde, var olmayan bir yol; test sonunda da oluşmamış olmalı."""
+    path = common.REPO_ROOT.joinpath(*parts)
+    assert not path.exists()
+    return path
+
+
+def export_args(inputs, info, out, key_dir):
+    return ["--girdi", *map(str, inputs), "--video-bilgisi", str(info), "--tohum", "11",
+            "--cikti", str(out), "--anahtar-cikti", str(key_dir), "--istem-surumu", "questions-v3"]
+
+
+def test_export_key_dir_inside_repo_refused(prepared, capsys):
+    tmp_path, inputs, info = prepared
+    key_dir = repo_target("docs", "bulgular", "depo-ici-anahtar-denemesi")
+    code = export_module.main(export_args(inputs, info, tmp_path / "dagitim", key_dir))
+    assert code == 1
+    out = capsys.readouterr().out
+    assert "depo içinde olamaz" in out and "anahtar dosyası koşul bilgisi taşır" in out
+    assert not key_dir.exists() and not (tmp_path / "dagitim").exists()  # hiçbir dosya oluşmadı
+
+
+def test_export_rater_dir_inside_repo_refused(prepared, capsys):
+    tmp_path, inputs, info = prepared
+    out_dir = repo_target("backend", "depo-ici-degerlendirici-denemesi")
+    code = export_module.main(export_args(inputs, info, out_dir, tmp_path / "gizli"))
+    assert code == 1
+    assert "değerlendirici dosyaları tam transkript içerir" in capsys.readouterr().out
+    assert not out_dir.exists() and not (tmp_path / "gizli").exists()
+    with pytest.raises(export_module.ExportError, match="depo içinde"):  # fonksiyon da reddeder
+        export(inputs, 11, out_dir, tmp_path / "gizli", info, "questions-v3")
+    assert not out_dir.exists()
+
+
+def test_export_outside_repo_works_as_before(prepared):
+    tmp_path, inputs, info = prepared
+    assert export_module.main(export_args(inputs, info, tmp_path / "dagitim", tmp_path / "gizli")) == 0
+    assert (tmp_path / "dagitim" / "degerlendirici-A.xlsx").exists() and (tmp_path / "gizli" / "anahtar.json").exists()
+
+
+def test_teacher_file_inside_repo_refused_before_anything(exported, capsys):
+    tmp_path, inputs = exported
+    teacher = repo_target("docs", "bulgular", "alan-ogretmeni-deneme.xlsx")
+    out_dir = tmp_path / "secim"
+    code = subset.main(["--anahtar", str(tmp_path / "gizli" / "anahtar.json"), "--cikti", str(out_dir),
+                        "--ogretmen-dosyasi", str(teacher), "--tohum", "5", "--girdi", *map(str, inputs)])
+    assert code == 1
+    assert "alan öğretmeni dosyası tam transkript içerir" in capsys.readouterr().out
+    assert not teacher.exists() and not out_dir.exists()  # alt-kume.json da yazılmadı
+    with pytest.raises(subset.SubsetError, match="depo içinde"):
+        subset.write_teacher_file(teacher, {}, {}, inputs, 5)
+
+
+def test_inside_repo_cases(monkeypatch):
+    root = common.REPO_ROOT
+    assert common.inside_repo(root)  # kökün kendisi
+    assert common.inside_repo(root / "backend" / "evaluation")  # alt klasör
+    assert common.inside_repo(root / "yok" / "olmayan.json")  # henüz var olmayan yol
+    assert not common.inside_repo(root.parent / (root.name + "-kardes"))  # kardeş klasör (aynı önekle)
+    assert not common.inside_repo(root.parent)
+    assert common.inside_repo(root / "backend" / ".." / "docs")  # .. içeren
+    assert not common.inside_repo(root / "backend" / ".." / ".." / "baska")
+    monkeypatch.chdir(root / "backend")
+    assert common.inside_repo(Path("../docs/bulgular"))  # göreli yol
+    assert not common.inside_repo(Path("../../baska-klasor"))
+
+
+@pytest.mark.skipif(sys.platform != "win32", reason="büyük-küçük harf yalnızca Windows'ta gözetilmez")
+def test_inside_repo_ignores_case_on_windows():
+    assert common.inside_repo(Path(str(common.REPO_ROOT).upper()) / "docs")
+
+
+def test_check_outside_repo_message():
+    with pytest.raises(common.InsideRepoError) as exc:
+        common.check_outside_repo(common.REPO_ROOT / "x", "Bir dosya", "çünkü gizli")
+    assert str(exc.value) == "Bir dosya depo içinde olamaz: çünkü gizli."
+    common.check_outside_repo(common.REPO_ROOT.parent / (common.REPO_ROOT.name + "-disari"), "Bir dosya", "gerekçe")

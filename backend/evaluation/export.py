@@ -57,6 +57,8 @@ from evaluation.common import (
     SHEET_QUESTIONS,
     TRANSCRIPT_PREFIX,
     VISIBLE_COLUMNS,
+    InsideRepoError,
+    check_outside_repo,
     write_json,
 )
 
@@ -326,10 +328,25 @@ def find_secrets(texts: list[str]) -> list[str]:
     return [kind for kind, pattern in SECRET_PATTERNS.items() if re.search(pattern, joined)]
 
 
+def check_output_dirs(out_dir: Path, key_dir: Path) -> None:
+    """Anahtar ve değerlendirici dosyaları depo içine yazılamaz (depo herkese açık)."""
+    try:
+        check_outside_repo(key_dir, "Anahtar klasörü (--anahtar-cikti)",
+                           "anahtar dosyası koşul bilgisi taşır. Depo dışında bir klasör verin")
+        check_outside_repo(out_dir, "Değerlendirici dosyalarının klasörü (--cikti)",
+                           "değerlendirici dosyaları tam transkript içerir. Depo dışında bir klasör verin")
+    except InsideRepoError as exc:
+        raise ExportError(str(exc)) from exc
+
+
 def export(paths: list[Path], seed: int, out_dir: Path, key_dir: Path, video_info_path: Path,
            prompt_version: str | None = None) -> dict:
-    """Dosyaları yazar ve anahtarı döndürür. Gizli bilgi bulunursa dosyalar silinir, hata verilir."""
-    runs = [run for path in paths for run in read_runs(path)]
+    """Dosyaları yazar ve anahtarı döndürür. Gizli bilgi bulunursa dosyalar silinir, hata verilir.
+
+    Çıktı klasörleri depo içindeyse hiçbir şey okunmadan ve yazılmadan ExportError verilir.
+    """
+    check_output_dirs(out_dir, key_dir)
+    runs =[run for path in paths for run in read_runs(path)]
     produced, unproduced, version = collect(runs, prompt_version)
     questions = assign_ids(produced, seed)
     key = build_key(questions, unproduced, seed, version, sorted({Path(p).name for p in paths}),
@@ -350,7 +367,7 @@ def export(paths: list[Path], seed: int, out_dir: Path, key_dir: Path, video_inf
     return key
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Kör değerlendirme dosyalarını hazırlar.")
     parser.add_argument("--girdi", nargs="+", required=True, help="Çalıştırma kaydı ya da pilot JSON'u (joker karakter olabilir)")
     parser.add_argument("--video-bilgisi", type=Path, required=True,
@@ -359,14 +376,21 @@ def main() -> None:
     parser.add_argument("--cikti", type=Path, required=True, help="Değerlendirici dosyalarının klasörü")
     parser.add_argument("--anahtar-cikti", type=Path, required=True, help="Anahtar dosyasının klasörü; değerlendiricilere verilmez")
     parser.add_argument("--istem-surumu", help="Girdide birden çok sürüm varsa seçilecek sürüm (ör. questions-v3)")
-    args = parser.parse_args()
-    paths = [Path(p) for pattern in args.girdi for p in sorted(glob.glob(pattern))]
-    if not paths:
-        parser.error("Girdi dosyası bulunamadı.")
-    key = export(paths, args.tohum, args.cikti, args.anahtar_cikti, args.video_bilgisi, args.istem_surumu)
+    args = parser.parse_args(argv)
+    try:
+        # Girdi aranmadan önce: depo içi çıktı klasörü hiçbir dosya oluşmadan reddedilir
+        check_output_dirs(args.cikti, args.anahtar_cikti)
+        paths = [Path(p) for pattern in args.girdi for p in sorted(glob.glob(pattern))]
+        if not paths:
+            parser.error("Girdi dosyası bulunamadı.")
+        key = export(paths, args.tohum, args.cikti, args.anahtar_cikti, args.video_bilgisi, args.istem_surumu)
+    except ExportError as exc:
+        print(f"Hata: {exc}")
+        return 1
     print(f"{key['question_count']} soru, {len(key['unproduced'])} üretilemeyen konu, "
           f"{len(key['incomplete_pairs'])} eksik çift, tohum {key['seed']}, sürüm {key['prompt_version']}.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

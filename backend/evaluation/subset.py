@@ -31,11 +31,11 @@ import argparse
 import glob
 import hashlib
 import json
-import os
 import random
 from pathlib import Path
 
-from evaluation.common import BLOOM_LEVELS, load_key
+from evaluation import common
+from evaluation.common import BLOOM_LEVELS, REPO_ROOT, InsideRepoError, inside_repo, load_key  # noqa: F401
 from evaluation.export import (
     ExportError,
     assign_ids,
@@ -48,7 +48,6 @@ from evaluation.export import (
     write_rater_workbook,
 )
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
 RULE_FILE = "docs/alt-kume-secim-kurali.md"
 RULE_VERSION = "alt-kume-v1 (2026-11-18)"
 SEED = "20261118-alt-kume"
@@ -69,17 +68,17 @@ def sha256_file(path: Path) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def inside_repo(path: Path) -> bool:
-    """Yol depo kökünün altında mı (kökün kendisi dahil). Windows'ta büyük-küçük harf gözetilmez."""
-    target = os.path.normcase(str(Path(path).resolve()))
-    root = os.path.normcase(str(REPO_ROOT))
-    return target == root or target.startswith(root.rstrip("\\/") + os.sep)
+SUBSET_REASON = ("seçim dosyası koşul bilgisi taşır ve puanlama bitene kadar depoya girmez. "
+                 "Depo dışında bir klasör verin (ör. anahtar dosyasının klasörü)")
+TEACHER_REASON = "alan öğretmeni dosyası tam transkript içerir. Depo dışında bir yol verin"
 
 
-def check_outside_repo(path: Path, what: str) -> None:
-    if inside_repo(path):
-        raise SubsetError(f"{what} depo içinde olamaz: seçim dosyası koşul bilgisi taşır ve puanlama bitene kadar "
-                          "depoya girmez. Depo dışında bir klasör verin (ör. anahtar dosyasının klasörü).")
+def check_outside_repo(path: Path, what: str, reason: str = SUBSET_REASON) -> None:
+    """common.check_outside_repo; hata SubsetError olarak yükselir."""
+    try:
+        common.check_outside_repo(path, what, reason)
+    except InsideRepoError as exc:
+        raise SubsetError(str(exc)) from exc
 
 
 def videos_by_field(key: dict) -> dict[str, list[str]]:
@@ -212,7 +211,8 @@ def teacher_questions(key: dict, subset: dict, input_paths: list[Path], seed: in
 
 def write_teacher_file(path: Path, key: dict, subset: dict, input_paths: list[Path], seed: int) -> int:
     """Alan öğretmeni dosyasını export.py'nin değerlendirici dosyası yazma koduyla yazar; soru sayısını döndürür."""
-    chosen = teacher_questions(key, subset, input_paths, seed)
+    check_outside_repo(path, "Alan öğretmeni dosyası", TEACHER_REASON)
+    chosen =teacher_questions(key, subset, input_paths, seed)
     transcripts = load_transcripts(sorted({q["video_id"] for q in chosen}))
     path = Path(path)
     write_rater_workbook(path, chosen, transcripts, read_flaws())
@@ -255,6 +255,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.ogretmen_dosyasi and (args.tohum is None or not args.girdi):
         parser.error("--ogretmen-dosyasi ile --tohum ve --girdi de verilmeli.")
     try:
+        # Öğretmen dosyasının yeri, alt-kume.json dahil hiçbir dosya yazılmadan önce denetlenir
+        if args.ogretmen_dosyasi:
+            check_outside_repo(args.ogretmen_dosyasi, "Alan öğretmeni dosyası", TEACHER_REASON)
         result, path, created = run(args.anahtar, args.cikti)
         for line in summary_lines(result, path, created):
             print(line)

@@ -1007,3 +1007,26 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Gerçek anahtarla çalıştırılmadı (144 soru henüz üretilmedi).
   - Alan öğretmeni henüz belirlenmedi.
   - Kappa güven aralığı büyük örneklem yaklaşımı; 36 soruda betimsel yorumlanmalı.
+
+## Değerlendirme dosyalarının depo içine yazılmasının engellenmesi (2026-11-18)
+
+- **Ne yapıldı:**
+  - **Ortak denetim:** `inside_repo` ve `REPO_ROOT` `subset.py`'den `evaluation/common.py`'ye taşındı; davranış aynı (kökün kendisi depo içi sayılır, Windows'ta büyük-küçük harf gözetilmez). `common.check_outside_repo(path, what, reason)` eklendi; mesaj "<ne> depo içinde olamaz: <gerekçe>." biçiminde.
+  - **export.py:** `--anahtar-cikti` ("anahtar dosyası koşul bilgisi taşır") ve `--cikti` ("değerlendirici dosyaları tam transkript içerir") depo içindeyse, girdi okunmadan ve hiçbir dosya ya da klasör oluşmadan hata veriyor. Denetim hem `export()` fonksiyonunda hem komut satırında. `main` artık `ExportError`'ı yakalayıp "Hata: ..." yazıyor ve 1 ile çıkıyor (önceden hata izi basılıyordu; çıkış kodu yine 1'di).
+  - **subset.py:** `--ogretmen-dosyasi` depo içindeyse ("alan öğretmeni dosyası tam transkript içerir") `alt-kume.json` dahil hiçbir dosya yazılmadan hata veriyor. `alt-kume.json` için mesaj ve davranış değişmedi.
+  - **.gitignore:** `alt-kume.json` ve `alan-ogretmeni*.xlsx` eklendi.
+  - **Belgeler:**
+    - `backend/evaluation/README.md`: örnek komutlarda depo dışı klasörler; alan öğretmeni dosyası için önerilen ad `alan-ogretmeni.xlsx`.
+    - `docs/bulgular/degerlendirme-denemesi-1/README.md`: depo içine yazan eski komut geçmiş kayıt olarak kaldı, altına artık çalışmadığını söyleyen not eklendi (kullanıcı kararı). O klasördeki eski xlsx ve anahtar dosyalarına dokunulmadı (git dışında).
+  - Mevcut testlerin hiçbiri depo içine yazmıyordu (hepsi tmp_path); düzeltme gerekmedi.
+- **Nasıl doğrulandı:**
+  - `backend/tests/test_alt_kume.py`: 7 yeni test.
+    - export `--anahtar-cikti` ve `--cikti` depo içinde: çıkış kodu 1 ve hiçbir klasör oluşmuyor (depo dışındaki öbür çıktı klasörü de oluşmuyor).
+    - subset `--ogretmen-dosyasi` depo içinde: çıkış kodu 1, `alt-kume.json` yazılmıyor.
+    - Depo dışında export komut satırından çalışıyor.
+    - `inside_repo`: kökün kendisi, alt klasör, var olmayan yol, aynı önekli kardeş klasör, `..` içeren ve göreli yollar; Windows'ta büyük-küçük harf.
+    - Mesaj biçimi.
+  - Önceki testler değiştirilmeden geçti; `pytest` 628 test geçti.
+- **Bilinen sınırlar:**
+  - Denetim yolun çözümlenmiş (`resolve()`) hâline bakar: depo içinde duran ama depo dışını gösteren bir bağlantıya (symlink) yazmaya izin verilir, çünkü dosya fiziksel olarak depo dışında olur.
+  - agreement.py ve analysis.py'nin çıktılarına denetim eklenmedi (ayrı karar).

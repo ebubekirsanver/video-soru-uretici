@@ -28,6 +28,8 @@ anahtar.*
 ortak-etiket*.xlsx
 ortak.xlsx
 anlasmazliklar.xlsx
+alt-kume.json
+alan-ogretmeni*.xlsx
 
 # Node
 node_modules/

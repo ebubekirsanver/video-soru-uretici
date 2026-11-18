@@ -1,7 +1,11 @@
 """Paketin ortak sabitleri ve küçük yardımcıları."""
 
 import json
+import os
 from pathlib import Path
+
+# Depo kökü: körlemeyi bozabilecek ya da tam transkript içeren dosyalar bunun altına yazılmaz
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 BLOOM_LEVELS = ["Hatırlama", "Anlama", "Uygulama", "Çözümleme", "Değerlendirme", "Yaratma"]
 CONDITIONS = ("full", "rag")
@@ -41,6 +45,26 @@ COLUMN_DESCRIPTIONS = {
 
 # Video bilgi dosyası (Hafta-3): altyazı türü ve iki dilli olma analizde değişkendir
 SUBTITLE_TYPES = ("elle", "otomatik")
+
+
+class InsideRepoError(ValueError):
+    """Dosya depo içine yazılmak istendi."""
+
+
+def inside_repo(path: Path) -> bool:
+    """Yol depo kökünün altında mı (kökün kendisi dahil). Windows'ta büyük-küçük harf gözetilmez."""
+    target = os.path.normcase(str(Path(path).resolve()))
+    root = os.path.normcase(str(REPO_ROOT))
+    return target == root or target.startswith(root.rstrip("\\/") + os.sep)
+
+
+def check_outside_repo(path: Path, what: str, reason: str) -> None:
+    """Yol depo içindeyse InsideRepoError. Mesaj: "<what> depo içinde olamaz: <reason>."
+
+    Hiçbir dosya ya da klasör oluşturulmadan önce çağrılmalı.
+    """
+    if inside_repo(path):
+        raise InsideRepoError(f"{what} depo içinde olamaz: {reason}.")
 
 
 def load_key(path: Path) -> dict:
