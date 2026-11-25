@@ -1,30 +1,46 @@
-"""Alan öğretmeni ile iki değerlendiricinin ortak etiketleri arasındaki uyum (docs/alt-kume-secim-kurali.md, Analiz).
+"""Uzman ile iki değerlendiricinin ortak etiketleri arasındaki uyum (docs/alt-kume-secim-kurali.md, Analiz).
 
-Alan öğretmeninin etiketleri ana analize (AS1, AS2) katılmaz; geçerlilik göstergesidir.
-Her ölçüt için ham uyum (Wilson aralığıyla), Cohen's kappa (aralığıyla), iki tarafın
-kategori dağılımı ve hesaba girmeyen soru sayısı verilir. --a ve --b verilirse alan
-öğretmeni ile her değerlendiricinin tartışma öncesi etiketleri arasındaki kappa da verilir.
+Puanlayıcı 2026-11-25'ten beri ölçme ve değerlendirme alanından bir uzmandır (kural,
+"Değişiklikler"); kodda ve dosya adlarında "alan öğretmeni / ogretmen" adı geçmişle
+uyum için korunmuştur. Uzmanın etiketleri ana analize (AS1, AS2) katılmaz; geçerlilik
+göstergesidir. Her ölçüt için ham uyum (Wilson aralığıyla), Cohen's kappa (büyük
+örneklem ve yüzdelik bootstrap aralığıyla), iki tarafın kategori dağılımı ve hesaba
+girmeyen soru sayısı verilir. --a ve --b verilirse uzman ile her değerlendiricinin
+tartışma öncesi etiketleri arasındaki kappa da verilir (yalnızca büyük örneklem aralığı).
+
+Bootstrap (2026-11-25, danışman önerisi): o ölçütte hesaba giren soru çiftlerinden aynı
+sayıda çift yerine koyarak çekilir, kappa B kez (varsayılan 2000) yeniden hesaplanır;
+aralık alfa/2 ve 1 - alfa/2 yüzdelikleridir. Tek üreteç random.Random(20261125) ölçütleri
+rapordaki sırayla dolaşır; aynı girdi aynı aralığı verir. Kappanın hesaplanamadığı
+örneklemler atlanır ve sayılır; B'nin %5'inden fazlaysa aralık verilmez.
 
 Raporda soru kimlikleri ve koşullar listelenmez; yalnızca toplam sayılar yazılır.
 
 Çalıştırma (backend klasöründen):
     python -m evaluation.validity --ogretmen <xlsx> --ortak <ortak.xlsx> --alt-kume <alt-kume.json> \\
-        --anahtar <anahtar.json> --cikti <klasör> [--a <A.xlsx> --b <B.xlsx>]
+        --anahtar <anahtar.json> --cikti <klasör> [--a <A.xlsx> --b <B.xlsx>] [--bootstrap 2000]
 """
 
 import argparse
 import json
+import random
 from pathlib import Path
 
 from evaluation.agreement import KAPPAS, METHOD_NOTE, compute_kappas
 from evaluation.common import DEFAULT_ALPHA, interval, load_key, num, table, write_json
 from evaluation.labels import Label, read_labels
-from evaluation.stats import kappa, wilson
+from evaluation.stats import bootstrap_kappa, kappa, wilson
 from evaluation.subset import sha256_file
 
 REPORT_FILE = "alan-ogretmeni-uyumu.md"
 JSON_FILE = "alan-ogretmeni-uyumu.json"
-NOTE = "Alan öğretmeninin etiketleri ana analize katılmaz; geçerlilik göstergesidir. 36 soru kappa için küçük bir örneklemdir."
+NOTE = ("Ölçme ve değerlendirme uzmanının etiketleri ana analize katılmaz; geçerlilik göstergesidir. "
+        "36 soru kappa için küçük bir örneklemdir.")
+BOOTSTRAP_REPLICATES = 2000
+BOOTSTRAP_SEED = 20261125
+BOOTSTRAP_MAX_SKIPPED = 0.05  # atlanan örneklem B'nin bu oranını aşarsa aralık verilmez
+BOOTSTRAP_NOTE = ("Bootstrap güven aralığı yüzdelik yöntemiyle, soru çiftleri yerine koyarak yeniden örneklenerek "
+                  "hesaplanır; küçük örneklemde büyük örneklem yaklaşımından daha güvenilirdir.")
 # Kural cevaplanabilirlik için ağırlıksız kappayı da istiyor; agreement.KAPPAS'ta yalnızca
 # doğrusal ağırlıklısı var. Bu satır aynı biçimde burada eklenir (agreement.py değişmez).
 EXTRA_KAPPAS = [("Cevaplanabilirlik", "answerable", [1, 2, 3, 4, 5], False)]
@@ -79,6 +95,21 @@ def with_raw_agreement(rows: list[dict], x: dict[str, Label], y: dict[str, Label
     return out
 
 
+def with_bootstrap(rows: list[dict], x: dict[str, Label], y: dict[str, Label], ids: list[str], alpha: float,
+                   replicates: int) -> list[dict]:
+    """Her kappa satırına yüzdelik bootstrap aralığı. Tek üreteç, satırlar sabit (rapordaki) sırayla."""
+    if replicates <= 0:
+        return rows
+    rng = random.Random(BOOTSTRAP_SEED)
+    out = []
+    for row in rows:
+        used = _used(x, y, ids, row["field"])
+        result = bootstrap_kappa([a for a, _ in used], [b for _, b in used], _categories(row["field"]), row["weighted"],
+                                 replicates, rng, alpha, BOOTSTRAP_MAX_SKIPPED)
+        out.append({**row, "bootstrap": {**result, "seed": BOOTSTRAP_SEED}})
+    return out
+
+
 def distributions(x: dict[str, Label], y: dict[str, Label], ids: list[str]) -> list[dict]:
     """Ölçüt başına iki tarafın kategori dağılımı; yalnızca iki tarafta da geçerli etiketi olan sorular."""
     result = []
@@ -109,30 +140,54 @@ def _show(category) -> str:
     return str(category)
 
 
+def _bootstrap_cell(row: dict) -> str:
+    boot = row["bootstrap"]
+    if boot["ci_low"] is None:
+        return boot["note"] or "hesaplanamadı"
+    text = interval(boot["ci_low"], boot["ci_high"])
+    return f"{text} ({boot['skipped']} atlanan)" if boot["skipped"] else text
+
+
 def render(result: dict) -> str:
     level = round((1 - result["alpha"]) * 100)
-    lines = ["# Alan öğretmeni uyumu", "", f"**Yöntem notu:** {NOTE}", "",
-             "Karşılaştırma: alan öğretmeninin etiketleri ile iki değerlendiricinin tartışmadan sonraki ortak etiketleri "
-             "(docs/alt-kume-secim-kurali.md, Analiz).", "",
-             f"Alt kümedeki soru: {result['subset_size']}. Sorunlu hücre: alan öğretmeni dosyasında "
+    replicates = result["bootstrap_replicates"]
+    lines = ["# Ölçme ve değerlendirme uzmanıyla uyum", "", f"**Yöntem notu:** {NOTE}", "",
+             "Karşılaştırma: ölçme ve değerlendirme uzmanının etiketleri ile iki değerlendiricinin tartışmadan sonraki "
+             "ortak etiketleri (docs/alt-kume-secim-kurali.md, Analiz; puanlayıcı değişikliği: kuralın "
+             "\"Değişiklikler\" bölümü, 2026-11-25).", "",
+             f"Alt kümedeki soru: {result['subset_size']}. Sorunlu hücre: uzman dosyasında "
              f"{result['problems']['teacher']}, ortak etiket dosyasında {result['problems']['joint']} "
              "(yalnızca alt kümedeki sorular sayıldı).", "",
              "## Uyum", ""]
-    lines += table(["Ölçüt", "n", "Hesaba girmeyen", "Ham uyum", f"%{level} GA (Wilson)", "Kappa", f"%{level} GA", "Not"],
-                   [[r["name"], r["n"], r["excluded"], num(r["raw"]["rate"]), interval(r["raw"]["ci_low"], r["raw"]["ci_high"]),
-                     num(r["kappa"]), interval(r["ci_low"], r["ci_high"]), r["note"] or ""] for r in result["kappas"]])
+    if replicates:
+        headers = ["Ölçüt", "n", "Hesaba girmeyen", "Ham uyum", f"%{level} GA (Wilson)", "Kappa",
+                   f"Büyük örneklem %{level} GA", f"Bootstrap %{level} GA (B = {replicates}, tohum {BOOTSTRAP_SEED})", "Not"]
+        rows = [[r["name"], r["n"], r["excluded"], num(r["raw"]["rate"]), interval(r["raw"]["ci_low"], r["raw"]["ci_high"]),
+                 num(r["kappa"]), interval(r["ci_low"], r["ci_high"]), _bootstrap_cell(r), r["note"] or ""]
+                for r in result["kappas"]]
+    else:
+        headers = ["Ölçüt", "n", "Hesaba girmeyen", "Ham uyum", f"%{level} GA (Wilson)", "Kappa", f"%{level} GA", "Not"]
+        rows = [[r["name"], r["n"], r["excluded"], num(r["raw"]["rate"]), interval(r["raw"]["ci_low"], r["raw"]["ci_high"]),
+                 num(r["kappa"]), interval(r["ci_low"], r["ci_high"]), r["note"] or ""] for r in result["kappas"]]
+    lines += table(headers, rows)
     lines += ["", "Ham uyum: iki tarafın aynı kategoriyi verdiği soruların oranı (ağırlıklı satırlarda da ağırlıksız).",
-              METHOD_NOTE, "", "## Kategori dağılımı", "",
+              METHOD_NOTE]
+    if replicates:
+        lines.append(f"{BOOTSTRAP_NOTE} B = {replicates}, tohum {BOOTSTRAP_SEED}; aralık sınırları alfa/2 ve 1 - alfa/2 "
+                     "yüzdelikleri. Kappanın hesaplanamadığı örneklemler (iki taraf da aynı tek kategoriye düştüğünde) "
+                     f"atlanır ve sayılır; atlananlar B'nin %{round(BOOTSTRAP_MAX_SKIPPED * 100)}'inden fazlaysa aralık "
+                     "verilmez.")
+    lines += ["", "## Kategori dağılımı", "",
               "Kategoriler dengesiz dağıldığında kappa ham uyuma göre düşük çıkabilir (Artstein ve Poesio, 2008; "
               "Sim ve Wright, 2005). Sayılar iki tarafta da geçerli etiketi olan sorulardır.", ""]
     for block in result["distributions"]:
         lines += [f"### {block['name']} (n = {block['n']})", ""]
-        lines += table(["Kategori", "Alan öğretmeni", "Ortak etiket"],
+        lines += table(["Kategori", "Uzman", "Ortak etiket"],
                        [[_show(c["category"]), c["teacher"], c["joint"]] for c in block["categories"]])
         lines.append("")
     if result["raters"]:
         lines += ["## Ek bilgi: tartışma öncesi etiketlerle", "",
-                  "Alan öğretmeni ile her değerlendiricinin tartışmadan önceki etiketleri arasındaki kappa.", ""]
+                  "Uzman ile her değerlendiricinin tartışmadan önceki etiketleri arasındaki kappa (büyük örneklem aralığı).", ""]
         names = list(result["raters"])
         rows = []
         for i, base in enumerate(result["kappas"]):
@@ -148,7 +203,8 @@ def render(result: dict) -> str:
 
 
 def run(teacher_path: Path, joint_path: Path, subset_path: Path, key_path: Path, out_dir: Path,
-        a_path: Path | None = None, b_path: Path | None = None, alpha: float = DEFAULT_ALPHA) -> dict:
+        a_path: Path | None = None, b_path: Path | None = None, alpha: float = DEFAULT_ALPHA,
+        bootstrap: int = BOOTSTRAP_REPLICATES) -> dict:
     key = load_key(key_path)
     subset = json.loads(Path(subset_path).read_text(encoding="utf-8"))
     ids = subset_ids(subset, key, key_path)
@@ -158,6 +214,7 @@ def run(teacher_path: Path, joint_path: Path, subset_path: Path, key_path: Path,
     joint, joint_problems = read_labels(joint_path, all_ids)
     wanted = set(ids)
     rows = with_raw_agreement(all_kappas(teacher, joint, ids, alpha), teacher, joint, ids, alpha)
+    rows = with_bootstrap(rows, teacher, joint, ids, alpha, bootstrap)
     raters = {}
     for name, path in (("A", a_path), ("B", b_path)):
         if path:
@@ -167,6 +224,7 @@ def run(teacher_path: Path, joint_path: Path, subset_path: Path, key_path: Path,
         "alpha": alpha,
         "note": NOTE,
         "subset_size": len(ids),
+        "bootstrap_replicates": max(bootstrap, 0),
         "problems": {"teacher": len(teacher_problems), "joint": sum(p.id in wanted for p in joint_problems)},
         "kappas": rows,
         "distributions": distributions(teacher, joint, ids),
@@ -183,8 +241,9 @@ def run(teacher_path: Path, joint_path: Path, subset_path: Path, key_path: Path,
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Alan öğretmeni ile ortak etiketler arasındaki uyumu hesaplar.")
-    parser.add_argument("--ogretmen", type=Path, required=True, help="Alan öğretmeninin doldurduğu dosya")
+    parser = argparse.ArgumentParser(description="Ölçme ve değerlendirme uzmanı ile ortak etiketler arasındaki uyumu hesaplar.")
+    parser.add_argument("--ogretmen", type=Path, required=True,
+                        help="Uzmanın doldurduğu dosya (seçenek adı geçmişle uyum için 'ogretmen')")
     parser.add_argument("--ortak", type=Path, required=True, help="Tartışmadan sonraki ortak etiket dosyası")
     parser.add_argument("--alt-kume", type=Path, required=True, help="subset.py'nin alt-kume.json dosyası")
     parser.add_argument("--anahtar", type=Path, required=True)
@@ -192,9 +251,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--a", type=Path, help="Değerlendirici A (tartışma öncesi)")
     parser.add_argument("--b", type=Path, help="Değerlendirici B (tartışma öncesi)")
     parser.add_argument("--alfa", type=float, default=DEFAULT_ALPHA)
+    parser.add_argument("--bootstrap", type=int, default=BOOTSTRAP_REPLICATES, metavar="B",
+                        help=f"Bootstrap tekrar sayısı (varsayılan {BOOTSTRAP_REPLICATES}); 0 verilirse bootstrap yapılmaz")
     args = parser.parse_args(argv)
+    if args.bootstrap < 0:
+        parser.error("--bootstrap 0 ya da pozitif olmalı.")
     try:
-        result = run(args.ogretmen, args.ortak, args.alt_kume, args.anahtar, args.cikti, args.a, args.b, args.alfa)
+        result = run(args.ogretmen, args.ortak, args.alt_kume, args.anahtar, args.cikti, args.a, args.b, args.alfa,
+                     args.bootstrap)
     except ValidityError as exc:
         print(f"Hata: {exc}")
         return 1

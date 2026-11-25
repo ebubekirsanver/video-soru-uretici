@@ -113,13 +113,13 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
 | Dönem | İş |
 |---|---|
 | Güz 7–8 | Video seçimi ve veri seti tablosu |
-| Güz 9–10 (19 Kasım–6 Aralık) | Tam transkript koşulu ve RAG hattı (bölütleme, gömme, erişim) → prototip sürüm 1. Hafta-4 eki (danışman): beyan ve belge güncellemesi, değerlendirici planının onaylatılması, alan öğretmeninin belirlenmesi, alt küme kuralı, puanlama takvimi |
+| Güz 9–10 (19 Kasım–6 Aralık) | Tam transkript koşulu ve RAG hattı (bölütleme, gömme, erişim) → prototip sürüm 1. Hafta-4 eki (danışman). Tamamlandı: video seçimi (17 Kasım), beyan ve paragraf ile alt küme kuralı (18 Kasım), danışman onayı (25 Kasım). Kalanlar: ölçme ve değerlendirme uzmanının belirlenmesi, puanlama takvimi |
 | Güz 11–12 | Bloom yönlendirmeli istem, çeldirici adımı, tekrar eleme; pilot videolarda üretim |
 | Güz 13–14 | Değerlendirme yönergesi, iki değerlendiriciyle pilot etiketleme ve kappa |
-| Güz 11–14 | Hafta-4 eki (danışman): alan öğretmeniyle yönergenin kısa bir okuması |
+| Güz 11–14 | Hafta-4 eki (danışman): ölçme ve değerlendirme uzmanıyla yönergenin kısa bir okuması; en çok ayrışılan ölçütün kaydı |
 | Bahar 1–2 | Düzeltmeler ve öğretmen onay ekranı → prototip sürüm 2 |
 | Bahar 3–4 | 144 soru üretimi |
-| Bahar 5–6 | Kör uzman değerlendirmesi. Hafta-4 eki (danışman): alt kümede alan öğretmeni puanlaması |
+| Bahar 5–6 | Kör uzman değerlendirmesi. Hafta-4 eki (danışman): alt kümede ölçme ve değerlendirme uzmanı puanlaması; alt küme kappası için bootstrap güven aralığı |
 | Bahar 7–8 | Öğrenci değerlendirmesi (SUS) |
 | Bahar 9–10 | Analizler |
 | Bahar 11–14 | Rapor ve sunum |
@@ -157,6 +157,11 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
   - **Değerlendiriciler:** aynı bölümden, projede yer almayan iki öğrenci; karşılıklı değerlendirme yapılmayacak.
   - **Alan öğretmeni alt kümesi:** danışmanın "Bu etiketlerin doğru olduğunu nereden biliyorsunuz?" sorusu üzerine, iki değerlendiricinin ortak etiketlerinin geçerliliği bir alan öğretmeniyle sınanacak. Öğretmen 144 sorudan 36'sını puanlar; etiketleri ana analize katılmaz, geçerlilik göstergesi olarak raporlanır. Alt küme puanlamadan önce sabit tohumla, alan, koşul ve Bloom düzeyine göre dengeli seçilir. Kural `docs/alt-kume-secim-kurali.md`; betikler `backend/evaluation/subset.py` ve `validity.py`. Seçim dosyası puanlama bitene kadar depo dışında kalır, depoya yalnızca SHA-256 özet değeri girer.
   - **Yapay zekâ beyanı:** video aramaları (Claude in Chrome ile yapılan aramalar) beyana eklenecek.
+- **Hafta-5 geri bildirimi (2026-11-25):**
+  - **Onay:** danışman değerlendirici planını ve 36 soruluk alt küme planını onayladı.
+  - **Puanlayıcı:** alt kümeyi alan öğretmeni yerine eğitim fakültesinin ölçme ve değerlendirme alanından bir araştırma görevlisi ya da öğretim elemanı puanlayacak. Gerekçe: sorular altı alandan geliyor ve tek bir alan öğretmeni bunların en fazla birinde uzman olur; Bloom düzeyi ve soru yazım hataları alan bilgisinden çok ölçme ve değerlendirme bilgisine dayanır. Seçim kuralı bu değişiklikten etkilenmiyor; değişiklik kuralın "Değişiklikler" bölümüne tarihiyle yazıldı. Kodda ve dosya adlarında "alan öğretmeni / ogretmen" adı geçmişle uyum için korundu.
+  - **Bootstrap güven aralığı:** alt kümedeki 36 soruda uzmanla uyum kappalarına, büyük örneklem aralığının yanında yüzdelik bootstrap aralığı da veriliyor (B = 2000, tohum 20261125; `validity.py --bootstrap`). Küçük örneklemde büyük örneklem yaklaşımından daha güvenilir.
+  - **Deneme etiketlemesi:** iki değerlendiricinin deneme etiketlemesinde en çok ayrıştığı ölçüt kaydedilecek.
 - **İstem (2026-11-04):** Pilot 2'den sonra ana deney istemi `questions-v3` olarak donduruldu (git etiketi `istem-v3-ana-deney`); `questions-v4` kullanılmayacak. Gerekçe: docs/bulgular/pilot-2/pilot-2.md, "Karar".
 
 ### İkincil deneyler

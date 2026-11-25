@@ -34,7 +34,7 @@ from evaluation.common import (
     SHEET_QUESTIONS,
 )
 from evaluation.export import export
-from evaluation.stats import kappa
+from evaluation.stats import bootstrap_kappa, kappa, sample_kappas
 
 FIELDS = ["biyoloji", "edebiyat", "ingilizce", "matematik", "python", "tarih"]
 # Alan başına iki video; kimlikler bilerek alan sırasıyla aynı sırada değil
@@ -491,3 +491,109 @@ def test_check_outside_repo_message():
         common.check_outside_repo(common.REPO_ROOT / "x", "Bir dosya", "çünkü gizli")
     assert str(exc.value) == "Bir dosya depo içinde olamaz: çünkü gizli."
     common.check_outside_repo(common.REPO_ROOT.parent / (common.REPO_ROOT.name + "-disari"), "Bir dosya", "gerekçe")
+
+
+# --- Bootstrap güven aralığı (2026-11-25) ------------------------------------------------------------
+
+
+def test_bootstrap_perfect_agreement_is_one():
+    labels = [True, False] * 10  # tam uyum, iki kategori
+    result = bootstrap_kappa(labels, labels, [True, False], False, 2000, random.Random(20261125))
+    assert (result["ci_low"], result["ci_high"]) == (1.0, 1.0)
+    assert result["skipped"] == 0 and result["computed"] == 2000
+    weighted = bootstrap_kappa([1, 2, 3, 4, 5] * 4, [1, 2, 3, 4, 5] * 4, [1, 2, 3, 4, 5], True, 500, random.Random(1))
+    # Ağırlıklıda kayan nokta yuvarlaması (ör. 0,9999999999999997); raporda [1,000; 1,000]
+    assert weighted["ci_low"] == pytest.approx(1.0, abs=1e-12) and weighted["ci_high"] == pytest.approx(1.0, abs=1e-12)
+    assert common.interval(weighted["ci_low"], weighted["ci_high"]) == "[1,000; 1,000]"
+
+
+def mixed_labels():
+    rng = random.Random(3)
+    a = [rng.choice(BLOOM_LEVELS[:4]) for _ in range(30)]
+    b = [x if rng.random() < 0.7 else rng.choice(BLOOM_LEVELS[:4]) for x in a]
+    return a, b
+
+
+def test_bootstrap_same_seed_same_interval():
+    a, b = mixed_labels()
+    first = bootstrap_kappa(a, b, BLOOM_LEVELS, False, 2000, random.Random(20261125))
+    second = bootstrap_kappa(a, b, BLOOM_LEVELS, False, 2000, random.Random(20261125))
+    assert first == second
+    other = bootstrap_kappa(a, b, BLOOM_LEVELS, False, 2000, random.Random(7))
+    assert (other["ci_low"], other["ci_high"]) != (first["ci_low"], first["ci_high"])
+
+
+@pytest.mark.parametrize("weighted", [False, True])
+def test_bootstrap_interval_contains_point_estimate(weighted):
+    a, b = mixed_labels()
+    point = kappa(a, b, BLOOM_LEVELS, weighted)["kappa"]
+    result = bootstrap_kappa(a, b, BLOOM_LEVELS, weighted, 2000, random.Random(20261125))
+    assert result["ci_low"] < point < result["ci_high"]
+    assert -1 <= result["ci_low"] and result["ci_high"] <= 1
+
+
+def test_sample_kappas_match_stats_kappa():
+    a, b = mixed_labels()
+    rng = random.Random(5)
+    picks = [[rng.randrange(len(a)) for _ in a] for _ in range(50)] + [[0] * len(a)]  # sonuncusu tek kategori
+    for weighted in (False, True):
+        fast = sample_kappas(a, b, BLOOM_LEVELS, weighted, picks)
+        for row, value in zip(picks, fast):
+            slow = kappa([a[i] for i in row], [b[i] for i in row], BLOOM_LEVELS, weighted)["kappa"]
+            if slow is None:
+                assert value != value  # NaN
+            else:
+                assert value == pytest.approx(slow, abs=1e-12)
+
+
+def test_bootstrap_skipped_counted_and_threshold():
+    # 10 çiftte 1 "hayır": örneklemlerin ~%35'inde iki taraf da yalnızca "evet" -> kappa hesaplanamaz
+    rare = [True] * 9 + [False]
+    result = bootstrap_kappa(rare, rare, [True, False], False, 2000, random.Random(20261125))
+    assert result["skipped"] > 0.05 * 2000 and result["skipped"] + result["computed"] == 2000
+    assert result["ci_low"] is None and result["ci_high"] is None
+    assert result["note"] == f"hesaplanamadı ({result['skipped']} atlanan örneklem)"
+    # 40 çiftte 4 "hayır": atlanan var ama %5'in altında -> aralık verilir
+    some = [True] * 36 + [False] * 4
+    result = bootstrap_kappa(some, some, [True, False], False, 2000, random.Random(20261125))
+    assert 0 < result["skipped"] <= 0.05 * 2000
+    assert (result["ci_low"], result["ci_high"]) == (1.0, 1.0) and result["note"] is None
+
+
+def test_validity_report_has_both_intervals(validity_files):
+    tmp_path, key_path, alt, teacher, joint = validity_files
+    result = validity.run(teacher, joint, alt, key_path, tmp_path / "rapor")
+    report = (tmp_path / "rapor" / "alan-ogretmeni-uyumu.md").read_text(encoding="utf-8")
+    assert "Büyük örneklem %95 GA" in report and "Bootstrap %95 GA (B = 2000, tohum 20261125)" in report
+    assert validity.BOOTSTRAP_NOTE in report
+    assert report.startswith("# Ölçme ve değerlendirme uzmanıyla uyum") and "Alan öğretmeni" not in report
+    for row in result["kappas"]:  # ağırlıksız ve ağırlıklı her kappada
+        boot = row["bootstrap"]
+        assert boot["replicates"] == 2000 and boot["seed"] == 20261125
+        assert boot["skipped"] + boot["computed"] == 2000
+        if boot["ci_low"] is None:  # 4 soruda çoğu ölçüt eşiği aşar
+            assert f"hesaplanamadı ({boot['skipped']} atlanan örneklem)" in report
+    assert {r["weighted"] for r in result["kappas"]} == {False, True}
+
+
+def test_validity_bootstrap_same_input_same_result(validity_files):
+    tmp_path, key_path, alt, teacher, joint = validity_files
+    first = validity.run(teacher, joint, alt, key_path, tmp_path / "r1")
+    second = validity.run(teacher, joint, alt, key_path, tmp_path / "r2")
+    assert [r["bootstrap"] for r in first["kappas"]] == [r["bootstrap"] for r in second["kappas"]]
+    assert (tmp_path / "r1" / "alan-ogretmeni-uyumu.md").read_text(encoding="utf-8") == \
+        (tmp_path / "r2" / "alan-ogretmeni-uyumu.md").read_text(encoding="utf-8")
+
+
+def test_validity_bootstrap_zero_keeps_old_table(validity_files):
+    tmp_path, key_path, alt, teacher, joint = validity_files
+    args = ["--ogretmen", str(teacher), "--ortak", str(joint), "--alt-kume", str(alt), "--anahtar", str(key_path),
+            "--cikti", str(tmp_path / "sifir"), "--bootstrap", "0"]
+    assert validity.main(args) == 0
+    report = (tmp_path / "sifir" / "alan-ogretmeni-uyumu.md").read_text(encoding="utf-8")
+    assert "ootstrap" not in report
+    assert "| Ölçüt | n | Hesaba girmeyen | Ham uyum | %95 GA (Wilson) | Kappa | %95 GA | Not |" in report
+    data = json.loads((tmp_path / "sifir" / "alan-ogretmeni-uyumu.json").read_text(encoding="utf-8"))
+    assert data["bootstrap_replicates"] == 0 and all("bootstrap" not in r for r in data["kappas"])
+    with pytest.raises(SystemExit):
+        validity.main(args[:-1] + ["-1"])

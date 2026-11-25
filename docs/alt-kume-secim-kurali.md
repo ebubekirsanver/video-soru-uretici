@@ -49,4 +49,5 @@ Seçilen hücrede soru yoksa (model boş yanıt döndürdüyse, yanıt yapı den
 
 ## Değişiklikler
 
-(Henüz yok.)
+- 2026-11-25, puanlayıcı: Danışmanın Hafta-5 geri bildirimiyle alt kümeyi puanlayacak kişi "alan öğretmeni (ya da eğitim bilimleri alanından bir araştırma görevlisi)" yerine "eğitim fakültesinin ölçme ve değerlendirme alanından bir araştırma görevlisi ya da öğretim elemanı" oldu. Gerekçe: sorular altı alandan geliyor ve tek bir alan öğretmeni bunların en fazla birinde uzman olur; Bloom düzeyi ve soru yazım hataları alan bilgisinden çok ölçme ve değerlendirme bilgisine dayanır. Bu kuraldaki "alan öğretmeni" ifadeleri bu kişiyi anlatır. Girdi, denge, seçim yöntemi, tohum, eksik soru kuralı ve kayıt biçimi değişmedi; değişiklik soru üretiminden ve seçimden önce yapıldı.
+- 2026-11-25, analiz: Danışmanın önerisiyle, uzmanla uyumdaki kappa değerleri için büyük örneklem güven aralığının yanında bootstrap güven aralığı da verilecek. Bu bir ekleme; var olan hesaplar değişmedi.

@@ -75,7 +75,9 @@ python -m evaluation.analysis --ortak <ortak.xlsx> --anahtar <anahtar.json> --ci
 
 Formüller `stats.py` başındadır.
 
-## Alan öğretmeni alt kümesi
+## Uzman alt kümesi (ölçme ve değerlendirme)
+
+Not: Puanlayıcı 2026-11-25'ten beri ölçme ve değerlendirme alanından bir uzmandır; kodda ve dosya adlarında 'alan öğretmeni / ogretmen' adı geçmişle uyum için korunmuştur.
 
 Kural: [docs/alt-kume-secim-kurali.md](../../docs/alt-kume-secim-kurali.md). İki değerlendiricinin ortak etiketlerinin geçerliliğini sınamak için bir alan öğretmeni 144 sorudan 36'sını da puanlar. Alan öğretmeninin etiketleri ana analize (AS1, AS2) katılmaz.
 
@@ -100,7 +102,9 @@ Sıra: **export → subset → özet değerinin commit'lenmesi → dosyaların d
 6. Puanlama ve tartışma bittikten sonra uyum hesaplanır (`--ortak`: tartışmadan sonraki ortak etiket dosyası; `--a` ve `--b` isteğe bağlı, tartışma öncesi dosyalar):
 
    ```
-   python -m evaluation.validity --ogretmen <depo-dışı-klasör>/alan-ogretmeni.xlsx --ortak <ortak.xlsx> --alt-kume <alt-kume.json> --anahtar <anahtar.json> --cikti <klasör> [--a <A.xlsx> --b <B.xlsx>]
+   python -m evaluation.validity --ogretmen <depo-dışı-klasör>/alan-ogretmeni.xlsx --ortak <ortak.xlsx> --alt-kume <alt-kume.json> --anahtar <anahtar.json> --cikti <klasör> [--a <A.xlsx> --b <B.xlsx>] [--bootstrap 2000]
    ```
 
    Çıktı `alan-ogretmeni-uyumu.md` ve `.json`. Her ölçüt için ham uyum (Wilson aralığı), kappa (aralığıyla), iki tarafın kategori dağılımı ve hesaba girmeyen soru sayısı verilir; Bloom düzeyi ve cevaplanabilirlik için doğrusal ağırlıklı kappa da var. Raporda soru kimlikleri ve koşullar listelenmez. Alt küme dosyası başka bir anahtarla üretildiyse (SHA-256 farklı) betik hata verir.
+
+   `--bootstrap B` (varsayılan 2000): uzman ile ortak etiketler arasındaki her kappaya (ağırlıksız ve doğrusal ağırlıklı) büyük örneklem aralığının yanında yüzdelik bootstrap aralığı eklenir. O ölçütte hesaba giren soru çiftlerinden aynı sayıda çift yerine koyarak çekilir ve kappa B kez yeniden hesaplanır; sınırlar alfa/2 ve 1 - alfa/2 yüzdelikleridir. Tohum sabittir (`random.Random(20261125)`, ölçütler rapordaki sırayla), aynı girdi aynı aralığı verir. Kappanın hesaplanamadığı örneklemler (iki taraf da aynı tek kategoriye düştüğünde) atlanır ve sayılır; B'nin %5'inden fazlaysa o ölçütte aralık yerine "hesaplanamadı (n atlanan örneklem)" yazılır. `--bootstrap 0` ile bootstrap yapılmaz ve tablo eski biçimindedir. Tartışma öncesi A ve B ile kappada yalnızca büyük örneklem aralığı verilir.

@@ -146,3 +146,72 @@ def wilcoxon_signed_rank(differences: list[float]) -> dict:
     z = (w_plus - n * (n + 1) / 4) / math.sqrt(variance)
     result.update(w_plus=w_plus, w_minus=w_minus, z=z, p_value=float(2 * norm.sf(abs(z))), r=z / math.sqrt(n))
     return result
+
+
+def sample_kappas(a: list, b: list, categories: list, weighted: bool, picks) -> list[float]:
+    """Her satırı bir örneklemin çift sırası olan `picks` (tekrar × n) için kappa değerleri.
+
+    `kappa` ile aynı formül; hesaplanamayan örneklem (beklenen uyum 1) NaN olur.
+    """
+    picks = np.asarray(picks, dtype=int)
+    if picks.size == 0:
+        return []
+    replicates, n = picks.shape
+    k = len(categories)
+    index = {c: i for i, c in enumerate(categories)}
+    first = np.array([index[x] for x in a])[picks]
+    second = np.array([index[y] for y in b])[picks]
+    counts = np.zeros((replicates, k, k))
+    np.add.at(counts, (np.arange(replicates)[:, None], first, second), 1)
+    p = counts / n
+    row, col = p.sum(axis=2), p.sum(axis=1)
+    w = np.eye(k)
+    if weighted:
+        steps = np.arange(k)
+        w = 1 - np.abs(steps[:, None] - steps) / (k - 1)
+    po = (w * p).sum(axis=(1, 2))
+    pe = np.einsum("ij,ri,rj->r", w, row, col)
+    undefined = np.abs(1 - pe) < 1e-12
+    values = np.where(undefined, np.nan, (po - pe) / np.where(undefined, 1.0, 1 - pe))
+    return values.tolist()
+
+
+def bootstrap_kappa(a: list, b: list, categories: list, weighted: bool, replicates: int, rng,
+                    alpha: float = DEFAULT_ALPHA, max_skipped_share: float = 0.05) -> dict:
+    """Kappa için yüzdelik (percentile) bootstrap güven aralığı.
+
+    Etiket çiftlerinden (a[i], b[i]) aynı sayıda çift yerine koyarak çekilir ve `kappa`
+    yeniden hesaplanır; bu `replicates` kez yapılır. Aralık, hesaplanabilen kappaların
+    alfa/2 ve 1 - alfa/2 yüzdelikleridir (numpy.quantile, doğrusal ara değer).
+
+    `rng` bir random.Random nesnesidir: çağıran tek bir üreteci sabit sırayla kullanırsa
+    aynı girdi her zaman aynı aralığı verir.
+
+    Kappanın hesaplanamadığı örneklemler (`kappa` None döndürür; ör. iki taraf da aynı tek
+    kategoriye düştüğünde beklenen uyum 1 olur) sayılır ve atlanır. Atlananlar
+    `replicates`'in `max_skipped_share` oranından fazlaysa aralık verilmez (None).
+
+    Her örneklemin kappası `kappa` ile aynı formülle (po, pe, aynı ağırlıklar, aynı
+    "beklenen uyum 1" sınırı) bütün tekrarlar için birlikte hesaplanır; varyans
+    hesaplanmadığı için `kappa`'yı 2000 kez çağırmaktan çok daha hızlıdır.
+    """
+    n = len(a)
+    if n != len(b):
+        raise ValueError("Etiket listeleri aynı uzunlukta olmalı.")
+    result = {"replicates": replicates, "computed": 0, "skipped": 0, "ci_low": None, "ci_high": None, "note": None}
+    if n == 0:
+        result["note"] = "veri yok"
+        return result
+    # Çekim: tekrar başına n kez rng.randrange(n), tekrarlar sırayla
+    picks = np.array([[rng.randrange(n) for _ in range(n)] for _ in range(replicates)], dtype=int).reshape(replicates, n)
+    values = np.asarray(sample_kappas(a, b, categories, weighted, picks), float)
+    defined = ~np.isnan(values)
+    result["skipped"] = int((~defined).sum())
+    values = values[defined]
+    result["computed"] = len(values)
+    if not len(values) or result["skipped"] > max_skipped_share * replicates:
+        result["note"] = f"hesaplanamadı ({result['skipped']} atlanan örneklem)"
+        return result
+    low, high = np.quantile(values, [alpha / 2, 1 - alpha / 2])
+    result.update(ci_low=float(low), ci_high=float(high))
+    return result

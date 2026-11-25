@@ -1030,3 +1030,36 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
 - **Bilinen sınırlar:**
   - Denetim yolun çözümlenmiş (`resolve()`) hâline bakar: depo içinde duran ama depo dışını gösteren bir bağlantıya (symlink) yazmaya izin verilir, çünkü dosya fiziksel olarak depo dışında olur.
   - agreement.py ve analysis.py'nin çıktılarına denetim eklenmedi (ayrı karar).
+
+## Hafta-5 geri bildirimi: puanlayıcı değişikliği ve uzman uyumu için bootstrap güven aralığı (2026-11-25)
+
+- **Ne yapıldı:**
+  - **Seçim kuralı:** `docs/alt-kume-secim-kurali.md` "Değişiklikler" bölümünde "(Henüz yok.)" kaldırıldı; yerine kullanıcının verdiği iki madde aynen yazıldı. Birinci madde puanlayıcının ölçme ve değerlendirme uzmanı olduğunu söylüyor, ikinci madde bootstrap aralığının eklendiğini. Kural metninin geri kalanı ("alan öğretmeni" ifadeleri dahil) değişmedi.
+  - **stats.py:** iki yeni fonksiyon eklendi; var olan fonksiyonlar değişmedi.
+    - `bootstrap_kappa`: yüzdelik bootstrap aralığı. Çiftlerden yerine koyarak çekiliyor; sınırlar alfa/2 ve 1 - alfa/2 yüzdelikleri (numpy.quantile).
+    - `sample_kappas`: bütün tekrarların kappasını `stats.kappa` ile aynı formülle birlikte hesaplıyor (hız için). Kappanın hesaplanamadığı örneklemler NaN.
+  - **validity.py:**
+    - Uzman ile ortak etiketler arasındaki her kappa satırına bootstrap aralığı eklendi (ağırlıksız ve doğrusal ağırlıklı). B = 2000; tek üreteç `random.Random(20261125)` satırları rapordaki sırayla dolaşıyor.
+    - Atlanan örneklemler sayılıyor; B'nin %5'inden fazlaysa aralık yerine "hesaplanamadı (n atlanan örneklem)" yazılıyor.
+    - `--bootstrap B` seçeneği; 0 verilirse bootstrap yapılmıyor ve tablo eski biçiminde.
+    - Raporun başlığı ve metni "ölçme ve değerlendirme uzmanı" diyor; yöntem notuna bootstrap cümlesi eklendi. Rapor dosyasının adı, `--ogretmen` ve `--ogretmen-dosyasi` seçenekleri ve `.gitignore` kalıbı değişmedi.
+    - Tartışma öncesi A ve B ile kappada yalnızca büyük örneklem aralığı veriliyor.
+  - **Belgeler:**
+    - `backend/evaluation/README.md`: bölüm başlığı "Uzman alt kümesi (ölçme ve değerlendirme)", başına ad notu, `--bootstrap` açıklaması.
+    - `docs/yol-haritasi.md`: Hafta-5 maddesi ve iş-zaman tablosu.
+  - agreement.py, analysis.py ve subset.py'nin seçimi değişmedi.
+- **Nasıl doğrulandı:**
+  - `backend/tests/test_alt_kume.py`: 9 yeni test.
+    - Tam uyumda aralık [1; 1].
+    - Aynı tohumla birebir aynı aralık, başka tohumla farklı.
+    - Ağırlıksız ve ağırlıklı kappada nokta kestirimi aralığın içinde.
+    - `sample_kappas`, `stats.kappa` ile aynı değeri veriyor; hesaplanamayan örneklemde NaN.
+    - Atlanan örneklemler sayılıyor; eşik aşılınca aralık verilmiyor, altında veriliyor.
+    - Raporda iki aralık sütunu ve not var.
+    - `--bootstrap 0` ile eski tablo, negatif değerde hata.
+  - Mevcut testler değiştirilmeden geçti; `pytest` 637 test geçti.
+  - Sahte etiketlerle 36 soruluk örnekte komut satırından çalıştırıldı; süre yaklaşık 5 sn.
+- **Bilinen sınırlar:**
+  - Gerçek etiketle çalıştırılmadı.
+  - Ölçme ve değerlendirme uzmanı henüz belirlenmedi.
+  - Yüzdelik bootstrap aralığı, kappa sınırda (ör. 1) ya da kategoriler çok dengesizken dar ya da kararsız olabilir; atlanan örneklem sayısı bu yüzden raporda veriliyor.
