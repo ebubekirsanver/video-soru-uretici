@@ -13,11 +13,21 @@ MAX_FLAWS = 19  # docs/soru-yazim-hatalari.md: 19 madde
 ACCEPTABLE_MAX_ERRORS = 1  # AS1 ölçütü: 0-1 yazım hatası kabul edilebilir
 DEFAULT_ALPHA = 0.05
 
+# "Anahtar yanlış" kuralı (yönerge, Bölüm 4; 2026-11-25, puanlamadan önce): modelin doğru diye
+# işaretlediği seçenek videoya göre yanlışsa "Hatalı maddeler"e A yazılır. A yazım hatası
+# sayısına 1 olarak katılır ve soru başka hatası olmasa da kabul edilemez sayılır. Moore vd.
+# (2023) listesinin maddesi değildir.
+KEY_WRONG_MARK = "A"
+KEY_WRONG_NAME = "Anahtar yanlış"
+KEY_WRONG_TEXT = ("Modelin işaretlediği cevap videoya göre yanlış (anahtar yanlış). "
+                  "Yazım hatası sayısına 1 olarak katılır; soru kabul edilemez sayılır.")
+
 SHEET_QUESTIONS = "Sorular"
 SHEET_GUIDE = "Yönerge"
 SHEET_FLAWS = "Yazım maddeleri"
 TRANSCRIPT_PREFIX = "T-"
-GUIDE_PLACEHOLDER = "YÖNERGE: kullanıcı tarafından doldurulacak"
+# Değerlendirme yönergesi: metni Excel'in Yönerge sayfasına yazılır (export --yonerge)
+GUIDE_FILE = REPO_ROOT / "docs" / "degerlendirme-yonergesi-v1.md"
 
 COL_ID = "Kimlik"
 COL_VIDEO = "Video bağlantısı"

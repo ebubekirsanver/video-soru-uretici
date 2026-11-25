@@ -1063,3 +1063,47 @@ RAG koşulunun (AS1) altyapısı kuruldu. API, istemler, soru üretimi ve fronte
   - Gerçek etiketle çalıştırılmadı.
   - Ölçme ve değerlendirme uzmanı henüz belirlenmedi.
   - Yüzdelik bootstrap aralığı, kappa sınırda (ör. 1) ya da kategoriler çok dengesizken dar ya da kararsız olabilir; atlanan örneklem sayısı bu yüzden raporda veriliyor.
+
+## "Anahtar yanlış" (A) kuralı, yönerge sayfası ve deneme etiketlemesi dosyaları (2026-11-25)
+
+- **Ne yapıldı:**
+  - **Kural (yönerge, Bölüm 4; puanlamadan önce):** modelin işaretlediği cevap videoya göre yanlışsa "Hatalı maddeler"e A yazılır. Gerekçe: Moore vd.'nin 19 maddesi cevabın doğruluğuna bakmıyor.
+    - `common.py`: `KEY_WRONG_MARK = "A"`. "Yazım maddeleri" sayfasında 19 maddenin altında A satırı var.
+    - `labels.py`:
+      - "A" / "a" kabul ediliyor, tekrar edemez.
+      - `Label.flaws` yalnızca numaraları, yeni `Label.key_wrong` A'yı tutuyor.
+      - Sayı denetimi A'yı 1 sayıyor.
+      - A varken kaynağa dayalı = evet ya da cevaplanabilirlik > 1 ise çelişen hücre geçersiz (yönerge mesajıyla) ve o ölçütten çıkıyor.
+      - `acceptable` (birincil): A varsa kabul edilemez. `acceptable_flaws_only` (ek): A katılmadan.
+    - `agreement.py`: `KAPPAS` ve anlaşmazlık listesinin sonuna "Anahtar yanlış (A)"; önceki satırlar ve hesaplar aynı.
+    - `analysis.py`: AS1 birincil sonucu `acceptable` ile. Ek satır "Kabul edilebilirlik, anahtar kuralı uygulanmadan (yalnızca 19 madde)" aynı istatistiklerle. Koşul bazında A işaretli soru sayısı ve yöntem notu eklendi. Üretilemeyen konu kuralı aynı.
+    - `validity.py`: anahtar yanlış kappası `KAPPAS`'tan kendiliğinden geliyor; kategori dağılımına da eklendi.
+  - **Yönerge sayfası:** `docs/degerlendirme-yonergesi-v1.md` (kullanıcının dosyası, içeriğine dokunulmadı) değerlendirici ve uzman dosyalarının "Yönerge" sayfasına satır satır yazılıyor.
+    - Markdown işaretleri sadeleştiriliyor, tablo hücreleri " · " ile ayrılıyor.
+    - En üstte dosya adı ve SHA-256'nın ilk 12 karakteri var.
+    - `--yonerge` seçeneği var. Dosya yoksa export hiçbir dosya yazmadan duruyor.
+    - Anahtara `guide` (ad, SHA-256) yazılıyor.
+    - subset.py uzman dosyasında aynı yönergeyi yazıyor; anahtardaki yönergeden farklı bir yönerge verilirse hiçbir dosya yazmadan reddediyor.
+    - `GUIDE_PLACEHOLDER` kaldırıldı.
+  - **Deneme etiketlemesi dosyaları (1–16 Aralık):** pilot 2 `questions-v3` sonuçlarından, tohum 20261125 ile depo dışına üretildi: 69 soru, 3 üretilemeyen konu, yönerge SHA-256 ön eki 5dad86252b14. Transkriptlerin hepsi önbellekteydi. Kayıt `docs/bulgular/degerlendirme-denemesi-2/README.md`.
+  - **Belgeler:** `backend/evaluation/README.md`, `docs/soru-yazim-hatalari.md` (A notu, Moore vd. maddesi olmadığı belirtilerek), `docs/yol-haritasi.md` (kural maddesi ve deneme etiketlemesi takvimi).
+- **Nasıl doğrulandı:**
+  - 24 yeni test:
+    - A kabulü ve reddi; sayı denetimi; kaynağa dayalılık ve cevaplanabilirlik çelişkisi.
+    - Dört durumda birincil ve ek kabul edilebilirlik.
+    - Anahtar yanlış kappası ve önceki kappa satırlarının değişmediği.
+    - A'lı ve A'sız örnekte birincil ve ek AS1.
+    - Yönerge sayfası, SHA-256 ön eki ve anahtardaki değer; Markdown sadeleştirme; `--yonerge`.
+    - Yönerge yokken dosya oluşmaması.
+    - Uzman dosyasında aynı yönergenin yazılması ve farklı yönergenin reddi.
+    - validity'de anahtar yanlış satırı.
+  - Değişen eski test: `test_sheets_transcript_guide_and_flaws` (yer tutucu yerine yönerge başlığını denetliyor).
+  - `pytest`: 661 test geçti.
+  - Üretilen değerlendirici dosyası açılıp denetlendi:
+    - Yönerge sayfası dolu ve SHA-256 ön eki eşleşiyor.
+    - A satırı var.
+    - 69 soru var; A ve B dosyalarının "Sorular" sayfası aynı.
+- **Bilinen sınırlar:**
+  - Kural gerçek etiketle denenmedi.
+  - "Yazım hatası sayısı" açılır listesi 0–19; 19 madde ile A birlikte işaretlenirse (20) girilemez (pratikte beklenmiyor).
+  - Markdown sadeleştirme yalnızca yönergedeki işaretleri (başlık, kalın/eğik, kod, tablo) kapsıyor.

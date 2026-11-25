@@ -2,6 +2,12 @@
 
 Eksik ya da geçersiz hücreler sessizce geçilmez: her biri kimlik ve sütunla
 `Problem` olarak döner. Geçersiz alan None olur ve o alanın hesabından çıkar.
+
+"Anahtar yanlış" kuralı (yönerge, Bölüm 4; 2026-11-25, puanlamadan önce): "Hatalı
+maddeler"de 1-19 arası numaralara ek olarak A (büyük ya da küçük harf) yazılabilir.
+A yazım hatası sayısına 1 olarak katılır ve soru kabul edilemez sayılır. A işaretli
+soruda kaynağa dayalı = hayır ve cevaplanabilirlik = 1 olmalıdır; değilse çelişen
+hücre geçersiz sayılır (o ölçütün hesabından çıkar).
 """
 
 import re
@@ -23,9 +29,14 @@ from evaluation.common import (
     COL_NOTE,
     DESCRIPTION_LABEL,
     FILL_COLUMNS,
+    KEY_WRONG_MARK,
     MAX_FLAWS,
     SHEET_QUESTIONS,
 )
+
+
+KEY_WRONG_CONFLICT = ("Anahtar yanlış (A) işaretli soruda kaynağa dayalı = hayır ve cevaplanabilirlik = 1 olmalı "
+                      "(yönerge, Bölüm 4).")
 
 
 class LabelError(Exception):
@@ -36,15 +47,30 @@ class LabelError(Exception):
 class Label:
     bloom: str | None = None
     errors: int | None = None
-    flaws: tuple[int, ...] | None = None
+    flaws: tuple[int, ...] | None = None  # yalnızca 1-19 arası madde numaraları
     grounded: bool | None = None
     answerable: int | None = None
     asr_error: bool | None = None  # sorunun hatası konuşma tanıma hatasından mı
     note: str = ""
+    key_wrong: bool | None = None  # "Hatalı maddeler"de A var mı; hücre geçersizse None
 
     @property
     def acceptable(self) -> bool | None:
+        """Birincil: anahtar yanlışsa kabul edilemez; değilse yazım hatası sayısı (A dahil) ≤ 1."""
+        if self.key_wrong:
+            return False
         return None if self.errors is None else self.errors <= ACCEPTABLE_MAX_ERRORS
+
+    @property
+    def acceptable_flaws_only(self) -> bool | None:
+        """Ek: anahtar kuralı uygulanmadan, yalnızca 19 maddeye göre (numara sayısı ≤ 1).
+
+        Numara sayısı = yazım hatası sayısı - 1 (A varsa); A yoksa birincil sonuçla aynıdır.
+        """
+        if self.errors is None:
+            return None
+        numbers = self.errors - 1 if self.key_wrong else self.errors
+        return numbers <= ACCEPTABLE_MAX_ERRORS
 
 
 @dataclass
@@ -75,17 +101,23 @@ def _grounded(value) -> bool | None:
     return {"evet": True, "hayır": False}.get(text)
 
 
-def _flaws(value) -> tuple[int, ...] | None:
-    """"4, 12" biçimindeki madde numaraları; boşsa boş demet, geçersizse None."""
+def _flaws(value) -> tuple[tuple[int, ...], bool] | None:
+    """"4, 12" ya da "4, A" biçimi: (madde numaraları, A var mı). Boşsa ((), False), geçersizse None.
+
+    Numaralar 1-19 arası; A büyük ya da küçük harf olabilir. Hiçbiri tekrar edemez.
+    """
     if value is None or not str(value).strip():
-        return ()
+        return (), False
     text = str(value).strip()
-    if not re.fullmatch(r"\d+(\s*[,;]\s*\d+)*", text):
+    token = rf"(?:\d+|[{KEY_WRONG_MARK}{KEY_WRONG_MARK.lower()}])"
+    if not re.fullmatch(rf"{token}(\s*[,;]\s*{token})*", text):
         return None
-    numbers = tuple(int(n) for n in re.findall(r"\d+", text))
-    if len(set(numbers)) != len(numbers) or not all(1 <= n <= MAX_FLAWS for n in numbers):
+    tokens = [t.strip().upper() for t in re.split(r"[,;]", text)]
+    marks = [t for t in tokens if t == KEY_WRONG_MARK]
+    numbers = tuple(int(t) for t in tokens if t != KEY_WRONG_MARK)
+    if len(marks) > 1 or len(set(numbers)) != len(numbers) or not all(1 <= n <= MAX_FLAWS for n in numbers):
         return None
-    return numbers
+    return numbers, bool(marks)
 
 
 def read_labels(path: Path, expected_ids: list[str]) -> tuple[dict[str, Label], list[Problem]]:
@@ -137,11 +169,22 @@ def read_labels(path: Path, expected_ids: list[str]) -> tuple[dict[str, Label], 
         label.answerable = parse(COL_ANSWERABLE, lambda v: _integer(v, 1, 5), "1-5 arası tam sayı değil")
         label.asr_error = parse(COL_ASR, _grounded, "evet ya da hayır değil")
 
-        label.flaws = _flaws(cell[COL_FLAWS])
-        if label.flaws is None:
-            report(item_id, COL_FLAWS, cell[COL_FLAWS], f"1-{MAX_FLAWS} arası, tekrarsız numaralar olmalı (ör. 4, 12)")
-        elif label.errors is not None and len(label.flaws) != label.errors:
-            report(item_id, COL_FLAWS, cell[COL_FLAWS], f"madde sayısı ({len(label.flaws)}) yazım hatası sayısıyla ({label.errors}) uyuşmuyor")
+        parsed = _flaws(cell[COL_FLAWS])
+        if parsed is None:
+            report(item_id, COL_FLAWS, cell[COL_FLAWS],
+                   f"1-{MAX_FLAWS} arası, tekrarsız numaralar ve en çok bir {KEY_WRONG_MARK} olmalı (ör. 4, 12 ya da 4, {KEY_WRONG_MARK})")
+        else:
+            label.flaws, label.key_wrong = parsed
+            count = len(label.flaws) + (1 if label.key_wrong else 0)  # A, sayıya 1 olarak katılır
+            if label.errors is not None and count != label.errors:
+                report(item_id, COL_FLAWS, cell[COL_FLAWS], f"madde sayısı ({count}) yazım hatası sayısıyla ({label.errors}) uyuşmuyor")
+            if label.key_wrong:
+                # Yönerge, Bölüm 4: A işaretli soruda kaynağa dayalı = hayır, cevaplanabilirlik = 1
+                for column, field, bad in ((COL_GROUNDED, "grounded", lambda v: v is True),
+                                           (COL_ANSWERABLE, "answerable", lambda v: v is not None and v > 1)):
+                    if bad(getattr(label, field)):
+                        report(item_id, column, cell[column], KEY_WRONG_CONFLICT)
+                        setattr(label, field, None)
         labels[item_id] = label
 
     for item_id in expected_ids:

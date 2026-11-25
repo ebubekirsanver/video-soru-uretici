@@ -117,6 +117,7 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
 | Güz 11–12 | Bloom yönlendirmeli istem, çeldirici adımı, tekrar eleme; pilot videolarda üretim |
 | Güz 13–14 | Değerlendirme yönergesi, iki değerlendiriciyle pilot etiketleme ve kappa |
 | Güz 11–14 | Hafta-4 eki (danışman): ölçme ve değerlendirme uzmanıyla yönergenin kısa bir okuması; en çok ayrışılan ölçütün kaydı |
+| Deneme etiketlemesi (Aralık 2026) | Açılış 1–3 Aralık; bağımsız puanlama 3–10 Aralık; uyum hesabı 11–12 Aralık; tartışma 13–16 Aralık; yönerge 2. sürüm 17–25 Aralık |
 | Bahar 1–2 | Düzeltmeler ve öğretmen onay ekranı → prototip sürüm 2 |
 | Bahar 3–4 | 144 soru üretimi |
 | Bahar 5–6 | Kör uzman değerlendirmesi. Hafta-4 eki (danışman): alt kümede ölçme ve değerlendirme uzmanı puanlaması; alt küme kappası için bootstrap güven aralığı |
@@ -162,6 +163,12 @@ Danışmanın Hafta-1 geri bildiriminden sonra literatür değerlendirmesi yenid
   - **Puanlayıcı:** alt kümeyi alan öğretmeni yerine eğitim fakültesinin ölçme ve değerlendirme alanından bir araştırma görevlisi ya da öğretim elemanı puanlayacak. Gerekçe: sorular altı alandan geliyor ve tek bir alan öğretmeni bunların en fazla birinde uzman olur; Bloom düzeyi ve soru yazım hataları alan bilgisinden çok ölçme ve değerlendirme bilgisine dayanır. Seçim kuralı bu değişiklikten etkilenmiyor; değişiklik kuralın "Değişiklikler" bölümüne tarihiyle yazıldı. Kodda ve dosya adlarında "alan öğretmeni / ogretmen" adı geçmişle uyum için korundu.
   - **Bootstrap güven aralığı:** alt kümedeki 36 soruda uzmanla uyum kappalarına, büyük örneklem aralığının yanında yüzdelik bootstrap aralığı da veriliyor (B = 2000, tohum 20261125; `validity.py --bootstrap`). Küçük örneklemde büyük örneklem yaklaşımından daha güvenilir.
   - **Deneme etiketlemesi:** iki değerlendiricinin deneme etiketlemesinde en çok ayrıştığı ölçüt kaydedilecek.
+- **Anahtar yanlış kuralı (2026-11-25):**
+  - **Ne:** modelin doğru diye işaretlediği seçenek videoya göre yanlışsa değerlendirici "Hatalı maddeler"e A yazar. A yazım hatası sayısına 1 olarak katılır, soru başka hatası olmasa da kabul edilemez sayılır; kaynağa dayalı = hayır, cevaplanabilirlik = 1 işaretlenir (yönerge, Bölüm 4).
+  - **Neden:** Moore vd.'nin 19 maddelik listesi cevabın doğruluğuna bakmıyor; kural olmazsa cevabı yanlış ama düzgün yazılmış bir soru "kabul edilebilir" sayılır.
+  - **Ne zaman:** hiçbir soru puanlanmadan önce eklendi (puanlama öncesi netleştirme).
+  - **Ek sonuç:** şeffaflık için AS1'in kabul edilebilirlik sonucu ek olarak kural uygulanmadan, yalnızca 19 maddeye göre de verilecek.
+  - Yönerge metni değerlendirici ve uzman dosyalarının "Yönerge" sayfasına yazılıyor; deneme etiketlemesi dosyaları bu kuralla yeniden üretildi (`docs/bulgular/degerlendirme-denemesi-2/`).
 - **İstem (2026-11-04):** Pilot 2'den sonra ana deney istemi `questions-v3` olarak donduruldu (git etiketi `istem-v3-ana-deney`); `questions-v4` kullanılmayacak. Gerekçe: docs/bulgular/pilot-2/pilot-2.md, "Karar".
 
 ### İkincil deneyler

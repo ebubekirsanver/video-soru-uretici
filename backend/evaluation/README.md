@@ -15,6 +15,7 @@ python -m evaluation.export --girdi <dosyalar> --video-bilgisi <secim.json> --to
 - `--girdi`: çalıştırma kaydı (`backend/runs`) ya da pilot JSON'u. Joker karakter kullanılabilir (`"../docs/bulgular/pilot-2/pilot-2-*.json"`).
 - `--tohum`: soru sırasını belirler ve anahtara yazılır.
 - `--istem-surumu`: girdide birden çok sürüm varsa zorunludur.
+- `--yonerge`: değerlendirme yönergesi (Markdown); varsayılan `docs/degerlendirme-yonergesi-v1.md`. Metni "Yönerge" sayfasına her satır bir hücre olacak biçimde yazılır (başlık ve kalın yazı işaretleri atılır, tablo hücreleri " · " ile ayrılır). Sayfanın en üstünde dosya adı ve SHA-256 değerinin ilk 12 karakteri durur; adı ve tam SHA-256 değeri anahtara (`guide`) da yazılır. Dosya yoksa betik hiçbir dosya yazmadan durur: değerlendiriciye yönergesiz dosya gitmez.
 - `--video-bilgisi`: her video için alan, altyazı türü (elle / otomatik) ve iki dilli mi. Ana deneyde `docs/bulgular/video-secimi/secim.json`. Girdideki her video bu dosyada olmalıdır; bilgiler anahtara yazılır.
 - Videoların transkripti önbellekte (`backend/transcripts`) olmalıdır; yoksa betik durur.
 - Çıktıda gizli bilgi bulunursa dosyalar silinir ve betik hata verir.
@@ -30,6 +31,7 @@ python -m evaluation.export --girdi <dosyalar> --video-bilgisi <secim.json> --to
 - Her değerlendiriciye yalnızca kendi xlsx dosyasını gönder. **Anahtarı gönderme.**
 - Göndermeden önce "Yönerge" sayfasını doldur.
 - Değerlendiriciler birbirinden bağımsız çalışır, "Sorular" sayfasındaki sarı sütunları doldurur. Sorular 3. satırdan başlar; 2. satır açıklama satırıdır.
+- "Hatalı maddeler": 1-19 arası madde numaraları virgülle (ör. `4, 12`). Modelin işaretlediği cevap videoya göre yanlışsa **A** da yazılır (ör. `4, A`; büyük ya da küçük harf). A, Moore vd. listesinin maddesi değildir ("Yazım maddeleri" sayfasında 19 maddenin altında). A yazım hatası sayısına 1 olarak katılır ("Yazım hatası sayısı" = numara sayısı + A); A işaretli soruda kaynağa dayalı = hayır ve cevaplanabilirlik = 1 olmalıdır, değilse çelişen hücre geçersiz sayılır ve raporda listelenir (yönerge, Bölüm 4).
 - "Tanıma hatası kaynaklı mı": sorudaki hata (yanlış bilgi, anlamsız ifade, yanlış doğru cevap) transkriptteki konuşma tanıma hatasından kaynaklanıyorsa evet; sorunun hatası yoksa hayır.
 
 ## 3. İçe aktar ve uyumu hesapla
@@ -71,6 +73,7 @@ python -m evaluation.analysis --ortak <ortak.xlsx> --anahtar <anahtar.json> --ci
 - **İki dilli videolar (alt grup):** AS1 ve AS2 iki dilli videolar hariç yeniden hesaplanır.
 - **Altyazı türü:** Kabul edilebilir oranı ve hedef düzeye uyum elle / otomatik altyazıya göre betimsel verilir; test yok.
 - **Birincil sonuç:** Bütün videolar ve bütün sorularla hesaplanan sonuçtur; duyarlılık ve alt grup sonuçları birincil değildir.
+- **Anahtar yanlış kuralı (2026-11-25, puanlamadan önce):** AS1'in birincil kabul edilebilirliğinde A işaretli soru, başka hatası olmasa da kabul edilemez sayılır. Ek olarak aynı istatistiklerle "Kabul edilebilirlik, anahtar kuralı uygulanmadan (yalnızca 19 madde)" verilir: A hesaba katılmadan, numara sayısı ≤ 1. Raporda koşul bazında A işaretli soru sayısı vardır. Uyum raporlarında "Anahtar yanlış (A)" için de kappa hesaplanır ve anlaşmazlık listesine girer. Üretilemeyen konunun kuralı değişmedi.
 - **Tanımsız değerler:** Kappa iki değerlendirici de tek kategori kullanırsa tanımsızdır; rapora "tanımsız" yazılır, oransal uyum yine verilir. Hiç uyumsuz çift yoksa McNemar p = 1. Bütün farklar sıfırsa Wilcoxon uygulanmaz.
 
 Formüller `stats.py` başındadır.

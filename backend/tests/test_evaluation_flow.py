@@ -1,5 +1,6 @@
 """Dışa aktarma, etiket okuma, uyum ve analiz. Sentetik veri; ağ yok, gerçek etiket yok."""
 
+import hashlib
 import json
 
 import pytest
@@ -23,15 +24,19 @@ from evaluation.common import (
     DATA_START_ROW,
     DESCRIPTION_LABEL,
     FILL_COLUMNS,
-    GUIDE_PLACEHOLDER,
+    GUIDE_FILE,
+    KEY_WRONG_MARK,
+    KEY_WRONG_TEXT,
     SHEET_FLAWS,
     SHEET_GUIDE,
     SHEET_QUESTIONS,
     VISIBLE_COLUMNS,
     load_key,
 )
-from evaluation.export import ExportError, collect, export, find_secrets, read_flaws, read_runs, read_video_info
-from evaluation.labels import Label, LabelError, read_labels
+from evaluation import export as export_module
+from evaluation.export import ExportError, collect, export, find_secrets, read_flaws, read_runs, read_video_info, simplify_markdown
+from evaluation.labels import KEY_WRONG_CONFLICT, Label, LabelError, read_labels
+from evaluation.stats import kappa
 
 VIDEOS = ["aaaaaaaaaaa", "bbbbbbbbbbb"]
 QUOTE = "gizli alıntı metni transkriptte olmayan cümle"
@@ -240,7 +245,9 @@ def test_sheets_transcript_guide_and_flaws(workspace):
     a, _, _ = do_export(workspace)
     wb = load_workbook(a)
     assert wb.sheetnames == [SHEET_QUESTIONS, SHEET_GUIDE, SHEET_FLAWS, f"T-{VIDEOS[0]}", f"T-{VIDEOS[1]}"]
-    assert wb[SHEET_GUIDE]["A1"].value == GUIDE_PLACEHOLDER and wb[SHEET_GUIDE].max_row == 1
+    # Yönerge sayfası: dosya adı, SHA-256 ön eki ve yönerge metni (GUIDE_PLACEHOLDER kaldırıldı, 2026-11-25)
+    assert wb[SHEET_GUIDE]["A1"].value == "Yönerge dosyası: degerlendirme-yonergesi-v1.md"
+    assert wb[SHEET_GUIDE]["A2"].value.startswith("SHA-256 (ilk 12 karakter): ") and wb[SHEET_GUIDE].max_row > 3
     assert wb[f"T-{VIDEOS[0]}"]["A2"].value == "1:05"
     assert wb[f"T-{VIDEOS[0]}"]["B2"].value == "merhaba arkadaşlar"  # temiz transkript
     assert [wb[SHEET_FLAWS].cell(r, 1).value for r in range(2, 21)] == list(range(1, 20))
@@ -688,3 +695,164 @@ def test_analysis_requires_video_info():
     del key["videos"]
     with pytest.raises(ValueError, match="video bilgisi"):
         analysis.analyze(key, base_labels())
+
+
+# --- "Anahtar yanlış" (A) kuralı ve yönerge sayfası (2026-11-25) ------------------------------------
+
+
+def key_wrong_values(flaws, errors, grounded="hayır", answerable=1):
+    return lambda item_id: {COL_BLOOM: "Anlama", COL_ERRORS: errors, COL_FLAWS: flaws, COL_GROUNDED: grounded,
+                            COL_ANSWERABLE: answerable, COL_ASR: "hayır"}
+
+
+@pytest.mark.parametrize("flaws,errors,numbers", [("A", 1, ()), ("a", 1, ()), ("4, A", 2, (4,)), ("A, 12", 2, (12,))])
+def test_key_wrong_mark_accepted(workspace, flaws, errors, numbers):
+    a, _, key_path = do_export(workspace)
+    ids = sorted(load_key(key_path)["questions"])
+    labels, problems = read_labels(fill(a, workspace / "a.xlsx", key_wrong_values(flaws, errors)), ids)
+    assert problems == []
+    label = labels["S001"]
+    assert label.flaws == numbers and label.key_wrong is True and label.errors == errors
+    assert label.acceptable is False
+
+
+@pytest.mark.parametrize("flaws", ["A, A", "B", "4, A, a"])
+def test_key_wrong_mark_invalid(workspace, flaws):
+    a, _, key_path = do_export(workspace)
+    ids = sorted(load_key(key_path)["questions"])
+    labels, problems = read_labels(fill(a, workspace / "a.xlsx", key_wrong_values(flaws, 2)), ids)
+    assert {(p.id, p.column) for p in problems} >= {("S001", COL_FLAWS)}
+    assert labels["S001"].key_wrong is None and labels["S001"].flaws is None
+
+
+def test_key_wrong_counts_in_error_number(workspace):
+    a, _, key_path = do_export(workspace)
+    ids = sorted(load_key(key_path)["questions"])
+    _, problems = read_labels(fill(a, workspace / "a.xlsx", key_wrong_values("4, A", 1)), ids)
+    reasons = {p.reason for p in problems if p.id == "S001" and p.column == COL_FLAWS}
+    assert reasons == {"madde sayısı (2) yazım hatası sayısıyla (1) uyuşmuyor"}
+    labels, problems = read_labels(fill(a, workspace / "b.xlsx", key_wrong_values("4, A", 2)), ids)
+    assert problems == []
+
+
+@pytest.mark.parametrize("grounded,answerable,column", [("evet", 1, COL_GROUNDED), ("hayır", 3, COL_ANSWERABLE)])
+def test_key_wrong_requires_not_grounded_and_answerable_one(workspace, grounded, answerable, column):
+    a, _, key_path = do_export(workspace)
+    ids = sorted(load_key(key_path)["questions"])
+    labels, problems = read_labels(fill(a, workspace / "a.xlsx", key_wrong_values("A", 1, grounded, answerable)), ids)
+    s001 = [p for p in problems if p.id == "S001"]
+    assert [(p.column, p.reason) for p in s001] == [(column, KEY_WRONG_CONFLICT)]
+    assert "kaynağa dayalı = hayır ve cevaplanabilirlik = 1 olmalı (yönerge, Bölüm 4)" in KEY_WRONG_CONFLICT
+    label = labels["S001"]
+    assert getattr(label, "grounded" if column == COL_GROUNDED else "answerable") is None  # çelişen hücre hesaptan çıkar
+    assert label.key_wrong is True and label.acceptable is False
+
+
+@pytest.mark.parametrize("errors,flaws,key_wrong,primary,flaws_only", [
+    (0, (), False, True, True),      # hata yok
+    (1, (), True, False, True),      # yalnız A: birincil kabul edilemez, ek kabul edilebilir
+    (2, (5,), True, False, True),    # 1 numara + A
+    (2, (4, 12), False, False, False),  # 2 numara
+])
+def test_acceptable_primary_and_flaws_only(errors, flaws, key_wrong, primary, flaws_only):
+    label = Label(errors=errors, flaws=flaws, key_wrong=key_wrong)
+    assert label.acceptable is primary and label.acceptable_flaws_only is flaws_only
+
+
+def test_agreement_key_wrong_kappa_and_old_rows_unchanged(workspace):
+    a, b, key_path = do_export(workspace)
+    ids = sorted(load_key(key_path)["questions"])
+    a_marked, b_marked = {"S001", "S002"}, {"S001", "S003"}
+
+    def rater(marked):
+        def values(item_id):
+            if item_id in marked:
+                return key_wrong_values("A", 1)(item_id)
+            return perfect(item_id)
+        return values
+
+    filled_a = fill(a, workspace / "A.xlsx", rater(a_marked))
+    filled_b = fill(b, workspace / "B.xlsx", rater(b_marked))
+    result = agreement.run(filled_a, filled_b, key_path, workspace / "uyum")
+    names = [k["name"] for k in result["kappas"]]
+    assert names == ["Bloom düzeyi", "Bloom düzeyi (doğrusal ağırlıklı)", "Kabul edilebilirlik (0-1 hata)", "Kaynağa dayalılık",
+                     "Cevaplanabilirlik (doğrusal ağırlıklı)", "Tanıma hatası kaynaklı", "Anahtar yanlış (A)"]
+    la, _ = read_labels(filled_a, ids)
+    lb, _ = read_labels(filled_b, ids)
+    for row, (_, field, categories, weighted) in zip(result["kappas"], agreement.KAPPAS):
+        used = [(getattr(la[i], field), getattr(lb[i], field)) for i in ids]
+        used = [(x, y) for x, y in used if x is not None and y is not None]
+        expected = kappa([x for x, _ in used], [y for _, y in used], categories, weighted)
+        assert row["kappa"] == expected["kappa"] and row["n"] == expected["n"]  # her satır eski formülle aynı
+    key_wrong = result["kappas"][-1]
+    assert key_wrong["n"] == 24 and key_wrong["agreement"] == pytest.approx(22 / 24)
+    assert {(r["id"], r["field"]) for r in result["disagreements"] if r["field"] == "Anahtar yanlış (A)"} == {
+        ("S002", "Anahtar yanlış (A)"), ("S003", "Anahtar yanlış (A)")}
+
+
+def with_key_wrong(labels, item_id, errors):
+    label = labels[item_id]
+    labels[item_id] = Label(bloom=label.bloom, errors=errors, flaws=(), grounded=False, answerable=1,
+                            asr_error=label.asr_error, key_wrong=True)
+    return labels
+
+
+def test_analysis_primary_and_flaws_only_differ_with_key_wrong(tmp_path):
+    labels = with_key_wrong(base_labels(), "S11", 1)  # P1 rag: yalnız A
+    result = analysis.analyze(make_key(), labels)
+    primary, extra = result["as1"]["acceptable"], result["as1"]["acceptable_flaws_only"]
+    assert primary["rag"]["k"] == 1 and extra["rag"]["k"] == 2  # A'lı soru birincilde kabul edilemez, ekte edilebilir
+    assert primary["full"]["k"] == extra["full"]["k"] == 3
+    assert primary["mcnemar"] != extra["mcnemar"] or primary["difference"] != extra["difference"]
+    assert result["key_wrong_by_condition"]["flagged"] == {"full": 0, "rag": 1}
+    report = analysis.render_report(result, [])
+    assert analysis.FLAWS_ONLY_NAME in report and analysis.KEY_WRONG_NOTE in report
+    assert "### Anahtar yanlış (A) işaretli sorular" in report
+
+
+def test_analysis_primary_and_flaws_only_same_without_key_wrong():
+    result = analysis.analyze(make_key(), base_labels())
+    assert result["as1"]["acceptable"] == result["as1"]["acceptable_flaws_only"]
+    assert result["key_wrong_by_condition"]["flagged"] == {"full": 0, "rag": 0}
+
+
+def test_guide_sheet_has_text_and_sha_prefix(workspace):
+    a, _, key_path = do_export(workspace)
+    sha = hashlib.sha256(GUIDE_FILE.read_bytes()).hexdigest()
+    cells = [r[0] for r in sheet_rows(a, SHEET_GUIDE)]
+    assert cells[0] == f"Yönerge dosyası: {GUIDE_FILE.name}" and cells[1] == f"SHA-256 (ilk 12 karakter): {sha[:12]}"
+    text = [c for c in cells if c]
+    assert "Değerlendirme Yönergesi v1" in text and "Sütun · Ne yazılır · Ayrıntı" in text
+    assert not any("**" in c or "|---" in c or c.startswith("#") for c in text)
+    assert load_key(key_path)["guide"] == {"file": GUIDE_FILE.name, "sha256": sha}
+    flaws = sheet_rows(a, SHEET_FLAWS)
+    assert flaws[20] == [KEY_WRONG_MARK, "Anahtar yanlış", KEY_WRONG_TEXT]  # 19 maddenin altında
+
+
+def test_simplify_markdown():
+    text = "# Başlık\n\n\n**Kalın** ve *eğik* `kod`\n\n| a | b |\n| --- | --- |\n| 1 | 2 |\n- madde 2 * 3\n"
+    assert simplify_markdown(text) == ["Başlık", "", "Kalın ve eğik kod", "", "a · b", "1 · 2", "- madde 2 * 3"]
+
+
+def test_custom_guide_option(workspace):
+    guide = workspace / "yonerge-deneme.md"
+    guide.write_text("# Deneme yönergesi\n\nTek satır.\n", encoding="utf-8")
+    paths = [pilot_file(workspace, VIDEOS[0]), pilot_file(workspace, VIDEOS[1])]
+    args = ["--girdi", *map(str, paths), "--video-bilgisi", str(info_file(workspace)), "--tohum", "1",
+            "--cikti", str(workspace / "o"), "--anahtar-cikti", str(workspace / "k"), "--istem-surumu", "questions-v3",
+            "--yonerge", str(guide)]
+    assert export_module.main(args) == 0
+    cells = [r[0] for r in sheet_rows(workspace / "o" / "degerlendirici-A.xlsx", SHEET_GUIDE)]
+    assert cells[0] == "Yönerge dosyası: yonerge-deneme.md" and cells[3:] == ["Deneme yönergesi", None, "Tek satır."]
+
+
+def test_missing_guide_stops_without_files(workspace, capsys):
+    paths = [pilot_file(workspace, VIDEOS[0])]
+    with pytest.raises(ExportError, match="Yönerge dosyası bulunamadı"):
+        export(paths, 1, workspace / "o", workspace / "k", info_file(workspace), "questions-v3", workspace / "yok.md")
+    assert not (workspace / "o").exists() and not (workspace / "k").exists()
+    args = ["--girdi", str(paths[0]), "--video-bilgisi", str(info_file(workspace)), "--tohum", "1",
+            "--cikti", str(workspace / "o"), "--anahtar-cikti", str(workspace / "k"), "--yonerge", str(workspace / "yok.md")]
+    assert export_module.main(args) == 1
+    assert "Yönerge dosyası bulunamadı" in capsys.readouterr().out
+    assert not (workspace / "o").exists() and not (workspace / "k").exists()

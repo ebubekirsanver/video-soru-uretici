@@ -49,6 +49,8 @@ KAPPAS = [
     ("Kaynağa dayalılık", "grounded", [True, False], False),
     ("Cevaplanabilirlik (doğrusal ağırlıklı)", "answerable", [1, 2, 3, 4, 5], True),
     ("Tanıma hatası kaynaklı", "asr_error", [True, False], False),
+    # 2026-11-25: "anahtar yanlış" kuralı (yönerge, Bölüm 4); yalnızca eklendi, önceki satırlar aynı
+    ("Anahtar yanlış (A)", "key_wrong", [True, False], False),
 ]
 # Anlaşmazlık listesindeki alanlar; kabul edilebilirlik hata sayısından türer
 DISAGREEMENT_FIELDS = [
@@ -59,6 +61,7 @@ DISAGREEMENT_FIELDS = [
     (COL_GROUNDED, "grounded"),
     (COL_ANSWERABLE, "answerable"),
     (COL_ASR, "asr_error"),
+    ("Anahtar yanlış (A)", "key_wrong"),
 ]
 
 

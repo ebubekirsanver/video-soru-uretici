@@ -48,6 +48,8 @@
 | 18 | More than one correct | Birden çok seçenek doğru olabilir. | model | Transkripte göre yargı gerekir; sadakat denetimiyle örtüşür. |
 | 19 | Negative worded | Soru kökü olumsuz. | kodla-kısmen | Yanlış pozitif olabilir. Aşağıya bakın. |
 
+**A — anahtar yanlış (2026-11-25).** Bu, Moore vd. (2023) listesinin maddesi değildir. Değerlendirme yönergesinde (`docs/degerlendirme-yonergesi-v1.md`, Bölüm 4) eklenen kuraldır: modelin doğru diye işaretlediği seçenek videoya göre yanlışsa değerlendirici "Hatalı maddeler"e A yazar. A yazım hatası sayısına 1 olarak katılır ve soru başka hatası olmasa da kabul edilemez sayılır. Liste cevabın doğruluğuna bakmadığı için bu kural olmazsa cevabı yanlış ama düzgün yazılmış bir soru "kabul edilebilir" sayılırdı. Otomatik yazım kuralları (`writing-rules-v1`) A'yı denetlemez.
+
 ## Kuralların tanımları (`writing-rules-v1`)
 
 Listelerdeki kelimeler normalleştirilmiş hâldedir.

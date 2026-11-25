@@ -8,6 +8,12 @@ yalnızca değerlendiricilere verilmeyen anahtar dosyasındadır.
 
 Transkriptler yalnızca yerel önbellekten okunur; bu betik YouTube'a gitmez.
 
+Değerlendirme yönergesi (--yonerge, varsayılan docs/degerlendirme-yonergesi-v1.md)
+"Yönerge" sayfasına satır satır yazılır; en üstte dosya adı ve SHA-256 değerinin ilk 12
+karakteri durur. Dosya yoksa hiçbir dosya yazılmaz: değerlendiriciye yönergesiz dosya
+gitmez. Yönergenin adı ve SHA-256 değeri anahtara da yazılır. "Yazım maddeleri"
+sayfasında 19 maddenin altında "A — anahtar yanlış" satırı vardır (yönerge, Bölüm 4).
+
 Video bilgi dosyası (JSON) her video için alanı, altyazı türünü (elle / otomatik)
 ve iki dilli olup olmadığını verir; bu bilgiler anahtara yazılır ve analizde
 değişken olarak kullanılır. Biçim: {"videos": {"<video_id>": {"alan": ...,
@@ -15,11 +21,13 @@ değişken olarak kullanılır. Biçim: {"videos": {"<video_id>": {"alan": ...,
 secim.json dosyası bu biçimdedir.
 
 Çalıştırma (backend klasöründen):
-    python -m evaluation.export --girdi <dosya...> --video-bilgisi <json> --tohum 42 --cikti <klasör> --anahtar-cikti <klasör>
+    python -m evaluation.export --girdi <dosya...> --video-bilgisi <json> --tohum 42 --cikti <klasör> --anahtar-cikti <klasör> \
+        [--yonerge <md>]
 """
 
 import argparse
 import glob
+import hashlib
 import json
 import random
 import re
@@ -50,7 +58,10 @@ from evaluation.common import (
     COL_FLAWS,
     COL_GROUNDED,
     FILL_COLUMNS,
-    GUIDE_PLACEHOLDER,
+    GUIDE_FILE,
+    KEY_WRONG_MARK,
+    KEY_WRONG_NAME,
+    KEY_WRONG_TEXT,
     MAX_FLAWS,
     SHEET_FLAWS,
     SHEET_GUIDE,
@@ -80,6 +91,52 @@ SECRET_PATTERNS = {
 
 class ExportError(Exception):
     """Girdi dışa aktarmaya uygun değil."""
+
+
+@dataclass
+class Guide:
+    """Değerlendirme yönergesi: dosya adı (yol değil), SHA-256 ve Excel'e yazılacak satırlar."""
+
+    name: str
+    sha256: str
+    lines: list[str]
+
+    def as_key(self) -> dict:
+        return {"file": self.name, "sha256": self.sha256}
+
+
+def simplify_markdown(text: str) -> list[str]:
+    """Markdown'ı Excel'de satır satır okunacak düz metne çevirir.
+
+    Başlık işaretleri (#), kalın/eğik yazı (** ve *) ve satır içi kod işaretleri atılır;
+    tablo ayırıcı satırları (|---|) atlanır, tablo satırlarının hücreleri " · " ile
+    ayrılır. Art arda boş satırlar teke indirilir.
+    """
+    lines: list[str] = []
+    for raw in text.replace("\r\n", "\n").split("\n"):
+        line = raw.strip()
+        if re.fullmatch(r"\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?", line):
+            continue  # tablo ayırıcı satırı
+        if line.startswith("|") and line.endswith("|"):
+            line = " · ".join(cell.strip() for cell in line.strip("|").split("|"))
+        line = re.sub(r"^#{1,6}\s+", "", line)
+        line = line.replace("**", "").replace("`", "")
+        line = re.sub(r"(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])", r"\1", line)
+        if not line and (not lines or not lines[-1]):
+            continue
+        lines.append(line)
+    while lines and not lines[-1]:
+        lines.pop()
+    return lines
+
+
+def read_guide(path: Path) -> Guide:
+    """Yönerge dosyası; yoksa ExportError (değerlendiriciye yönergesiz dosya gitmez)."""
+    path = Path(path)
+    if not path.is_file():
+        raise ExportError(f"Yönerge dosyası bulunamadı: {path.name}. Değerlendirici dosyaları yönergesiz üretilmez.")
+    data = path.read_bytes()
+    return Guide(path.name, hashlib.sha256(data).hexdigest(), simplify_markdown(data.decode("utf-8")))
 
 
 @dataclass
@@ -187,7 +244,7 @@ def read_video_info(path: Path) -> dict[str, dict]:
 
 
 def build_key(questions: list[dict], unproduced: list[dict], seed: int, version: str, inputs: list[str],
-              video_info: dict[str, dict]) -> dict:
+              video_info: dict[str, dict], guide: Guide | None = None) -> dict:
     fields = ("video_id", "topic_index", "topic", "condition", "prompt_version", "bloom_target", "pair_id", "source")
     slots = {}
     for item in questions + unproduced:
@@ -206,6 +263,8 @@ def build_key(questions: list[dict], unproduced: list[dict], seed: int, version:
         "unproduced": [{**{f: u[f] for f in fields}, "outcome": u["outcome"]} for u in unproduced],
         # İki koşuldan yalnızca biri girdide olan çiftler; analize girmez
         "incomplete_pairs": sorted(p for p, conditions in slots.items() if len(conditions) < 2),
+        # Hangi yönerge sürümüyle puanlandığı (dosya adı ve SHA-256)
+        **({"guide": guide.as_key()} if guide else {}),
     }
 
 
@@ -258,8 +317,22 @@ def _validation(sheet, column: int, last_row: int, values: list[str], title: str
     sheet.add_data_validation(rule)
 
 
+def write_guide_sheet(sheet, guide: Guide) -> None:
+    """Yönerge sayfası: en üstte dosya adı ve SHA-256 ön eki, sonra her satır A sütununda bir hücre."""
+    rows = [f"Yönerge dosyası: {guide.name}", f"SHA-256 (ilk 12 karakter): {guide.sha256[:12]}", "", *guide.lines]
+    for row, text in enumerate(rows, 1):
+        if not text:
+            continue  # boş satır: hücre boş kalır, satır aralığı korunur
+        cell = sheet.cell(row, 1)
+        _text(cell, text)
+        cell.alignment = Alignment(wrap_text=True, vertical="top")
+        if row <= 2:
+            cell.font = Font(bold=True)
+    sheet.column_dimensions["A"].width = 120
+
+
 def write_rater_workbook(path: Path, questions: list[dict], transcripts: dict[str, Transcript],
-                         flaws: list[tuple[int, str, str]]) -> None:
+                         flaws: list[tuple[int, str, str]], guide: Guide) -> None:
     wb = Workbook()
     wb.properties.creator = ""
     sheet = wb.active
@@ -292,7 +365,7 @@ def write_rater_workbook(path: Path, questions: list[dict], transcripts: dict[st
     _validation(sheet, columns.index(COL_ANSWERABLE) + 1, last, ["1", "2", "3", "4", "5"], COL_ANSWERABLE)
     _validation(sheet, columns.index(COL_ASR) + 1, last, ["evet", "hayır"], COL_ASR)
 
-    wb.create_sheet(SHEET_GUIDE).cell(1, 1, GUIDE_PLACEHOLDER)
+    write_guide_sheet(wb.create_sheet(SHEET_GUIDE), guide)
 
     flaw_sheet = wb.create_sheet(SHEET_FLAWS)
     _header(flaw_sheet, ["Madde", "Ad", "Kısa açıklama"])
@@ -300,6 +373,10 @@ def write_rater_workbook(path: Path, questions: list[dict], transcripts: dict[st
         flaw_sheet.cell(row, 1, number)
         _text(flaw_sheet.cell(row, 2), name)
         _text(flaw_sheet.cell(row, 3), text)
+    # Moore vd. listesinin maddesi değil: "anahtar yanlış" kuralı (yönerge, Bölüm 4)
+    row = len(flaws) + 2
+    for column, value in ((1, KEY_WRONG_MARK), (2, KEY_WRONG_NAME), (3, KEY_WRONG_TEXT)):
+        _text(flaw_sheet.cell(row, column), value)
     flaw_sheet.column_dimensions["B"].width = 34
     flaw_sheet.column_dimensions["C"].width = 80
 
@@ -340,23 +417,24 @@ def check_output_dirs(out_dir: Path, key_dir: Path) -> None:
 
 
 def export(paths: list[Path], seed: int, out_dir: Path, key_dir: Path, video_info_path: Path,
-           prompt_version: str | None = None) -> dict:
+           prompt_version: str | None = None, guide_path: Path = GUIDE_FILE) -> dict:
     """Dosyaları yazar ve anahtarı döndürür. Gizli bilgi bulunursa dosyalar silinir, hata verilir.
 
     Çıktı klasörleri depo içindeyse hiçbir şey okunmadan ve yazılmadan ExportError verilir.
     """
     check_output_dirs(out_dir, key_dir)
-    runs =[run for path in paths for run in read_runs(path)]
+    guide = read_guide(guide_path)  # dosya yoksa hiçbir şey yazılmadan durur
+    runs = [run for path in paths for run in read_runs(path)]
     produced, unproduced, version = collect(runs, prompt_version)
     questions = assign_ids(produced, seed)
     key = build_key(questions, unproduced, seed, version, sorted({Path(p).name for p in paths}),
-                    read_video_info(video_info_path))
+                    read_video_info(video_info_path), guide)
     transcripts = load_transcripts(sorted({q["video_id"] for q in questions}))
     flaws = read_flaws()
 
     targets = [Path(out_dir) / name for name in RATER_FILES]
     for target in targets:
-        write_rater_workbook(target, questions, transcripts, flaws)
+        write_rater_workbook(target, questions, transcripts, flaws, guide)
     key_path = Path(key_dir) / KEY_FILE
     write_json(key_path, key)
     secrets = find_secrets(workbook_strings(targets[0]) + [key_path.read_text(encoding="utf-8")])
@@ -376,6 +454,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cikti", type=Path, required=True, help="Değerlendirici dosyalarının klasörü")
     parser.add_argument("--anahtar-cikti", type=Path, required=True, help="Anahtar dosyasının klasörü; değerlendiricilere verilmez")
     parser.add_argument("--istem-surumu", help="Girdide birden çok sürüm varsa seçilecek sürüm (ör. questions-v3)")
+    parser.add_argument("--yonerge", type=Path, default=GUIDE_FILE,
+                        help="Değerlendirme yönergesi (md); Yönerge sayfasına yazılır. Varsayılan docs/degerlendirme-yonergesi-v1.md")
     args = parser.parse_args(argv)
     try:
         # Girdi aranmadan önce: depo içi çıktı klasörü hiçbir dosya oluşmadan reddedilir
@@ -383,12 +463,13 @@ def main(argv: list[str] | None = None) -> int:
         paths = [Path(p) for pattern in args.girdi for p in sorted(glob.glob(pattern))]
         if not paths:
             parser.error("Girdi dosyası bulunamadı.")
-        key = export(paths, args.tohum, args.cikti, args.anahtar_cikti, args.video_bilgisi, args.istem_surumu)
+        key = export(paths, args.tohum, args.cikti, args.anahtar_cikti, args.video_bilgisi, args.istem_surumu, args.yonerge)
     except ExportError as exc:
         print(f"Hata: {exc}")
         return 1
     print(f"{key['question_count']} soru, {len(key['unproduced'])} üretilemeyen konu, "
-          f"{len(key['incomplete_pairs'])} eksik çift, tohum {key['seed']}, sürüm {key['prompt_version']}.")
+          f"{len(key['incomplete_pairs'])} eksik çift, tohum {key['seed']}, sürüm {key['prompt_version']}, "
+          f"yönerge {key['guide']['file']} (SHA-256 {key['guide']['sha256'][:12]}).")
     return 0
 
 

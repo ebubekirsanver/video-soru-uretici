@@ -597,3 +597,38 @@ def test_validity_bootstrap_zero_keeps_old_table(validity_files):
     assert data["bootstrap_replicates"] == 0 and all("bootstrap" not in r for r in data["kappas"])
     with pytest.raises(SystemExit):
         validity.main(args[:-1] + ["-1"])
+
+
+# --- Uzman dosyasında yönerge (2026-11-25) ------------------------------------------------------------
+
+
+def test_teacher_file_guide_sheet_same_as_rater(exported):
+    tmp_path, inputs = exported
+    key_path = tmp_path / "gizli" / "anahtar.json"
+    key = json.loads(key_path.read_text(encoding="utf-8"))
+    result, _, _ = subset.run(key_path, tmp_path / "gizli")
+    teacher = tmp_path / "alan-ogretmeni.xlsx"
+    subset.write_teacher_file(teacher, key, result, inputs, 5)
+    guide_rows = lambda path: [[c.value for c in r] for r in load_workbook(path)[SHEET_GUIDE].iter_rows()]
+    assert guide_rows(teacher) == guide_rows(tmp_path / "dagitim" / "degerlendirici-A.xlsx")
+    assert key["guide"]["sha256"][:12] in guide_rows(teacher)[1][0]
+
+
+def test_teacher_file_refuses_other_guide(exported, capsys):
+    tmp_path, inputs = exported
+    key_path = tmp_path / "gizli" / "anahtar.json"
+    other = tmp_path / "baska-yonerge.md"
+    other.write_text("# Başka\n", encoding="utf-8")
+    out_dir = tmp_path / "secim-baska"
+    code = subset.main(["--anahtar", str(key_path), "--cikti", str(out_dir), "--ogretmen-dosyasi", str(tmp_path / "u.xlsx"),
+                        "--tohum", "5", "--girdi", *map(str, inputs), "--yonerge", str(other)])
+    assert code == 1 and "aynı yönerge" in capsys.readouterr().out
+    assert not out_dir.exists() and not (tmp_path / "u.xlsx").exists()  # hiçbir dosya yazılmadı
+
+
+def test_validity_has_key_wrong_row_from_agreement(validity_files):
+    tmp_path, key_path, alt, teacher, joint = validity_files
+    result = validity.run(teacher, joint, alt, key_path, tmp_path / "rapor", bootstrap=0)
+    assert result["kappas"][-1]["name"] == "Anahtar yanlış (A)" and result["kappas"][-1]["n"] == 4
+    assert result["distributions"][-1]["field"] == "key_wrong"
+    assert "Anahtar yanlış (A)" in (tmp_path / "rapor" / "alan-ogretmeni-uyumu.md").read_text(encoding="utf-8")

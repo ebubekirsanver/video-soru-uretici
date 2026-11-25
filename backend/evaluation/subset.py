@@ -35,14 +35,16 @@ import random
 from pathlib import Path
 
 from evaluation import common
-from evaluation.common import BLOOM_LEVELS, REPO_ROOT, InsideRepoError, inside_repo, load_key  # noqa: F401
+from evaluation.common import BLOOM_LEVELS, GUIDE_FILE, REPO_ROOT, InsideRepoError, inside_repo, load_key  # noqa: F401
 from evaluation.export import (
     ExportError,
+    Guide,
     assign_ids,
     collect,
     find_secrets,
     load_transcripts,
     read_flaws,
+    read_guide,
     read_runs,
     workbook_strings,
     write_rater_workbook,
@@ -209,13 +211,28 @@ def teacher_questions(key: dict, subset: dict, input_paths: list[Path], seed: in
     return chosen
 
 
-def write_teacher_file(path: Path, key: dict, subset: dict, input_paths: list[Path], seed: int) -> int:
+def teacher_guide(key: dict, guide_path: Path) -> Guide:
+    """Uzman dosyasının yönergesi. Dosya yoksa ExportError; anahtardaki yönergeden farklıysa SubsetError.
+
+    Kural: uzmana değerlendiricilerle aynı yönerge verilir.
+    """
+    guide = read_guide(guide_path)
+    recorded = key.get("guide")
+    if recorded and recorded.get("sha256") != guide.sha256:
+        raise SubsetError(f"Yönerge ({guide.name}, SHA-256 {guide.sha256[:12]}) değerlendirici dosyalarındakinden farklı "
+                          f"({recorded.get('file')}, SHA-256 {str(recorded.get('sha256'))[:12]}); uzmana aynı yönerge verilmeli.")
+    return guide
+
+
+def write_teacher_file(path: Path, key: dict, subset: dict, input_paths: list[Path], seed: int,
+                       guide_path: Path = GUIDE_FILE) -> int:
     """Alan öğretmeni dosyasını export.py'nin değerlendirici dosyası yazma koduyla yazar; soru sayısını döndürür."""
     check_outside_repo(path, "Alan öğretmeni dosyası", TEACHER_REASON)
+    guide = teacher_guide(key, guide_path)
     chosen =teacher_questions(key, subset, input_paths, seed)
     transcripts = load_transcripts(sorted({q["video_id"] for q in chosen}))
     path = Path(path)
-    write_rater_workbook(path, chosen, transcripts, read_flaws())
+    write_rater_workbook(path, chosen, transcripts, read_flaws(), guide)
     secrets = find_secrets(workbook_strings(path))
     if secrets:
         path.unlink()
@@ -251,6 +268,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--ogretmen-dosyasi", type=Path, help="Alan öğretmeni dosyası (xlsx)")
     parser.add_argument("--tohum", type=int, help="Alan öğretmeni dosyasındaki soru sırasının tohumu")
     parser.add_argument("--girdi", nargs="+", help="export.py'ye verilen çalıştırma dosyaları (joker karakter olabilir)")
+    parser.add_argument("--yonerge", type=Path, default=GUIDE_FILE,
+                        help="Uzman dosyasının Yönerge sayfası (md); değerlendirici dosyalarındakiyle aynı olmalı")
     args = parser.parse_args(argv)
     if args.ogretmen_dosyasi and (args.tohum is None or not args.girdi):
         parser.error("--ogretmen-dosyasi ile --tohum ve --girdi de verilmeli.")
@@ -258,6 +277,7 @@ def main(argv: list[str] | None = None) -> int:
         # Öğretmen dosyasının yeri, alt-kume.json dahil hiçbir dosya yazılmadan önce denetlenir
         if args.ogretmen_dosyasi:
             check_outside_repo(args.ogretmen_dosyasi, "Alan öğretmeni dosyası", TEACHER_REASON)
+            teacher_guide(load_key(args.anahtar), args.yonerge)  # yönerge yoksa ya da farklıysa hiçbir şey yazılmaz
         result, path, created = run(args.anahtar, args.cikti)
         for line in summary_lines(result, path, created):
             print(line)
@@ -265,7 +285,7 @@ def main(argv: list[str] | None = None) -> int:
             paths = [Path(p) for pattern in args.girdi for p in sorted(glob.glob(pattern))]
             if not paths:
                 raise SubsetError("Girdi dosyası bulunamadı.")
-            count = write_teacher_file(args.ogretmen_dosyasi, load_key(args.anahtar), result, paths, args.tohum)
+            count = write_teacher_file(args.ogretmen_dosyasi, load_key(args.anahtar), result, paths, args.tohum, args.yonerge)
             print(f"Alan öğretmeni dosyası yazıldı: {count} soru, tohum {args.tohum}.")
     except (SubsetError, ExportError) as exc:
         print(f"Hata: {exc}")

@@ -8,6 +8,12 @@ Koşullar "rag" ve "full"; farklar her yerde rag - full yönündedir.
 - AS2'de birincil sonuç "bütün konular"dır: üretilemeyen konu hedef düzeye uyumsuz
   sayılır (kullanıcı kararı). "Yalnızca üretilen sorular" ikincil olarak verilir.
 
+"Anahtar yanlış" kuralı (yönerge, Bölüm 4; 2026-11-25, puanlamadan önce): AS1'in birincil
+kabul edilebilirliği `Label.acceptable` ile hesaplanır (A işaretli soru kabul edilemez). Ek
+olarak aynı istatistiklerle kural uygulanmadan, yalnızca 19 maddeye göre
+(`Label.acceptable_flaws_only`) verilir. Koşul bazında A işaretli soru sayısı raporlanır.
+Üretilemeyen konunun kuralı değişmedi (iki sonuçta da "hayır").
+
 Duyarlılık ve alt grup analizleri (Hafta-3; birincil sonuç bütün videolarla ve bütün
 sorularla kalır):
 - Tanıma hatası kaynaklı sorular hariç: AS1'de iki sorudan biri işaretli olan çift
@@ -42,6 +48,8 @@ from evaluation.labels import Label, read_labels
 from evaluation.stats import mcnemar_exact, paired_difference, wilcoxon_signed_rank, wilson
 
 UNPRODUCED_COLUMN = "Üretilemedi"
+FLAWS_ONLY_NAME = "Kabul edilebilirlik, anahtar kuralı uygulanmadan (yalnızca 19 madde)"
+KEY_WRONG_NOTE = "Anahtar yanlış kuralı 25 Kasım 2026'da, puanlamadan önce eklenmiştir; kural uygulanmadan hesaplanan sonuç ek olarak verilir."
 
 
 def build_pairs(key: dict) -> dict[str, dict]:
@@ -169,7 +177,8 @@ def descriptive(pairs: dict, labels: dict[str, Label], alpha: float) -> dict:
 
 def as1(pairs: dict, labels: dict[str, Label], alpha: float) -> dict:
     return {
-        "acceptable": as1_binary(pairs, labels, "acceptable", alpha),
+        "acceptable": as1_binary(pairs, labels, "acceptable", alpha),  # birincil (anahtar kuralıyla)
+        "acceptable_flaws_only": as1_binary(pairs, labels, "acceptable_flaws_only", alpha),  # ek
         "grounded": as1_binary(pairs, labels, "grounded", alpha),
         "answerable": as1_answerable(pairs, labels),
     }
@@ -189,6 +198,21 @@ def _asr_flag(slot: dict, labels: dict[str, Label]) -> bool | None:
 
 def asr_by_condition(pairs: dict, labels: dict[str, Label]) -> dict:
     flags = [(s["condition"], _asr_flag(s, labels)) for s in _slots(pairs) if s["id"] is not None]
+    return {
+        "flagged": {c: sum(1 for cond, f in flags if cond == c and f is True) for c in CONDITIONS},
+        "missing": sum(1 for _, f in flags if f is None),
+        "questions": {c: sum(1 for cond, _ in flags if cond == c) for c in CONDITIONS},
+    }
+
+
+def key_wrong_by_condition(pairs: dict, labels: dict[str, Label]) -> dict:
+    """Koşul bazında "anahtar yanlış" (A) işaretli soru sayısı; üretilemeyen konu sayılmaz."""
+    flags = []
+    for slot in _slots(pairs):
+        if slot["id"] is None:
+            continue
+        label = labels.get(slot["id"])
+        flags.append((slot["condition"], None if label is None else label.key_wrong))
     return {
         "flagged": {c: sum(1 for cond, f in flags if cond == c and f is True) for c in CONDITIONS},
         "missing": sum(1 for _, f in flags if f is None),
@@ -259,6 +283,7 @@ def analyze(key: dict, labels: dict[str, Label], alpha: float = DEFAULT_ALPHA) -
         "as2": as2(pairs, labels, alpha),
         "descriptive": descriptive(pairs, labels, alpha),
         "asr_by_condition": asr_by_condition(pairs, labels),
+        "key_wrong_by_condition": key_wrong_by_condition(pairs, labels),
         "sensitivity": {
             "without_asr": without_asr(pairs, labels, alpha),
             "without_bilingual": without_bilingual(pairs, labels, videos, alpha),
@@ -286,7 +311,8 @@ def render_report(result: dict, problems: list[dict]) -> str:
              f"Bir koşulu eksik, analize girmeyen çift: {len(result['incomplete_pairs'])}. Farklar rag - full yönündedir.", "",
              "## AS1: kabul edilebilirlik ve kaynağa dayalılık", ""]
     rows = []
-    for name, r in (("Kabul edilebilir (0-1 hata)", as1["acceptable"]), ("Kaynağa dayalı", as1["grounded"])):
+    for name, r in (("Kabul edilebilir (0-1 hata)", as1["acceptable"]), (FLAWS_ONLY_NAME, as1["acceptable_flaws_only"]),
+                    ("Kaynağa dayalı", as1["grounded"])):
         d, m = r["difference"], r["mcnemar"]
         rows.append([name, r["pairs"], r["excluded_missing_label"], _rate(r["rag"]), num(r["rag"]["rate"]), _rate(r["full"]), num(r["full"]["rate"]),
                      r["both"], r["rag_only"], r["full_only"], r["neither"], num(d["difference"]), interval(d["ci_low"], d["ci_high"]),
@@ -294,7 +320,14 @@ def render_report(result: dict, problems: list[dict]) -> str:
     lines += table(["Ölçüt", "Çift", "Çıkarılan", "rag", "rag oranı", "full", "full oranı", "İkisi de evet", "Yalnız rag", "Yalnız full",
                     "İkisi de hayır", "Fark", f"Fark %{level} GA", "McNemar p", f"p < {num(alpha, 2)}"], rows)
     lines += ["", "Kesin McNemar: uyumsuz çiftlerde iki yönlü binom testi. Oran farkı aralığı: Newcombe (1998) 10. yöntem. "
-              "Üretilemeyen konu o koşulda \"hayır\" sayıldı.", "", "## AS1: cevaplanabilirlik", ""]
+              "Üretilemeyen konu o koşulda \"hayır\" sayıldı.", "",
+              "Birincil kabul edilebilirlikte \"anahtar yanlış\" (A) işaretli soru, başka hatası olmasa da kabul edilemez "
+              f"sayılır ve A yazım hatası sayısına 1 olarak katılır. {KEY_WRONG_NOTE}", ""]
+    kw = result["key_wrong_by_condition"]
+    lines += ["### Anahtar yanlış (A) işaretli sorular", ""]
+    lines += table(["Koşul", "Soru", "Anahtar yanlış (A)"], [[c, kw["questions"][c], kw["flagged"][c]] for c in CONDITIONS])
+    lines += ["", f"\"Hatalı maddeler\" hücresi eksik ya da geçersiz olduğu için bilinmeyen soru: {kw['missing']}.", "",
+              "## AS1: cevaplanabilirlik", ""]
     w = as1["answerable"]
     lines += table(["Test edilen çift", "Sıfır fark", "Üretilemeyen konu nedeniyle çıkarılan", "Etiket eksikliği nedeniyle çıkarılan",
                     "W+", "W-", "Z", "p", f"p < {num(alpha, 2)}", "r", "Not"],

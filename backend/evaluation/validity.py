@@ -51,6 +51,7 @@ CRITERIA = [
     ("Kaynağa dayalılık", "grounded"),
     ("Cevaplanabilirlik", "answerable"),
     ("Tanıma hatası kaynaklı", "asr_error"),
+    ("Anahtar yanlış (A)", "key_wrong"),  # 2026-11-25; kappa satırı agreement.KAPPAS'tan gelir
 ]
 
 
